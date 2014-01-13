@@ -1,10 +1,10 @@
-chez les barbus:  master chef et puppet show
+Chez les barbus:  master chef et puppet show
 ============================================
 
 abstract
 --------
 
-Développeurs Java expérimentés, François et Romain ont découvert le monde des opérations et se sont aventurés dans le monde du Continuous Delivery, du Devops - avec des outils tels que Jenkins, Puppet et Chef. Néanmoins, si cet univers assure des mises en production rapides et fiables, il reste très mystérieux pour les développeurs Java/JEE. Par un retour d'expérience croisé chez les "barbus", ils vont tenter de lever le voile sur cet univers et ses contraintes et permettre à leur audience de comprendre comment dev, qa et ops peuvent se libérer du stress de la mise en production.
+Développeurs Java expérimentés, François et Romain ont découvert le monde de la sécurité et des opérations en mettant en place des stratégies de livraison continue (Continous Delivery). C'est par leurs retours d'expérience croisés au coeur des opérarions, "chez les barbus", qu'ils vous proposent lever le voile sur cet univers et ses contraintes, et de découvrir comment leurs techniques et leurs outillage respectifs (Chef pour le premier et Puppet le second) les ont libérés du stress de la mise en production.
 
 tags
 ----
