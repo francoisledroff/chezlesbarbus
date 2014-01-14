@@ -13,10 +13,13 @@ C'est un retour d'expérience croisé sur ce sujet, un point sur leur stratégie
 tags
 ----
 
-Continous Delivery
+Continuous Delivery
 Silo
 Puppet
 Chef
 DevOps
 securité
+linux
+jenkins
+
 
