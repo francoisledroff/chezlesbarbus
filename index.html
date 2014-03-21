@@ -3,12 +3,12 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>JavaScript: The Good Parts</title>
-    <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript"> </script>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.6.2.min.js" type="text/javascript"> </script>
     <style type="text/css" media="screen">
       @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
       @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 
-      body { font-family: 'Droid Serif'; }
+      body { font-family: 'Droid Serif';  }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: 400;
@@ -55,901 +55,419 @@
       .pushdown {
         margin-top: 12em;
       }
+       /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+        font-size: 1.2em;
+      }
     </style>
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse
 
-# JavaScript: The Good Parts
-
-### by [@gnab](http://twitter.com/gnab) &amp; [@torgeir](http://twitter.com/torgeir)
-
----
-
-# The Book
-
-.right[![JavaScript: The Good Parts](thebook.png)]
-
-Short, exclusively about JavaScript.
-
-- "_Intended for programmers venturing into JavaScript for the first time_"
-
-- "_... also indented for programmers who have been working with JavaScript at a novice level, and are now ready for a more sophisticated relationship with the language_"
-
-- "_This is not a book for beginners_"
-
-- "_This is not a book for dummies_"
-
-
-???
-
-- Crockford som har skrevet både bok og JSLint (luke ut ulumskheter)
-- editorjs - online editor m/ oppgaver, kjøring og linting
-- Fokus kun på språk, ikke rammeverk / arkitektur
-
----
-class: center, middle
-
-## Editor
-### [http://js-workshop.herokuapp.com](http://js-workshop.herokuapp.com)
-
-## Slides
-### [http://gnab.github.com/js-workshop](http://gnab.github.com/js-workshop)
-
-## Code
-### [http://github.com/gnab/js-workshop](http://github.com/gnab/js-workshop)
-
----
-name: default
-layout: true
-task: &nbsp;
-
-.task[{{task}}]
+# Chez les barbus
+# Master Chef & Puppet Show
+### by [@francoisledroff](https://twitter.com/francoisledroff) &amp; [@rpelisse](https://twitter.com/rpelisse)
 
 ---
 class: center, middle, inverse
-
-# Object Literals
-
-???
-
-Objekter, arrays og typer
----
-template: default
-layout: true
-
-### Object Literals
+## [@rpelisse](https://twitter.com/rpelisse)
 
 ---
-task: [#01 Object properties](http://js-workshop.herokuapp.com/#1/1)
-
-# Objects
-
-A collection of key-value properties.
-
-    var obj = {
-      key1: 'value1',
-      key2: 13
-    };
-
-    obj.key1;         // 'value1'
-    obj['key2'];      // 13
-    obj.key3;         // undefined
-
-    delete obj.key1;
-    obj.key1;         // undefined
-
-???
-
-- Aksess av felter både ved . og []
-- Manglende felt gir undefined, ikke feil
+class: center, middle, inverse
+## [@francoisledroff](https://twitter.com/francoisledroff)
 
 ---
-task: [#02 Populating arrays](http://js-workshop.herokuapp.com/#1/2)
-
-# Arrays
-
-A collection of indexed properties.
-
-    var arr = [1, "two", 3];
-
-    arr.push(4);
-
-    arr[1];         // "two"
-    arr[3] = 4;
-    arr.length;     // 4
-
-???
-
-- Dynamisk størrelse
-- Vilkårlige typer objekter
-- .length
+class: center, middle, inverse
+## Agenda
 
 ---
+class: center, middle, inverse
+# What ?
+# Why ?
+# How ?
 
-# Objects vs. Arrays (1/2)
-
-Arrays are not "real":
-
-- Objects in disguise
-- Operations are slow when number of elements are large
-
-
-    var obj = [1, 2, 3];
-    obj.speed = 5;
-
-    obj[1];         // 2
-    obj.speed       // 5
-    obj['speed'];   // 5
-
-    obj.length;     // 3
-
-???
-
-.length baserer seg på "array" innhold, ikke andre felter
-
----
-task: [#03 What have you got?](http://js-workshop.herokuapp.com/#1/3)
-
-# Objects vs. Arrays (2/2)
-
-The `for (... in ...)` loops all properties of an object.
-
-    var obj = [1, 2, 3];
-    obj.speed = 5;
-
-    var i;
-    for (i = 0; i < obj.length; ++i) {
-      obj[i];  // 1, 2, 3
-    }
-
-    var key;
-    for (key in obj) {
-      obj[key];  // 1, 2, 3, 5
-    }
-
----
-task: [#04 Who are you?](http://js-workshop.herokuapp.com/#1/4)
-
-# Types
-
-Go figure.
-
-    new Object();       // {}
-    new Array();        // []
-    new Number(1);      // 1
-    new Boolean(true);  // true
-
-    typeof {};          // 'object'
-    typeof [];          // 'object'     WTF?
-    typeof 1;           // 'number'
-    typeof '';          // 'string'
-    typeof true;        // 'boolean'
-
-    typeof null;        // 'object'     WTF?
-
-???
-
-- Foretrukket å ikke bruke new (kan utelates og gi feil resultat)
-- typeof [] gir mening, men kan ikke skille typene
-- typeof gir alltid streng
-- typeof må brukes for å sjekke eksistens (men ikke for objektfelter)
 
 ---
 layout: false
-class: center, middle, inverse
-
-# Functions
-
----
-template: default
-layout: true
-
-### Functions
----
-
-# You name it
-
-    function () {}
-
-    function add (a, b) {
-      return a + b;
-    }
-
-    var multiply = function (a, b) {
-      return a * b;
-    };
-
-    var recur = function rec (num) {
-      if (num === 0) { return num; }
-      return rec(num - 1);
-    };
-
-???
-
-- Function expressions vs statements
-- Hoisting - add tilgjengelig overalt
-- Kan lagre (anonyme) funksjoner i variabler
-- Navngitt funksjon privat ved tilordning (recur / rec)
-
----
-task: [#01 How many arguments do you have?](http://js-workshop.herokuapp.com/#2/1)
-
-# arguments
-
-All functions can access their:
-
-- `arguments`
-  - `length`
-  - `callee`
-
-
-    function countArgs () {
-      return arguments.length;
-    }
-
-    countArgs();              // 0
-    countArgs('one');         // 1
-    countArgs('one', 'two');  // 2
-
-???
-
-- arguments ikke array, men objekt med length-felt
-- callee - funksjonen selv, den som blir kalt
-- Oppgave løses med for, ikke for in
-- Siste definisjon av funksjon med samme navn gjelder
-- Funksjon kan kalles med vilkårlig antall argumenter uavh. av definisjon
-
----
-task: [#02 Higher order functions](http://js-workshop.herokuapp.com/#2/2)
-
-# First order variables
-
-- Functions can return functions
-- Functions can take functions as an argument
-
-
-    function createFunction () {
-      return function () {
-
-      };
-    }
-
-    var anonymous = createFunction();
-    anonymous();  // undefined
-
----
-
-# Scope (1/2)
-
-JavaScript has __function scope__, not block scope.
-
-    function () {
-      i;  // undefined    WTF?
-
-      for (var i = 0; i < 10; i++) {
-
-      }
-
-      i;  // 10
-    }
-
-???
-
-Uten var i hadde man fått ReferenceError
-
----
-
-# Scope (2/2)
-
-Variable declarations towards the top, please!
-
-    function () {
-      var i;
-
-      for (i = 0; i < 10; i++) {
-
-      }
-
-      i;  // 10
-    }
-
-???
-
-Hoisting - skjer implisitt, så greit å gjøre synlig
-
----
-
-# More on scope (1/3)
-
-Functions can access everything from their outer scope.
-
-    var a = 1;
-
-    function doSomething () {
-      a;  // 1
-
-      function doMore () {
-        a;  // 1
-      }
-    }
-
----
-
-# More on scope (2/3)
-
-Not the other way around.
-
-    function doSomething () {
-      var b = 1;
-
-      function doMore () {
-        b;  // 1
-      }
-    }
-    doSomething();
-
-    b;  // ReferenceError
-
-???
-
-Funksjon kan kjøres når expression - vanlig med () rundt for å gjøre til expr.
-
----
-task: [#03 JavaScript pwns your scope](http://js-workshop.herokuapp.com/#2/3)
-
-# More on scope (3/3)
-
-Forgot the __`var`__? You've got yourself a global!
-
-    function doSomething () {
-      c = 1;
-
-      function doMore () {
-        c;  // 1
-      }
-    }
-    doSomething();
-
-    c;  // 1
-
----
-task: [#04 Variables by reference](http://js-workshop.herokuapp.com/#2/4)<br /> [#05 Binding scope](http://js-workshop.herokuapp.com/#2/5)
-
-# Closures (1/3)
-
-Functions can bind scope, even after their outer function has returned!
-
-    var counter = function () {
-      var i = 0;
-
-      return function () {
-        return i++;
-      };
-    };
-
-    var inc = counter();
-    inc();  // 0
-    inc();  // 1
-
----
-task: [#06 Globally ugly, privately slow, closingly sweet](http://js-workshop.herokuapp.com/#2/6)<br />[#07 Variables by reference](http://js-workshop.herokuapp.com/#2/7)
-
-# Closures (2/3)
-
-Functions can run immediatly!
-
-    var inc = function () {
-      var i = 0;
-
-      return function () {
-        return i++;
-      };
-    }();  // Note the trailing ()!
-
-    inc();  // 0
-    inc();  // 1
-
----
-
-# Closures (3/3)
-
-Create modules with private state!
-
-    var lib = {};
-    lib.module = (function () {
-
-      var privateVariable;
-
-      var privateFunction = function () {};
-
-      return {
-        publicProperty: 1,
-        privilegedMethod: function (arg) {
-          // privateVariable = arg;
-        }
-      };
-
-    })();
-
----
-
-# Context
-
-- Functions run in different contexts
-  - Depending on how they are invoked
-
-- May be invoked in 4 primary ways
-  - Function invocation
-  - Constructor invocation
-  - Method invocation
-  - `apply`/`call` invocation
-
----
-task: [#08 What is this?](http://js-workshop.herokuapp.com/#2/8)
-
-# Function invocation
-
-Functions called directly.
-
-    var countArgs = function () {
-      // this === window
-
-      return arguments.length;
-    };
-
-    countArgs();  // 0
-
-???
-
-I nodejs ville this ikke være window, men exports.
-
----
-task: [#09 Constructing objects](http://js-workshop.herokuapp.com/#2/9)
-
-# Constructor invocation (1/2)
-
-Functions called with the __`new`__ keyword.
-
-    function Person (name) {
-      // this === instance of Person
-
-      this.name = name;
-    }
-
-    var bob = new Person('bob');
-    var ed = new Person('ed');
-
-    ed.name = 'fred';
-
----
-
-# Constructor invocation (2/2)
-
-But there's a gotcha!
-
-    function Person (name) {
-      this.name = name;
-    }
-
-    var bob = Person('bob');
-    var ed = new Person('ed');
-
-    window.name === 'bob'  // true    WTF?
-
----
-task: [#10 Context confusion](http://js-workshop.herokuapp.com/#2/10)
-
-# Method invocation
-
-Functions called on objects.
-
-    var obj = {
-      value: 1,
-      getValue: function () {
-        // this === obj
-
-        return this.value;
-      }
-    };
-
-    obj.getValue()  // 1
-
----
-task: [#11 Is this yours?](http://js-workshop.herokuapp.com/#2/11)
-
-#  apply/call invocation
-
-Applying functions to objects.
-
-    function doStuff () {
-      return this.speed;
-    }
-
-    var obj = { speed: 2 };
-
-    doStuff.apply(obj, [ arg1, arg2 ]);  // 2
-
-    doStuff.call(obj, arg1, arg2);     // 2
+.left-column[
+  ## What?
+]
 
 ---
 layout: false
-class: center, middle, inverse
+.left-column[
+  ## What?
+  
+]
 
-# Inheritance
+.right-column[
 
+Une Solution de gestion de configuration
+
+- écrit en Ruby
+- langage dédié (DSL) et pure Ruby
+- recettes *recipes*
+- livres de recettes *cookbook*
+
+.right[![Chef](img/chef_logo.png)]
+
+
+]
 ---
-layout: true
-template: default
 
-### Inheritance
----
-
-# Multiple paradigms
-
-- Pseudoclassical inheritance
-
-- Prototypal/differential inheritance
-
-- Functional inheritance
-
-???
-
-- Ullent område
-- Mange gjør forskjellig
-- Prøver å etterligne andre språk
-- JavaScript kan tilpasses flere paradigmer
 
 ---
 
-# Prototype (1/3)
-
-- Inherit directly from other objects
-  - Properties
-  - Methods
-
-- All objects inherit from a `prototype` property
-
-- Bound upon object creation
-
-
-    var obj = {};
-    obj.toString();  // '[object Object]'
+# slides below are just remark.js demo
 
 ---
-
-# Prototype (2/3)
-
-The `prototype` property.
-
-    function Object () {}
-
-    Object.prototype = {
-      toString: function () {
-        return '[object Object]';
-      }
-    };
-
-    var obj = new Object();
-    obj.toString();  // '[object Object]'
-
+#remark
+[ri-mahrk]
+.footnote[Go to directly to [project site](https://github.com/gnab/remark)]
 ---
-
-# Prototype (3/3)
-
-    var first = new Object();
-    // first.__proto__ = Object.prototype;
-
-    first.x = 1;       // on first
-    first.toString();  // on first's prototype (Object)
-
-![Prototypal Inheritance 1](prototype1.png)
-
----
-task: [#01 Pseudoclassical 1](http://js-workshop.herokuapp.com/#3/1)
-
-# Pseudoclassical inheritance (1/2)
-
-.right.pushdown[![Prototypal Inheritance 2](prototype2.png)]
-
-    function CoolObject (x) {
-      this.x = x;
-    }
-
-    CoolObject.prototype = {
-      getX : function () {
-        return this.x;
-      }
-    };
-
-    var coolObj = new CoolObject(1);
-
-???
-
-- Prototype-objektet deles av alle instanser, hvert objekt arver ikke alt
-- Minner om statiske klassevariabler/metoder
-- Kan endre ting på prototypen i etterkant - vil påvirke alle instanser
-- Kan endre prototype for objekt etter opprettelse
-- Husk at = { .. tilsvarere new Object()
-
----
-task: [#02 Pseudoclassical 2](http://js-workshop.herokuapp.com/#3/2)
-
-# Pseudoclassical inheritance (2/2)
-
-- Intented to look object oriented - looks quite alien?
-
-- Remember to use __`new`__!
- - Clobbering global variables
- - No compile warning, no runtime warning
- - Convention - all constructor functions start with an capital letter
-
-"_Comfort to unexperienced JavaScript programmers_"
-"_Induce unnecessary complex hierarcies_"
-"_... motivated by constraints of static type checking_"
-
-__JavaScript has more and better options__
-
-???
-
-- Bedre å pakke inn new for å unngå å etterligne andre språk
-- Veldig likt obj := Object clone i Io
-
----
-task: [#03 Prototypal](http://js-workshop.herokuapp.com/#3/3)
-
-# Prototypal/differential inheritance
-
-- Dispence with classes, make useful objects
-- Specify differences
-
-
-    function create (proto) {
-      function F () {};
-      F.prototype = proto;
-      return new F();
-    }
-
-    var eventBase = {
-      emit: function () {},
-      on: function () {}
-    };
-
-    var obj = create(eventBase);
-    obj.emit('some event');
-
----
-task: [#04 Functional](http://js-workshop.herokuapp.com/#3/4)
-
-# Functional inheritance (1/2)
-
-    var person = function (options) {
-      var that = {};
-
-      that.getName = function () {
-        return options.name;
-      };
-
-      return that;
-    };
-
-    var bob = person({ name: 'bob' });
-    var ed = person({ name: 'ed' });
-
-???
-
-Ulempe at alle instanser får egne kopier av funksjoner
-
----
-
-# Functional inheritance (2/2)
-
-    function Car (options) {
-
-      this.getColor = function () {
-        return options.color;
-      };
-    }
-
-    Car.proto...
-
-    var car = new Car({ color: 'red' });
-    car.getColor(); // 'red'
-
+## What is it and why should I be using it?
 ---
 layout: false
-class: center, middle, inverse
+.left-column[
+  ## What is it?
+]
+.right-column[
+  A simple, in-browser, Markdown-driven slideshow tool targeted at people who know their way around HTML and CSS, featuring:
 
-# Bad Parts
+- Markdown formatting, with smart extensions
+
+- Presenter mode, with cloned slideshow view
+
+- Syntax highlighting, supporting a range of languages
+
+- Slide scaling, thus similar appearance on all devices / resolutions .red[*]
+
+- Touch support for smart phones and pads, i.e. swipe to navigate slides
+
+.footnote[.red[*] At least browsers try their best]
+]
+---
+.left-column[
+  ## What is it?
+  ## Why use it?
+]
+.right-column[
+If your ideal slideshow creation workflow contains any of the following steps:
+
+- Just write what's on your mind
+
+- Do some basic styling
+
+- Easily collaborate with others
+
+- Share with and show to everyone
+
+Then remark might be perfect for your next.red[*] slideshow!
+
+.footnote[.red[*] You probably want to convert existing slideshows as well]
+]
+---
+.left-column[
+  ## What is it?
+  ## Why use it?
+]
+.right-column[
+As the slideshow is expressed using Markdown, you may:
+
+- Focus on the content, expressing yourself in next to plain text not worrying what flashy graphics and disturbing effects to put where
+
+As the slideshow is actually an HTML document, you may:
+
+- Display it in any decent browser
+
+- Style it using regular CSS, just like any other HTML content
+
+- Use it offline!
+
+As the slideshow is contained in a plain file, you may:
+
+- Store it wherever you like; on your computer, hosted from your Dropbox, hosted on Github Pages alongside the stuff you're presenting...
+
+- Easily collaborate with others, keeping track of changes using your favourite SCM tool, like Git or Mercurial
+]
+---
+template: inverse
+
+## How does it work, then?
+---
+name: how
+
+.left-column[
+  ## How does it work?
+### - Markdown
+]
+.right-column[
+A Markdown-formatted chunk of text is transformed into individual slides by JavaScript running in the browser:
+
+```remark
+# Slide 1
+This is slide 1
 
 ---
-layout: true
-template: default
 
-### Bad Parts
+# Slide 2
+This is slide 2
+```
+
+.slides[
+  .first[
+  ### Slide 1
+  This is slide 1
+  ]
+  .second[
+  ### Slide 2
+  This is slide 2
+  ]
+]
+
+Regular Markdown rules apply with only a single exception:
+
+  - A line containing three dashes constitutes a new slide
+  (not a horizontal rule, `&lt;hr /&gt;`)
+
+Have a look at the [Markdown website](http://daringfireball.net/projects/markdown/) if you're not familiar with Markdown formatting.
+]
 ---
+.left-column[
+  ## How does it work?
+  ### - Markdown
+  ### - Inside HTML
+]
+.right-column[
+A simple HTML document is needed for hosting the styles, Markdown and the generated slides themselves:
 
-# Arrays
+```xml
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      /* Slideshow styles */
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+      <!-- Slideshow Markdown -->
+    &lt;/textarea&gt;
+    <script type="text/javascript" src="remark.js">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
+```
 
-Indices are free to go.
+You may download remark to have your slideshow not depend on any online resources, or reference the [latest version](https://github.com/gnab/remark/releases) online directly.
+]
+---
+template: inverse
 
-    var arr = [1, 2, 3];
-    arr[999] = 0; // WTF
-    arr.length;   // 1000
+## Of course, Markdown can only go so far.
+---
+.left-column[
+  ## Markdown extensions
+]
+.right-column[
+To help out with slide layout and formatting, a few Markdown extensions have been included:
 
-    delete arr[1];
-    arr; // [1, undefined, 3];
+- Slide properties, for naming, styling and templating slides
+
+- Content classes, for styling specific content
+
+- Syntax highlighting, supporting a range of languages
+]
+
+---
+.left-column[
+  ## Markdown extensions
+  ### - Slide properties
+]
+.right-column[
+Initial lines containing key-value pairs are extracted as slide properties:
+
+```remark
+name: agenda
+class: middle, center
+
+# Agenda
+
+The name of this slide is {{ name }}.
+```
+
+Slide properties serve multiple purposes:
+
+* Naming and styling slides using properties `name` and `class`
+
+* Using slides as templates using properties `template` and `layout`
+
+* Expansion of `{{ property }}` expressions to property values
+
+See the [complete list](https://github.com/gnab/remark/wiki/Slide-Properties) of slide properties.
+]
+---
+.left-column[
+  ## Markdown extensions
+  ### - Slide properties
+  ### - Content classes
+]
+.right-column[
+Any occurences of one or more dotted CSS class names followed by square brackets are replaced with the contents of the brackets with the specified classes applied:
+
+```remark
+.footnote[.red.bold[*] Important footnote]
+```
+
+Resulting HTML extract:
+
+```xml
+<span class="footnote">
+  <span class="red bold">*</span> Important footnote
+</span>
+```
+]
+---
+.left-column[
+  ## Markdown extensions
+  ### - Slide properties
+  ### - Content classes
+  ### - Syntax Highlighting
+]
+.right-column[
+Code blocks can be syntax highlighted by specifying a language from the set of [supported languages](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting).
+
+Using [GFM](http://github.github.com/github-flavored-markdown/) fenced code blocks you can easily specify highlighting language:
+
+.pull-left[
+
+<pre><code>```javascript
+function add(a, b)
+  return a + b
+end
+```</code></pre>
+]
+.pull-right[
+
+<pre><code>```ruby
+def add(a, b)
+  a + b
+end
+```</code></pre>
+]
+
+A number of highlighting [styles](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting) are available, including several well-known themes from different editors and IDEs.
+
+]
+---
+.left-column[
+  ## Presenter mode
+]
+.right-column[
+To help out with giving presentations, a presenter mode comprising the
+following features is provided:
+
+- Display of slide notes for the current slide, to help you remember
+  key points
+
+- Display of upcoming slide, to let you know what's coming
+
+- Cloning of slideshow for viewing on extended display
+]
+---
+.left-column[
+  ## Presenter mode
+  ### - Inline notes
+]
+.right-column[
+Just like three dashes separate slides,
+three question marks separate slide content from slide notes:
+
+```
+Slide 1 content
 
 ???
 
-Sletting må gjøres med splice(1,1) (fjern ett element fra posisjon 1)
+Slide 1 notes
 
 ---
 
-# for (... in ...)
+Slide 2 content
 
-Properties from the `prototype` chain are looped as well.
+???
 
-    var key;
+Slide 2 notes
+```
 
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        // Property belongs to obj itself
-      }
-    }
+Slide notes are also treated as Markdown, and will be converted in the
+same manner slide content is.
 
+Pressing __P__ will toggle presenter mode.
+]
+???
+Congratulations, you just toggled presenter mode!
+
+Now press __P__ to toggle it back off.
 ---
+.left-column[
+  ## Presenter mode
+  ### - Inline notes
+  ### - Cloned view
+]
+.right-column[
+Presenter mode of course makes no sense to the audience.
 
-# eval is evil
+Creating a cloned view of your slideshow lets you:
 
-Property look-ups.
+- Move the cloned view to the extended display visible to the audience
 
-    // Don't do
-    eval('var value = obj.' + key);
+- Put the original slideshow in presenter mode
 
-    // Rather do
-    var value = obj[key];
+- Navigate as usual, and the cloned view will automatically keep up with the original
 
-Function references.
-
-    // Don't do
-    var f = new Function("alert('hello');");
-    setTimeout("alert('hello')", 1000);
-    setInterval("alert('hello')", 1000);
-
-    // Rather do
-    var f = function () { alert('hello'); };
-    setTimeout(f, 1000);
-
+Pressing __C__ will open a cloned view of the current slideshow in a new
+browser window.
+]
 ---
+template: inverse
 
-# Falsy values
-
-- __`false`__
-- __`null`__
-- __`undefined`__
-- `0` (zero)
-- `''` or `""` (empty string)
-- __`NaN`__ (not-a-number, e.g. 'a' / 2)
-
-
-`&&` and `||` return the actual value of the expession that stops the evaluation:
-
-
-    function Car (name) {
-      this.name = name || 'default name';
-    }
-
+## It's time to get started!
 ---
+.left-column[
+  ## Getting started
+]
+.right-column[
+Getting up and running is done in only a few steps:
 
-# Transitivity - come again?
+1. Visit the [project site](http://github.com/gnab/remark)
 
-    0 == '0'            // true
-    0 == ''             // true
-    '' == '0'           // false
+2. Follow the steps in the Getting Started section
 
-    false == 'false'    // false
-    false == '0'        // true
-
-    undefined == false  // false
-    undefined == true   // false
-    false == null       // false
-    null == undefined   // true
-
-    ' \t\r\n ' == 0     // true
-
+For more information on using remark, please check out the [wiki](https://github.com/gnab/remark/wiki) pages.
+]
 ---
+name: last-page
+template: inverse
 
-# Semicolon insertion (1/2)
+## That's all folks (for now)!
 
-    function getStatus () {
-      return
-      {
-        status: true
-      }
-    }
-
----
-
-# Semicolon insertion (2/2)
-
-    function getStatus () {
-      return;                             <- semicolon insertion
-      {                                   <- open block
-        status: true                      <- loop label
-      }                                   <- close block
-    }
-
-
-# W T F
-
----
-
-# arguments is not an array
-
-It only pretends to be.
-
-    {
-      '0': 1,
-      '1': 2,
-      length: 2
-    }
-
-But you can fix it.
-
-    function f () {
-      var slice = Array.prototype.slice; // [].slice
-      return slice.apply(arguments);
-    }
-
-    f(1, 2);  // [1, 2]
-
----
-
-# Keywords
-
-    obj[&lt;keyword&gt;] = 1  // Reserved word (undefined, NaN, Infinity?)
-
-- `abstract`
-- __`boolean`__ __`break`__ `byte`
-- __`case`__ __`catch`__ `char` `class` `const` __`continue`__
-- __`debugger`__ __`default`__ __`delete`__ `do` `double`
-- __`else`__ `enum` `export` `extends`
-- __`false`__ `final` __`finally`__ `float` __`for`__ __`function`__
-- `goto`
-- __`if`__ `implements` `import` __`in`__ __`instanceof`__ `int` `interface`
-- `long`
-- `native` __`new`__ __`null`__
-- `package` `private` `protected` `public`
-- __`return`__
-- `short` `static` `super` __`switch`__ `synchronized`
-- __`this`__ __`throw`__ `throws` `transient` __`true`__ __`try`__ __`typeof`__
-- __`var`__ `volatile` __`void`__
-- __`while`__ __`with`__
-
----
-
-# Avoid void
-
-Void is not useful, avoid void!
-
-- __`void`__ is an operator
-- takes an operand
-- returns __`undefined`__
-
-` `
-
-    void 1  // undefined
-
----
-layout: false
-class: center, middle, inverse
-
-# That's all folks!
-
-Slideshow created with [remark](http://gnab.github.com/remark).
-
+Slideshow created using [remark](http://github.com/gnab/remark).
     </textarea>
     <script>
       var slideshow = remark.create({ highlightLanguage: 'javascript'});
