@@ -8,10 +8,11 @@
       @import url(http://fonts.googleapis.com/css?family=Lobster);
       @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
       @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Lato);
 
       body {
-        font-family: 'Droid Serif';
-        font-size: 20px;
+        font-family: 'Lato';
+        font-size: 25px;
       }
        h1 {
         font-family: 'Lobster';
@@ -27,6 +28,7 @@
       h2 { font-size: 2em; }
       h3 { font-size: 1.6em; }
       .footnote {
+        font-family: 'Yanone Kaffeesatz';
         position: absolute;
         bottom: 3em;
       }
@@ -109,16 +111,23 @@
 
       /* Two-column layout */
       .left-column {
+        font-family: 'Lobster';
         color: #777;
         width: 20%;
         height: 92%;
         float: left;
       }
-        .left-column h2:last-of-type, .left-column h3:last-child {
+      
+      /* Two-column layout */
+      .left-column h2 {
+        font-family: 'Lobster';
+        font-size: 1.3em;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
           color: #000;
         }
       .right-column {
-        width: 75%;
+        width: 76%;
         float: right;
         padding-top: 1em;
       }
@@ -168,6 +177,8 @@ layout: false
 layout: false
 .left-column[
   ## What?
+
+.footnote[![Chef](img/chef_logo.png)]
   
 ]
 
@@ -175,17 +186,35 @@ layout: false
 
 Une Solution de gestion de configuration
 
+- édité par opscode/Chef
+- license TBD
 - écrit en Ruby
 - langage dédié (DSL) et pure Ruby
 - recettes *recipes*
 - livres de recettes *cookbook*
-
-.right[![Chef](img/chef_logo.png)]
-
+- bla TBD
 
 ]
 ---
 
+layout: false
+.left-column[
+  ## What?
+
+.footnote[![Chef](img/puppet_logo.png)]
+  
+]
+
+.right-column[
+
+Une Solution de gestion de configuration
+
+- édité par PuppetLabs
+- license TBD
+- langage dédié (DSL) 
+- bla TBD
+
+]
 
 ---
 
