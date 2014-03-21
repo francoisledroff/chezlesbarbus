@@ -8,16 +8,54 @@
       @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
       @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 
-      body { font-family: 'Droid Serif';  }
+      body {
+        font-family: 'Droid Serif';
+        font-size: 20px;
+      }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: 400;
         margin-bottom: 0;
-        margin-top: 10px;
       }
-      h1 { font-size: 3.5em; }
-      h2 { font-size: 3em; }
+      h1 { font-size: 4em; }
+      h2 { font-size: 2em; }
       h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        -moz-border-radius: 5px;
+        -web-border-radius: 5px;
+        background: #e7e8e2;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
       .inverse {
         background: #272822;
         color: #777872;
@@ -28,34 +66,42 @@
         line-height: 0.8em;
       }
 
-      pre {
-        border-left: 0.4em solid #d7d7d7;
-        padding: 1em !important;
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
       }
-      code {
-        background: transparent !important;
-      }
-      a {
-        color: #F92672;
-        text-decoration: none;
-      }
-      .task {
-        float: right;
+      #slide-how .slides {
         font-size: 0.9em;
-        padding-top: 0.6em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
       }
-      .task a {
-        color: #080;
-        text-decoration: none;
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
       }
-      .right {
-        float: right;
-        margin-left: 1em;
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
       }
-      .pushdown {
-        margin-top: 12em;
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
       }
-       /* Two-column layout */
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
       .left-column {
         color: #777;
         width: 20%;
@@ -69,7 +115,6 @@
         width: 75%;
         float: right;
         padding-top: 1em;
-        font-size: 1.2em;
       }
     </style>
   </head>
@@ -81,6 +126,7 @@ class: center, middle, inverse
 # Master Chef & Puppet Show
 ### by [@francoisledroff](https://twitter.com/francoisledroff) &amp; [@rpelisse](https://twitter.com/rpelisse)
 
+.footnote[[@ Devoxx France 2014](http://cfp.devoxx.fr/devoxxfr2014/talk/QRF-934/Chez%20les%20barbus:%20master%20chef%20et%20puppet%20show)]
 ---
 class: center, middle, inverse
 ## [@rpelisse](https://twitter.com/rpelisse)
@@ -91,7 +137,7 @@ class: center, middle, inverse
 
 ---
 class: center, middle, inverse
-## Agenda
+# Agenda
 
 ---
 class: center, middle, inverse
@@ -134,6 +180,8 @@ Une Solution de gestion de configuration
 # slides below are just remark.js demo
 
 ---
+class: center, middle, inverse
+
 #remark
 [ri-mahrk]
 .footnote[Go to directly to [project site](https://github.com/gnab/remark)]
