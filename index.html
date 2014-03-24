@@ -17,7 +17,7 @@
       
 
       body {
-        font-family: josefin-sans, sans-serif;
+        font-family: lato, sans-serif;
         font-size: 30px;
       }
        h1 {
@@ -40,7 +40,7 @@
         bottom: 1.5em;
       }
       li p { line-height: 1.25em; }
-      .red { color: #fa0000; }
+      .red { color: #fa0000; font-size: 0.8em;}
       .large { font-size: 2em; }
       a, a > code {
         color: rgb(249, 38, 114);
@@ -149,10 +149,14 @@
       }
       
       .remark-slide-content {
-       padding-top: 0.5em;
+        padding-top: 0.5em;
         padding-right: 0.5em;
         padding-bottom: 0.5em;
         padding-left: 0.9em;
+      }
+      .remark-slide-number {
+        bottom: 0px;
+        font-size: 0.6em;
        
       }
       .splash 
@@ -215,61 +219,24 @@ layout: false
 .left-column[
   ## Quoi?
 ]
----
-layout: false
-.left-column[
-  ## Quoi?
-  ### - Infrastructure as code  
-]
-
-.right-column[
-
-Chef & Puppet sont 2 solutions concurrentes 
-* de gestion de configuration
-* d' * **Infrastructure as Code** *
-
-Pas un remplacement de tes scripts shell
-
-* abstraire la facon dont tu manages ton infra
-* coder ce que tu veux faire de ton infra
- * (re)construit là, sur demande depuis des serveurs 'nus'
-* faire converger ton système 
-```   
-    Etat A --> Etat B
-```   
-* de façon idempotente 
-```   
-    Etat B --> Etat B
-```
-]
-
-???
-
-reconstruct business from code repo, data back up and bare metal resources
-
-
-http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
-http://architects.dzone.com/articles/infrastructure-code
-https://www.youtube.com/watch?v=cuJZbRngWC0
-
-
 
 ---
 layout: false
 .left-column[
   ## Quoi?
-  ### - Infrastructure as code
-  ### - Infrastructure ?
+  ### - Infrastructure 
 ]
 
 
 .right-column[
 
-Infrastructure: Définition .red[[1]], une collection :
+**Infrastructure** [in-fruh-struhk-cher]
+nom féminin
 
-* de ressources
+.red[[1]] une collection de
+* ressources:
  * réseaux, noeuds 
- * systèms de fichiers, fichiers, répertoires, liens symboliques, montages disques
+ * systèmes de fichiers, fichiers, répertoires, liens symboliques, montages disques
  * utilisateurs, groupes
  * packages, logiciels, services
  * configuration
@@ -280,9 +247,11 @@ Infrastructure: Définition .red[[1]], une collection :
 
 
 ]
-.footnote[.red[[1]]:[Introduction to Chef](http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup)]
+.footnote[.red[[1] [Introduction to Chef](http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup)]]
 
 ???
+
+notes à déplacer:
 
 Donc forcemment toujours sujet au changement...
 on commence par un app server, une db
@@ -293,14 +262,49 @@ puis on rajoute du cache distribué
 puis on doit maintenir ca par env,
 monter des data centers par geographie
 
----
 
+---
+layout: false
+.left-column[
+  ## Quoi?
+  ### - Infrastructure 
+  ### - Infrastructure as code  
+]
+
+.right-column[
+
+Chef & Puppet sont 2 solutions concurrentes 
+* de gestion de configuration
+* d' * **Infrastructure as Code** *
+
+Il ne remplacent pas juste tes scripts shell, il te permettent de:
+
+* abstraire la facon dont tu manages ton infra
+* de la coder 
+ * de la (re)construire à partir de serveurs 'nus'
+* faire converger tes systèmes 
+* de façon idempotente 
+```   
+    EtatA --> Etat B --> Etat B
+```
+]
+
+???
+
+
+http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
+http://architects.dzone.com/articles/infrastructure-code
+https://www.youtube.com/watch?v=cuJZbRngWC0
+
+
+
+---
 
 layout: false
 .left-column[
   ## Quoi?
+  ### - Infrastructure 
   ### - Infrastructure as code
-  ### - Infrastructure ?
   ### - Puppet
 ]
 
@@ -312,7 +316,7 @@ Puppet:
 - édité par PuppetLabs
 - license TBD
 - langage dédié (DSL) 
-- bla TBD
+- blablabla TBD
 
 .right.footnote[![Puppet](img/puppet_logo.png)]
 
@@ -320,11 +324,12 @@ Puppet:
 
 
 ---
+
 layout: false
 .left-column[
   ## Quoi?
+   ### - Infrastructure 
    ### - Infrastructure as code
-   ### - Infrastructure ?
    ### - Puppet
    ### - Chef
 
@@ -336,14 +341,14 @@ layout: false
 Chef:
 
 - créé en 2009
-- édité par opscode/Chef
-- license TBD
+- édité par Opscode/Chef
+- license Apache
 - écrit en Ruby
 - langage dédié (DSL) et pure Ruby
-- recettes *recipes*
-- livres de recettes *cookbook*
-- Chef solo (je ne connais pas)
-- Chef serveur
+- different modes
+ * Chef solo 
+ * Chef zero 
+ * Chef server + client
 
 ]
 .footnote[![Chef](img/chef_logo.png)]
@@ -368,12 +373,14 @@ A centralized API that interacts with and integrates infrastructure components
 Authentication or authorization
 Persistent attributes
 
+chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
+
 ---
 layout: false
 .left-column[
   ## Quoi?
+   ### - Infrastructure 
    ### - Infrastructure as code
-   ### - Infrastructure ?
    ### - Puppet
    ### - Chef
 
@@ -382,16 +389,14 @@ layout: false
 
 .right-column[
 
-* Reduce management complexity through abstraction, introduisant des concepts
- * Organizations, Environments, Roles, Nodes, Run List, Cookbooks, Recipes, Resource, Search
+Chef
+
+* réduit la complexité de la gestion d'une infrastructure par l'abstraction
+ * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
  
-* Store the configuration of your programs in version control
+* permet de persister et manager ces abstractions sous forme de code
 
-* propose une interface déclarative aux ressources
- * definit des '*policy*'
- * definit quoi pas comment
-
-* generates configurations directly on nodes from their run list (en mode pull)
+* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
  
 
 ]
@@ -416,7 +421,7 @@ layout: false
 
 .right-column[
 
-- Adobe se transforme, son IT aussi
+- Adobe **Creative Cloud**
  * *'Accelerate, Simplify, Scale'*
  
 - décloisonner les équipes, dev, de qualité, de sécurité et d'exploitation
@@ -509,52 +514,51 @@ layout: false
 http://www.slideshare.net/opscode/week-1-overview-of-chef
 Should we add a tale of growth section dans le 'pourquoi?'
 
+---
+class: center, middle, inverse
+# Comment
+### Comprende Chef
+#### Panorama 
+
+.footnote[![Chef](img/chef_logo.png)]
 
 ---
 
 layout: false
 .left-column[
-  ## Comment ?
-  ### - Intro à Chef
+  ## Chef Comment ?
+  ### -  Panorama
 
   
 ]
 
 .right-column[
 
-* manager le complexité: embrasser les abstraction offertes par Chef
-
-* manipuler les resources à travers les recipes et cookbooks
-
-* un exemple
-
+![overview](img/overview_chef.png)
 
 ]
 .footnote[![Chef](img/chef_logo.png)]
 
 ???
 
+http://docs.opscode.com/chef_overview.html
 
 
 ---
 
 layout: false
 .left-column[
-  ## Comment ?
-  ### - Intro à Chef
-  #### - Abstractions
-
-
-
-
-  
+  ## Chef Comment ?
+  ### -  Panorama
+  ### -  Server (recherche management et APIs)
+  ### -  Nodes (attributes et run list)
+  ### -  Policy  
+  ### -  cookbooks (attributs, recipes version)
 ]
 
 .right-column[
 
-
-* Organisations
- * locataires independants du chef serveur (BU, Département)
+Policy settings map business and operational requirements, to settings stored on the server
  
 * Environments
  * modèle votre cycle de release et vos process (dev, test, stage, prod)  
@@ -562,16 +566,25 @@ layout: false
 * Roles 
  * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
  
+* Data Bags
+
+A data bag is a global variable that is stored as JSON data and is accessible from a server. 
+A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
+
+ 
 * Nodes
  * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
  * sur lequel tourne `chef-client`
-
 ]
+
 .footnote[![Chef](img/chef_logo.png)]
 
 ???
 
 manager le complexité, et embrasser les abstraction offertes par Chef
+
+* Organisations
+ * locataires independants du chef serveur (BU, Département)
 
 
 Organization : 
@@ -610,6 +623,7 @@ policy
 
 http://www.slideshare.net/opscode/week-1-overview-of-chef
 
+http://docs.opscode.com/chef_overview.html
 
 ---
 
