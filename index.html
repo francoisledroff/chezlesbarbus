@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Master Chef and Puppet Show</title>
     <script src="http://gnab.github.io/remark/downloads/remark-0.6.2.min.js" type="text/javascript"> </script>
-    <script src="//use.edgefonts.net/sansita-one.js"></script>
+    <script src="//use.edgefonts.net/sansita-one;carter-one;amaranth;lato.js"></script>
     <script src="//use.edgefonts.net/bangers.js"></script>
     <script src="//use.edgefonts.net/josefin-sans:n1,i1,n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
     <style type="text/css" media="screen">
@@ -18,7 +18,7 @@
 
       body {
         font-family: josefin-sans, sans-serif;
-        font-size: 27px;
+        font-size: 30px;
       }
        h1 {
         font-family: bangers, sans-serif;
@@ -30,13 +30,14 @@
         font-weight: 400;
         margin-bottom: 0;
       }
-      h1 { font-size: 4em; }
+      h1 { font-size: 3.6em; }
       h2 { font-size: 2em; }
       h3 { font-size: 1.6em; }
       .footnote {
         font-family: 'Yanone Kaffeesatz';
         position: absolute;
-        bottom: 3em;
+        right: 1em;
+        bottom: 1.5em;
       }
       li p { line-height: 1.25em; }
       .red { color: #fa0000; }
@@ -50,7 +51,7 @@
         -web-border-radius: 5px;
         background: #e7e8e2;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 20px;
       }
       .pull-left {
         float: left;
@@ -129,21 +130,37 @@
         font-family: bangers, sans-serif;
         font-size: 1.3em;
       }
+       /* Two-column layout */
+      .left-column h3 {
+        font-family: bangers, sans-serif;
+        font-size: 0.8em;
+      }
+        /* Two-column layout */
+      .left-column h4 {
+        font-family: bangers, sans-serif;
+        font-size: 0.6em;
+      }
       .left-column h2:last-of-type, .left-column h3:last-child {
           color: #000;
         }
       .right-column {
         width: 76%;
         float: right;
-        padding-top: 1em;
       }
       
+      .remark-slide-content {
+       padding-top: 0.5em;
+        padding-right: 0.5em;
+        padding-bottom: 0.5em;
+        padding-left: 0.9em;
+       
+      }
       .splash 
       { padding: 1em 3em; 
         background: url(img/devoxx_fr_2014_splash.png) no-repeat center #272822;
         color: #777872; text-align: right; vertical-align: bottom; 
       }
-      
+     
     </style>
   </head>
   <body>
@@ -167,96 +184,28 @@ class: center, middle, inverse
 
 ---
 class: center, middle, inverse
-# Pourquoi?
 # Quoi?
+# Pourquoi?
 # Comment?
+# Comment??
+
 
 ???
 
 Francois:
 Chef et puppet sont deux solutions concurrentes de gestion de configuration
-Pourquoi? Quel est ce nouveau besoin ? Pourquoi cet engouement pour coder nos infrastrcuture
+Nous allons rapidement lever le voile sur la nature de ces solutions
 
-Romain:
-Puis nous allons lever le voile sur la nature de ces solutions
+Romain
+Pourquoi? Quel est ce nouveau besoin ? Pourquoi cet engouement pour coder nos infrastructure ?
 
 Francois
-Avant de passer à l'exploration rapide de quelque cas concrets  mettant en oeuvre la configuration de back-end java
+Avant de passer à l'exploration rapide de quelque cas concrets 
+mettant en oeuvre la configuration de back-end java
 
----
-layout: false
-.left-column[
-  ## Pourquoi?
-]
+Romain
+et enfin une section pour un usage plus avancé, mettant en exergue quelques unes de nos retour d'experience et 'best pratices'
 
----
-layout: false
-.left-column[
-  ## Pourquoi?
-
-
-.footnote[
-![Adobe](img/adobe_logo.png)
-
- [@francoisledroff](https://twitter.com/francoisledroff)
-]
-
-  
-]
-
-.right-column[
-
-* Adobe IT
- * *Accelerate, Simplify, Scale*
- * Sécurité 
-* décloisonner les équipes, dev, de qualité et d'exploitation
- * faciliter, accélérer les changements 
- * mieux garantir stabilité et sécurité 
- * éviter les surprises
-* Comme votre infra devient code, elle devient testable, versionable, jetable, repétable
-* appliquer l'*open development* sur notre infra
- * Whatever you're working on, it must be backed by an issue in the tracker.
- * If it's not in the source code control system, it doesn't exist.
- * If it's important, it needs a permanent URL.
- * If it didn't happen on the dev list, it didn't happen.
- * What happened while you were away? Check the activity stream and archives.
-
-
-]
-
-???
-
-* http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013
-
-* http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
-* http://java.dzone.com/articles/infrastructure-code-key-devops
-* http://architects.dzone.com/articles/infrastructure-code
-
-
----
-
-layout: false
-.left-column[
-  ## Pourquoi?
-
-
-.footnote[
-![Redhat](img/redhat_logo.jpeg)
-
- [@rpelisse](https://twitter.com/rpelisse)
-]
-
-  
-]
-
-.right-column[
-
-* TBD
-
-
-]
-
-???
 
 
 ---
@@ -266,19 +215,125 @@ layout: false
 .left-column[
   ## Quoi?
 ]
+---
+layout: false
+.left-column[
+  ## Quoi?
+  ### - Infrastructure as code  
+]
+
+.right-column[
+
+Chef & Puppet sont 2 solutions concurrentes 
+* de gestion de configuration
+* d' * **Infrastructure as Code** *
+
+Pas un remplacement de tes scripts shell
+
+* abstraire la facon dont tu manages ton infra
+* coder ce que tu veux faire de ton infra
+ * (re)construit là, sur demande depuis des serveurs 'nus'
+* faire converger ton système 
+```   
+    Etat A --> Etat B
+```   
+* de façon idempotente 
+```   
+    Etat B --> Etat B
+```
+]
+
+???
+
+reconstruct business from code repo, data back up and bare metal resources
+
+
+http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
+http://architects.dzone.com/articles/infrastructure-code
+https://www.youtube.com/watch?v=cuJZbRngWC0
+
+
 
 ---
 layout: false
 .left-column[
   ## Quoi?
+  ### - Infrastructure as code
+  ### - Infrastructure ?
+]
 
-.footnote[![Chef](img/chef_logo.png)]
+
+.right-column[
+
+Infrastructure: Définition .red[[1]], une collection :
+
+* de ressources
+ * réseaux, noeuds 
+ * systèms de fichiers, fichiers, répertoires, liens symboliques, montages disques
+ * utilisateurs, groupes
+ * packages, logiciels, services
+ * configuration
+ 
+* agissant de concert
+
+* pour fournir un service
+
+
+]
+.footnote[.red[[1]]:[Introduction to Chef](http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup)]
+
+???
+
+Donc forcemment toujours sujet au changement...
+on commence par un app server, une db
+on ajoute un load balancer devant les app serveurs
+puis on veut aussi du HA sur la base, puis sur les LBs
+on scale, on passe a 2 load balancers
+puis on rajoute du cache distribué
+puis on doit maintenir ca par env,
+monter des data centers par geographie
+
+---
+
+
+layout: false
+.left-column[
+  ## Quoi?
+  ### - Infrastructure as code
+  ### - Infrastructure ?
+  ### - Puppet
+]
+
+.right-column[
+
+Puppet:
+
+- créé en 2005
+- édité par PuppetLabs
+- license TBD
+- langage dédié (DSL) 
+- bla TBD
+
+.right.footnote[![Puppet](img/puppet_logo.png)]
+
+]
+
+
+---
+layout: false
+.left-column[
+  ## Quoi?
+   ### - Infrastructure as code
+   ### - Infrastructure ?
+   ### - Puppet
+   ### - Chef
+
   
 ]
 
 .right-column[
 
-Une Solution de gestion de configuration
+Chef:
 
 - créé en 2009
 - édité par opscode/Chef
@@ -287,9 +342,11 @@ Une Solution de gestion de configuration
 - langage dédié (DSL) et pure Ruby
 - recettes *recipes*
 - livres de recettes *cookbook*
-- bla TBD
+- Chef solo (je ne connais pas)
+- Chef serveur
 
 ]
+.footnote[![Chef](img/chef_logo.png)]
 
 ???
 
@@ -301,27 +358,258 @@ It is often described as easier to use — particularly for Ruby developers,
 because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in. 
 Chef has a passionate user base, and the Chef community is rapidly growing while developing cookbooks for others to use.
 
----
+chef-solo: http://docs.opscode.com/chef_solo.html
+chef-solo is an open source version of the chef-client that allows using cookbooks with nodes without requiring access to a server. chef-solo runs locally and requires that a cookbook (and any of its dependencies) be on the same physical disk as the node. chef-solo is a limited-functionality version of the chef-client and does not support the following:
 
+Node data storage
+Search indexes
+Centralized distribution of cookbooks
+A centralized API that interacts with and integrates infrastructure components
+Authentication or authorization
+Persistent attributes
+
+---
 layout: false
 .left-column[
   ## Quoi?
+   ### - Infrastructure as code
+   ### - Infrastructure ?
+   ### - Puppet
+   ### - Chef
 
-.footnote[![Chef](img/puppet_logo.png)]
   
 ]
 
 .right-column[
 
-Une Solution de gestion de configuration
+* Reduce management complexity through abstraction, introduisant des concepts
+ * Organizations, Environments, Roles, Nodes, Run List, Cookbooks, Recipes, Resource, Search
+ 
+* Store the configuration of your programs in version control
 
-- créé en 2005
-- édité par PuppetLabs
-- license TBD
-- langage dédié (DSL) 
-- bla TBD
+* propose une interface déclarative aux ressources
+ * definit des '*policy*'
+ * definit quoi pas comment
+
+* generates configurations directly on nodes from their run list (en mode pull)
+ 
 
 ]
+.footnote[![Chef](img/chef_logo.png)]
+
+???
+
+
+
+---
+layout: false
+.left-column[
+  ## Pourquoi?
+]
+
+---
+layout: false
+.left-column[
+  ## Pourquoi?
+  ### - Transformation d'Adobe IT
+]
+
+.right-column[
+
+- Adobe se transforme, son IT aussi
+ * *'Accelerate, Simplify, Scale'*
+ 
+- décloisonner les équipes, dev, de qualité, de sécurité et d'exploitation
+ 
+- Comme notre infra devient code, elle devient 
+ * testable
+ * versionable 
+ * jetable 
+ * repétable, *'cloud-ready'*
+ 
+ 
+] 
+.footnote[![Adobe](img/adobe_logo.png)]
+
+???
+
+
+- Adobe IT
+ * *Accelerate, Simplify, Scale*
+ 
+- décloisonner les équipes, dev, de qualité et d'exploitation
+ * faciliter, accélérer les changements 
+ * mieux garantir stabilité et sécurité 
+ * éviter les surprises
+ 
+- Comme votre infra devient code, elle devient 
+ * testable
+ * versionable 
+ * jetable 
+ * repétable
+
+* http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
+* http://java.dzone.com/articles/infrastructure-code-key-devops
+* http://architects.dzone.com/articles/infrastructure-code
+
+
+---
+
+layout: false
+.left-column[
+  ## Pourquoi?
+  ### - Transformation d'Adobe IT
+  ### - Open Development
+
+]
+.right-column[
+
+[@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013) nous donnes 5 clefs:
+
+ * Whatever you're working on, it must be backed by an issue in the tracker.
+
+ * **If it's not in the source code control system, it doesn't exist.**
+
+ * If it's important, it needs a permanent URL.
+
+* If it didn't happen on the dev list, it didn't happen.
+
+* What happened while you were away? Check the activity stream and archives.
+]
+
+.footnote[![Adobe](img/adobe_logo.png)]
+
+???
+
+Who needs secrets?
+Who cares if your code is not yet perfect?
+
+* http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013
+
+without trust, the tools don't matter
+
+* http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup
+
+---
+
+layout: false
+.left-column[
+  ## Pourquoi?  
+]
+
+.right-column[
+
+* TBD
+
+]
+.footnote[![Redhat](img/redhat_logo.jpeg)]
+
+???
+
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+Should we add a tale of growth section dans le 'pourquoi?'
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+  ### - Intro à Chef
+
+  
+]
+
+.right-column[
+
+* manager le complexité: embrasser les abstraction offertes par Chef
+
+* manipuler les resources à travers les recipes et cookbooks
+
+* un exemple
+
+
+]
+.footnote[![Chef](img/chef_logo.png)]
+
+???
+
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+  ### - Intro à Chef
+  #### - Abstractions
+
+
+
+
+  
+]
+
+.right-column[
+
+
+* Organisations
+ * locataires independants du chef serveur (BU, Département)
+ 
+* Environments
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)  
+ 
+* Roles 
+ * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
+ 
+* Nodes
+ * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
+ * sur lequel tourne `chef-client`
+
+]
+.footnote[![Chef](img/chef_logo.png)]
+
+???
+
+manager le complexité, et embrasser les abstraction offertes par Chef
+
+
+Organization : 
+
+Completely independent tenants of Enterprise Chef
+*  Share nothing with other organizations
+*  May represent different
+*  Companies
+*  Business Units
+*  Departments
+
+Environments may include data attributes necessary
+for configuring your infrastructure
+*  The URL of your payment service’s API
+*  The location of your package repository
+*  The version of the Chef configuration files that
+should be used
+
+
+Roles may include a list of Chef configuration files
+that should be applied.
+*  We call this list a Run List
+*  Roles may include data attributes necessary for
+configuring your infrastructure
+*  The port that the application server listens on
+*  A list of applications that should be deployed
+
+Nodes Adhere to Policy
+• An application, the chef-client, runs on each node
+• chef-client will
+• gather current system configuration
+• download the desired system configuration from
+the Chef server
+• configure the node such that it adheres to the
+policy
+
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+
 
 ---
 
