@@ -26,7 +26,7 @@ Avant de passer à l'exploration rapide de quelque cas concrets
 mettant en oeuvre la configuration de back-end java
 
 
-Pourquoi? Quel est ce nouveau besoin ? Pourquoi cet engouement pour coder nos infrastructure ?
+Et enfin nous conlurons par ce qui devrait alors vous paraite evident. Pourquoi Chef ? Pourquoi Puppet ?  Pourquoi cet engouement pour coder nos infrastructure ? 
 
 ----
 -----
