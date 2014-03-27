@@ -213,12 +213,8 @@ et enfin une section pour un usage plus avancé, mettant en exergue quelques une
 
 
 ---
-
-
-layout: false
-.left-column[
-  ## Quoi?
-]
+class: center, middle, inverse
+# Quoi?
 
 ---
 layout: false
@@ -285,7 +281,8 @@ Il ne remplacent pas juste tes scripts shell, il te permettent de:
 * faire converger tes systèmes 
 * de façon idempotente 
 ```   
-    EtatA --> Etat B --> Etat B
+    Etat A --> Etat B 
+    Etat B --> Etat B
 ```
 ]
 
@@ -297,6 +294,8 @@ http://architects.dzone.com/articles/infrastructure-code
 https://www.youtube.com/watch?v=cuJZbRngWC0
 
 
+How is this better than bash script ?
+reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
 
 ---
 
@@ -375,6 +374,20 @@ Persistent attributes
 
 chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
 
+https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
+
+Puppet evolved from CFEngine and showed potential to be a new kind of configuration management. The original design of Chef was strongly influenced by our own experiences working with and contributing to the Puppet project. That said, Chef does not share any code from Puppet, and is not a “fork” of the Puppet project.
+
+Chef is different from Puppet in a number of important ways:
+
+* Chef uses Ruby as the configuration language, as opposed to a custom DSL
+* Chef is designed from the ground up to integrate with other tools, or to make that integration as simple as possible. Chef is not the canonical representation of your infrastructure. It is a service that exposes data about the state of your infrastructure
+* The chef-client applies resources in the order they are specified in recipes. There is no dependency management. This means multiple chef-client runs will always apply the resources under management in the same order, every time
+* Resources have actions, which can be signaled
+* Resources can appear more than once and they inherit the attributes of the earlier resource. In other words, you can tell Apache to start and stop in a recipe by specifying the resource twice, with the second one only changing the action attribute
+
+http://docs.opscode.com/chef_why.html
+
 ---
 layout: false
 .left-column[
@@ -404,13 +417,55 @@ Chef
 
 ???
 
+---
+
+layout: false
+.left-column[
+  ## Quoi?
+   ### - Infrastructure 
+   ### - Infrastructure as code
+   ### - Puppet
+   ### - Chef
+
+  
+]
+
+.right-column[
+
+Chef & Puppet, c'est donc 
+
+* gestion de configuration
+
+* administration de cloud
+
+* continuous delivery
+
+* open source
+
+* communitry driven
+ 
+
+]
+.footnote[![Chef](img/chef_logo.png)]
+
+???
+
+Chef, c'est donc 
+
+* une solution de management de configuration
+* une solution de administration de cloud
+* s'inscrit dans une approche de continuous delivery
+* c'est open source
+* et communitry driven
+
+
+https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
 
 
 ---
-layout: false
-.left-column[
-  ## Pourquoi?
-]
+class: center, middle, inverse
+# Pourquoi?
+
 
 ---
 layout: false
@@ -430,7 +485,7 @@ layout: false
  * testable
  * versionable 
  * jetable 
- * repétable, *'cloud-ready'*
+ * repétable
  
  
 ] 
@@ -451,7 +506,7 @@ layout: false
  * testable
  * versionable 
  * jetable 
- * repétable
+ * repétable / reproductible  *'cloud-ready'*
 
 * http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
 * http://java.dzone.com/articles/infrastructure-code-key-devops
@@ -543,17 +598,57 @@ layout: false
 
 http://docs.opscode.com/chef_overview.html
 
-
 ---
-
 layout: false
 .left-column[
   ## Chef Comment ?
   ### -  Panorama
-  ### -  Server (recherche management et APIs)
-  ### -  Nodes (attributes et run list)
+  ### -  Server 
+]
+
+.right-column[
+
+* recherche
+* management
+* API
+
+]
+
+.footnote[![Chef](img/chef_logo.png)]
+
+---
+layout: false
+.left-column[
+  ## Chef Comment ?
+  ### -  Panorama
+  ### -  Server 
+  ### -  Nodes 
   ### -  Policy  
   ### -  cookbooks (attributs, recipes version)
+]
+
+.right-column[
+
+* Nodes
+ * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
+ * sur lequel tourne `chef-client`
+
+* attributes
+
+* run-list
+]
+
+.footnote[![Chef](img/chef_logo.png)]
+
+
+---
+layout: false
+.left-column[
+  ## Chef Comment ?
+  ### -  Panorama
+  ### -  Server
+  ### -  Nodes
+  ### -  Policy 
 ]
 
 .right-column[
@@ -567,14 +662,8 @@ Policy settings map business and operational requirements, to settings stored on
  * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
  
 * Data Bags
+ * variable globales, stockées en json sur le serveur Chef (chargées/recherchés dans les recettes)	
 
-A data bag is a global variable that is stored as JSON data and is accessible from a server. 
-A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
-
- 
-* Nodes
- * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
- * sur lequel tourne `chef-client`
 ]
 
 .footnote[![Chef](img/chef_logo.png)]
@@ -624,6 +713,30 @@ policy
 http://www.slideshare.net/opscode/week-1-overview-of-chef
 
 http://docs.opscode.com/chef_overview.html
+
+
+---
+layout: false
+.left-column[
+  ## Chef Comment ?
+  ### -  Panorama
+  ### -  Server 
+  ### -  Nodes 
+  ### -  Policy  
+  ### -  cookbooks 
+]
+
+.right-column[
+
+* attributes
+* recipes
+* version
+
+]
+
+.footnote[![Chef](img/chef_logo.png)]
+
+
 
 ---
 
