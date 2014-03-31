@@ -138,6 +138,17 @@ TODO: décrire le contenu du script à l'oral
 
 Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
 
+TODO: la "suite", pour la partie "conf du service"
+- installation multi instance avec un seul "rpm binaire"
+- mise en place du firewall/selinux
+- configurer les instances pour n'utiliser qu'un fichier de configuration
+- servir le fichier de conf depuis puppet
+- mise en place du monit avec Jolokia
+
+puis, pour la partie "prod"
+- ajout d'une instance par noeud -> mise à jour fw
+- ajout d'un cache dans la grille
+
 ---
 ---
 
