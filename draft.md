@@ -4,7 +4,6 @@
 ---------
 
 
-
 # Quoi?
 # Comment?
 ## Quelque études de cas
@@ -17,16 +16,14 @@ presenter's notes:
 ---
 
 
-Chef et puppet sont deux solutions concurrentes de gestion de configuration
-Nous allons rapidement lever le voile sur la nature de ces solutions
+Chef et puppet sont deux solutions concurrentes (au sens commercial) de gestion de configuration de système (et non de code source). Bien que très "à la mode" et adopter massivement par de nombreuse compagnie, petit ou grande, leur rôle - et surtout l'intérêt, ne semble pas toujours évident pour de nombreux développeurs Java. C'est plus que regrettable, car c'est ce genre d'outil qui permettent justement de meettre en place une approche DevOps.
 
+Nous allons donc rapidement lever le voile sur la nature de ces solutions, mais de manière pragmatique, en détaillant une paire de cas d'études concret, que nous avons rencontrés dans notre parcous professionnel, et que nous avons justement adressé à l'aide de, respectivement, Chef et Puppet.
 
+Ces cas d'études parlerons au public Java de cette instance, car ils concerneront justement des
+problématiques liées à la mise en place de logiciels 'back-end' java.
 
-Avant de passer à l'exploration rapide de quelque cas concrets 
-mettant en oeuvre la configuration de back-end java
-
-
-Et enfin nous conlurons par ce qui devrait alors vous paraite evident. Pourquoi Chef ? Pourquoi Puppet ?  Pourquoi cet engouement pour coder nos infrastructure ? 
+Et enfin nous conlurons par ce qui devrait alors vous paraite evident. Pourquoi Chef ? Pourquoi Puppet ?  Pourquoi cet engouement pour coder nos infrastructure ?
 
 ----
 -----
@@ -37,19 +34,19 @@ Et enfin nous conlurons par ce qui devrait alors vous paraite evident. Pourquoi 
 ---
 
 ## Quoi?
-### - Infrastructure 
+### - Infrastructure
 
 **Infrastructure** [in-fruh-struhk-cher]
 nom féminin
 
 .red[[1]] une collection de
 * ressources:
- * réseaux, noeuds 
+ * réseaux, noeuds
  * systèmes de fichiers, fichiers, répertoires, liens symboliques, montages disques
  * utilisateurs, groupes
  * packages, logiciels, services
  * configuration
- 
+
 * agissant de concert
 
 * pour fournir un service
@@ -62,6 +59,10 @@ presenter's notes:
 
 ----
 
+Avant de se lancer, tête la première cas d'étude (@FLD, le tien), on va déjà rappeler sommairement de quoi on parle ici, et qu'est ce que l'on entend exactement par le terme infranstrucute. En effet, à l'image de son grand frère "middleware", le terme infrastructure est utilisé un peu à toutes les sauces, et parfois même dans différents endroits d'une même architecture (Tiens, lui aussi c'est terme sur utilisé).
+
+TODO: "lire le slide"
+
 notes à déplacer:
 
 Donc forcemment toujours sujet au changement...
@@ -73,27 +74,90 @@ puis on rajoute du cache distribué
 puis on doit maintenir ca par env,
 monter des data centers par geographie
 
+@FLD: comme on a dit on va mettre nos cas d'étude en // et décrire chacun des "grandes étapes" (installation, configuration et "production") pour chacun des cas. Donc dans mon cas d'études à moi , je pars du principe que tu as déjà parlé de l'installation de ton backend Java avec Jar.
+
+
+---
+
+# Cas #2 - Mise en place de JBoss Data Grid (JDG)
+## JDG en quelques mots....
+# Objectif(s):
+## installer JDG v6 de manière automatisé
+## mettre la bonne JVM
+## Assurer une mise à jour aisée et automatique des binaires ("patching") du produit
+## Disposer de plusieurs instances par machine, pour créer une "grille" avec un seul noeud
+## Mettre en place le monitoring à l'installation
+
+
+------
+presenter's notes:
+
+Alors de manière similaire au cas décrit par François, moi aussi, dans mon travail de tout les jours je dois assurer l'installation de "bouzin" en Java - et, étrangement, surtout ceux que Red Hat supporte (bizarrement, j'installe rarement du Spring...). Un de nos produits récent - et honnêtement, est JBoss Data Grid. Conçu pour remplacé JBoss Cache, ce produit permet de mettre en place une "grille de données". C'est donc, pour simplifier, une source de données de type NoSQL, qui distribue le stockage des données qu'on lui confie, sur plusieurs noeuds.
+
+Ainsi, Data Grid peut aisément monter à l'échelle, car, si on a besoin de plus d'espace, on rajoute simplement des noeuds. Par la magie d'un algorithme de hashage, quelques soit le nombre de noeuds formant la grille, le programme client sera toujours en mesure de déterminer quel noeud possède son information. Bref, c'est génial, c'est "cloud", c'est "scalable", etc...
+
+(dans la prochaine version, ça fera aussi le café et s'attaquera à la faim dans le monde)
+
+Plus sérieusement, c'est bien gentil de monter en charge, mais si il me faut un admin et deux heures pour agrandir (ou réduire) la taille de ma grille, c'est quand même pas très, très pratique, il faut le reconnaitre. Pour tirer parti de cet aspect du produit, il est donc nécessaire de pouvoir automatiser, autant que possible, son installation et sa configuration.
+
+En plus de permettre l'automatisation, il faut aussi pouvoir déployer aisément un correctif (un changement de binaire). JDG n'est pas, comme le backend de François, un simple jars. En effet, il s'execute sur un serveur JBoss AS et est donc fait de nombreux jars, mais aussi de fichier de configuration diverses. Une mise à jour, de securité ou non, peut affecter plusieurs de ces fichiers.
+
+Enfin, comme pour François, il ne faut pas oublier notre ami la JVM. Avant même d'installer JDG, il faut bien s'assurer que cet outil d'infrastructure soit en place.
+
+Alors, à la différence notable de son cas, nous chez Red Hat, on a peu cette habitude d'utiliser des RPMs ! D'ailleurs, c'est bien parce que Puppet, il est pas bête (oh la rime), et, par défaut, quand il faut installer quelque chose sur une RHEL ou une autre distribution à base de RPM, il utilise par défaut, RPM et yum. Alors, chouette, déjà c'est réglé, on package JDG sous forme de RPM - bidon, et on demande à Puppet de simpement l'installer.
+
+Bon il faut
+
+---
+
+# Cas #2 - Puppet
+
+node *-jdg.mygrid.com {
+
+  $openjdk = 'openjdk-1.6.0'
+  package { $openjdk:
+    ensure => installed,
+  }
+
+  $jdg = 'jdg'
+  package { $jdg:
+    ensure => installed,
+    require => Package[$openjdk]
+  }
+
+  service { $jdg:
+    ensure => running,
+    require => Package[$jdg],
+  }
+}
+
+------
+presenter's notes:
+
+TODO: décrire le contenu du script à l'oral
+
+Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
 
 ---
 ---
 
 ## Quoi?
-### - Infrastructure 
-### - Infrastructure as code  
+### - Infrastructure
+### - Infrastructure as code
 
 
-Chef & Puppet sont 2 solutions concurrentes 
+Chef & Puppet sont 2 solutions concurrentes
 * de gestion de configuration
 * d' * **Infrastructure as Code** *
 
 Il ne remplacent pas juste tes scripts shell, il te permettent de:
 
 * abstraire la facon dont tu manages ton infra
-* de la coder 
+* de la coder
  * de la (re)construire à partir de serveurs 'nus'
-* faire converger tes systèmes 
-* de façon idempotente 
-```   
+* faire converger tes systèmes
+* de façon idempotente
+```
     EtatA --> Etat B --> Etat B
 ```
 ]
@@ -113,7 +177,7 @@ https://www.youtube.com/watch?v=cuJZbRngWC0
 ---
 
 ## Quoi?
-### - Infrastructure 
+### - Infrastructure
 ### - Infrastructure as code
 ### - Puppet
 
@@ -123,14 +187,14 @@ Puppet:
 - créé en 2005
 - édité par PuppetLabs
 - license TBD
-- langage dédié (DSL) 
+- langage dédié (DSL)
 - blablabla TBD
 
 
 ---
 
 ## Quoi?
-### - Infrastructure 
+### - Infrastructure
 ### - Infrastructure as code
 ### - Puppet
 ### - Chef
@@ -144,8 +208,8 @@ Chef:
 - écrit en Ruby
 - langage dédié (DSL) et pure Ruby
 - different modes
- * Chef solo 
- * Chef zero 
+ * Chef solo
+ * Chef zero
  * Chef server + client
 
 
@@ -157,10 +221,10 @@ presenter's notes:
 
 https://www.ibm.com/developerworks/library/a-devops2/
 
-Chef has been around since 2009. It was influenced by Puppet and CFEngine. 
-Chef supports multiple platforms including Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server. 
-It is often described as easier to use — particularly for Ruby developers, 
-because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in. 
+Chef has been around since 2009. It was influenced by Puppet and CFEngine.
+Chef supports multiple platforms including Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server.
+It is often described as easier to use — particularly for Ruby developers,
+because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in.
 Chef has a passionate user base, and the Chef community is rapidly growing while developing cookbooks for others to use.
 
 chef-solo: http://docs.opscode.com/chef_solo.html
@@ -180,7 +244,7 @@ chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
 
 
 ## Quoi?
-### - Infrastructure 
+### - Infrastructure
 ### - Infrastructure as code
 ### - Puppet
 ### - Chef
@@ -190,11 +254,11 @@ Chef
 
 * réduit la complexité de la gestion d'une infrastructure par l'abstraction
  * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
- 
+
 * permet de persister et manager ces abstractions sous forme de code
 
-* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
- 
+* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists*
+
 
 ---
 ---
@@ -202,7 +266,7 @@ Chef
 
 
 # Comment
-### Comprende Chef 
+### Comprende Chef
 ### -  Panorama
 
 
@@ -228,13 +292,13 @@ http://www.slideshare.net/opscode/week-1-overview-of-chef
 
 * Organisations
  * locataires independants du chef serveur (BU, Département)
- 
+
 * Environments
- * modèle votre cycle de release et vos process (dev, test, stage, prod)  
- 
-* Roles 
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
+
+* Roles
  * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
- 
+
 * Nodes
  * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
  * sur lequel tourne `chef-client`
@@ -249,7 +313,7 @@ presenter's notes:
 manager le complexité, et embrasser les abstraction offertes par Chef
 
 
-Organization : 
+Organization :
 
 Completely independent tenants of Enterprise Chef
 *  Share nothing with other organizations
@@ -298,17 +362,17 @@ c'est auto suffisant
 oui mais:
 * installation en service
 * monitoring de log
-* HA 
+* HA
 * apache dispatcher for static content
 * security checklist
 * elasticité
 
-multiplié par le nombre d'env 
+multiplié par le nombre d'env
 
 
 ---
 ---
-## je veux protéger mes secrets 
+## je veux protéger mes secrets
 
 * chef-vault
 
@@ -334,15 +398,15 @@ multiplié par le nombre d'env
 
 - Adobe **Creative Cloud**
  * *'Accelerate, Simplify, Scale'*
- 
+
 - décloisonner les équipes, dev, de qualité, de sécurité et d'exploitation
- 
-- Comme notre infra devient code, elle devient 
+
+- Comme notre infra devient code, elle devient
  * testable
- * versionable 
- * jetable 
+ * versionable
+ * jetable
  * repétable, *'cloud-ready'*
- 
+
 
 ------
 presenter's notes:
@@ -353,16 +417,16 @@ presenter's notes:
 
 - Adobe IT
  * *Accelerate, Simplify, Scale*
- 
+
 - décloisonner les équipes, dev, de qualité et d'exploitation
- * faciliter, accélérer les changements 
- * mieux garantir stabilité et sécurité 
+ * faciliter, accélérer les changements
+ * mieux garantir stabilité et sécurité
  * éviter les surprises
- 
-- Comme votre infra devient code, elle devient 
+
+- Comme votre infra devient code, elle devient
  * testable
- * versionable 
- * jetable 
+ * versionable
+ * jetable
  * repétable
 
 * http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
@@ -409,7 +473,7 @@ without trust, the tools don't matter
 ---
 ---
 
-## Pourquoi?  
+## Pourquoi?
 
 
 
