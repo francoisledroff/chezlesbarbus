@@ -25,7 +25,10 @@ slide d'agenda sans menu de gauche
    * securiser mon serveur et proteger mes secrets
    * gestion des dépendances, reutilisation des commmunity cookbook
    * allez plus loin: pour les truc qu'on survole avec des pointeurs surtout pour donner envie a la fin:
-   	* test unitaires et d'integration ?? 
+   	* testKitchen et chefspec 
+   	* foodcritic et strainer et guard
+   	* bundler et jenkins 
+   	* docker et packer ?
    
 
 # Pourquoi?
