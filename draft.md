@@ -1,12 +1,44 @@
 
 #Master Chef & Puppet Show
 -----
----------
+-----
+
+
+---
+---
+## Menu de la colonne de gauche
+### - sous Menu de gauche
+
+* le premier bullet point du slide a droite
+* le second
+ * le 2.1
+ * le 2.2
+
+------
+presenter's notes:
+
+---
+tes notes, tes idées en vrac
+
+---
+---
 
 
 # Quoi?
+ * ## *infrastrucure as code*
+ 	* infrastructure
+ 	* infrastructure as code
+ * ## Puppet 
+   * @romain TODO : presenter les concepts clef de Puppet
+ * ## Chef
+ 	* Intro
+ 	* Panorama
+ 	* abstraction
+ 
 # Comment?
-## Quelque études de cas
+ * ## Quelque études de cas
+
+
 # Pourquoi?
 
 
@@ -63,7 +95,42 @@ Avant de se lancer, tête la première cas d'étude (@FLD, le tien), on va déj�
 
 TODO: "lire le slide"
 
-notes à déplacer:
+
+---
+---
+
+## Quoi?
+### - Infrastructure
+### - Infrastructure as code
+
+
+Chef & Puppet sont 2 solutions concurrentes
+* de gestion de configuration
+* d' * **Infrastructure as Code** *
+
+Il ne remplacent pas juste tes scripts shell, il te permettent de:
+
+* abstraire la facon dont tu manages ton infra
+* de la coder
+ * de la (re)construire à partir de serveurs 'nus'
+* faire converger tes systèmes
+* de façon idempotente
+```
+    EtatA --> Etat B --> Etat B
+```
+]
+
+------
+presenter's notes:
+
+----
+
+
+http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
+http://architects.dzone.com/articles/infrastructure-code
+https://www.youtube.com/watch?v=cuJZbRngWC0
+
+notes à déplacer/utiliser?:
 
 Donc forcemment toujours sujet au changement...
 on commence par un app server, une db
@@ -74,6 +141,295 @@ puis on rajoute du cache distribué
 puis on doit maintenir ca par env,
 monter des data centers par geographie
 
+
+---
+
+## Puppet
+
+
+Puppet:
+
+- créé en 2005
+- édité par PuppetLabs
+- license TBD
+- langage dédié (DSL)
+- blablabla TBD
+
+---
+
+## Puppet
+
+@romain: c'est toi qui voit ce que tu veux presenter ici
+voir ce que j'ai fait plus bas pour Chef
+
+---
+
+## Chef
+
+
+
+Chef:
+
+- créé en 2009
+- édité par Opscode/Chef
+- license Apache
+- écrit en Ruby
+- langage dédié (DSL) et pure Ruby
+- different modes
+ * Chef solo
+ * Chef zero
+ * Chef server + client
+
+
+
+------
+presenter's notes:
+
+----
+
+https://www.ibm.com/developerworks/library/a-devops2/
+
+Chef has been around since 2009. It was influenced by Puppet and CFEngine.
+Chef supports multiple platforms including Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server.
+It is often described as easier to use — particularly for Ruby developers,
+because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in.
+Chef has a passionate user base, and the Chef community is rapidly growing while developing cookbooks for others to use.
+
+chef-solo: http://docs.opscode.com/chef_solo.html
+chef-solo is an open source version of the chef-client that allows using cookbooks with nodes without requiring access to a server. chef-solo runs locally and requires that a cookbook (and any of its dependencies) be on the same physical disk as the node. chef-solo is a limited-functionality version of the chef-client and does not support the following:
+
+Node data storage
+Search indexes
+Centralized distribution of cookbooks
+A centralized API that interacts with and integrates infrastructure components
+Authentication or authorization
+Persistent attributes
+
+chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
+
+
+---
+---
+
+## Chef 
+### - Panorama
+
+
+![overview](img/overview_chef.png)
+
+------
+presenter's notes:
+
+----
+
+
+http://docs.opscode.com/chef_overview.html
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+
+---
+---
+
+## Chef 
+### - Panorama
+### - le serveur
+
+* Entrepise, Hosted ou Open Source
+* manage les noeuds, cookbooks, recipes, data bags, env, user accounts
+* API (les clients sont les noeuds et la machine du dev)
+* search
+
+------
+presenter's notes:
+
+----
+ ajoute un screenshot de la ui du serveur ?
+
+---
+---
+
+## Chef 
+### - Panorama
+### - le serveur
+### - la machine de dev
+
+* Knife
+* Chef-repo, un repo git contenant le code de votre infra
+
+----
+presenter's notes:
+
+Knife is a command-line tool that provides an interface between a 
+local chef-repo and the Chef server
+RSA public key-pairs are used to authenticate Knife with the Chef server every time Knife attempts to access the Chef server. 
+
+The chef-repo is the location in which the following data objects are stored:
+
+Cookbooks (including recipes, versions, cookbook attributes, resources, providers, libraries, and templates)
+Roles
+Data bags
+Environments
+Configuration files (for clients, workstations, and servers)
+
+---
+---
+
+## Chef 
+### - Panorama
+### - le serveur
+### - la machine de dev
+### - les noeuds client
+
+
+* A node is any machine that is configured to be maintained by a chef-client. (cloud, physique, virtuel, réseau)
+ * A chaque noeud correspond un object Node avec ses
+ 	* attributs
+ 	* A run-list is an ordered list of roles and/or recipes that are run in an exact order.
+ 	
+ 	
+* A chef-client is an agent that runs locally on every node registered with the Chef server. A chef-client bring the node into the expected state
+* Ohai un outil detectant et communiquant les attributs d'un noeud a l'agent chef-client
+( Platform, cpu, kernel, host names, fqdn et bien plus)
+
+------
+presenter's notes:
+
+----
+
+Node notes:
+
+A cloud-based node is hosted in an external cloud-based service, 
+such as Amazon Virtual Private Cloud, OpenStack, Rackspace, 
+Google Compute Engine, Linode, or Microsoft Azure. 
+Plugins are available for Knife that provide support 
+for external cloud-based services. 
+Knife can use these plugins to create instances 
+on cloud-based services. 
+
+A network node is a networking device—a switch, 
+a router, a VLAN—that is being managed by a chef-client.
+
+
+Attributes are defined by:
+
+The state of the node itself
+Cookbooks (in attribute files and/or recipes)
+Roles
+Environments
+
+At the end of every chef-client run, the node object 
+that defines the current state of the node 
+is uploaded to the Chef server so that it can be indexed for search.
+
+
+Chef-client notes:
+
+will perform all of the steps that are required to bring the node into the expected state, including:
+
+Registering and authenticating the node with the Chef server
+Building the node object
+Synchronizing cookbooks
+Compiling the resource collection by loading each of the required cookbooks, including recipes, attributes, and all other dependencies
+Taking the appropriate and required actions to configure the node
+Looking for exceptions and notifications, handling each as required
+
+---
+---
+
+## Chef 
+### - Panorama
+### - le serveur
+### - la machine de dev
+### - les noeuds client
+### - les policy
+
+Policy settings map business and operational requirements, 
+such as process and workflow, to settings stored on the Chef server:
+
+Ces Policy vont definir quelles run-list vont être appliquées aux noeuds
+
+* Roles
+ * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
+
+* Data Bags
+ * a global variable stored as JSON data in the Chef server. 
+ * A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
+ 
+* Environments
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
+
+
+* Nodes
+ * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
+ * sur lequel tourne `chef-client`
+
+
+------
+presenter's notes:
+
+----
+
+
+manager le complexité, et embrasser les abstraction offertes par Chef
+
+
+Organization :
+
+Completely independent tenants of Enterprise Chef
+*  Share nothing with other organizations
+*  May represent different
+*  Companies
+*  Business Units
+*  Departments
+
+Environments may include data attributes necessary
+for configuring your infrastructure
+*  The URL of your payment service’s API
+*  The location of your package repository
+*  The version of the Chef configuration files that
+should be used
+
+
+Roles may include a list of Chef configuration files
+that should be applied.
+*  We call this list a Run List
+*  Roles may include data attributes necessary for
+configuring your infrastructure
+*  The port that the application server listens on
+*  A list of applications that should be deployed
+
+Nodes Adhere to Policy
+• An application, the chef-client, runs on each node
+• chef-client will
+• gather current system configuration
+• download the desired system configuration from
+the Chef server
+• configure the node such that it adheres to the
+policy
+
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+
+http://docs.opscode.com/chef_overview.html
+
+
+---
+---
+
+## je n'ai qu'un simple jar
+un micro service/site web
+c'est auto suffisant
+
+oui mais:
+* installation en service
+* monitoring de log
+* HA
+* apache dispatcher for static content
+* security checklist
+* elasticité
+
+multiplié par le nombre d'env
+
+----
+---
 @FLD: comme on a dit on va mettre nos cas d'étude en // et décrire chacun des "grandes étapes" (installation, configuration et "production") pour chacun des cas. Donc dans mon cas d'études à moi , je pars du principe que tu as déjà parlé de l'installation de ton backend Java avec Jar.
 
 
@@ -149,236 +505,6 @@ puis, pour la partie "prod"
 - ajout d'une instance par noeud -> mise à jour fw
 - ajout d'un cache dans la grille
 
----
----
-
-## Quoi?
-### - Infrastructure
-### - Infrastructure as code
-
-
-Chef & Puppet sont 2 solutions concurrentes
-* de gestion de configuration
-* d' * **Infrastructure as Code** *
-
-Il ne remplacent pas juste tes scripts shell, il te permettent de:
-
-* abstraire la facon dont tu manages ton infra
-* de la coder
- * de la (re)construire à partir de serveurs 'nus'
-* faire converger tes systèmes
-* de façon idempotente
-```
-    EtatA --> Etat B --> Etat B
-```
-]
-
-------
-presenter's notes:
-
-----
-
-
-http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
-http://architects.dzone.com/articles/infrastructure-code
-https://www.youtube.com/watch?v=cuJZbRngWC0
-
-
-
----
-
-## Quoi?
-### - Infrastructure
-### - Infrastructure as code
-### - Puppet
-
-
-Puppet:
-
-- créé en 2005
-- édité par PuppetLabs
-- license TBD
-- langage dédié (DSL)
-- blablabla TBD
-
-
----
-
-## Quoi?
-### - Infrastructure
-### - Infrastructure as code
-### - Puppet
-### - Chef
-
-
-Chef:
-
-- créé en 2009
-- édité par Opscode/Chef
-- license Apache
-- écrit en Ruby
-- langage dédié (DSL) et pure Ruby
-- different modes
- * Chef solo
- * Chef zero
- * Chef server + client
-
-
-
-------
-presenter's notes:
-
-----
-
-https://www.ibm.com/developerworks/library/a-devops2/
-
-Chef has been around since 2009. It was influenced by Puppet and CFEngine.
-Chef supports multiple platforms including Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server.
-It is often described as easier to use — particularly for Ruby developers,
-because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in.
-Chef has a passionate user base, and the Chef community is rapidly growing while developing cookbooks for others to use.
-
-chef-solo: http://docs.opscode.com/chef_solo.html
-chef-solo is an open source version of the chef-client that allows using cookbooks with nodes without requiring access to a server. chef-solo runs locally and requires that a cookbook (and any of its dependencies) be on the same physical disk as the node. chef-solo is a limited-functionality version of the chef-client and does not support the following:
-
-Node data storage
-Search indexes
-Centralized distribution of cookbooks
-A centralized API that interacts with and integrates infrastructure components
-Authentication or authorization
-Persistent attributes
-
-chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
-
----
----
-
-
-## Quoi?
-### - Infrastructure
-### - Infrastructure as code
-### - Puppet
-### - Chef
-
-
-Chef
-
-* réduit la complexité de la gestion d'une infrastructure par l'abstraction
- * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
-
-* permet de persister et manager ces abstractions sous forme de code
-
-* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists*
-
-
----
----
-
-
-
-# Comment
-### Comprende Chef
-### -  Panorama
-
-
-![overview](img/overview_chef.png)
-
-------
-presenter's notes:
-
-----
-
-
-http://docs.opscode.com/chef_overview.html
-http://www.slideshare.net/opscode/week-1-overview-of-chef
-
----
----
-
-## Chef Comment ?
-### -  Panorama
-### -  Abstractions
-
-
-
-* Organisations
- * locataires independants du chef serveur (BU, Département)
-
-* Environments
- * modèle votre cycle de release et vos process (dev, test, stage, prod)
-
-* Roles
- * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
-
-* Nodes
- * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
- * sur lequel tourne `chef-client`
-
-
-------
-presenter's notes:
-
-----
-
-
-manager le complexité, et embrasser les abstraction offertes par Chef
-
-
-Organization :
-
-Completely independent tenants of Enterprise Chef
-*  Share nothing with other organizations
-*  May represent different
-*  Companies
-*  Business Units
-*  Departments
-
-Environments may include data attributes necessary
-for configuring your infrastructure
-*  The URL of your payment service’s API
-*  The location of your package repository
-*  The version of the Chef configuration files that
-should be used
-
-
-Roles may include a list of Chef configuration files
-that should be applied.
-*  We call this list a Run List
-*  Roles may include data attributes necessary for
-configuring your infrastructure
-*  The port that the application server listens on
-*  A list of applications that should be deployed
-
-Nodes Adhere to Policy
-• An application, the chef-client, runs on each node
-• chef-client will
-• gather current system configuration
-• download the desired system configuration from
-the Chef server
-• configure the node such that it adheres to the
-policy
-
-http://www.slideshare.net/opscode/week-1-overview-of-chef
-
-http://docs.opscode.com/chef_overview.html
-
-
----
----
-
-## je n'ai qu'un simple jar
-un micro service/site web
-c'est auto suffisant
-
-oui mais:
-* installation en service
-* monitoring de log
-* HA
-* apache dispatcher for static content
-* security checklist
-* elasticité
-
-multiplié par le nombre d'env
 
 
 ---
