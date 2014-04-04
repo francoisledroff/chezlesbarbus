@@ -1,28 +1,9 @@
 
-#Master Chef & Puppet Show
------
------
-
-
 ---
 ---
-## Menu de la colonne de gauche
-### - sous Menu de gauche
-
-* le premier bullet point du slide a droite
-* le second
- * le 2.1
- * le 2.2
-
-------
-presenter's notes:
-
----
-tes notes, tes idées en vrac
-
+slide d'agenda sans menu de gauche
 ---
 ---
-
 
 # Quoi?
  * ## *infrastrucure as code*
@@ -30,14 +11,22 @@ tes notes, tes idées en vrac
  	* infrastructure as code
  * ## Puppet 
    * @romain TODO : presenter les concepts clef de Puppet
+   * tu veux peut-etre parler de Vagrant ?
  * ## Chef
- 	* Intro
- 	* Panorama
- 	* abstraction
- 
-# Comment?
- * ## Quelque études de cas
-
+  *  Panorama
+   * le serveur
+   * la machine de dev
+   * les noeuds client
+   * les policy
+   * les livres de recettes
+# Comment / Quelques études de cas
+   * un simple jar 
+   * Mise en place de JBoss Data Grid (JDG)
+   * securiser mon serveur et proteger mes secrets
+   * gestion des dépendances, reutilisation des commmunity cookbook
+   * allez plus loin: pour les truc qu'on survole avec des pointeurs surtout pour donner envie a la fin:
+   	* test unitaires et d'integration ?? 
+   
 
 # Pourquoi?
 
@@ -410,39 +399,87 @@ http://www.slideshare.net/opscode/week-1-overview-of-chef
 
 http://docs.opscode.com/chef_overview.html
 
+---
+---
+
+## Chef 
+### - Panorama
+### - le serveur
+### - la machine de dev
+### - les noeuds client
+### - les policy
+### - les livres de recettes
+
+cookbook un scenario d'installation et de configuration, il comprend entre autre:
+
+* version et dependances
+* attributes
+* recipes : configure une partie du systeme, en Ruby
+* resources and providers (on va voir ça dans l'artifact cookbook) 
+* files
+* libraries
+* templates
+
+------
+presenter's notes:
+
+----
+
+A cookbook is the fundamental unit of configuration 
+and policy distribution. Each cookbook defines a scenario, 
+such as everything needed to install and configure MySQL, 
+and then it contains all of the components 
+that are required to support that scenario
+
+A run-list is an ordered list of roles and/or recipes that are run in an exact order.
+
+A resource is a package, a service, a group of users, and so on. A resource tells the chef-client which provider to use during a chef-client run for various tasks, such as installing packages, running Ruby code, or accessing directories and file systems.
 
 ---
 ---
 
-## je n'ai qu'un simple jar
+## Chef 
+
+
+![overview](img/overview_chef.png)
+
+---
+---
+
+## un simple jar
+
 un micro service/site web
 c'est auto suffisant
 
 oui mais:
+* installer le jdk
+* unpack the jar
 * installation en service
+* rotation de log
 * monitoring de log
 * HA
-* apache dispatcher for static content
-* security checklist
-* elasticité
 
 multiplié par le nombre d'env
 
 ----
 ---
-@FLD: comme on a dit on va mettre nos cas d'étude en // et décrire chacun des "grandes étapes" (installation, configuration et "production") pour chacun des cas. Donc dans mon cas d'études à moi , je pars du principe que tu as déjà parlé de l'installation de ton backend Java avec Jar.
+@FLD: comme on a dit on va mettre nos cas d'étude en // et décrire chacun des "grandes étapes" (installation, configuration et "production") 
+pour chacun des cas. 
+Donc dans mon cas d'études à moi , 
+je pars du principe que tu as déjà parlé de l'installation
+ de ton backend Java avec Jar.
 
 
 ---
 
-# Cas #2 - Mise en place de JBoss Data Grid (JDG)
-## JDG en quelques mots....
-# Objectif(s):
-## installer JDG v6 de manière automatisé
-## mettre la bonne JVM
-## Assurer une mise à jour aisée et automatique des binaires ("patching") du produit
-## Disposer de plusieurs instances par machine, pour créer une "grille" avec un seul noeud
-## Mettre en place le monitoring à l'installation
+* Cas #2 - Mise en place de JBoss Data Grid (JDG)
+ * JDG en quelques mots....
+* Objectif(s):
+ * installer JDG v6 de manière automatisé
+ * mettre la bonne JVM
+ * Assurer une mise à jour aisée et automatique des binaires ("patching") du produit
+ * Disposer de plusieurs instances par machine, pour créer une "grille" avec un seul noeud
+ * Mettre en place le monitoring à l'installation
 
 
 ------
@@ -509,15 +546,18 @@ puis, pour la partie "prod"
 
 ---
 ---
-## je veux protéger mes secrets
+## securiser mon serveur et proteger mes secrets
 
+* two way ssl (keytool lwrp)
+* api key
 * chef-vault
 
 ---
 ---
-## l'enfer des dépendances
+## gestion des dépendances, reutilisation des commmunity cookbook
 
 * berkshelf
+* chef-rewind
 
 ---
 ---
