@@ -184,17 +184,14 @@ class: center, middle, inverse
 
 ---
 class: center, middle, inverse
-# Agenda
 
----
-class: center, middle, inverse
 # Quoi?
-# Pourquoi?
 # Comment?
-# Comment??
-
+# et Pourquoi?
 
 ???
+
+
 
 Francois:
 Chef et puppet sont deux solutions concurrentes de gestion de configuration
@@ -210,11 +207,31 @@ mettant en oeuvre la configuration de back-end java
 Romain
 et enfin une section pour un usage plus avancé, mettant en exergue quelques unes de nos retour d'experience et 'best pratices'
 
-
-
----
-class: center, middle, inverse
 # Quoi?
+ * ## *infrastrucure as code*
+ 	* infrastructure
+ 	* infrastructure as code
+ * ## Puppet 
+   * @romain TODO : presenter les concepts clef de Puppet
+   * tu veux peut-etre parler de Vagrant ?
+ * ## Chef
+  *  Panorama
+   * le serveur
+   * la machine de dev
+   * les noeuds client
+   * les policy
+   * les livres de recettes
+# Comment / Quelques études de cas
+   * un simple jar 
+   * Mise en place de JBoss Data Grid (JDG)
+   * securiser mon serveur et proteger mes secrets
+   * gestion des dépendances, reutilisation des commmunity cookbook
+   * allez plus loin: pour les truc qu'on survole avec des pointeurs surtout pour donner envie a la fin:
+   	* testKitchen et chefspec 
+   	* foodcritic et strainer et guard
+   	* bundler et jenkins 
+   	* docker et packer ?
+# Mais Pourquoi au fait ?
 
 ---
 layout: false
@@ -281,8 +298,9 @@ Il ne remplacent pas juste tes scripts shell, il te permettent de:
 * faire converger tes systèmes 
 * de façon idempotente 
 ```   
-    Etat A --> Etat B 
-    Etat B --> Etat B
+    Etat A --> Etat B  (ex: install)
+    Etat B --> Etat B  (ex: contrôle)
+    Etat C --> Etat B  (ex: remise en état)
 ```
 ]
 
@@ -297,6 +315,47 @@ https://www.youtube.com/watch?v=cuJZbRngWC0
 How is this better than bash script ?
 reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
 
+
+---
+layout: false
+.left-column[
+  ## Quoi?
+   ### - Infrastructure 
+   ### - Infrastructure as code
+   ### - Puppet & Chef
+
+  
+]
+
+.right-column[
+
+Complexe ? non, abstrait.
+
+ * ressources
+ 
+ * roles
+ 
+ * environnements
+
+permet de **persister et manager** ces abstractions sous forme de code
+ 
+ 
+ 
+
+]
+
+???
+
+ * java interfarce
+
+
+* réduit la complexité de la gestion d'une infrastructure par l'abstraction
+ * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
+ 
+* permet de persister et manager ces abstractions sous forme de code
+
+* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
+ 
 ---
 
 layout: false
@@ -304,7 +363,11 @@ layout: false
   ## Quoi?
   ### - Infrastructure 
   ### - Infrastructure as code
-  ### - Puppet
+  ### - Puppet & Chef
+  
+  ![Puppet](img/puppet_logo.png)
+  ![Chef](img/chef_logo.png)
+  
 ]
 
 .right-column[
@@ -313,29 +376,9 @@ Puppet:
 
 - créé en 2005
 - édité par PuppetLabs
-- license TBD
+- license Apache
 - langage dédié (DSL) 
-- blablabla TBD
-
-.right.footnote[![Puppet](img/puppet_logo.png)]
-
-]
-
-
----
-
-layout: false
-.left-column[
-  ## Quoi?
-   ### - Infrastructure 
-   ### - Infrastructure as code
-   ### - Puppet
-   ### - Chef
-
-  
-]
-
-.right-column[
+- Et pourquoi Puppet ? Romain ?
 
 Chef:
 
@@ -344,13 +387,13 @@ Chef:
 - license Apache
 - écrit en Ruby
 - langage dédié (DSL) et pure Ruby
-- different modes
- * Chef solo 
- * Chef zero 
- * Chef server + client
+- Et pourquoi Chef ? Francois ?
+
+Community Driven
 
 ]
-.footnote[![Chef](img/chef_logo.png)]
+
+
 
 ???
 
@@ -389,31 +432,35 @@ Chef is different from Puppet in a number of important ways:
 http://docs.opscode.com/chef_why.html
 
 ---
+
 layout: false
 .left-column[
   ## Quoi?
    ### - Infrastructure 
    ### - Infrastructure as code
-   ### - Puppet
-   ### - Chef
+   ### - Puppet & Chef
 
   
 ]
 
 .right-column[
 
-Chef
+Panorama
 
-* réduit la complexité de la gestion d'une infrastructure par l'abstraction
- * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
+* A node is any machine that is configured to be maintained by a chef-client. (cloud, physique, virtuel, réseau)
+ * A chaque noeud correspond un object Node avec ses
+ 	* attributs
+ 	* A run-list is an ordered list of roles and/or recipes that are run in an exact order.
+ 	
+ 	
+* A chef-client is an agent that runs locally on every node registered with the Chef server. 
+A chef-client bring the node into the expected state
+* Ohai un outil detectant et communiquant les attributs d'un noeud a l'agent chef-client
+( Platform, cpu, kernel, host names, fqdn et bien plus)
+
  
-* permet de persister et manager ces abstractions sous forme de code
-
-* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
- 
-
 ]
-.footnote[![Chef](img/chef_logo.png)]
+
 
 ???
 
@@ -421,50 +468,428 @@ Chef
 
 layout: false
 .left-column[
-  ## Quoi?
-   ### - Infrastructure 
-   ### - Infrastructure as code
-   ### - Puppet
-   ### - Chef
+  ## Comment ?
+   ### - un simple jar
 
   
 ]
 
 .right-column[
 
-Chef & Puppet, c'est donc 
+## un simple jar
 
-* gestion de configuration
+un micro service/site web
+c'est auto suffisant
 
-* administration de cloud
+oui mais:
+* installer le jdk
+* unpack the jar
+* installation en service
+* rotation de log
+* monitoring de log
 
-* continuous delivery
-
-* open source
-
-* communitry driven
  
-
 ]
-.footnote[![Chef](img/chef_logo.png)]
+
 
 ???
 
-Chef, c'est donc 
+---
 
-* une solution de management de configuration
-* une solution de administration de cloud
-* s'inscrit dans une approche de continuous delivery
-* c'est open source
-* et communitry driven
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+
+  
+]
+
+.right-column[
+
+``` 
+#unpack CQ5 quickstart jar
+execute 'java' do
+  command node['cq5']['unpack']
+  cwd node['cq5']['install_dir']
+  action :run
+  user node['cq5']['user']
+  group node['cq5']['group']
+  not_if do
+	File.exists?(node['cq5']['stdout_log'])
+  end
+  notifies :restart, 'service[cq5]', :delayed
+end
+
+```
+
+```
+service 'cq5' do
+  action [:enable]
+  supports [:status, :start, :stop, :restart]
+end
+```
+
+```
+include_recipe 'it-splunkforwarder::default'
+```
 
 
-https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
+ 
+]
+
+
+???
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+
+  
+]
+
+.right-column[
+
+* Mise en place de JBoss Data Grid (JDG)
+ * JDG en quelques mots....
+ 
+ok et donc:
+* installer le jdk
+* installer et configuer le jdg (v6) de manière completement **automatisée**
+* assurer une mise à jour des **binaires** ("patching") du produit
+* disposer de plusieurs instances par machine, pour créer une "grille" avec un seul noeud
+* mettre en place le monitoring
+
+]
+
+
+???
+
+
+presenter's notes:
+
+Alors de manière similaire au cas décrit par François, moi aussi, dans mon travail de tout les jours je dois assurer l'installation de "bouzin" en Java - et, étrangement, surtout ceux que Red Hat supporte (bizarrement, j'installe rarement du Spring...). Un de nos produits récent - et honnêtement, est JBoss Data Grid. Conçu pour remplacé JBoss Cache, ce produit permet de mettre en place une "grille de données". C'est donc, pour simplifier, une source de données de type NoSQL, qui distribue le stockage des données qu'on lui confie, sur plusieurs noeuds.
+
+Ainsi, Data Grid peut aisément monter à l'échelle, car, si on a besoin de plus d'espace, on rajoute simplement des noeuds. Par la magie d'un algorithme de hashage, quelques soit le nombre de noeuds formant la grille, le programme client sera toujours en mesure de déterminer quel noeud possède son information. Bref, c'est génial, c'est "cloud", c'est "scalable", etc...
+
+(dans la prochaine version, ça fera aussi le café et s'attaquera à la faim dans le monde)
+
+Plus sérieusement, c'est bien gentil de monter en charge, mais si il me faut un admin et deux heures pour agrandir (ou réduire) la taille de ma grille, c'est quand même pas très, très pratique, il faut le reconnaitre. Pour tirer parti de cet aspect du produit, il est donc nécessaire de pouvoir automatiser, autant que possible, son installation et sa configuration.
+
+En plus de permettre l'automatisation, il faut aussi pouvoir déployer aisément un correctif (un changement de binaire). JDG n'est pas, comme le backend de François, un simple jars. En effet, il s'execute sur un serveur JBoss AS et est donc fait de nombreux jars, mais aussi de fichier de configuration diverses. Une mise à jour, de securité ou non, peut affecter plusieurs de ces fichiers.
+
+Enfin, comme pour François, il ne faut pas oublier notre ami la JVM. Avant même d'installer JDG, il faut bien s'assurer que cet outil d'infrastructure soit en place.
+
+Alors, à la différence notable de son cas, nous chez Red Hat, on a peu cette habitude d'utiliser des RPMs ! D'ailleurs, c'est bien parce que Puppet, il est pas bête (oh la rime), et, par défaut, quand il faut installer quelque chose sur une RHEL ou une autre distribution à base de RPM, il utilise par défaut, RPM et yum. Alors, chouette, déjà c'est réglé, on package JDG sous forme de RPM - bidon, et on demande à Puppet de simpement l'installer.
+
+Bon il faut
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+
+  
+]
+
+.right-column[
+
+```
+node *-jdg.mygrid.com {
+
+  $openjdk = 'openjdk-1.6.0'
+  package { $openjdk:
+    ensure => installed,
+  }
+
+  $jdg = 'jdg'
+  package { $jdg:
+    ensure => installed,
+    require => Package[$openjdk]
+  }
+
+  service { $jdg:
+    ensure => running,
+    require => Package[$jdg],
+  }
+}
+```
+
+]
+
+
+???
+
+TODO: décrire le contenu du script à l'oral
+
+Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
+
+TODO: la "suite", pour la partie "conf du service"
+- installation multi instance avec un seul "rpm binaire"
+- mise en place du firewall/selinux
+- configurer les instances pour n'utiliser qu'un fichier de configuration
+- servir le fichier de conf depuis puppet
+- mise en place du monit avec Jolokia
+
+puis, pour la partie "prod"
+- ajout d'une instance par noeud -> mise à jour fw
+- ajout d'un cache dans la grille
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+
+  
+]
+
+.right-column[
+
+slide 41 et 43
+
+]
+
+
+???
+
+Policy settings map business and operational requirements, 
+such as process and workflow, to settings stored on the Chef server:
+
+Ces Policy vont definir quelles run-list vont être appliquées aux noeuds
+
+* Roles
+ * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
+
+* Data Bags
+ * a global variable stored as JSON data in the Chef server. 
+ * A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
+ 
+* Environments
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
+
+
+* Nodes
+ * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
+ * sur lequel tourne `chef-client`
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+
+  
+]
+
+.right-column[
+
+chef-repo/environments/trunk-stable.rb
+
+```
+name "trunk-stable"
+description "Environment for trunk-stable nodes"
+cookbook_versions({"adobehub"=>"= 0.0.16","cq5" =>"= 0.0.13"})
+override_attributes({
+  "apache" => {"servername" => "hub-trunk-stable.corp.adobe.com" },
+  "cq5" => {"vault_accounts_cq_admin_item" => "hub_trunk_cq_admin" ,
+           "ldap" => {"vault_conf"=> "ldap_it_ad_test_conf" ,
+                      "host"=> "stagechild.adstage.adobe.com",
+                      "secure"=> "false",
+                      "port"=> "389"} ,
+            "disabled_osgi_bundles" => ['org.apache.sling.jcr.webdav', 'org.apache.sling.jcr.davex'],
+            "debug" => "true",
+            "debug_port" => "30305"}
+}) 
+```
+
+```
+default['adobehub']['trusted_certificates'] = [
+  'api.corp.adobe.com',
+  'lces2-dev2.corp.adobe.com',
+  's2api.corp.adobe.com',
+  'sap-rs4ci.corp.adobe.com']
+```
+
+]
+
+
+???
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+
+  
+]
+
+.right-column[
+
+chef-repo/environments/trunk-stable.rb
+
+```
+name "hub_server"
+description "Adobe Hub Server Role"
+run_list "recipe[chef-client::delete_validation]", "recipe[chef-client]", "recipe[ntp]", "recipe[adobehub]"
+```
+
+]
+
+???
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+   ### - unique, central
+
+  
+]
+
+.right-column[
+
+TODO code puppet
+
+
+]
+
+???
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+   ### - unique, central
+   ### - sécurisé
+
+  
+]
+
+.right-column[
+
+slide 56
+
+]
+
+???
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+   ### - unique, central
+   ### - sécurisé
+
+  
+]
+
+.right-column[
+
+```
+include_recipe 'chef-vault-util::default'
+keystore_item = chef_vault_item(node['adobehub']['vault_password'], node['adobehub']['vault_password_keystore_item'])
+jvm_keystore_password = keystore_item[node['adobehub']['vault_password_property']]
+
+execute "create the server keystore p12 key file to perform 2 way ssl call as client" do
+  command "openssl pkcs12  -export  -in #{node['apache']['ssl_cert_file_path']}  -inkey #{node['apache']['ssl_key_file_path']}  -out #{node['adobehub']['ssl_p12_file_path']}  -passout pass:#{jvm_keystore_password}"
+  not_if { File.exists?(node['adobehub']['ssl_p12_file_path']) }
+end
+```
+
+
+]
+
+???
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+   ### - environnements
+   ### - unique, central
+   ### - sécurisé
+   ### - élastique
+
+  
+]
+
+.right-column[
+
+TODO : romain
+
+]
+
+???
+
 
 
 ---
 class: center, middle, inverse
 # Pourquoi?
+
+---
+
+layout: false
+.left-column[
+  ## Pourquoi?  
+]
+
+.right-column[
+
+Chef & Puppet: une porte d'entrée 
+
+* pour passer de de 10 à 100 serveurs
+
+* pour gérer un parc hétérogène
+
+* vers le cloud,
+
+* un acteur continuous delivery
+
+
+]
+.footnote[![Redhat](img/redhat_logo.jpeg)]
+
+???
+
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+Should we add a tale of growth section dans le 'pourquoi?'
+
 
 
 ---
@@ -486,6 +911,9 @@ layout: false
  * versionable 
  * jetable 
  * repétable
+
+- [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013)
+ * **If it's not in the source code control system, it doesn't exist.**
  
  
 ] 
@@ -507,6 +935,10 @@ layout: false
  * versionable 
  * jetable 
  * repétable / reproductible  *'cloud-ready'*
+ 
+- [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013):
+ * **If it's not in the source code control system, it doesn't exist.**
+ 
 
 * http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
 * http://java.dzone.com/articles/infrastructure-code-key-devops
@@ -537,7 +969,6 @@ layout: false
 * What happened while you were away? Check the activity stream and archives.
 ]
 
-.footnote[![Adobe](img/adobe_logo.png)]
 
 ???
 
@@ -551,31 +982,10 @@ without trust, the tools don't matter
 * http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup
 
 ---
-
-layout: false
-.left-column[
-  ## Pourquoi?  
-]
-
-.right-column[
-
-* TBD
-
-]
-.footnote[![Redhat](img/redhat_logo.jpeg)]
-
-???
-
-http://www.slideshare.net/opscode/week-1-overview-of-chef
-Should we add a tale of growth section dans le 'pourquoi?'
-
----
 class: center, middle, inverse
-# Comment
-### Comprende Chef
-#### Panorama 
+# fin
+#### ou pas
 
-.footnote[![Chef](img/chef_logo.png)]
 
 ---
 
