@@ -275,87 +275,6 @@ puis on rajoute du cache distribué
 puis on doit maintenir ca par env,
 monter des data centers par geographie
 
-
----
-layout: false
-.left-column[
-  ## Quoi?
-  ### - Infrastructure 
-  ### - Infrastructure as code  
-]
-
-.right-column[
-
-Chef & Puppet sont 2 solutions concurrentes 
-* de gestion de configuration
-* d' * **Infrastructure as Code** *
-
-Il ne remplacent pas juste tes scripts shell, il te permettent de:
-
-* abstraire la facon dont tu manages ton infra
-* de la coder 
- * de la (re)construire à partir de serveurs 'nus'
-* faire converger tes systèmes 
-* de façon idempotente 
-```   
-    Etat A --> Etat B  (ex: install)
-    Etat B --> Etat B  (ex: contrôle)
-    Etat C --> Etat B  (ex: remise en état)
-```
-]
-
-???
-
-
-http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
-http://architects.dzone.com/articles/infrastructure-code
-https://www.youtube.com/watch?v=cuJZbRngWC0
-
-
-How is this better than bash script ?
-reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
-
-
----
-layout: false
-.left-column[
-  ## Quoi?
-   ### - Infrastructure 
-   ### - Infrastructure as code
-   ### - Puppet & Chef
-
-  
-]
-
-.right-column[
-
-Complexe ? non, abstrait.
-
- * ressources
- 
- * roles
- 
- * environnements
-
-permet de **persister et manager** ces abstractions sous forme de code
- 
- 
- 
-
-]
-
-???
-
- * java interfarce
-
-
-* réduit la complexité de la gestion d'une infrastructure par l'abstraction
- * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
- 
-* permet de persister et manager ces abstractions sous forme de code
-
-* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
- 
 ---
 
 layout: false
@@ -363,6 +282,7 @@ layout: false
   ## Quoi?
   ### - Infrastructure 
   ### - Infrastructure as code
+  ### - Abstractions
   ### - Puppet & Chef
   
   ![Puppet](img/puppet_logo.png)
@@ -372,24 +292,22 @@ layout: false
 
 .right-column[
 
-Puppet:
+Community Driven
 
-- créé en 2005
-- édité par PuppetLabs
+Puppet:
+- créé en 2005, édité par PuppetLabs
 - license Apache
 - langage dédié (DSL) 
 - Et pourquoi Puppet ? Romain ?
 
 Chef:
-
-- créé en 2009
-- édité par Opscode/Chef
+- créé en 2009, édité par Opscode/Chef
 - license Apache
 - écrit en Ruby
 - langage dédié (DSL) et pure Ruby
 - Et pourquoi Chef ? Francois ?
 
-Community Driven
+
 
 ]
 
@@ -431,38 +349,126 @@ Chef is different from Puppet in a number of important ways:
 
 http://docs.opscode.com/chef_why.html
 
+
+---
+layout: false
+.left-column[
+  ## Quoi?
+  ### - Infrastructure 
+  ### - Infrastructure as code  
+]
+
+.right-column[
+
+Chef & Puppet sont 2 solutions concurrentes 
+* d' * **Infrastructure as Code** *
+
+Ne remplacent pas juste tes scripts shell, te permettent:
+
+* d'abstraire la façon dont tu manages ton infra
+* de la coder 
+ * de la (re)construire à partir de serveurs 'nus'
+* faire converger tes systèmes 
+* de façon idempotente 
+```   
+    Etat A --> Etat B  (ex: install)
+    Etat B --> Etat B  (ex: contrôle)
+    Etat C --> Etat B  (ex: remise en état)
+```
+]
+
+???
+
+
+http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
+http://architects.dzone.com/articles/infrastructure-code
+https://www.youtube.com/watch?v=cuJZbRngWC0
+
+
+How is this better than bash script ?
+reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
+
+
+---
+layout: false
+.left-column[
+  ## Quoi?
+   ### - Infrastructure 
+   ### - Infrastructure as code
+   ### - Abstractions
+  
+]
+
+.right-column[
+
+Complexe ? Non ! Abstrait.
+
+ * ressources
+ 
+ * rôles
+ 
+ * environnements
+
+Chef & Puppet te permettent de **persister et manager** ces abstractions sous forme de code.
+ 
+ 
+ 
+
+]
+
+???
+
+ * java interfarce
+
+
+* réduit la complexité de la gestion d'une infrastructure par l'abstraction
+ * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
+ 
+* permet de persister et manager ces abstractions sous forme de code
+
+* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
+ 
+
 ---
 
 layout: false
 .left-column[
   ## Quoi?
    ### - Infrastructure 
-   ### - Infrastructure as code
+   ### - Abstractions
    ### - Puppet & Chef
+   ### - Clients - Serveur
 
   
 ]
 
 .right-column[
 
-Panorama
-
-* A node is any machine that is configured to be maintained by a chef-client. (cloud, physique, virtuel, réseau)
- * A chaque noeud correspond un object Node avec ses
- 	* attributs
- 	* A run-list is an ordered list of roles and/or recipes that are run in an exact order.
+Noeud: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
+* un object *Node* 
+ * attributs détectés et communiqués à l'agent
+ * attributs configurés par les recettes
+ * *run-list*: une liste des recettes executées 
  	
- 	
-* A chef-client is an agent that runs locally on every node registered with the Chef server. 
-A chef-client bring the node into the expected state
-* Ohai un outil detectant et communiquant les attributs d'un noeud a l'agent chef-client
-( Platform, cpu, kernel, host names, fqdn et bien plus)
-
+Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits	
+ * met le noeud dans l'état attendu
  
 ]
 
 
 ???
+
+* Noeud/*Node*: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
+ * machine: vm, physique, privée, ou sur le cloud
+ * A chaque noeud correspond un object *Node* sur le serveur Chef/Puppet
+ 	* attributs
+ 		* détectés et communiqués à l'agent ( Ohai pour Chef):  Platform, cpu, kernel, host names, fqdn et bien plus
+ 		* configurés par les recettes
+ 	* *run-list*: une liste ordonnées de roles et/ou de recettes executées dans un ordre défini
+ 	
+* un client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits auprès du serveur Chef/Puppet 	
+ * met le noeud dans l'état attendu
+
 
 ---
 
@@ -478,15 +484,14 @@ layout: false
 
 ## un simple jar
 
-un micro service/site web
-c'est auto suffisant
+un micro service/site web, autosuffisant
 
-oui mais:
-* installer le jdk
-* unpack the jar
-* installation en service
-* rotation de log
-* monitoring de log
+oui mais il faut:
+* installer le jdk,
+* décompresser le jar,
+* l'insaller en tant que service,
+* faire tourner les log,
+* et les monitorer.
 
  
 ]
