@@ -220,10 +220,7 @@ et enfin une section pour un usage plus avancé, mettant en exergue quelques une
  * ## *infrastrucure as code*
  	* infrastructure
  	* infrastructure as code
- * ## Puppet 
-   * @romain TODO : presenter les concepts clef de Puppet
-   * tu veux peut-etre parler de Vagrant ?
- * ## Chef
+ * ## Puppet & Chef
   *  Panorama
    * le serveur
    * la machine de dev
@@ -231,14 +228,14 @@ et enfin une section pour un usage plus avancé, mettant en exergue quelques une
    * les policy
    * les livres de recettes
 # Comment / Quelques études de cas
-   * un simple jar 
-   * Mise en place de JBoss Data Grid (JDG)
+   * un simple jar
+   * mise en place de jboss data grid (jdg)
    * securiser mon serveur et proteger mes secrets
    * gestion des dépendances, reutilisation des commmunity cookbook
    * allez plus loin: pour les truc qu'on survole avec des pointeurs surtout pour donner envie a la fin:
-   	* testKitchen et chefspec 
+   	* testKitchen et chefspec
    	* foodcritic et strainer et guard
-   	* bundler et jenkins 
+   	* bundler et jenkins
    	* docker et packer ?
 # Mais Pourquoi au fait ?
 
@@ -246,7 +243,7 @@ et enfin une section pour un usage plus avancé, mettant en exergue quelques une
 layout: false
 .left-column[
   ## Quoi?
-  ### - Infrastructure 
+  ### - Infrastructure
 ]
 
 
@@ -257,12 +254,12 @@ nom féminin
 
 .red[[1]] une collection de
 * ressources:
- * réseaux, noeuds 
+ * réseaux, noeuds
  * systèmes de fichiers, fichiers, répertoires, liens symboliques, montages disques
  * utilisateurs, groupes
  * packages, logiciels, services
  * configuration
- 
+
 * agissant de concert
 
 * pour fournir un service
@@ -273,30 +270,19 @@ nom féminin
 
 ???
 
-notes à déplacer:
-
-Donc forcemment toujours sujet au changement...
-on commence par un app server, une db
-on ajoute un load balancer devant les app serveurs
-puis on veut aussi du HA sur la base, puis sur les LBs
-on scale, on passe a 2 load balancers
-puis on rajoute du cache distribué
-puis on doit maintenir ca par env,
-monter des data centers par geographie
-
 ---
 
 layout: false
 .left-column[
   ## Quoi?
-  ### - Infrastructure 
+  ### - Infrastructure
   ### - Infrastructure as code
   ### - Abstractions
   ### - Puppet & Chef
-  
+
   ![Puppet](img/puppet_logo.png)
   ![Chef](img/chef_logo.png)
-  
+
 ]
 
 .right-column[
@@ -306,7 +292,7 @@ Community Driven
 Puppet:
 - créé en 2005, édité par PuppetLabs
 - license Apache
-- langage dédié (DSL) 
+- langage dédié (DSL)
 - Et pourquoi Puppet ? Romain ?
 
 Chef:
