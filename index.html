@@ -611,10 +611,20 @@ layout: false
 
 ok et donc:
 * installer le jdk
+** déploiement de policy 'security-manager'
 * installer et configuer le jdg (v6) de manière completement **automatisée**
-* assurer une mise à jour des **binaires** ("patching") du produit
-* disposer de plusieurs instances par machine, pour créer une "grille" avec un seul noeud
+* intégration avec le système
+** script de démarrage (service)
+** journaux et liens symboliques
+** ouverture de port (firewall)
+** montage de système de fichiers distants
+** mise à jour des règles SE Linux
+** mise à jour des binaires
+* disposer de plusieurs instances par machine
+** pour créer une "grille" avec un seul noeud
+** instance plus "petite", limite impact en cas d'échec
 * mettre en place le monitoring
+** déploiement de l'agent [Jolokia](Jolokia)
 
 ]
 
