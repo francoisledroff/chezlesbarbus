@@ -838,7 +838,34 @@ layout: false
 
 .right-column[
 
-TODO code puppet
+```
+file { '/etc/jdg/config.xml':
+    content => template('jdg/config.xml')
+    require => Package[$jdg]
+}
+
+initd_folder = '/etc/init.d'/
+jdg_instances = [ "$initd_folder/jdg1", "$initd_folder/jdg2", "initd_folder/$jdg3" ]
+file { $jdg_instances:
+  TODO: symlink config
+}
+```
+
+```
+    ...
+    <interfaces>
+      <interface name="management">
+      <% if management_ip != 'UNSET' %>
+        <inet-address value="<%= management_ip %>"/>
+      <% else %>
+        <inet-address value="<%= hostname %>"/>
+      <% end %>
+      </interface>
+     <interface name="public">
+        <inet-address value="<%= hostname %>"/>
+    ...
+```
+
 
 
 ]
