@@ -14,7 +14,7 @@
       @import url(http://fonts.googleapis.com/css?family=Lato);
       @import url(http://fonts.googleapis.com/css?family=Ruluko);
       @import url(http://fonts.googleapis.com/css?family=Caudex);
-      
+
 
       body {
         font-family: lato, sans-serif;
@@ -124,7 +124,7 @@
         height: 92%;
         float: left;
       }
-      
+
       /* Two-column layout */
       .left-column h2 {
         font-family: bangers, sans-serif;
@@ -147,7 +147,7 @@
         width: 76%;
         float: right;
       }
-      
+
       .remark-slide-content {
         padding-top: 0.5em;
         padding-right: 0.5em;
@@ -157,14 +157,14 @@
       .remark-slide-number {
         bottom: 0px;
         font-size: 0.6em;
-       
+
       }
-      .splash 
-      { padding: 1em 3em; 
+      .splash
+      { padding: 1em 3em;
         background: url(img/devoxx_fr_2014_splash.png) no-repeat center #272822;
-        color: #777872; text-align: right; vertical-align: bottom; 
+        color: #777872; text-align: right; vertical-align: bottom;
       }
-     
+
     </style>
   </head>
   <body>
@@ -202,8 +202,6 @@ class: center, middle, inverse
 
 ???
 
-
-
 Francois:
 Chef et puppet sont deux solutions concurrentes de gestion de configuration
 Nous allons rapidement lever le voile sur la nature de ces solutions
@@ -212,7 +210,7 @@ Romain
 Pourquoi? Quel est ce nouveau besoin ? Pourquoi cet engouement pour coder nos infrastructure ?
 
 Francois
-Avant de passer à l'exploration rapide de quelque cas concrets 
+Avant de passer à l'exploration rapide de quelque cas concrets
 mettant en oeuvre la configuration de back-end java
 
 Romain
@@ -415,57 +413,70 @@ layout: false
 Complexe ? Non ! Abstrait.
 
  * ressources
- 
+
  * rôles
- 
+
  * environnements
 
 Chef & Puppet te permettent de **persister et manager** ces abstractions sous forme de code.
- 
- 
- 
+
+
+
 
 ]
 
 ???
 
- * java interfarce
+Romain:
+Alors comme évoqué un peu avant, une infrastructure est quelque chose d'assez complexe. En plus des
+configurations et des installations, il y a des problématiques réseaux, tel que les firewall, et
+résolution de nom de FQDN - et j'en passe. Heureusement, pour simplifier ce fouilli, Puppet et
+Chef abstrait tout ces composants sous forme de "ressource".
+
+C'est abstraction est essentiel, car elle libère la description de l'état d'un système ("un
+webserveur pour tels vhosts") de l'implémentation physique sous jacente ("Apache 2.22 sur RHEL").
+Ainsi, on peut simplement dire à Puppet, "je voudrais que ce système exécute Apache avec ce fichier
+configuration". Ce dernier va simplement utiliser "yum" si le système est sous RHEL ou "apt-get"
+sous Debian pour installer le logiciel.
 
 
-* réduit la complexité de la gestion d'une infrastructure par l'abstraction
- * *Organizations, Environments, Roles, Nodes, Run-List, Cookbooks, Recipes, Resource, Data Bags, Search*
- 
-* permet de persister et manager ces abstractions sous forme de code
+En fait, cette abstraction devrait vous paraitre assez naturelle, car c'est finalement assez proche
+de la notion d'interface en Java.
 
-* génère les configurations et provoque les installations directement sur les serveurs/ *Nodes* à partir des leur *Run-Lists* 
- 
+François:
+TODO
+
+Romain:
+Bref, Puppet & Chef vous permettent donc de décrire l'état souhaité de votre infrastructure et de
+non seulement persiter ce dernier, ainsi que ses révisions, mais aussi de "manager" votre
+infrastructure, en ajoutant des modifications à cette historique.
+
 
 ---
 
 layout: false
 .left-column[
   ## Quoi?
-   ### - Infrastructure 
+   ### - Infrastructure
    ### - Abstractions
    ### - Puppet & Chef
    ### - Clients - Serveur
 
-  
+
 ]
 
 .right-column[
 
 Noeud: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
-* un object *Node* 
+* un object *Node*
  * attributs détectés et communiqués à l'agent
  * attributs configurés par les recettes
- * *run-list*: une liste des recettes executées 
- 	
-Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits	
- * met le noeud dans l'état attendu
- 
-]
+ * *run-list*: une liste des recettes executées
 
+Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits
+ * met le noeud dans l'état attendu
+
+]
 
 ???
 
@@ -476,8 +487,8 @@ Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits
  		* détectés et communiqués à l'agent ( Ohai pour Chef):  Platform, cpu, kernel, host names, fqdn et bien plus
  		* configurés par les recettes
  	* *run-list*: une liste ordonnées de roles et/ou de recettes executées dans un ordre défini
- 	
-* un client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits auprès du serveur Chef/Puppet 	
+
+* un client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits auprès du serveur Chef/Puppet
  * met le noeud dans l'état attendu
 
 
@@ -488,7 +499,7 @@ layout: false
   ## Comment ?
    ### - un simple jar
 
-  
+
 ]
 
 .right-column[
@@ -504,7 +515,7 @@ oui mais il faut:
 * faire tourner les log,
 * et les monitorer.
 
- 
+
 ]
 
 
@@ -517,12 +528,12 @@ layout: false
   ## Comment ?
    ### - un simple jar
 
-  
+
 ]
 
 .right-column[
 
-``` 
+```
 #unpack CQ5 quickstart jar
 execute 'java' do
   command node['cq5']['unpack']
@@ -550,7 +561,7 @@ include_recipe 'it-splunkforwarder::default'
 ```
 
 
- 
+
 ]
 
 
@@ -564,14 +575,14 @@ layout: false
    ### - un simple jar
    ### - un middleware
 
-  
+
 ]
 
 .right-column[
 
 * Mise en place de JBoss Data Grid (JDG)
  * JDG en quelques mots....
- 
+
 ok et donc:
 * installer le jdk
 * installer et configuer le jdg (v6) de manière completement **automatisée**
@@ -611,7 +622,7 @@ layout: false
    ### - un simple jar
    ### - un middleware
 
-  
+
 ]
 
 .right-column[
@@ -667,7 +678,7 @@ layout: false
    ### - un middleware
    ### - environnements
 
-  
+
 ]
 
 .right-column[
@@ -679,7 +690,7 @@ slide 41 et 43
 
 ???
 
-Policy settings map business and operational requirements, 
+Policy settings map business and operational requirements,
 such as process and workflow, to settings stored on the Chef server:
 
 Ces Policy vont definir quelles run-list vont être appliquées aux noeuds
@@ -688,9 +699,9 @@ Ces Policy vont definir quelles run-list vont être appliquées aux noeuds
  * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
 
 * Data Bags
- * a global variable stored as JSON data in the Chef server. 
+ * a global variable stored as JSON data in the Chef server.
  * A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
- 
+
 * Environments
  * modèle votre cycle de release et vos process (dev, test, stage, prod)
 
@@ -709,7 +720,7 @@ layout: false
    ### - un middleware
    ### - environnements
 
-  
+
 ]
 
 .right-column[
@@ -730,7 +741,7 @@ override_attributes({
             "disabled_osgi_bundles" => ['org.apache.sling.jcr.webdav', 'org.apache.sling.jcr.davex'],
             "debug" => "true",
             "debug_port" => "30305"}
-}) 
+})
 ```
 
 ```
@@ -755,7 +766,7 @@ layout: false
    ### - un middleware
    ### - environnements
 
-  
+
 ]
 
 .right-column[
@@ -783,7 +794,7 @@ layout: false
    ### - environnements
    ### - unique, central
 
-  
+
 ]
 
 .right-column[
@@ -806,7 +817,7 @@ layout: false
    ### - unique, central
    ### - sécurisé
 
-  
+
 ]
 
 .right-column[
@@ -828,7 +839,7 @@ layout: false
    ### - unique, central
    ### - sécurisé
 
-  
+
 ]
 
 .right-column[
@@ -861,7 +872,7 @@ layout: false
    ### - sécurisé
    ### - élastique
 
-  
+
 ]
 
 .right-column[
@@ -882,12 +893,12 @@ class: center, middle, inverse
 
 layout: false
 .left-column[
-  ## Pourquoi?  
+  ## Pourquoi?
 ]
 
 .right-column[
 
-Chef & Puppet: une porte d'entrée 
+Chef & Puppet: une porte d'entrée
 
 * pour passer de de 10 à 100 serveurs
 
@@ -919,20 +930,20 @@ layout: false
 
 - Adobe **Creative Cloud**
  * *'Accelerate, Simplify, Scale'*
- 
+
 - décloisonner les équipes, dev, de qualité, de sécurité et d'exploitation
- 
-- Comme notre infra devient code, elle devient 
+
+- Comme notre infra devient code, elle devient
  * testable
- * versionable 
- * jetable 
+ * versionable
+ * jetable
  * repétable
 
 - [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013)
  * **If it's not in the source code control system, it doesn't exist.**
- 
- 
-] 
+
+
+]
 .footnote[![Adobe](img/adobe_logo.png)]
 
 ???
@@ -940,21 +951,21 @@ layout: false
 
 - Adobe IT
  * *Accelerate, Simplify, Scale*
- 
+
 - décloisonner les équipes, dev, de qualité et d'exploitation
- * faciliter, accélérer les changements 
- * mieux garantir stabilité et sécurité 
+ * faciliter, accélérer les changements
+ * mieux garantir stabilité et sécurité
  * éviter les surprises
- 
-- Comme votre infra devient code, elle devient 
+
+- Comme votre infra devient code, elle devient
  * testable
- * versionable 
- * jetable 
+ * versionable
+ * jetable
  * repétable / reproductible  *'cloud-ready'*
- 
+
 - [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013):
  * **If it's not in the source code control system, it doesn't exist.**
- 
+
 
 * http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
 * http://java.dzone.com/articles/infrastructure-code-key-devops
@@ -1010,7 +1021,7 @@ layout: false
   ## Chef Comment ?
   ### -  Panorama
 
-  
+
 ]
 
 .right-column[
@@ -1029,7 +1040,7 @@ layout: false
 .left-column[
   ## Chef Comment ?
   ### -  Panorama
-  ### -  Server 
+  ### -  Server
 ]
 
 .right-column[
@@ -1047,9 +1058,9 @@ layout: false
 .left-column[
   ## Chef Comment ?
   ### -  Panorama
-  ### -  Server 
-  ### -  Nodes 
-  ### -  Policy  
+  ### -  Server
+  ### -  Nodes
+  ### -  Policy
   ### -  cookbooks (attributs, recipes version)
 ]
 
@@ -1074,21 +1085,21 @@ layout: false
   ### -  Panorama
   ### -  Server
   ### -  Nodes
-  ### -  Policy 
+  ### -  Policy
 ]
 
 .right-column[
 
 Policy settings map business and operational requirements, to settings stored on the server
- 
+
 * Environments
- * modèle votre cycle de release et vos process (dev, test, stage, prod)  
- 
-* Roles 
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
+
+* Roles
  * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
- 
+
 * Data Bags
- * variable globales, stockées en json sur le serveur Chef (chargées/recherchés dans les recettes)	
+ * variable globales, stockées en json sur le serveur Chef (chargées/recherchés dans les recettes)
 
 ]
 
@@ -1102,7 +1113,7 @@ manager le complexité, et embrasser les abstraction offertes par Chef
  * locataires independants du chef serveur (BU, Département)
 
 
-Organization : 
+Organization :
 
 Completely independent tenants of Enterprise Chef
 *  Share nothing with other organizations
@@ -1146,10 +1157,10 @@ layout: false
 .left-column[
   ## Chef Comment ?
   ### -  Panorama
-  ### -  Server 
-  ### -  Nodes 
-  ### -  Policy  
-  ### -  cookbooks 
+  ### -  Server
+  ### -  Nodes
+  ### -  Policy
+  ### -  cookbooks
 ]
 
 .right-column[
