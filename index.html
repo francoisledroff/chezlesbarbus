@@ -364,23 +364,23 @@ http://docs.opscode.com/chef_why.html
 layout: false
 .left-column[
   ## Quoi?
-  ### - Infrastructure 
-  ### - Infrastructure as code  
+  ### - Infrastructure
+  ### - Infrastructure as code
 ]
 
 .right-column[
 
-Chef & Puppet sont 2 solutions concurrentes 
+Chef & Puppet sont 2 solutions concurrentes
 * d' * **Infrastructure as Code** *
 
 Ne remplacent pas juste tes scripts shell, te permettent:
 
 * d'abstraire la façon dont tu manages ton infra
-* de la coder 
+* de la coder
  * de la (re)construire à partir de serveurs 'nus'
-* faire converger tes systèmes 
-* de façon idempotente 
-```   
+* faire converger tes systèmes
+* de façon idempotente
+```
     Etat A --> Etat B  (ex: install)
     Etat B --> Etat B  (ex: contrôle)
     Etat C --> Etat B  (ex: remise en état)
@@ -389,7 +389,34 @@ Ne remplacent pas juste tes scripts shell, te permettent:
 
 ???
 
+Concrètement que font Puppet et Chef ? Ben ce sont des outils d'infrastructure as code, comme dit le
+slide, ce qui signifie qu'ils permettent d'exprimer ou plutôt de décrire, chacun à sa manière,
+l'état souhaité de son infrastructure, et d'en automatiser non seulement la mise en place, mais
+aussi le maintien en état.
 
+Alors, bien évidement, vous avez peut être déjà vu ce genre d'automatisation réalisée à l'aide de
+shell scripts par exemple, mais ces outils permettent de faire bien mieux. En effet, ils fournissent
+non seulement un langage de description de haut niveau et approprié, mais surtout ils fournissent
+une couche d'abstraction, qui permet de décrire l'état d'un système, sans rentrer dans les détails
+de comment cet état sera concrètement implémenté sur le système cible.
+
+En outre, et c'est crucial pour assurer le maintien en état, ces outils agissent de manière
+idempotente (ça veut dire que après chaque exécution on doit rester dans le même état, c'est pas
+quand vous avez des problèmes au lit, avec votre partenaire).
+
+Donc, par exemple, on récupère un serveur fraichement installé, soit dans l'état A, et bien Puppet
+ou Chef va effectuer une série d'installations et de configuration pour l'amener à l'état B.
+Ensuite, à interval régulier, il va s'assurer que cet état B reste constant.
+
+Si cet état diverge de la cible (état C), parce que, par exemple:
+- un développeur à laisser un log en DEBUG après un passage sur le serveur pour analyser un indicent
+- ou parce qu'un admin système de mauvaise volonté à fermer un port dont il ne comprenait pas
+l'utilité.
+
+Et bien, dans tout les cas, ces outils vont redresser la situation, et s'assurer que la
+configuration du serveur reviennent à un état B.
+
+@FLD, on peut être virer ce copier/coller en anglais, au pire, il est dans l'historique de Git
 http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
 http://architects.dzone.com/articles/infrastructure-code
 https://www.youtube.com/watch?v=cuJZbRngWC0
@@ -403,10 +430,10 @@ reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
 layout: false
 .left-column[
   ## Quoi?
-   ### - Infrastructure 
+   ### - Infrastructure
    ### - Infrastructure as code
    ### - Abstractions
-  
+
 ]
 
 .right-column[
