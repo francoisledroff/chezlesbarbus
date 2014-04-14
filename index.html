@@ -655,6 +655,7 @@ layout: false
 
 .right-column[
 
+# installer jdg et sa jvm
 ```
 node *-jdg.mygrid.com {
 
@@ -669,11 +670,25 @@ node *-jdg.mygrid.com {
     require => Package[$openjdk]
   }
 
-  service { $jdg:
+  jdg_instances = [ 'jdg1', 'jdg2', 'jdg3' ]
+  service { $jdg_instances:
     ensure => running,
     require => Package[$jdg],
   }
 }
+```
+# le RPM
+[https://github.com/rpelisse/jdg-rpm-infra](https://github.com/rpelisse/jdg-rpm-infra)
+
+# mettre en place MySQL pour charger les données des noeuds
+```
+  mysql::db { $db_name:
+    user     => $db_user,
+    password => $db_password,
+    host     => 'localhost',
+    grant    => ['all'],
+    require => Service['mysqld']
+  }
 ```
 
 ]
