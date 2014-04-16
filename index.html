@@ -193,6 +193,15 @@ de l'intégration de ces derniers au sein de l'IT de nos clients.
 class: center, middle, inverse
 ## [@francoisledroff](https://twitter.com/francoisledroff)
 
+???
+
+Je m'appelle Francois, Francois Le Droff, Je vais du Java depuis le dernier millenaire, 1997
+J'ai eu la chance de travailler et faire quelques conf avec Romain notamment au ParisJug 
+je travaille maintenant chez Adobe, apres quelques années chez Adobe Consulting
+j'ai rejoint Adobe IT, je fais toujours du consulting en quelque sorte, mais Chez Adobe pour Adobe et souvent avec les produits Adobe,
+et toujours beaucoup de linux, de java et d'open source.
+
+
 ---
 class: center, middle, inverse
 
@@ -203,41 +212,17 @@ class: center, middle, inverse
 ???
 
 Francois:
-Chef et puppet sont deux solutions concurrentes de gestion de configuration
-Nous allons rapidement lever le voile sur la nature de ces solutions
+Nous allons Commencer par quelques definitions utiles
+Puis Nous allons rapidement lever le voile sur la nature de ces deux solutions concurrentes de gestion de configuration que sont Chef et Puppet
+Pour voir ensemble quelques cas concret d'utilisation de chef et puppet dans des contextes liée à l'ecosysteme Java
 
-Romain
-Pourquoi? Quel est ce nouveau besoin ? Pourquoi cet engouement pour coder nos infrastructure ?
+La conclusion devrait couler de source, si nous avons bien fait notre travail dans les 30 premieres minutes, 
+vous aurez alors compris pourquoi Chef et/ou Puppet sont des solutions à considérer
+pour vous permettre 
+* de simplifier, accélerer, sécuriser, scaler vos infra
+* de mettre en place une vraie solution de continuous delivery
 
-Francois
-Avant de passer à l'exploration rapide de quelque cas concrets
-mettant en oeuvre la configuration de back-end java
 
-Romain
-et enfin une section pour un usage plus avancé, mettant en exergue quelques unes de nos retour d'experience et 'best pratices'
-
-# Quoi?
- * ## *infrastrucure as code*
- 	* infrastructure
- 	* infrastructure as code
- * ## Puppet & Chef
-  *  Panorama
-   * le serveur
-   * la machine de dev
-   * les noeuds client
-   * les policy
-   * les livres de recettes
-# Comment / Quelques études de cas
-   * un simple jar
-   * mise en place de jboss data grid (jdg)
-   * securiser mon serveur et proteger mes secrets
-   * gestion des dépendances, reutilisation des commmunity cookbook
-   * allez plus loin: pour les truc qu'on survole avec des pointeurs surtout pour donner envie a la fin:
-   	* testKitchen et chefspec
-   	* foodcritic et strainer et guard
-   	* bundler et jenkins
-   	* docker et packer ?
-# Mais Pourquoi au fait ?
 
 ---
 
@@ -245,33 +230,42 @@ layout: false
 .left-column[
   ## Quoi?
 
-  ![Puppet](img/puppet_logo.png)
-  ![Chef](img/chef_logo.png)
-
 ]
 
 .right-column[
 
-Community Driven
+
+.pull-left[
+
+![Puppet](img/puppet_logo.png)
 
 Puppet:
-- créé en 2005, édité par PuppetLabs
+- créé en 2005
+- édité par PuppetLabs
 - license Apache
 - langage dédié (DSL)
-- Et pourquoi Puppet ? Romain ?
+
+Pourquoi Puppet Romain ?
+]
+
+.pull-right[
+![Chef](img/chef_logo.png)
 
 Chef:
-- créé en 2009, édité par Opscode/Chef
+- créé en 2009 
+- édité par Opscode/Chef
 - license Apache
-- écrit en Ruby
-- langage dédié (DSL) et pure Ruby
-- Et pourquoi Chef ? Francois ?
+- Ruby
 
+Pourquoi Chef Francois ?
+]
 
-
+ ** une communité active, et ouverte **
 ]
 
 ???
+
+Romain:
 
 Bon, alors, Puppet est un logiciel Open Source, crée en 2005 et sous licence Apache. La compangie
 Puppetlabs fournit du support sur une version "entreprise" - dans un business model similaire au
@@ -289,39 +283,32 @@ encore le cas à ce jour, l'IT au complet de la startup est littéralement recon
 tout le matins. Tout les matins, on tue toutes les VMs dépoyées sur Amazon, on fait "un checkout" et
 on reconstruit l'intégralité du système - en à peu près une demi heure.
 
-@FLD, on peut être virer ce copier/coller en anglais, au pire, il est dans l'historique de Git
-https://www.ibm.com/developerworks/library/a-devops2/
+Francois:
 
-Chef has been around since 2009. It was influenced by Puppet and CFEngine.
-Chef supports multiple platforms including Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server.
-It is often described as easier to use — particularly for Ruby developers,
-because everything in Chef is defined as a Ruby script and follows a model that developers are used to working in.
-Chef has a passionate user base, and the Chef community is rapidly growing while developing cookbooks for others to use.
+Chef est présent sur le marché depuis 2009, influencé par Puppet et CFengine
+Chef est open source, license Apahce et tout comme Puppet, il est multi platform, il supporte notamment  Ubuntu, Debian, RHEL/CentOS, Fedora, Mac OS X, Windows 7, and Windows Server.
 
-chef-solo: http://docs.opscode.com/chef_solo.html
-chef-solo is an open source version of the chef-client that allows using cookbooks with nodes without requiring access to a server. chef-solo runs locally and requires that a cookbook (and any of its dependencies) be on the same physical disk as the node. chef-solo is a limited-functionality version of the chef-client and does not support the following:
+Tout comme Puppet,
+Chef a été concu pour s'integrer avec d'autres outils (rpm, msi, brew) chef n'est pas la representation canonique de votre infra, 
+c'est un service qui qui expose des données sur l'état de votre infra structure.
 
-Node data storage
-Search indexes
-Centralized distribution of cookbooks
-A centralized API that interacts with and integrates infrastructure components
-Authentication or authorization
-Persistent attributes
 
-chef-zero : http://www.slideshare.net/mpgoetz/chefzero-local-mode
+Tout dans Chef est décrit avec des scripts Ruby, il semblera sans doute plus familier que Puppet aux développeurs.
+Vous n'avez toutefois pas besoin d'être un expert Ruby pour commencer, 
+Vous ne connaissez pas Ruby ? 
+20 minutes m'ont suffit et 10 devrait suffir à la plupart d'entre vous pour connaitre assez de Ruby pour commencer a utiliser ruby pour configurer votre infra avec Chef
+
+Mais vous serez grandement recompensé si vous investisser a minima dans Ruby
+Car vous pourrez integrer et reutiliser des gem/librairies Ruby et mettre en places des test unitaires, des test d'integrations
+
+
+Contrairement a Puppet, il n'y pas de gestion de dependances dans Chef, (meme si les resource peuvent etre notifies), 
+chef appliquera/actionera les resources dans un ordre definit par les recettes et les policy
+
+
+Henri Gomez: 'Puppet c'est maven, Chef c'est graddle'
 
 https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
-
-Puppet evolved from CFEngine and showed potential to be a new kind of configuration management. The original design of Chef was strongly influenced by our own experiences working with and contributing to the Puppet project. That said, Chef does not share any code from Puppet, and is not a “fork” of the Puppet project.
-
-Chef is different from Puppet in a number of important ways:
-
-* Chef uses Ruby as the configuration language, as opposed to a custom DSL
-* Chef is designed from the ground up to integrate with other tools, or to make that integration as simple as possible. Chef is not the canonical representation of your infrastructure. It is a service that exposes data about the state of your infrastructure
-* The chef-client applies resources in the order they are specified in recipes. There is no dependency management. This means multiple chef-client runs will always apply the resources under management in the same order, every time
-* Resources have actions, which can be signaled
-* Resources can appear more than once and they inherit the attributes of the earlier resource. In other words, you can tell Apache to start and stop in a recipe by specifying the resource twice, with the second one only changing the action attribute
-
 http://docs.opscode.com/chef_why.html
 
 
@@ -367,21 +354,22 @@ layout: false
 ]
 
 .right-column[
-
-Chef & Puppet sont 2 solutions concurrentes
-* d' * **Infrastructure as Code** *
+**Infrastructure as Code** ?
 
 Ne remplacent pas juste tes scripts shell, te permettent:
 
-* d'abstraire la façon dont tu manages ton infra
-* de la coder
+* d'abstraire les élements de gestion de ton infra
+* de définir ton infra sous forme de code 
  * de la (re)construire à partir de serveurs 'nus'
 * faire converger tes systèmes
 * de façon idempotente
 ```
-    Etat A --> Etat B  (ex: install)
+    Etat A --> Etat B  (ex: install) 
+        Chef Client finished, 147/153 resources updated
     Etat B --> Etat B  (ex: contrôle)
+         Chef Client finished, 0/153 resources updated
     Etat C --> Etat B  (ex: remise en état)
+         Chef Client finished, 48/153 resources updated
 ```
 ]
 
@@ -393,7 +381,10 @@ l'état souhaité de son infrastructure, et d'en automatiser non seulement la mi
 aussi le maintien en état.
 
 Alors, bien évidement, vous avez peut être déjà vu ce genre d'automatisation réalisée à l'aide de
-shell scripts par exemple, mais ces outils permettent de faire bien mieux. En effet, ils fournissent
+shell scripts par exemple, mais ces outils permettent de faire bien mieux. 
+
+
+En effet, ils fournissent
 non seulement un langage de description de haut niveau et approprié, mais surtout ils fournissent
 une couche d'abstraction, qui permet de décrire l'état d'un système, sans rentrer dans les détails
 de comment cet état sera concrètement implémenté sur le système cible.
@@ -414,14 +405,15 @@ l'utilité.
 Et bien, dans tout les cas, ces outils vont redresser la situation, et s'assurer que la
 configuration du serveur reviennent à un état B.
 
+Francois: Ils font mieux que du bash, car ils apportent, reproducibilite, idem potence, clarté, c'est du ruby pas du bash
+Mais surtout ces framework apportent une couche d'abstractions aidant au managemtn de ton infra, pas jsute de ta machine
+
+
 @FLD, on peut être virer ce copier/coller en anglais, au pire, il est dans l'historique de Git
+@RP, laissons les pointeurs pour les mettre dans un slide final
 http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
 http://architects.dzone.com/articles/infrastructure-code
 https://www.youtube.com/watch?v=cuJZbRngWC0
-
-
-How is this better than bash script ?
-reliable, reproducible, idempotent, cross-platform, clean, ruby, it's not bash
 
 
 ---
@@ -436,44 +428,76 @@ layout: false
 
 .right-column[
 
-Complexe ? Non ! Abstrait.
+Complexe ? Non ! Abstrait.  
 
- * ressources
+**persister et manager** tes abstractions sous forme de code.
 
- * rôles
+* ressources
 
- * environnements
+* rôles
+ * représente votre type de serveur
 
-Chef & Puppet te permettent de **persister et manager** ces abstractions sous forme de code.
+* environnements
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
 
+* pannier de données (data bags)
 
 ]
 
 ???
 
 Romain:
-Alors comme évoqué un peu avant, une infrastructure est quelque chose d'assez complexe. En plus des
+
+Bref, Puppet & Chef vous permettent donc de décrire l'état souhaité de votre infrastructure et de
+non seulement persiter ce dernier, ainsi que ses révisions, mais aussi de "manager" votre
+infrastructure, en ajoutant des modifications à cette historique.
+
+Une infrastructure est quelque chose d'assez complexe. En plus des
 configurations et des installations, il y a des problématiques réseaux, tel que les firewall, et
 résolution de nom de FQDN - et j'en passe. Heureusement, pour simplifier ce fouilli, Puppet et
 Chef abstrait tout ces composants sous forme de "ressource".
 
 C'est abstraction est essentiel, car elle libère la description de l'état d'un système ("un
 webserveur pour tels vhosts") de l'implémentation physique sous jacente ("Apache 2.22 sur RHEL").
+
+Resources:
+
+Les ressources définisssent les actions comme:
+* un paquet devrait étre installé, un service doit etre demarrer, un user, un group, un repertoire doit etre crée
+ 
 Ainsi, on peut simplement dire à Puppet, "je voudrais que ce système exécute Apache avec ce fichier
 configuration". Ce dernier va simplement utiliser "yum" si le système est sous RHEL ou "apt-get"
 sous Debian pour installer le logiciel.
 
-
 En fait, cette abstraction devrait vous paraitre assez naturelle, car c'est finalement assez proche
 de la notion d'interface en Java.
 
-François:
-TODO
+Francois:
+Dans Chef les resources peuvent être notifiés, un service redemarre par exemple
+Les resource peuvent apparaitre plus d'une fois, 
 
-Romain:
-Bref, Puppet & Chef vous permettent donc de décrire l'état souhaité de votre infrastructure et de
-non seulement persiter ce dernier, ainsi que ses révisions, mais aussi de "manager" votre
-infrastructure, en ajoutant des modifications à cette historique.
+Pour reussir a manager cette complexité, il est necessaire d'embrasser les abstraction offertes par Chef
+
+Roles:
+* rôles
+ * représente votre type de serveur: lb, web, db
+ * contient des attributs tels que , la liste de recettes a appliquer, de applicationa a installer, les ports 
+
+
+* Environments
+ * modèle votre cycle de release et vos process (dev, test, stage, prod)
+ * contient des attributs tels que : ulr de ton paiement de service, l'url du repo yum, les versions des cookbooks
+
+* Data Bags, 
+ * données globale stockée en json sur le serveur
+ * je l'utilise pour encrypter/proteger les secrets servant a la configuration de mon systeme
+ * les autres best practices : 
+  * global pour toute votre infra : external service api key, license
+  * ca doit etre ecrit/donné par un autre systeme: un pipeline d'integration continue, ton jenkins, des infos d'une autre equipe 
+
+http://www.slideshare.net/opscode/week-1-overview-of-chef
+http://docs.opscode.com/chef_overview.html
+http://www.getchef.com/blog/2014/01/23/attributes-or-data-bags-what-should-i-use/
 
 
 ---
@@ -491,18 +515,25 @@ layout: false
 
 .right-column[
 
-Noeud: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
-* un object *Node*
- * attributs détectés et communiqués à l'agent
- * attributs configurés par les recettes
- * *run-list*: une liste des recettes executées
+* Chef/Puppet Server
 
-Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits
- * met le noeud dans l'état attendu
+* Noeud: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
+* Noeud <--> object *Node*
+  * attributs détectés et communiqués à l'agent
+  * attributs configurés par les recettes
+  * *run-list*: une liste des recettes executées
+
+* Client Chef/Puppet: met le noeud dans l'état attendu
 
 ]
 
 ???
+
+* Chef server : 
+Dans un utilisation classique les 2 solution fonctionne en mode client serveurs.
+D'autre mode existe,: chef-zero (in memeory chef serveur, chef-solo)
+le serveur fournit un repo de noeuds, recette, de cookbooks, d'env, de role, de data bags
+une api, un search
 
 * Noeud/*Node*: une machine configurée pour être maintenue par un agent, un client Chef/Puppet
  * machine: vm, physique, privée, ou sur le cloud
@@ -515,6 +546,12 @@ Client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits
 * un client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits auprès du serveur Chef/Puppet
  * met le noeud dans l'état attendu
 
+---
+
+class: center, middle
+
+![overview](img/chef-client-serveurs.png)
+
 
 ---
 
@@ -528,17 +565,15 @@ layout: false
 
 .right-column[
 
-## un simple jar
-
-un micro service/site web, autosuffisant
+M'em$%^$&rde pas, je n'ai qu'un simple jar, un container osgi 
 
 oui mais il faut:
 * installer le jdk,
-* décompresser le jar,
-* l'insaller en tant que service,
+* télécharger le jar,
+* l'installer en tant que service,
 * faire tourner les log,
 * et les monitorer.
-
+* de la haute dispo 
 
 ]
 
@@ -557,39 +592,121 @@ layout: false
 
 .right-column[
 
-```
-#unpack CQ5 quickstart jar
-execute 'java' do
-  command node['cq5']['unpack']
-  cwd node['cq5']['install_dir']
-  action :run
-  user node['cq5']['user']
+ * cq5-cookbook/recipes/default.rb
+
+```ruby
+remote_file node['cq5']['quickstart_jar'] do
+  source node['cq5']['repo_url']
+  owner node['cq5']['user']
   group node['cq5']['group']
-  not_if do
-	File.exists?(node['cq5']['stdout_log'])
-  end
+  action :create_if_missing  
   notifies :restart, 'service[cq5]', :delayed
 end
-
 ```
 
+```ruby
+artifact_file node['cq5']['quickstart_jar'] do
+  location  'com.day.cq:cq5:jar:5.5.0.20120220'
+  nexus_configuration nexus_configuration_object
+  owner node['cq5']['user']
+  group node['cq5']['group']
+  checksum '3043859473'
+  action :create
+  notifies :restart, 'service[cq5]', :delayed
+end
 ```
+
+```ruby
 service 'cq5' do
   action [:enable]
   supports [:status, :start, :stop, :restart]
 end
 ```
+]
 
-```
-include_recipe 'it-splunkforwarder::default'
-```
+???
 
+https://github.com/RiotGames/artifact-cookbook#artifact_file
+
+Downloads a file from a provided location and then verifies that the integrity of the file is intact. 
+Artifact files from Nexus will check with the Nexus Server to verify the SHA1 of the downloaded file. 
+Artifact files from an HTTP or S3 source will either use the provided SHA256 checksum to verify integrity 
+or skip the check if no checksum is given.
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ####  - ses logs
 
 
 ]
 
+.right-column[
 
-???
+ * cq5-cookbook/recipes/log.rb
+
+```ruby
+logrotate_app 'cq5' do
+  cookbook  'logrotate'
+  path      node['cq5']['log_dir']
+  frequency node['cq5']['logrotate']['frequency']
+  rotate    node['cq5']['logrotate']['rotate']
+end
+
+include_recipe 'it-splunkforwarder::default'
+```
+
+
+ * cq5-cookbook/attributes/log.rb
+
+
+```ruby
+default.splunkforwarder.inputs =  [ 
+  { "input_type" => "monitor://",
+      "input_path" => "#{node['cq5']['log_dir']}/error.log", 
+      "input_vars" => {
+                        "source" => "hub_cq-error.log",
+                        "sourcetype" => "log4j" 
+                      }
+  }
+]
+```
+]
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   #### HA
+
+
+]
+
+.right-column[
+
+Haute dispo
+
+```
+mon-chef-repo\roles\load_balancer.rb
+```
+
+```ruby
+name 'load_balancer'
+description 'haproxy load balancer'
+run_list('recipe[haproxy::app_lb]')
+override_attributes(
+  'haproxy' => {
+    'app_server_role' => 'cq5_server'
+  }
+)
+```
+]
+
+
 
 ---
 
@@ -605,24 +722,18 @@ layout: false
 .right-column[
 
 * Mise en place de JBoss Data Grid (JDG)
- * JDG en quelques mots....
 
-ok et donc:
+Il faut donc
 * installer le jdk
-** déploiement de policy 'security-manager'
+ * déploiement de policy 'security-manager'
 * installer et configuer le jdg (v6) de manière completement **automatisée**
 * intégration avec le système
-** script de démarrage (service)
-** journaux et liens symboliques
-** ouverture de port (firewall)
-** montage de système de fichiers distants
-** mise à jour des règles SE Linux
-** mise à jour des binaires
-* disposer de plusieurs instances par machine
-** pour créer une "grille" avec un seul noeud
-** instance plus "petite", limite impact en cas d'échec
-* mettre en place le monitoring
-** déploiement de l'agent [Jolokia](Jolokia)
+ * script de démarrage (service)
+ * journaux et liens symboliques
+ * ouverture de port (firewall)
+ * montage de système de fichiers distants
+ * mise à jour des règles SE Linux
+ * mise à jour des binaires
 
 ]
 
@@ -661,8 +772,33 @@ layout: false
 
 .right-column[
 
-# installer jdg et sa jvm
-```
+et aussi:
+
+* disposer de plusieurs instances par machine
+ * pour créer une "grille" avec un seul noeud
+ * instance plus "petite", limite impact en cas d'échec
+* mettre en place le monitoring
+ * déploiement de l'agent [Jolokia](Jolokia)
+
+]
+
+
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+
+
+]
+
+.right-column[
+
+installer jdg et sa jvm
+
+```ruby
 node *-jdg.mygrid.com {
 
   $openjdk = 'openjdk-1.6.0'
@@ -683,11 +819,33 @@ node *-jdg.mygrid.com {
   }
 }
 ```
-# le RPM
+]
+
+
+???
+
+TODO: décrire le contenu du script à l'oral
+
+Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
+---
+
+layout: false
+.left-column[
+  ## Comment ?
+   ### - un simple jar
+   ### - un middleware
+
+
+]
+
+.right-column[
+
+le RPM
 [https://github.com/rpelisse/jdg-rpm-infra](https://github.com/rpelisse/jdg-rpm-infra)
 
-# mettre en place MySQL pour charger les données des noeuds
-```
+mettre en place MySQL pour charger les données des noeuds
+
+```ruby
   mysql::db { $db_name:
     user     => $db_user,
     password => $db_password,
@@ -698,13 +856,6 @@ node *-jdg.mygrid.com {
 ```
 
 ]
-
-
-???
-
-TODO: décrire le contenu du script à l'oral
-
-Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
 
 ---
 
@@ -764,7 +915,7 @@ layout: false
 
 chef-repo/environments/trunk-stable.rb
 
-```
+```ruby
 name "trunk-stable"
 description "Environment for trunk-stable nodes"
 cookbook_versions({"adobehub"=>"= 0.0.16","cq5" =>"= 0.0.13"})
@@ -781,7 +932,7 @@ override_attributes({
 })
 ```
 
-```
+```ruby
 default['adobehub']['trusted_certificates'] = [
   'api.corp.adobe.com',
   'lces2-dev2.corp.adobe.com',
@@ -810,7 +961,7 @@ layout: false
 
 chef-repo/environments/trunk-stable.rb
 
-```
+```ruby
 name "hub_server"
 description "Adobe Hub Server Role"
 run_list "recipe[chef-client::delete_validation]", "recipe[chef-client]", "recipe[ntp]", "recipe[adobehub]"
@@ -836,7 +987,7 @@ layout: false
 
 .right-column[
 
-```
+```ruby
 file { '/etc/jdg/config.xml':
     content => template('jdg/config.xml')
     require => Package[$jdg]
@@ -849,7 +1000,7 @@ file { $jdg_instances:
 }
 ```
 
-```
+```ruby
     ...
     <interfaces>
       <interface name="management">
@@ -908,7 +1059,7 @@ layout: false
 
 .right-column[
 
-```
+```ruby
 include_recipe 'chef-vault-util::default'
 keystore_item = chef_vault_item(node['adobehub']['vault_password'], node['adobehub']['vault_password_keystore_item'])
 jvm_keystore_password = keystore_item[node['adobehub']['vault_password_property']]
@@ -1035,39 +1186,6 @@ layout: false
 - [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013):
  * **If it's not in the source code control system, it doesn't exist.**
 
-
-* http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
-* http://java.dzone.com/articles/infrastructure-code-key-devops
-* http://architects.dzone.com/articles/infrastructure-code
-
-
----
-
-layout: false
-.left-column[
-  ## Pourquoi?
-  ### - Transformation d'Adobe IT
-  ### - Open Development
-
-]
-.right-column[
-
-[@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013) nous donnes 5 clefs:
-
- * Whatever you're working on, it must be backed by an issue in the tracker.
-
- * **If it's not in the source code control system, it doesn't exist.**
-
- * If it's important, it needs a permanent URL.
-
-* If it didn't happen on the dev list, it didn't happen.
-
-* What happened while you were away? Check the activity stream and archives.
-]
-
-
-???
-
 Who needs secrets?
 Who cares if your code is not yet perfect?
 
@@ -1077,20 +1195,25 @@ without trust, the tools don't matter
 
 * http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup
 
+
+* http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
+* http://java.dzone.com/articles/infrastructure-code-key-devops
+* http://architects.dzone.com/articles/infrastructure-code
+
+
+
+
 ---
 class: center, middle, inverse
 # fin
-#### ou pas
+#### Questions ?
 
 
 ---
 
 layout: false
 .left-column[
-  ## Chef Comment ?
-  ### -  Panorama
-
-
+  ## Chef Overview
 ]
 
 .right-column[
@@ -1098,210 +1221,16 @@ layout: false
 ![overview](img/overview_chef.png)
 
 ]
-.footnote[![Chef](img/chef_logo.png)]
+
+
+---
+name: last-page
+template: inverse
+
+## That's all folks !
 
 ???
 
-http://docs.opscode.com/chef_overview.html
-
----
-layout: false
-.left-column[
-  ## Chef Comment ?
-  ### -  Panorama
-  ### -  Server
-]
-
-.right-column[
-
-* recherche
-* management
-* API
-
-]
-
-.footnote[![Chef](img/chef_logo.png)]
-
----
-layout: false
-.left-column[
-  ## Chef Comment ?
-  ### -  Panorama
-  ### -  Server
-  ### -  Nodes
-  ### -  Policy
-  ### -  cookbooks (attributs, recipes version)
-]
-
-.right-column[
-
-* Nodes
- * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
- * sur lequel tourne `chef-client`
-
-* attributes
-
-* run-list
-]
-
-.footnote[![Chef](img/chef_logo.png)]
-
-
----
-layout: false
-.left-column[
-  ## Chef Comment ?
-  ### -  Panorama
-  ### -  Server
-  ### -  Nodes
-  ### -  Policy
-]
-
-.right-column[
-
-Policy settings map business and operational requirements, to settings stored on the server
-
-* Environments
- * modèle votre cycle de release et vos process (dev, test, stage, prod)
-
-* Roles
- * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
-
-* Data Bags
- * variable globales, stockées en json sur le serveur Chef (chargées/recherchés dans les recettes)
-
-]
-
-.footnote[![Chef](img/chef_logo.png)]
-
-???
-
-manager le complexité, et embrasser les abstraction offertes par Chef
-
-* Organisations
- * locataires independants du chef serveur (BU, Département)
-
-
-Organization :
-
-Completely independent tenants of Enterprise Chef
-*  Share nothing with other organizations
-*  May represent different
-*  Companies
-*  Business Units
-*  Departments
-
-Environments may include data attributes necessary
-for configuring your infrastructure
-*  The URL of your payment service’s API
-*  The location of your package repository
-*  The version of the Chef configuration files that
-should be used
-
-
-Roles may include a list of Chef configuration files
-that should be applied.
-*  We call this list a Run List
-*  Roles may include data attributes necessary for
-configuring your infrastructure
-*  The port that the application server listens on
-*  A list of applications that should be deployed
-
-Nodes Adhere to Policy
-• An application, the chef-client, runs on each node
-• chef-client will
-• gather current system configuration
-• download the desired system configuration from
-the Chef server
-• configure the node such that it adheres to the
-policy
-
-http://www.slideshare.net/opscode/week-1-overview-of-chef
-
-http://docs.opscode.com/chef_overview.html
-
-
----
-layout: false
-.left-column[
-  ## Chef Comment ?
-  ### -  Panorama
-  ### -  Server
-  ### -  Nodes
-  ### -  Policy
-  ### -  cookbooks
-]
-
-.right-column[
-
-* attributes
-* recipes
-* version
-
-]
-
-.footnote[![Chef](img/chef_logo.png)]
-
-
-
----
-
-# slides below are just remark.js demo
-
----
-class: center, middle, inverse
-
-#remark
-[ri-mahrk]
-.footnote[Go to directly to [project site](https://github.com/gnab/remark)]
----
-## What is it and why should I be using it?
----
-layout: false
-.left-column[
-  ## What is it?
-]
-.right-column[
-  A simple, in-browser, Markdown-driven slideshow tool targeted at people who know their way around HTML and CSS, featuring:
-
-- Markdown formatting, with smart extensions
-
-- Presenter mode, with cloned slideshow view
-
-- Syntax highlighting, supporting a range of languages
-
-- Slide scaling, thus similar appearance on all devices / resolutions .red[*]
-
-- Touch support for smart phones and pads, i.e. swipe to navigate slides
-
-.footnote[.red[*] At least browsers try their best]
-]
----
-.left-column[
-  ## What is it?
-  ## Why use it?
-]
-.right-column[
-If your ideal slideshow creation workflow contains any of the following steps:
-
-- Just write what's on your mind
-
-- Do some basic styling
-
-- Easily collaborate with others
-
-- Share with and show to everyone
-
-Then remark might be perfect for your next.red[*] slideshow!
-
-.footnote[.red[*] You probably want to convert existing slideshows as well]
-]
----
-.left-column[
-  ## What is it?
-  ## Why use it?
-]
-.right-column[
 As the slideshow is expressed using Markdown, you may:
 
 - Focus on the content, expressing yourself in next to plain text not worrying what flashy graphics and disturbing effects to put where
@@ -1319,270 +1248,20 @@ As the slideshow is contained in a plain file, you may:
 - Store it wherever you like; on your computer, hosted from your Dropbox, hosted on Github Pages alongside the stuff you're presenting...
 
 - Easily collaborate with others, keeping track of changes using your favourite SCM tool, like Git or Mercurial
-]
----
-template: inverse
 
-## How does it work, then?
----
-name: how
 
-.left-column[
-  ## How does it work?
-### - Markdown
-]
-.right-column[
-A Markdown-formatted chunk of text is transformed into individual slides by JavaScript running in the browser:
+Now press __P__ to toggle  presenter mode !and again  to  back it off.
+Pressing __C__ will open a cloned view of the current slideshow in a new
+browser window.
 
-```remark
-# Slide 1
-This is slide 1
-
----
-
-# Slide 2
-This is slide 2
-```
-
-.slides[
-  .first[
-  ### Slide 1
-  This is slide 1
-  ]
-  .second[
-  ### Slide 2
-  This is slide 2
-  ]
-]
-
-Regular Markdown rules apply with only a single exception:
-
-  - A line containing three dashes constitutes a new slide
-  (not a horizontal rule, `&lt;hr /&gt;`)
-
-Have a look at the [Markdown website](http://daringfireball.net/projects/markdown/) if you're not familiar with Markdown formatting.
-]
----
-.left-column[
-  ## How does it work?
-  ### - Markdown
-  ### - Inside HTML
-]
-.right-column[
-A simple HTML document is needed for hosting the styles, Markdown and the generated slides themselves:
-
-```xml
-<!DOCTYPE html>
-<html>
-  <head>
-    <style type="text/css">
-      /* Slideshow styles */
-    </style>
-  </head>
-  <body>
-    <textarea id="source">
-      <!-- Slideshow Markdown -->
-    &lt;/textarea&gt;
-    <script type="text/javascript" src="remark.js">
-    </script>
-    <script type="text/javascript">
-      var slideshow = remark.create();
-    </script>
-  </body>
-</html>
-```
-
-You may download remark to have your slideshow not depend on any online resources, or reference the [latest version](https://github.com/gnab/remark/releases) online directly.
-]
----
-template: inverse
-
-## Of course, Markdown can only go so far.
----
-.left-column[
-  ## Markdown extensions
-]
-.right-column[
-To help out with slide layout and formatting, a few Markdown extensions have been included:
-
-- Slide properties, for naming, styling and templating slides
-
-- Content classes, for styling specific content
-
-- Syntax highlighting, supporting a range of languages
-]
-
----
-.left-column[
-  ## Markdown extensions
-  ### - Slide properties
-]
-.right-column[
-Initial lines containing key-value pairs are extracted as slide properties:
-
-```remark
-name: agenda
-class: middle, center
-
-# Agenda
-
-The name of this slide is {{ name }}.
-```
-
-Slide properties serve multiple purposes:
-
-* Naming and styling slides using properties `name` and `class`
-
-* Using slides as templates using properties `template` and `layout`
-
-* Expansion of `{{ property }}` expressions to property values
-
-See the [complete list](https://github.com/gnab/remark/wiki/Slide-Properties) of slide properties.
-]
----
-.left-column[
-  ## Markdown extensions
-  ### - Slide properties
-  ### - Content classes
-]
-.right-column[
-Any occurences of one or more dotted CSS class names followed by square brackets are replaced with the contents of the brackets with the specified classes applied:
-
-```remark
-.footnote[.red.bold[*] Important footnote]
-```
-
-Resulting HTML extract:
-
-```xml
-<span class="footnote">
-  <span class="red bold">*</span> Important footnote
-</span>
-```
-]
----
-.left-column[
-  ## Markdown extensions
-  ### - Slide properties
-  ### - Content classes
-  ### - Syntax Highlighting
-]
-.right-column[
 Code blocks can be syntax highlighted by specifying a language from the set of [supported languages](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting).
 
 Using [GFM](http://github.github.com/github-flavored-markdown/) fenced code blocks you can easily specify highlighting language:
 
-.pull-left[
-
-<pre><code>```javascript
-function add(a, b)
-  return a + b
-end
-```</code></pre>
-]
-.pull-right[
-
-<pre><code>```ruby
-def add(a, b)
-  a + b
-end
-```</code></pre>
-]
 
 A number of highlighting [styles](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting) are available, including several well-known themes from different editors and IDEs.
 
-]
----
-.left-column[
-  ## Presenter mode
-]
-.right-column[
-To help out with giving presentations, a presenter mode comprising the
-following features is provided:
 
-- Display of slide notes for the current slide, to help you remember
-  key points
-
-- Display of upcoming slide, to let you know what's coming
-
-- Cloning of slideshow for viewing on extended display
-]
----
-.left-column[
-  ## Presenter mode
-  ### - Inline notes
-]
-.right-column[
-Just like three dashes separate slides,
-three question marks separate slide content from slide notes:
-
-```
-Slide 1 content
-
-???
-
-Slide 1 notes
-
----
-
-Slide 2 content
-
-???
-
-Slide 2 notes
-```
-
-Slide notes are also treated as Markdown, and will be converted in the
-same manner slide content is.
-
-Pressing __P__ will toggle presenter mode.
-]
-???
-Congratulations, you just toggled presenter mode!
-
-Now press __P__ to toggle it back off.
----
-.left-column[
-  ## Presenter mode
-  ### - Inline notes
-  ### - Cloned view
-]
-.right-column[
-Presenter mode of course makes no sense to the audience.
-
-Creating a cloned view of your slideshow lets you:
-
-- Move the cloned view to the extended display visible to the audience
-
-- Put the original slideshow in presenter mode
-
-- Navigate as usual, and the cloned view will automatically keep up with the original
-
-Pressing __C__ will open a cloned view of the current slideshow in a new
-browser window.
-]
----
-template: inverse
-
-## It's time to get started!
----
-.left-column[
-  ## Getting started
-]
-.right-column[
-Getting up and running is done in only a few steps:
-
-1. Visit the [project site](http://github.com/gnab/remark)
-
-2. Follow the steps in the Getting Started section
-
-For more information on using remark, please check out the [wiki](https://github.com/gnab/remark/wiki) pages.
-]
----
-name: last-page
-template: inverse
-
-## That's all folks (for now)!
 
 Slideshow created using [remark](http://github.com/gnab/remark).
     </textarea>
