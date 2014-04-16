@@ -1000,6 +1000,14 @@ file { $jdg_instances:
 
 ???
 
+---
+
+
+![overview](img/chef-vault.png)
+
+
+
+???
 
 ---
 
@@ -1029,18 +1037,20 @@ node['dev_mode']
 ```ruby
 include_recipe 'chef-vault-util::default'
 keystore_item = 
-chef_vault_item(node['adobehub']['vault_password'], 
-               node['adobehub']['vault_password_keystore_item'])
+chef_vault_item('password','dev-stable-keystore')
                
-jvm_keystore_password = keystore_item[node['adobehub']['vault_password_property']]
+jvm_keystore_password = keystore_item['password']
 
-execute "create the server keystore p12 key file to perform 2 way ssl call as client" do
-  command "openssl pkcs12  
-           -export  -in #{node['apache']['ssl_cert_file_path']}  
-           -inkey #{node['apache']['ssl_key_file_path']}  
-           -out #{node['adobehub']['ssl_p12_file_path']} 
-            -passout pass:#{jvm_keystore_password}"
-  not_if { File.exists?(node['adobehub']['ssl_p12_file_path']) }
+execute "create the server keystore p12 key file 
+         to perform 2 way ssl call as client" do 
+         
+ command "openssl pkcs12  
+      -export  -in #{node['ssl_cert_file_path']}  
+      -inkey #{node['ssl_key_file_path']}  
+      -out #{node['ssl_p12_file_path']} 
+      -passout pass:#{jvm_keystore_password}"
+      
+ not_if { File.exists?(node['ssl_p12_file_path']) }
 end
 ```
 
@@ -1061,14 +1071,6 @@ If this is true, chef_vault_item will attempt
 to load the specified item as a regular Data Bag Item with Chef::DataBagItem.load. 
 This is intended to be used only for testing, and not as a fall back to avoid issues loading encrypted items.
 
----
-
-
-![overview](img/chef-vault.png)
-
-
-
-???
 
 ---
 
@@ -1109,6 +1111,8 @@ class: center, middle, inverse
 layout: false
 .left-column[
   ## Pourquoi?
+  
+  ![Redhat](img/redhat_logo.jpeg)
 ]
 
 .right-column[
@@ -1125,7 +1129,7 @@ Chef & Puppet: une porte d'entrée
 
 
 ]
-.footnote[![Redhat](img/redhat_logo.jpeg)]
+
 
 ???
 
@@ -1138,13 +1142,12 @@ Should we add a tale of growth section dans le 'pourquoi?'
 layout: false
 .left-column[
   ## Pourquoi?
-  ### - Transformation d'Adobe IT
+ ![Adobe](img/adobe_logo.png)
 ]
 
 .right-column[
 
-- Adobe **Creative Cloud**
- * *'Accelerate, Simplify, Scale'*
+- *'Accelerate, Simplify, Scale'*
 
 - décloisonner les équipes, dev, de qualité, de sécurité et d'exploitation
 
@@ -1159,7 +1162,7 @@ layout: false
 
 
 ]
-.footnote[![Adobe](img/adobe_logo.png)]
+
 
 ???
 
@@ -1203,26 +1206,6 @@ class: center, middle, inverse
 # fin
 #### Questions ?
 
-
----
-
-layout: false
-.left-column[
-  ## Chef Overview
-]
-
-.right-column[
-
-![overview](img/overview_chef.png)
-
-]
-
-
----
-name: last-page
-template: inverse
-
-## That's all folks !
 
 ???
 
