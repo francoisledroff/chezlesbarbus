@@ -669,13 +669,6 @@ layout: false
  * cq5-cookbook/recipes/log.rb
 
 ```ruby
-logrotate_app 'cq5' do
-  cookbook  'logrotate'
-  path      node['cq5']['log_dir']
-  frequency node['cq5']['logrotate']['frequency']
-  rotate    node['cq5']['logrotate']['rotate']
-end
-
 include_recipe 'it-splunkforwarder::default'
 ```
 
@@ -863,6 +856,10 @@ node *-jdg.mygrid.com {
   }
 }
 ```
+
+le RPM
+[https://github.com/rpelisse/jdg-rpm-infra](https://github.com/rpelisse/jdg-rpm-infra)
+
 ]
 
 
@@ -871,36 +868,6 @@ node *-jdg.mygrid.com {
 TODO: décrire le contenu du script à l'oral
 
 Et voilà, le tour est joué, on vient déjà d'implémenter les deux premiers points de notre cahier des charges. On automatisé l'installation de JDG, et on s'est surtout assurer que notre logiciel dispose de la bonne "infrastructure" (ie la bonne jvm). En outre, permet d'assurer, lors de son exécution que non seulement le produit est installé, mais aussi que le service tourne ! Bon, avant d'attaquer la suite, je laisse François reprendre son cas d'étude à lui...
----
-
-layout: false
-.left-column[
-  ## Comment ?
-   ### - un simple jar
-   ### - un middleware
-
-
-]
-
-.right-column[
-
-le RPM
-[https://github.com/rpelisse/jdg-rpm-infra](https://github.com/rpelisse/jdg-rpm-infra)
-
-mettre en place MySQL pour charger les données des noeuds
-
-```ruby
-  mysql::db { $db_name:
-    user     => $db_user,
-    password => $db_password,
-    host     => 'localhost',
-    grant    => ['all'],
-    require => Service['mysqld']
-  }
-```
-
-]
-
 ---
 
 ![overview](img/path-to-prod.png)
@@ -1076,31 +1043,6 @@ to load the specified item as a regular Data Bag Item with Chef::DataBagItem.loa
 This is intended to be used only for testing, and not as a fall back to avoid issues loading encrypted items.
 
 
----
-
-layout: false
-.left-column[
-  ## Comment ?
-   ### - un simple jar
-   ### - un middleware
-   ### - environnements
-   ### - unique, central
-   ### - sécurisé
-   ### - élastique
-
-
-]
-
-.right-column[
-
-* modification ou ajout de paramètres de démarrage de la JVM
-* ajout d'une instance par noeud
-* ajout d'un cache dans la grille
-* mise en "cluster" de mysql
-* déploiement de RHQ sur chaque noeud, retrait de Jolokia
-* ...
-
-]
 
 ---
 class: center, middle, inverse
