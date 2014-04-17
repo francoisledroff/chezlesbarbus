@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Master Chef and Puppet Show</title>
-    <script src="http://gnab.github.io/remark/downloads/remark-0.6.2.min.js" type="text/javascript"> </script>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.6.4.min.js" type="text/javascript"> </script>
     <script src="//use.edgefonts.net/sansita-one;carter-one;amaranth;lato.js"></script>
     <script src="//use.edgefonts.net/bangers.js"></script>
     <script src="//use.edgefonts.net/josefin-sans:n1,i1,n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
@@ -52,6 +52,9 @@
         background: #e7e8e2;
         border-radius: 5px;
         font-size: 20px;
+      }
+      .super-small {
+        font-size: 14px;
       }
       .pull-left {
         float: left;
@@ -211,7 +214,7 @@ class: center, middle, inverse
 
 ???
 
-Francois:
+Francois
 Nous allons Commencer par quelques definitions utiles
 Puis Nous allons rapidement lever le voile sur la nature de ces deux solutions concurrentes de gestion de configuration que sont Chef et Puppet
 Pour voir ensemble quelques cas concret d'utilisation de chef et puppet dans des contextes liée à l'ecosysteme Java
@@ -257,10 +260,10 @@ Chef:
 - license Apache
 - Ruby
 
-Pourquoi Chef Francois ?
+Pourquoi Chef François ?
 ]
 
- ** une communité active, et ouverte **
+ ** une communité active et ouverte **
 ]
 
 ???
@@ -302,11 +305,6 @@ Mais vous serez grandement recompensé si vous investisser a minima dans Ruby
 Car vous pourrez integrer et reutiliser des gem/librairies Ruby et mettre en places des test unitaires, des test d'integrations
 
 
-Contrairement a Puppet, il n'y pas de gestion de dependances dans Chef, (meme si les resource peuvent etre notifies), 
-chef appliquera/actionera les resources dans un ordre definit par les recettes et les policy
-
-
-Henri Gomez: 'Puppet c'est maven, Chef c'est graddle'
 
 https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
 http://docs.opscode.com/chef_why.html
@@ -356,11 +354,11 @@ layout: false
 .right-column[
 **Infrastructure as Code** ?
 
-Ne remplacent pas juste tes scripts shell, te permettent:
+Ne remplace pas juste tes scripts shell, te permet:
 
 * d'abstraire les élements de gestion de ton infra
 * de définir ton infra sous forme de code 
- * de la (re)construire à partir de serveurs 'nus'
+* de la (re)construire à partir de serveurs 'nus'
 * faire converger tes systèmes
 * de façon idempotente
 ```
@@ -435,10 +433,10 @@ Complexe ? Non ! Abstrait.
 * ressources
 
 * rôles
- * représente votre type de serveur
+ * représente le type de serveur
 
 * environnements
- * modèle votre cycle de release et vos process (dev, test, stage, prod)
+ * modèle ton cycle de release et tes processus (dev, test, stage, prod)
 
 * pannier de données (data bags)
 
@@ -546,6 +544,13 @@ une api, un search
 * un client Chef/Puppet: un agent qui tourne sur chacun des noeuds inscrits auprès du serveur Chef/Puppet
  * met le noeud dans l'état attendu
 
+Contrairement a Puppet, il n'y pas de gestion de dependances dans Chef, (meme si les resource peuvent etre notifies), 
+chef appliquera/actionera les resources dans un ordre definit par les recettes et les policy
+
+
+Henri Gomez: 'Puppet c'est maven, Chef c'est graddle'
+
+
 ---
 
 class: center, middle
@@ -569,15 +574,16 @@ layout: false
 
 .right-column[
 
-M'em$%^$&rde pas, je n'ai qu'un simple jar, un container osgi 
+M'$%^$& pas, je n'ai qu'un simple jar, un container osgi, cq5
 
 oui mais il faut:
 * installer le jdk,
 * télécharger le jar,
 * l'installer en tant que service,
-* faire tourner les log,
-* et les monitorer.
+* faire tourner ses log,
+* et les monitorer,
 * de la haute dispo 
+
 
 ]
 
@@ -603,6 +609,7 @@ remote_file node['cq5']['quickstart_jar'] do
   source node['cq5']['repo_url']
   owner node['cq5']['user']
   group node['cq5']['group']
+  checksum '3043859473'
   action :create_if_missing  
   notifies :restart, 'service[cq5]', :delayed
 end
@@ -614,8 +621,6 @@ artifact_file node['cq5']['quickstart_jar'] do
   nexus_configuration nexus_configuration_object
   owner node['cq5']['user']
   group node['cq5']['group']
-  checksum '3043859473'
-  action :create
   notifies :restart, 'service[cq5]', :delayed
 end
 ```
@@ -632,10 +637,20 @@ end
 
 https://github.com/RiotGames/artifact-cookbook#artifact_file
 
-Downloads a file from a provided location and then verifies that the integrity of the file is intact. 
-Artifact files from Nexus will check with the Nexus Server to verify the SHA1 of the downloaded file. 
-Artifact files from an HTTP or S3 source will either use the provided SHA256 checksum to verify integrity 
-or skip the check if no checksum is given.
+Downloading files using artifact_file
+
+In its simplest state, the artifact_file resource is a wrapper for the remote_file resource for Nexus and URL locations. The key addition is retry logic and integrity checking for the downloaded files. Below is a brief description of the logic flow for the resource:
+
+Download the file using remote_file resource.
+Check the file's integrity
+Is it from the Nexus?
+Check the SHA1 of the downloaded file against Nexus Server's SHA1. Returns false if they are not equal.
+Not from Nexus - Is the checksum attribute defined for the resource?
+If defined - Check the SHA256 of the downloaded file against the checksum attribute. Returns false if they are not equal.
+If not defined - log a message and return true.
+When the logic returns true, the downloaded file is considered good and the resource will exit. 
+When the logic above returns false, the downloaded file is considered corrupt and an attempt will be made to download the file again. 
+The number of retries can be controlled with the download_retries attribute.
 
 ---
 
@@ -670,14 +685,14 @@ include_recipe 'it-splunkforwarder::default'
 
 ```ruby
 default.splunkforwarder.inputs =  [ 
-  { "input_type" => "monitor://",
-      "input_path" => "#{node['cq5']['log_dir']}/error.log", 
-      "input_vars" => {
-                        "source" => "hub_cq-error.log",
-                        "sourcetype" => "log4j" 
-                      }
-  }
-]
+{"input_type" => "monitor://",
+ "input_path" => 
+     "#{node['cq5']['log_dir']}/error.log", 
+ "input_vars" => 
+    {"source" => "cq_error.log",
+     "sourcetype" => "log4j" 
+    }
+  }]
 ```
 ]
 ---
@@ -721,9 +736,23 @@ override_attributes(
 ```
 ]
 
+---
+
+class: center, middle
+
+![overview](img/simple-jar.png)
 
 
 ---
+
+
+class: center, middle
+
+![overview](img/simple-jar2.png)
+
+
+---
+
 
 layout: false
 .left-column[
@@ -738,15 +767,15 @@ layout: false
 
 * Mise en place de JBoss Data Grid (JDG)
 
-Il faut donc
+Il faut donc:
 * installer le jdk
  * déploiement de policy 'security-manager'
-* installer et configuer le jdg (v6) de manière completement **automatisée**
+* installer et configuer le jdg (v6) de manière complétement **automatisée**
 * intégration avec le système
  * script de démarrage (service)
  * journaux et liens symboliques
  * ouverture de port (firewall)
- * montage de système de fichiers distants
+ * montage de systèmes de fichiers distants
  * mise à jour des règles SE Linux
  * mise à jour des binaires
 
@@ -876,29 +905,10 @@ mettre en place MySQL pour charger les données des noeuds
 
 ![overview](img/path-to-prod.png)
 
+---
 
+![overview](img/path-to-prod2.png)
 
-???
-
-Policy settings map business and operational requirements,
-such as process and workflow, to settings stored on the Chef server:
-
-Ces Policy vont definir quelles run-list vont être appliquées aux noeuds
-
-* Roles
- * représente votre type de serveur (lb, JEE serveur, DB Serveur...)
-
-* Data Bags
- * a global variable stored as JSON data in the Chef server.
- * A data bag is indexed for searching and can be loaded by a recipe or accessed during a search.
-
-* Environments
- * modèle votre cycle de release et vos process (dev, test, stage, prod)
-
-
-* Nodes
- * vos serveurs (physique ou virtuel, sur votre réseau our sur le cloud)
- * sur lequel tourne `chef-client`
 
 
 ---
@@ -926,9 +936,7 @@ override_attributes({
   "apache" => 
      {"servername" => "app-dev-stable.corp.adobe.com"},
   "cq5" => 
-     {"vault_accounts_cq_admin_item"
-                   => "dev_stable_cq_admin",
-      "ldap" => 
+     {"ldap" => 
          {"vault_conf"=> 
              "ldap_it_ad_test_conf" ,
              "host"=> "ldap-dev.adobe.com"},
@@ -946,7 +954,9 @@ override_attributes({
 ]
 
 
-???
+---
+class: center, middle, inverse
+# Romain ?
 
 
 
@@ -970,12 +980,6 @@ layout: false
 file { '/etc/jdg/config.xml':
     content => template('jdg/config.xml')
     require => Package[$jdg]
-}
-
-initd_folder = '/etc/init.d'/
-jdg_instances = [ "$initd_folder/jdg1", "$initd_folder/jdg2", "initd_folder/$jdg3" ]
-file { $jdg_instances:
-  TODO: symlink config
 }
 ```
 
@@ -1089,7 +1093,7 @@ layout: false
 
 .right-column[
 
-* modification ou ajout de paramètre de démarrage de la JVM
+* modification ou ajout de paramètres de démarrage de la JVM
 * ajout d'une instance par noeud
 * ajout d'un cache dans la grille
 * mise en "cluster" de mysql
@@ -1097,10 +1101,6 @@ layout: false
 * ...
 
 ]
-
-???
-
-
 
 ---
 class: center, middle, inverse
@@ -1119,7 +1119,7 @@ layout: false
 
 Chef & Puppet: une porte d'entrée
 
-* pour passer de de 10 à 100 serveurs
+* pour passer de 10 à 100 serveurs
 
 * pour gérer un parc hétérogène
 
@@ -1129,14 +1129,6 @@ Chef & Puppet: une porte d'entrée
 
 
 ]
-
-
-???
-
-http://www.slideshare.net/opscode/week-1-overview-of-chef
-Should we add a tale of growth section dans le 'pourquoi?'
-
-
 
 ---
 layout: false
@@ -1162,86 +1154,61 @@ layout: false
 
 
 ]
+---
+layout: false
+.left-column[
+  ## pointeurs
+]
 
+.right-column[
+.super-small[
 
-???
+Le slideshow 
+* created using http://github.com/gnab/remark
+* hosted at http://francoisledroff.github.io/chezlesbarbus
 
+Nous contacter:
+* https://twitter.com/rpelisse
+* https://twitter.com/francoisledroff
 
-- Adobe IT
- * *Accelerate, Simplify, Scale*
-
-- décloisonner les équipes, dev, de qualité et d'exploitation
- * faciliter, accélérer les changements
- * mieux garantir stabilité et sécurité
- * éviter les surprises
-
-- Comme votre infra devient code, elle devient
- * testable
- * versionable
- * jetable
- * repétable / reproductible  *'cloud-ready'*
-
-- [@bdelacretaz](http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013):
- * **If it's not in the source code control system, it doesn't exist.**
-
-Who needs secrets?
-Who cares if your code is not yet perfect?
-
+Aller plus loin:
+* https://github.com/rpelisse/jdg-rpm-infra
+* https://github.com/RiotGames/artifact-cookbook
+* http://www.slideshare.net/opscode/week-1-overview-of-chef
+* http://docs.opscode.com/chef_overview.html
+* http://www.getchef.com/blog/2014/01/23/attributes-or-data-bags-what-should-i-use/
+* http://www.slideshare.net/jedi4ever/infrastructure-as-code-abug-session
+* http://architects.dzone.com/articles/infrastructure-code
+* http://www.slideshare.net/opscode/week-1-overview-of-chef
+* https://github.com/Nordstrom/chef-vault
+* https://github.com/opscode-cookbooks/chef-vault
+* https://www.youtube.com/watch?v=cuJZbRngWC0
+* http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup
+* https://speakerdeck.com/sethvargo/using-ruby-to-automate-your-life
+* http://docs.opscode.com/chef_why.html
+* http://blip.tv/oreilly-velocity-conference/velocity-09-john-allspaw-10-deploys-per-day-dev-and-ops-cooperation-at-flickr-2297883 
+* http://blog.carlossanchez.eu/2012/03/13/infrastructure-as-code/ 
+* http://www.jedi.be/blog/2012/05/12/codifying-devops-area-practices/
+* http://www.slideshare.net/KrisBuytaert/7-tools-for-your-devops-stack
+* http://www.slideshare.net/carlossg/from-dev-to-devops-apachecon-na-2011 
+* http://dev2ops.org/blog/2010/2/22/what-is-devops.html   
+* http://www.slideshare.net/jedi4ever/vagrant-devopsdays-mountain-view-2011 
+* http://www.puppetlabs.com/ 
+* http://www.opscode.com/chef/ 
 * http://www.slideshare.net/bdelacretaz/open-development-in-the-enterprise-apachecon-na-2013
 
-without trust, the tools don't matter
-
-* http://www.slideshare.net/JulianDunn/chef-introduction-princeton-meetup
 
 
-* http://sdarchitect.wordpress.com/2012/12/13/infrastructure-as-code/
-* http://java.dzone.com/articles/infrastructure-code-key-devops
-* http://architects.dzone.com/articles/infrastructure-code
+]
 
-
-
-
+]
 ---
 class: center, middle, inverse
 # fin
 #### Questions ?
 
 
-???
 
-As the slideshow is expressed using Markdown, you may:
-
-- Focus on the content, expressing yourself in next to plain text not worrying what flashy graphics and disturbing effects to put where
-
-As the slideshow is actually an HTML document, you may:
-
-- Display it in any decent browser
-
-- Style it using regular CSS, just like any other HTML content
-
-- Use it offline!
-
-As the slideshow is contained in a plain file, you may:
-
-- Store it wherever you like; on your computer, hosted from your Dropbox, hosted on Github Pages alongside the stuff you're presenting...
-
-- Easily collaborate with others, keeping track of changes using your favourite SCM tool, like Git or Mercurial
-
-
-Now press __P__ to toggle  presenter mode !and again  to  back it off.
-Pressing __C__ will open a cloned view of the current slideshow in a new
-browser window.
-
-Code blocks can be syntax highlighted by specifying a language from the set of [supported languages](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting).
-
-Using [GFM](http://github.github.com/github-flavored-markdown/) fenced code blocks you can easily specify highlighting language:
-
-
-A number of highlighting [styles](https://github.com/gnab/remark/wiki/Configuration-Options#wiki-highlighting) are available, including several well-known themes from different editors and IDEs.
-
-
-
-Slideshow created using [remark](http://github.com/gnab/remark).
     </textarea>
     <script>
       var slideshow = remark.create({ highlightLanguage: 'javascript'});
