@@ -45,6 +45,18 @@ Content:
 abstract 2: Bash pour les Javateux
 ----------------------------------
 
+Clojure, Scala, Ceylon, tant de nouveau language à apprendre alors qu'ils vous restent tant de chose
+à apprendre sur un language qui vous servira vraiment: Bash ! En effet, ce shell est de loin le plus
+utilisé et il arrive tôt ou tard à tout programmeur de devoir écrire des scripts shell - si ce
+n'est que pour lancer son programme Java, ou le metrre en production. Hors, bien souvent, quand il
+écrit un script Bash, le développeur Java semble subitement oublié toutes les bonnes pratiques de
+programmation et produit un script non seulement peu élégant, mais difficile à maintenir et souvent
+source de problème.
+
+Alors, si au lieu d'apprendre le dernier language à la mode, vous laissiez François et Romain vous
+montrez quelque chose d'un peu utile ;)
+
+
 1. Approche moqueuse/ironique sur le Bash comme nouveau language (qui a tout d'un grand, même si il
 ne tourne pas sur le JVM)
 2. Vue "pédagogique/critique" du développeur Java qui oublie tout de base de la programmation quand
