@@ -67,6 +67,43 @@ on joue tour a tous soit l'acteur 1 (a1) soit l'acteur 2 (a2)
 plan
 -----
 
+### avant propos
+
+"audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tou developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet...
+en gros le concept d'audit de secu est naze...
+
+* a1: c'est le dev
+* a2: c'est le sec
+
+### mon appli jhipster
+
+* a1: j'ai cette petite appli web intranet à faire, un truc pas trop big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+* a2: c'est quoi jhipster ?
+* a1: c'est un generateur d'appli web (à la appfuse) basé sur yeoman, au final tu as un stack plutot hispter, plutot recent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
+jhipster te donne quelque choix, voici les miens:
+
+    {
+    "generator-jhipster": {
+    "baseName": "petiteappli",
+    "packageName": "com.devoxx.petiteappli",
+    "packageFolder": "com/devoxx/petiteappli",
+    "authenticationType": "token",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "nosql",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "gulp",
+    "javaVersion": "7"
+    }
+    }
+
+* a2: ok donc je vois des choix majeurs ici, t'es parti sur du oauth2 et du mongodb
+
+
 ### just an internal app
 
 * a1: c'est juste une petite appli intranet
@@ -74,23 +111,33 @@ plan
 
 => ça serait de trouvé un exemple de hack/exploit sur une app "interne" déployé sur un coin de table
 
-### just a web app
+### je suis dans le VPN 
 
-http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
+* a2: je vois que par defaut, tout passe en clair entre ton mongo et ton serveur d'app
+* a1: je suis en intranet
+* a2: peu importe, la question à laquelle tu dois repondre c'est tes donnés sont t-elles confidentielles, que peut-il arriver si elle sont compromises
+* a1: données rh et finance, ça pourrait faire pas mal de bruit si on les trouvait sur le web
+* a2: tu peux pas laisser ca en clair
+* a1: je suis en intranet
+* a2: http://www.arnoldit.com/articles/10intranetSecAug2002.htm l'intranet n'est plus safe
 
-* 99% of web applications have at least 1 vulnerability
-* 82% of web applications have at least 1 High/Critical Vulnerability
-* 90% of hacking incidents are not reported publicly
+### Mongo SSL authentication 
 
-### I made exploits harders
+la je peux faire un slide et fournir un peu de code
+car en fait la x509 authentication n'est pas fourni par defaut dans spring data mongo, j'ai du la coder dans mon appli
 
-* a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
-* a2 : exploits is not such a big deal anymore
+### Password
 
-### I enforced strong password policies
-
-* a1 : strong password policies
+* a2: ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur
+* a1: oui mais I enforced strong password policies
 * a2 : passwords are bad. 100% of attacks in 2014 involve stolen credentials. avoid dealing with passwords.
+
+### t'as pas un IDP dans ton intranet
+
+* a2: mais dis des utilisateurs vont devoir creer un nouveau password juste pour ton app
+* a1: oui
+* a2: non tu ne veux pas faire ça :
+
 
 we have so may passwords to deal with, we reused them
 sony password reused at yahoo: http://www.troyhunt.com/2012/07/what-do-sony-and-yahoo-have-in-common.html
@@ -107,6 +154,32 @@ http://www.macdevcenter.com/pub/a/mac/2005/01/01/paris.html
 http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-prince-hilton-auf-dem-arm.jpg
 
 http://idtheftcenter.org/
+
+* a2: t'as pas un IDP dans ton intranet ?
+* a1: si basé sur saml avec du 2FA
+
+### 2 FA and UX
+
+
+* a2: vas-y qu'est ce que t'attends, put 2fa in place
+* a1: bad ux though, https://twitter.com/michaelneale/status/568279010968383488
+
+1. App requires 2FA login.
+2. get phone from pants
+3. Distracted by 100s of notifications on it
+4. Back to computer. Repeat.
+
+
+* a2: je crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
+* a1 oui c'est une bonne idée :
+
+et la je peux montrer encore du code modifié de jhispter ou l'authentication est deporté sur un idp saml et ensuite seuleuemtn un oauth token (et un refresh token) est echangé avec le front-end javascript
+
+resultat tu te tappes le 2fa une fois et ensuite a moins de quitter l'app pendant plus de 30 jours tu le referas pas.
+
+on peux montrer les echanges avec des jolies sequence diagram
+on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
+j;ai du code jhipster et une interface pour ca 
 
 ### avoid Brute force attack
 
@@ -125,33 +198,46 @@ this will buy you time to detect an attack and react accordingly
 
  => useless if no IDS in place or at least monitoring !!!
 
-### 2 FA
 
 
-* a2: put 2fa in place.
-* a1: bad ux though, https://twitter.com/michaelneale/status/568279010968383488
 
-1. App requires 2FA login.
-2. get phone from pants
-3. Distracted by 100s of notifications on it
-4. Back to computer. Repeat.
 
+
+### just a web app
+
+http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
+
+* 99% of web applications have at least 1 vulnerability
+* 82% of web applications have at least 1 High/Critical Vulnerability
+* 90% of hacking incidents are not reported publicly
+
+=> là on pourrait aussi évoquer PMD/Findbugs pour justement mettre en place des contrôles/analyses
+de sécurité.
+
+### I made exploits harders
+
+* a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
+* a2 : exploits is not such a big deal anymore
 
 ### never assume your source code is safe
 
 segregate your secrets from your source code
 search in github.com for password, secret, key
 
-we have oauth clientid and secret in jhipster
 
 a $2.375 amazon mistake
 http://www.devfactor.net/2014/12/30/2375-amazon-mistake/
 
+et hop la on peut une recherche dans jhipster on y trouveras quelques secrets
+
+we have oauth clientid and secret in jhipster
+la encore je peux montrer comment on peut generer le oauth client et le oauth secret à la volée seuleument une fois l'authentication saml reussi
+
+
 sepration of duties
 rotate account information
 
-=> là on pourrait aussi évoquer PMD/Findbugs pour justement mettre en place des contrôles/analyses
-de sécurité.
+
 
 ### never assume the system you are talking to is safe
 
