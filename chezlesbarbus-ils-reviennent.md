@@ -64,21 +64,37 @@ Content:
 draft content
 ============
 on joue tour a tous soit l'acteur 1 (a1) soit l'acteur 2 (a2)
+
+* a1: c'est le dev
+* a2: c'est le sec
+
 plan
 -----
 
 ### avant propos
 
-"audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tou developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet...
-en gros le concept d'audit de secu est naze...
+"audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tout developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet... en gros le concept d'audit de secu est naze...
 
-* a1: c'est le dev
-* a2: c'est le sec
+Idéee de dialogue
+
+FLD: Romain, on n'a une petit appli interne, qu'on va mettre en prod, et on m'a dit de faire un audit de sécurité.
+
+RPE: Pourquoi ? C'est déjà trop tard...
+
+FLD: Ben, c'est pas le moment de faire un audit de sécurité ? On voulait faire venir des experts en sécurité.
+
+RPE: Pourquoi faire ? Tu veux qu'il te reconfigure ton FW ? Honnêtement, je vois mal comment des experts externes pourront mieux sécuriser ton appli que tes devs et toi. Eventuellement, ton infra se sécu, mais à la base, pour hacker une appli, il faut la détourner de son fonctionnement "normal". Et, à ton avis, de tes fameux experts en sécurité et ton équipe de dév qui connait mieux le fonctionnement normal de l'appli ?
+
+FLD: Ouais, mais attend mon équipe de dév, y'en a la moitié déjà qui travaille sur Windows, et l'architecte a rasé sa barbe la semaine dernière - bref, personne n'est calé en sécurité, on va pas faire ça tout seul.
+
+RPE: Non, mais vous allez aire ça ensemble... Bon allez, commençons par le début, parlez moi un peu de ton bouzin en Java (je sens déjà le jar de 200Mb arrivé...)
 
 ### mon appli jhipster
 
-* a1: j'ai cette petite appli web intranet à faire, un truc pas trop big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
-* a2: c'est quoi jhipster ?
+* FLD j'ai cette petite appli web intranet à faire, un truc pas trop big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+
+* RPE c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons groovy ?
+
 * a1: c'est un generateur d'appli web (à la appfuse) basé sur yeoman, au final tu as un stack plutot hispter, plutot recent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
 jhipster te donne quelque choix, voici les miens:
 
@@ -101,44 +117,50 @@ jhipster te donne quelque choix, voici les miens:
     }
     }
 
-* a2: ok donc je vois des choix majeurs ici, t'es parti sur du oauth2 et du mongodb
+* RPE ok, bon  à part télécharger la terre entière pour foutre je ne sais combien de couche d'abstraction à la Java, je vois surtout t'es parti sur du oauth2 et du mongodb. MongoDB c'est pour faire cool et dragué les filles sur la plage, c'est ça ?
 
+* FLD: Ouais, exactement !
 
 ### just an internal app
 
-* a1: c'est juste une petite appli intranet
-* a2: assume there is a breach, never assume you are safe, architect with "assumed breach" mindset
+* FLD: Non, plus sérieusement, tu sais, on n'a pas des gros besoin en sécurité. L'appli est déployé en interne, au sein de notre VPN, donc on craint pas grand chose.
 
-=> ça serait de trouvé un exemple de hack/exploit sur une app "interne" déployé sur un coin de table
+TODO: trouvé une anecdote qui montre - que je raconterais en mode "vieux grumpy" qui montre que le réseau interne n'est pas secure.
 
-### je suis dans le VPN 
+### je suis dans le VPN
 
-* a2: je vois que par defaut, tout passe en clair entre ton mongo et ton serveur d'app
-* a1: je suis en intranet
-* a2: peu importe, la question à laquelle tu dois repondre c'est tes donnés sont t-elles confidentielles, que peut-il arriver si elle sont compromises
-* a1: données rh et finance, ça pourrait faire pas mal de bruit si on les trouvait sur le web
-* a2: tu peux pas laisser ca en clair
-* a1: je suis en intranet
+RPE: Bon au vu de tout ça, on va commencer à regarder les flux entre ton app et le reste du réseau. Déjà, rassures moi, la communication entre MongoDB et ton app, rassumes moi c'est pas en clair quand même ? Parce que c'est le fonctionnement par défaut, je te signal
+
+FLD: Ouais, mais attend, je suis en intranet, réseau interne, donc bon...
+
+RPE: OK, mais même si on assume, à tort, qu'on est "safe" sur le réseau interne, il reste que les données peuvent être confidentielles. Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches combien de fois il a renouvellé sa prescription de viagra... Ou plus sérieusement, et simplement, les données RH et son salaire.
+
+FLD: Ah ouais, surtout que pour le coup, le salaire d'un employé c'est une bonne info avant tout pour ses collègues, qui on accès au réseau de l'entreprise...
+
 * a2: http://www.arnoldit.com/articles/10intranetSecAug2002.htm l'intranet n'est plus safe
 
-### Mongo SSL authentication 
+### Mongo SSL authentication
+
+FLD: Ok, tu m'as convaincu, j'arrête de faire mon bisounours, on va sécuriser la conf mongo. Surtout qu'en fait, c'est pas si simple ...
 
 la je peux faire un slide et fournir un peu de code
 car en fait la x509 authentication n'est pas fourni par defaut dans spring data mongo, j'ai du la coder dans mon appli
 
+RPE: Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent à la configuration de FW...
+
 ### Password
 
-* a2: ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur
-* a1: oui mais I enforced strong password policies
-* a2 : passwords are bad. 100% of attacks in 2014 involve stolen credentials. avoid dealing with passwords.
+RPE: Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
+
+FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré que tout les mots de passe seraient "strong" (à dév)
+
+RPE: Bon, alors pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? En gros, 100% des attaques en 2014 implique des mots de dérobé. Si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, en ai pas !
 
 ### t'as pas un IDP dans ton intranet
 
-* a2: mais dis des utilisateurs vont devoir creer un nouveau password juste pour ton app
-* a1: oui
-* a2: non tu ne veux pas faire ça :
+RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ). Sans compter, qu'il faudra créer un mot de passe pour ton app, en plus du reste. C'est naze, ça va faire chier tout le monde, qui va coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA, et qu'ils ne vont jamais changé par eux même. Du coup, ton app doit gérer le cycle de vies, envoyés des mails (donc pouvoir envoyer des mails) pour notifier les utilisateurs etc... Bref, la merde.
 
-
+FLD: Ouais, c'est vrai qu'il suffit de se rappeler de Sonny...
 we have so may passwords to deal with, we reused them
 sony password reused at yahoo: http://www.troyhunt.com/2012/07/what-do-sony-and-yahoo-have-in-common.html
 
@@ -156,12 +178,15 @@ http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-
 http://idtheftcenter.org/
 
 * a2: t'as pas un IDP dans ton intranet ?
-* a1: si basé sur saml avec du 2FA
+
+RPE: Bon, après ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
+
+FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
 
 ### 2 FA and UX
 
-
-* a2: vas-y qu'est ce que t'attends, put 2fa in place
+RPE: vas-y qu'est ce que t'attends, put 2fa in place
+FLD: Ouais, mais alors, OK , c'est secure, mais alors bonjour l'expérience utilisateur ! Personne va vouloir l'utiliser notre app à ce compte là
 * a1: bad ux though, https://twitter.com/michaelneale/status/568279010968383488
 
 1. App requires 2FA login.
@@ -169,9 +194,11 @@ http://idtheftcenter.org/
 3. Distracted by 100s of notifications on it
 4. Back to computer. Repeat.
 
+RPE: Oui, en fait, mais crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
 
-* a2: je crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
-* a1 oui c'est une bonne idée :
+FLD: Oui, c'est une bonne idée
+
+RPE: Comme quoi, c'est malin de bosser Dev + Sécu ;) - vas y montre moi comment tu fais avec ton app:
 
 et la je peux montrer encore du code modifié de jhispter ou l'authentication est deporté sur un idp saml et ensuite seuleuemtn un oauth token (et un refresh token) est echangé avec le front-end javascript
 
@@ -179,28 +206,26 @@ resultat tu te tappes le 2fa une fois et ensuite a moins de quitter l'app pendan
 
 on peux montrer les echanges avec des jolies sequence diagram
 on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
-j;ai du code jhipster et une interface pour ca 
+j'ai du code jhipster et une interface pour ca
 
 ### avoid Brute force attack
+
+Idée: là, on pourrait faire une sorte de duel entre "a1, je veux le faire dans mon app" et "a2, mais non, laisse l'infra faire..."
 
 (pour tout ce que tu évoques ci dessous, ça peut être fait dans app ou en externe, donc je
 propose que tu évoques les solutions "in-app" et moi les solutions infra)
 
-rate limiting => safe2ban
+rate limiting => fail2ban, firewall réseau...
 password strength => reverse
 captchas => AFAIK no out app option
 
-hsm protect private key
+hsm protect private key, proprio non ?
 certificate segregated by group
 hsm will make offline attacks impossible
 
 this will buy you time to detect an attack and react accordingly
 
  => useless if no IDS in place or at least monitoring !!!
-
-
-
-
 
 
 ### just a web app
