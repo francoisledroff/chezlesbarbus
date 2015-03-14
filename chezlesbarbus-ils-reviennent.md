@@ -71,11 +71,14 @@ on joue tour a tous soit l'acteur 1 (a1) soit l'acteur 2 (a2)
 plan
 -----
 
+1 ma petit wep interne
+2 d'interne à externe
+3 bienvenu sur le cloud
+4 CI & Build, tout un monde de faille à exploiter
+
 ### avant propos
 
 "audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tout developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet... en gros le concept d'audit de secu est naze...
-
-Idéee de dialogue
 
 FLD: Romain, on n'a une petit appli interne, qu'on va mettre en prod, et on m'a dit de faire un audit de sécurité.
 
@@ -121,11 +124,22 @@ jhipster te donne quelque choix, voici les miens:
 
 * FLD: Ouais, exactement !
 
-### just an internal app
+### just an internal web-app
 
 * FLD: Non, plus sérieusement, tu sais, on n'a pas des gros besoin en sécurité. L'appli est déployé en interne, au sein de notre VPN, donc on craint pas grand chose.
 
 TODO: trouvé une anecdote qui montre - que je raconterais en mode "vieux grumpy" qui montre que le réseau interne n'est pas secure.
+
+http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
+
+* 99% of web applications have at least 1 vulnerability
+* 82% of web applications have at least 1 High/Critical Vulnerability
+* 90% of hacking incidents are not reported publicly
+
+Sécurité : Java serait le programme le plus exposé aux attaques, suivi par QuickTime, Adobe Reader, VLC et .Ne...
+
+https://twitter.com/Developpez/status/560389865003425792
+http://bit.ly/1zaB89X
 
 ### je suis dans le VPN
 
@@ -148,6 +162,14 @@ car en fait la x509 authentication n'est pas fourni par defaut dans spring data 
 
 RPE: Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent à la configuration de FW...
 
+http://www.slideshare.net/mongodb/securing-mongo-db-mongodc-2014-nosig
+http://www.allanbank.com/blog/security/tls/x.509/2014/10/13/tls-x509-and-mongodb/
+
+mongo leak
+---
+https://twitter.com/unix_root/status/565906945488748544
+40,000 unprotected MongoDB databases, 8 million telecommunication customer records exposed http://thehackernews.com/2015/02/mongodb-database-hacking.html
+
 ### Password
 
 RPE: Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
@@ -156,7 +178,7 @@ FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré 
 
 RPE: Bon, alors pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? En gros, 100% des attaques en 2014 implique des mots de dérobé. Si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, en ai pas !
 
-### t'as pas un IDP dans ton intranet
+### t'as pas un IDP dans ton intranet 
 
 RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ). Sans compter, qu'il faudra créer un mot de passe pour ton app, en plus du reste. C'est naze, ça va faire chier tout le monde, qui va coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA, et qu'ils ne vont jamais changé par eux même. Du coup, ton app doit gérer le cycle de vies, envoyés des mails (donc pouvoir envoyer des mails) pour notifier les utilisateurs etc... Bref, la merde.
 
@@ -177,7 +199,32 @@ http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-
 
 http://idtheftcenter.org/
 
-* a2: t'as pas un IDP dans ton intranet ?
+### passwords
+
+100% of attacks in 2014 involve stolen credentials
+
+segregate your secrets from your source code
+search in github.com for password, secret, key
+et hop la on peut une recherche dans jhipster on y trouveras quelques secrets
+
+we have oauth clientid and secret in jhipster
+la encore je peux montrer comment on peut generer le oauth client et le oauth secret à la volée seuleument une fois l'authentication saml reussi
+
+sepration of duties
+rotate account information
+
++1 slide sur ça
+
+@FLD, ok, là je pense qu'il faut qu'on passe à la partie Cloud....
+
+### secret management
+
+https://twitter.com/jtimberman/status/568124542553423872
+Managing secrets: still the hardest problem in operations.
+
+jce chef recipe
+chef-vault
+
 
 RPE: Bon, après ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
 
@@ -208,17 +255,78 @@ on peux montrer les echanges avec des jolies sequence diagram
 on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
 j'ai du code jhipster et une interface pour ca
 
+RPE: Ok, je pense que là t'es bon pour au moins déployé en interne.
+
+FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien, on veut ouvrir le service à l'extérieur.
+
+RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
+
 ### avoid Brute force attack
 
-Idée: là, on pourrait faire une sorte de duel entre "a1, je veux le faire dans mon app" et "a2, mais non, laisse l'infra faire..."
+FLD: Attend, on y a pensé, et on a mis des contraintes sur les password pour qu'il soit difficile à craquer
 
-(pour tout ce que tu évoques ci dessous, ça peut être fait dans app ou en externe, donc je
-propose que tu évoques les solutions "in-app" et moi les solutions infra)
+(@FLD, là si tu as , on montre du code jhipster)
 
-rate limiting => fail2ban, firewall réseau...
-password strength => reverse
-captchas => AFAIK no out app option
+RPE: Ouais, c'est bien, mais ça n'empêche pas un attaquant d'essayer quand même et, soit d'éventuellement réussir, ou juste rendre ton service inaccessible (par effet de bord). C'est pourr ça que moi j'aime bien avoir un reverse proxy en place en frontal de tout appli.
 
+@FLD, la je ferais une petit explication du concept sur 1,2 slides
+
+RPE: Donc avec un RP en place, pour ton problème de mot de passe, tu peux déjà controllé qu'un utilisateur ou une IP essaye pas "en boucle" de se logguer, sans encombrer le code ou la logique de ton app. Tu peux aussi nettoyer les paramètres transmis ou simplement dropper des requêtes invalides. Quand on sait que, en fin de compte, le gros des exploits se font en abusant des paramètres - comme le classique "; drop database", c'est une bonne protection de s'assurer qu'on  ne recevra que des requêtes dotés de paramètres valides.
+
+(là tu peux rebondir avec les CAPCHAs que tu as mis en place sur ton app jhipster
+
+@FLD, peut être que tu as du code JHipster qui fait pareil, et là on peut faire un micro débat sur ce point entre "a1, je veux le faire dans mon app" et "a2, mais non, laisse l'infra faire...",
+
+### API en ligne
+
+FLD: Au fait, Romain, on n'en a pas parlé, mais mon appli a un service en ligne - un service ReST, 
+
+RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD ;) ? Mais plus sérieusement, ça crée d'autres problèmes...
+
+* rate limits
+* header validation
+* conditional requests
+
+=> IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
+nécessaire, me semble être essentiel.
+
+
+### The shit HAS hit the fan
+
+FLD: bon, on est bon là ?
+
+RPE: ben c'est dur à dire, on peut jamais être sûr, mais disons que maintenant, ce qui serait sympa, c'est de protéger les copains de nos conneries. Bref si tu as laissé un trou dans ton appli, que au moins, seule elle soit compromise.
+
+FLD: Comment ça ?
+
+RPE: Ben si un mec à trouver un exploit sur ton app, il peut accéder à ses données, mais aussi éventuellement, modifier son comportement. Par exemple, lui faire envoyer des mails ("Merci à l'infrastructure Adobe d'avoir participé "pro bono" à la diffusion de mes spams !), effacer des fichiers ou récupérer des données d'une autre app colocalisé avec l'appli.
+
+FLD: Et tu peux faire qqlchose contre ça ?
+
+RPE: Ouais, bien sûr, c'est un peu la même logique qu'avec le RP. En gros, tu défini le comportement "normal" de ton appli et tu banni tout le reste. Tu peux le même faire à deux niveaux. D'abord, sur le JVM avec le Security Manager, que tout le monde connait ici (regard à l'assistance) car aucun expert ou dev Java tourne d'applicatif sans, hein ? ;)
+
+RPE: Et tu peux aussi le faire au niveau système avec SE LInux. En gros, les deux technos ont la même fonctionnalité et voilà comment elles marchent
+
+1,2 slides sur ce truc, avec des petits exemples de config
+
+#### Never safe behind a FW
+
+FLD: Au fait, tu me casses les pieds avec la sécu depuis 20 minutes, mais on n'en pas encore parlé de FW !
+
+RPE: Pourquoi faire ? Les FW ça ne sert pas à sécuriser des applis... Non, sérieusement, le truc du FW, c'est juste de faire de la qualité réseau et d'épargner, le CPU. En gros, si un système reçoit un paquet pour un port "non utilisé", il drop en kernal space, plutôt que de le faire remonter pour rien jusqu'au couche applicative.
+
+FLD: Mais attends ça bloque des ports, donc ça empêche des attaques, non ?
+
+RPE: Ouais, généralement que tu as truc qui tourne sur un port, c'est que tu en as besoin. Si tu es assez con pour laisser tourner un service dont tu as pas besoin, effectivement, ton FW te "sécuriser", mais à mon avis tu auras d'autres problèmes ailleurs. En gros, un FW c'est comme la ligne Maginot, qui, contrairement à ce qu'on pense, à super bien fonctionner - la preuve, Hitler est passé à coté, mais du coup, elle a pas servi à grand chose. Un FW c'est à peu prêt aussi inutile.
+
+Perso, j'ai l'habitude de dire qu'on estimer la nullité crasse d'une sécurité par le nombre de port bloqué:
+- je peux pas relever mes mails en POP, naze
+- mon accès VPN est bloqué, encore plus naze
+- SSH sortant est bloqué, stupide, un coup de tunnel HTTPS et je sors de toute manière.
+
+La vrai sécurité avec les FW, c'est le filtrage applicatif, c'est à dire, non pas bloqué un protocole ou service, mais vérifier que celui-ci a un usage valide. Fais tu STMP si tu veux, mais sur ce port, je veux que du STMP, pas autre chose. Fais du ssh autant que tu veux, mais sur le port 22 et pas à travers HTTPS, et au passage, si tu fais tu ssh, je te loggue (etc...)
+
+### HSM (@FLD, RPE doit lire car là, il connait pas, peut être parlant et ça fera une séquence où tu me fermes la geule et tu me dis 'hey pas que les barbus qui s'y connaissent ;)")
 hsm protect private key, proprio non ?
 certificate segregated by group
 hsm will make offline attacks impossible
@@ -227,44 +335,31 @@ this will buy you time to detect an attack and react accordingly
 
  => useless if no IDS in place or at least monitoring !!!
 
-
-### just a web app
-
-http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
-
-* 99% of web applications have at least 1 vulnerability
-* 82% of web applications have at least 1 High/Critical Vulnerability
-* 90% of hacking incidents are not reported publicly
-
-=> là on pourrait aussi évoquer PMD/Findbugs pour justement mettre en place des contrôles/analyses
-de sécurité.
-
-### I made exploits harders
-
-* a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
-* a2 : exploits is not such a big deal anymore
+RPE: Je ne sais pas si le HSM ne serait pas à dropper si on a trop de contenu... my 2c
 
 ### never assume your source code is safe
 
-segregate your secrets from your source code
-search in github.com for password, secret, key
+FLD: Bon après tout ça, au final, je peux laisser tomber mon audit, non ?
+RPE: Non, pas vraiment, mais plutôt qu'auditer l'appli, maintenant, avec les usuels test de sécurité (qu'elle devrait passer maintenant), tu devrais ton concentrer sur le code. On doit jamais assumer qu'un code source est sûr.
 
+FLD: Tu veux dire pour trouver des failles ou des contournemt ? (@FLD: on peut peut être parler du hack de Prados là, où il a exploiter des XLST)
+
+### Clouds looks nice from afar, but try piloting your Cessna through one !
+
+FLD: Ok, tout ça a plutôt marcher, mais maintenant, on va se débarrasser notre infra à nous, et migrer notre app, sur le Cloud. Vu qu'elle est déjà "secure", je dois revoir ma copie tu crois ?
+
+RPE: Ben oauis, et plutôt deux fois qu'une ! Parce que maintenant, si tu applis par en sucette, ton provider Web, va littéralement tu le faire payer.
+
+FLD: Ah oui, comme le mec qui a voulu apprendre Ruby...
 
 a $2.375 amazon mistake
 http://www.devfactor.net/2014/12/30/2375-amazon-mistake/
 
-et hop la on peut une recherche dans jhipster on y trouveras quelques secrets
-
-we have oauth clientid and secret in jhipster
-la encore je peux montrer comment on peut generer le oauth client et le oauth secret à la volée seuleument une fois l'authentication saml reussi
-
-
-sepration of duties
-rotate account information
-
-
-
 ### never assume the system you are talking to is safe
+
+FLD: Ah oauis, ça fait mal tout ça, surtout qu'on pensait s'intégrer avec S3. Du coup, on va peut être aller voir ailleurs.
+
+RPE: Oui, mais ça change rien, dès l'instant où tu t'intègres avec un système externe, il faut grosso modo partir du principe qu'il est pas 'secure' et te protéger de lui.
 
 siemens stuxnet credentials in the source code
 http://en.wikipedia.org/wiki/Stuxnet
@@ -293,6 +388,18 @@ it will fail, stability is a myth
 
 ### safer in the cloud
 
+FLD: Bon, en gros, au final, le cloud c'est la jungle, et on est plus secure chez soi en fait ?
+
+RPE: Non, au contraire ! Le cloud te force à faire plus gaffe à ta sécurité, pour toutes les raisons qu'on vient d'évoquer, mais t'apportes bcp en termes de sécurité. Y'a qu'on bien de système non maintenu, qui tourne depuis 10 ans, sans le moindre de security patch appliqué dans ton infra ?
+
+FLD: (gros sourire) ben aucun bien sûr ;) !
+
+RPE: Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché (là RPE parle de Netflix)
+
+=> là je peux expliquer le cas de Netflix où justement, aucun serveur en prod ne dure que qql
+jours... plus leur approche "Choas Monkey" qui est phénoménale !
+http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
+
 a 10 years old server in your data center is much more vulnerable than a fresh server in the cloud
 
 a 10 years old server, imagine
@@ -302,37 +409,6 @@ a 10 years old server, imagine
 * quaterly security review ? this clash with continous delivery
 
 a typical aws server last a few days
-
-=> là je peux expliquer le cas de Netflix où justement, aucun serveur en prod ne dure que qql
-jours... plus leur approche "Choas Monkey" qui est phénoménale !
-http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
-
-### Avoid security scan false positive
-
-false positive overload : http://infosecnirvana.com/false-positive-in-a-siem/
-
-avoid false positive:
-
-checksum on sensitive directory only
-file integrity monitoring tool
-http://www.cloudpassage.com/
-
-
-=> semble être le bon endroit pour évoquer le rôle du Firewall et surtout ses limites, et leur //
-avec la ligne Maginot. Du coup, j'évoquerais bien aussi le filtrage applicative et les reverse
-proxy.
-
-splunk enterprise security analytics
-
-### Make your Linux *really* secure - SELinux
-
-(je ne sais pas si c'est la meilleur place pour en parler, mais à défaut, enchainer là dessus après
-avoir décrits les limites des FW semble pertinent).
-
-limite le comportememt des logiciels
-
-Aller plus loin ? Utiliser Docker et/ou OpenShift pour isoler les processus / apps hostés sur le
-même serveur
 
 ### CI and security
 
@@ -352,48 +428,39 @@ vlan segregation
 
 make swing peeps harders:  disable ping sweeps on a network, administrators can block ICMP ECHO requests from outside sources.
 
-=> bof, moi je suis contre les stratégie consiste à fermer/bloquer les trucs. Je préfère surveiller
-que le traffique est sain et correspond aux attentes.
+@FLD: bof, moi je suis contre les stratégie consiste à fermer/bloquer les trucs. Je préfère surveiller
+que le traffique est sain et correspond aux attentes. Je pense qu'on peut avoir un micro débat sur ce sujet, c'est intéressant. Et genre, tu pourrais conclure "ben dans tout les cas, moi je le fais co ça, si ce n'est que pour te faire chier !" :) 
 
-voila un paquet de liens et idees en vrac:
--------
+git and jenkins , chef, vagrant exploits
+https://twitter.com/morlhon/status/554899543150850048
 
-### REST API
+A must-read  : @paulgreg: interesting slide on security of your webapp "DevOoops"  by @carnal0wnage #devops #hacking http://www.slideshare.net/chrisgates/lascon-2014-devooops …”
 
+-> le spoof de Git Hub est intéressant, car c'est un bon exemple d'exploit "social". On peut
+imaginer une PR sur un projet prétendant venir de XXX insérant une faille... Je pense qu'il faut
+qu'on mentionne que le "hack" social reste une des principales failles de sécurité.
 
-* rate limits
-* header validation
-* conditional requests
+### Avoid security scan false positive
 
-=> IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
-nécessaire, me semble être essentiel.
+false positive overload : http://infosecnirvana.com/false-positive-in-a-siem/
 
-### exploits
+avoid false positive:
 
-not that bif of a deal nowadays
-sandboxing reduces vulnerabilities
-better application server
-harders to implement an exploit
-exploit don't last long
-you leave a trail
+checksum on sensitive directory only
+file integrity monitoring tool
+http://www.cloudpassage.com/
 
-### passwords
+splunk enterprise security analytics
 
-100% of attacks in 2014 involve stolen credentials
+CONCLUSION
 
-java
----
+### exploit ? not that bif of a deal nowadays
 
-https://twitter.com/Developpez/status/560389865003425792
-Sécurité : Java serait le programme le plus exposé aux attaques, suivi par QuickTime, Adobe Reader, VLC et .Ne... http://bit.ly/1zaB89X
-
-Sécurisé Java => SecurityManager !
-
-=> On peut aussi mentioner le hack de Prados où il a utiliser un service qui permettait d'uploader
-sa propre XSLT et qui lui a permis d'exécuter des commandes sur le système. Typiquement, impossible
-avec SELinux +/- SecurityManager.
-
-=> Idée de conclusion
+* sandboxing reduces vulnerabilities
+* better application server
+* harders to implement an exploit
+* exploit don't last long
+* you leave a trail
 
 On pourrait finir en disant qu'après DevOps, il faudrait un DevSec - utilisant le même approche,
 impliquant les gens de la sécurité et les dévs. Ne plus laisser les dévs ignorer la sécurité, mais
@@ -402,13 +469,9 @@ faiblesses de sécurité sont aujourd'hui dans les apps plus que l'infrastructur
 système, les deux profils doivent s'assurer coté à coté et (par exemple) rédiger ensemble les
 polices de sécurité du SecurityManager et les règles de filtrages applicatives.
 
-### misc
+### misc / unused
 
-=> Pas mal de bon truc là dessous, il faudrait au moins parler de Java (donc j'ai remonté la
-section juste au dessus) et garder le reste pour "en rajouter" si nécessaire.
-
-http://www.slideshare.net/mongodb/securing-mongo-db-mongodc-2014-nosig
-http://www.allanbank.com/blog/security/tls/x.509/2014/10/13/tls-x509-and-mongodb/
+rate limiting => @FLD, tu pensais à quoi là ? Tu as un truc jhipster sur ce point ?.
 
 update your linux (ghost) we you have docker ! fun !
 
@@ -419,50 +482,12 @@ gemalto hacked : https://firstlook.org/theintercept/2015/02/19/great-sim-heist
 vous avez été espionné?
 http://www.numerama.com/magazine/32243-avez-vous-ete-espionne-par-la-nsa-voici-une-chance-de-le-savoir.html
 
+siemens stuxnet credentials in the source code
+http://en.wikipedia.org/wiki/Stuxnet
 
-twitter entries
-=====
-
-UX :
-----
-https://twitter.com/michaelneale/status/568279010968383488
-
-1. App requires 2FA login.
-2. get phone from pants
-3. Distracted by 100s of notifications on it
-4. Back to computer. Repeat.
-
-secret management
-----
-https://twitter.com/jtimberman/status/568124542553423872
-Managing secrets: still the hardest problem in operations.
-
-jce chef recipe
-chef-vault
-
-
-documentation
-----
 https://twitter.com/codinghorror/status/567434195987738624
 The best reaction to "this is confusing, where are the docs" is to rewrite the feature to make it less confusing, not write more docs.
 
-mongo leak
----
-https://twitter.com/unix_root/status/565906945488748544
-40,000 unprotected MongoDB databases, 8 million telecommunication customer records exposed http://thehackernews.com/2015/02/mongodb-database-hacking.html
-
-java
----
-https://twitter.com/Developpez/status/560389865003425792
-Sécurité : Java serait le programme le plus exposé aux attaques, suivi par QuickTime, Adobe Reader, VLC et .Ne... http://bit.ly/1zaB89X
-
-git and jenkins , chef, vagrant exploits
----
-https://twitter.com/morlhon/status/554899543150850048
-A must-read  : @paulgreg: interesting slide on security of your webapp "DevOoops"  by @carnal0wnage #devops #hacking http://www.slideshare.net/chrisgates/lascon-2014-devooops …”
-
--> le spoof de Git Hub est intéressant, car c'est un bon exemple d'exploit "social". On peut
-imaginer une PR sur un projet prétendant venir de XXX insérant une faille... Je pense qu'il faut
-qu'on mentionne que le "hack" social reste une des principales failles de sécurité.
-
+* a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
+* a2 : exploits is not such a big deal anymore
 
