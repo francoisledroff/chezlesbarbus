@@ -63,22 +63,34 @@ Content:
 
 draft content
 ============
-on joue tour a tous soit l'acteur 1 (a1) soit l'acteur 2 (a2)
 
-* a1: c'est le dev
-* a2: c'est le sec
+intro
+====
+
+### Notre but :
+
+FLD: "audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tout developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet... en gros le concept d'audit de secu est naze...
+
+
+### FLD se presente
+###  RPE se presente
+
 
 plan
 -----
 
-1 ma petit wep interne
-2 d'interne à externe
-3 bienvenu sur le cloud
-4 CI & Build, tout un monde de faille à exploiter
+* ma petit web app intranet
+* d'interne à externe
+* bienvenu sur le cloud
+* CI & Build, tout un monde de faille à exploiter
 
-### avant propos
 
-"audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tout developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet... en gros le concept d'audit de secu est naze...
+ma petite web app intranet
+==========
+
+
+avant propos
+-----
 
 FLD: Romain, on n'a une petit appli interne, qu'on va mettre en prod, et on m'a dit de faire un audit de sécurité.
 
@@ -88,17 +100,19 @@ FLD: Ben, c'est pas le moment de faire un audit de sécurité ? On voulait faire
 
 RPE: Pourquoi faire ? Tu veux qu'il te reconfigure ton FW ? Honnêtement, je vois mal comment des experts externes pourront mieux sécuriser ton appli que tes devs et toi. Eventuellement, ton infra se sécu, mais à la base, pour hacker une appli, il faut la détourner de son fonctionnement "normal". Et, à ton avis, de tes fameux experts en sécurité et ton équipe de dév qui connait mieux le fonctionnement normal de l'appli ?
 
-FLD: Ouais, mais attend mon équipe de dév, y'en a la moitié déjà qui travaille sur Windows, et l'architecte a rasé sa barbe la semaine dernière - bref, personne n'est calé en sécurité, on va pas faire ça tout seul.
+FLD: Ouais, mais attend mon équipe de dév, y'en a la moitié déjà qui travaille sur Windows, l'autre sous OSX, et l'architecte a rasé sa barbe la semaine dernière - bref, personne n'est calé en sécurité, on va pas faire ça tout seul.
 
-RPE: Non, mais vous allez aire ça ensemble... Bon allez, commençons par le début, parlez moi un peu de ton bouzin en Java (je sens déjà le jar de 200Mb arrivé...)
+RPE: Non, mais vous allez aire ça ensemble... Bon allez, commençons par le début, parlez moi un peu de ton bouzin en Java (je sens déjà le jar de 200Mb arriver...)
 
-### mon appli jhipster
+mon appli jhipster
+-----
 
-* FLD j'ai cette petite appli web intranet à faire, un truc pas trop big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+* FLD c'est une appli web intranet, c'est pas une appli pour placer des pubs,  c'est pas big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
 
 * RPE c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons groovy ?
 
-* a1: c'est un generateur d'appli web (à la appfuse) basé sur yeoman, au final tu as un stack plutot hispter, plutot recent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
+* FLD: c'est un generateur d'appli web (à la appfuse) basé sur yeoman, au final tu as un stack assez lean, plutot recent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
+
 jhipster te donne quelque choix, voici les miens:
 
     {
@@ -124,11 +138,12 @@ jhipster te donne quelque choix, voici les miens:
 
 * FLD: Ouais, exactement !
 
-### just an internal web-app
 
-* FLD: Non, plus sérieusement, tu sais, on n'a pas des gros besoin en sécurité. L'appli est déployé en interne, au sein de notre VPN, donc on craint pas grand chose.
+web app
+-------
 
-TODO: trouvé une anecdote qui montre - que je raconterais en mode "vieux grumpy" qui montre que le réseau interne n'est pas secure.
+RPE: donc c'est une web app
+FLD: OUi je sais ce que tu vas me dire:
 
 http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
 
@@ -141,19 +156,105 @@ Sécurité : Java serait le programme le plus exposé aux attaques, suivi par Qu
 https://twitter.com/Developpez/status/560389865003425792
 http://bit.ly/1zaB89X
 
-### je suis dans le VPN
 
-RPE: Bon au vu de tout ça, on va commencer à regarder les flux entre ton app et le reste du réseau. Déjà, rassures moi, la communication entre MongoDB et ton app, rassumes moi c'est pas en clair quand même ? Parce que c'est le fonctionnement par défaut, je te signal
 
-FLD: Ouais, mais attend, je suis en intranet, réseau interne, donc bon...
+Intranet
+-----
 
-RPE: OK, mais même si on assume, à tort, qu'on est "safe" sur le réseau interne, il reste que les données peuvent être confidentielles. Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches combien de fois il a renouvellé sa prescription de viagra... Ou plus sérieusement, et simplement, les données RH et son salaire.
+* FLD: Ce qui est cool c'est que l'appli est déployé en interne, au sein de notre intranet
+* RPE : just a look 
+* FLD: je sais ce que tu vas me dire
+* RPE: laisse moi d'abord te poser une question, tes ulisateurs se connecte depuis une variéte de laptop et desktop et se connectet depuis leur machine égagelemt sur internet ?
+* FLD oui
+* RPE: tes utilisateurs sont-ils root sur leur machine ? tes utilisateurs ont-ils des machine managées ?
+* FLD: oui, et tu vas me demander si mes utilisateurs sont usr linux  RHEL 
+* RPE: tu l'as compris, intranet ou internet, c'est le même combat.
 
-FLD: Ah ouais, surtout que pour le coup, le salaire d'un employé c'est une bonne info avant tout pour ses collègues, qui on accès au réseau de l'entreprise...
+* FLD: "The only secure computer is one with no power, locked in a room, with no user." Any other system can be compromised. 
 
-* a2: http://www.arnoldit.com/articles/10intranetSecAug2002.htm l'intranet n'est plus safe
+TODO: trouver une anecdote qui montre - que je raconterais en mode "vieux grumpy" qui montre que le réseau interne n'est pas secure.
 
-### Mongo SSL authentication
+**The three goals of security are confidentiality, integrity and availability**. Intranet security must deliver integrity and availability. Intranets exist to make information available to colleagues. Nevertheless, confidentiality is an issue. Each job function and person holding that job is given a level of access appropriate to his or her role. Intranets are often less secure than information technology professionals and managers realize
+
+http://www.arnoldit.com/articles/10intranetSecAug2002.htm
+
+
+Thread Model
+--------
+
+FLD: ce qui compte c'est du comprendre les menaces qui pèsent sur notre système. 
+
+Microsoft 
+https://www.owasp.org/index.php/Threat_Risk_Modeling
+
+
+FLD: pas le temps ici pour faire un cours sur les concepts de STRIDE et DREAD, voici juste un slide
+
+
+STRIDE is a classification scheme for characterizing known threats according to the kinds of exploit that are used (or motivation of the attacker). 
+
+* Spoofing Identity : ensure a single execution context at the application and database level. 
+* Tampering with Data : data validation
+* Repudiation: audit trails at each tier
+* Information Disclosure: persist/cache as little info as possible
+* Denial of Service, do not allow anonymous, or do as little as possible for anonymous
+* Elevation of Privilege : proper ACL in place
+
+DREAD is a classification scheme for quantifying, comparing and prioritizing the amount of risk presented by each evaluated threat. 
+
+* Damage Potential
+* Reproducibility
+* Exploitability
+* Affected Users
+* Discoverability
+
+
+RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles. Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches combien de stocks
+
+FLD: oui on a beau mashup de données, c'est un "employee productivity tool", on prévois de manipuler des données de type 
+* PII http://en.wikipedia.org/wiki/Personally_identifiable_information
+* RH : l'org chart, , les manager pourront également consulter et approuver des demandes de congés et des modifications de salaire 
+* finance : nos utlisateurs pourront consulter et approuver les achats commes les ventes  
+
+RPE: ok donc, on a plutot intérêt à faire du bon boulot
+
+
+Https
+-----
+
+FLD: Bon je propose que l'on parte de servir l'application sur https uniquement
+RPE:  SSL is good, but it depends on how secure is the private key on the server side, how much bits the key has, the algorithm used, how trustworthy the used certificates are, etc ....
+
+But if you use SSL at least all your data transmitted is encrypted (except the target IP because it is used to route your package).
+
+SSL is secure, but remember that any encryption can be broken if given enough time and resources.
+
+### secret management
+
+FLD: pour gèrer mes secrets et mes clefs , j'utilise chef-vault
+
+
+https://twitter.com/jtimberman/status/568124542553423872
+Managing secrets: still the hardest problem in operations.
+
+secret management : https://coderanger.net/chef-secrets/
+chef-vault and citadelle
+
+jce chef recipe
+chef-vault
+
+
+
+Mongo SSL authentication
+----
+
+RPE:  regardons aussi les flux entre ton app et le reste du réseau. Déjà, rassures moi, la communication entre MongoDB et ton app, rassumes moi c'est pas en clair quand même ? Parce que c'est le fonctionnement par défaut, je te signal
+
+
+### mongo leak
+
+https://twitter.com/unix_root/status/565906945488748544
+40,000 unprotected MongoDB databases, 8 million telecommunication customer records exposed http://thehackernews.com/2015/02/mongodb-database-hacking.html
 
 FLD: Ok, tu m'as convaincu, j'arrête de faire mon bisounours, on va sécuriser la conf mongo. Surtout qu'en fait, c'est pas si simple ...
 
@@ -165,43 +266,109 @@ RPE: Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc
 http://www.slideshare.net/mongodb/securing-mongo-db-mongodc-2014-nosig
 http://www.allanbank.com/blog/security/tls/x.509/2014/10/13/tls-x509-and-mongodb/
 
-mongo leak
----
-https://twitter.com/unix_root/status/565906945488748544
-40,000 unprotected MongoDB databases, 8 million telecommunication customer records exposed http://thehackernews.com/2015/02/mongodb-database-hacking.html
+
 
 ### Password
 
 RPE: Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
 FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré que tout les mots de passe seraient "strong" (à dév)
+pour èviter ca http://www.ayblog.com/wp-content/uploads/2013/10/Nice-Change-of-Password-to-Incorrect.jpg
 
-RPE: Bon, alors pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? En gros, 100% des attaques en 2014 implique des mots de dérobé. Si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, en ai pas !
+RPE: mouais, tu veux implementer ca : http://www.medsyn.fr/perso/g.perrin/joomla/images/stories/food/Blog/mot-passe2.jpg
+ou ca https://theeditorsjournal.files.wordpress.com/2014/09/creating-a-password.jpg?w=1240&h=1248
 
-### t'as pas un IDP dans ton intranet 
+FLD: c'est vrai, que ces strong passwords sont just difficile a retenir mais pas à craquer : http://xkcd.com/936/
 
-RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ). Sans compter, qu'il faudra créer un mot de passe pour ton app, en plus du reste. C'est naze, ça va faire chier tout le monde, qui va coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA, et qu'ils ne vont jamais changé par eux même. Du coup, ton app doit gérer le cycle de vies, envoyés des mails (donc pouvoir envoyer des mails) pour notifier les utilisateurs etc... Bref, la merde.
+
+RPE: Sans compter, qu'il faudra créer un mot de passe pour ton app, en plus du reste. C'est naze, ça va faire chier tout le monde, qui va coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA, et qu'ils ne vont jamais changé par eux même. 
 
 FLD: Ouais, c'est vrai qu'il suffit de se rappeler de Sonny...
 we have so may passwords to deal with, we reused them
 sony password reused at yahoo: http://www.troyhunt.com/2012/07/what-do-sony-and-yahoo-have-in-common.html
 
-social engineering hack: the wired journalist hack
-plus simple: the cartoon with first pet name
+
+
+
+RPE: Du coup, ton app doit gérer le cycle de vies, envoyés des mails (donc pouvoir envoyer des mails) pour notifier les utilisateurs etc... Bref, la merde.
+
+FLD: je crois qu'en effet Jhipster a toute une tringlerie, avec une page register et de l'envoi de mail avec un password reset link...  moij'avais pensé à faire une page de "password recovery" à base ce question secrète 
 
 You can name her whatever you like but be sure it’s something you can remember. You’ll be using it as a security question answer for the rest of your life
 
 http://positivedoggie.com/you-can-name-her-whatever-you-like-but/
 
+RPE: ca me rappelle le hack de Paris Hilton :
+
 Paris Hilton pet name security hack
 http://www.macdevcenter.com/pub/a/mac/2005/01/01/paris.html
 http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-prince-hilton-auf-dem-arm.jpg
 
+
+RPE: on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? En gros, 100% des attaques en 2014 implique des mots de dérobé. Si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, en ai pas !
 http://idtheftcenter.org/
 
-### passwords
 
-100% of attacks in 2014 involve stolen credentials
+FLD: on souffre tous, on doit tous gerer à notre echelle une ribambelle de mot de passe, moi j'utilise splashid pour stocker et generer mes mots de passe, aucune synchro sur le cloud, juste une synchro entre device
+
+j'ai actuellement 159 mots de passe dans cette base, je ne voudrais pas en créer un autre...
+
+
+### t'as pas un IDP dans ton intranet 
+
+RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ). 
+
+
+
+RPE: Bon, après ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
+
+FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
+
+### 2 FA and UX
+
+RPE: vas-y qu'est ce que t'attends, put 2fa in place
+
+FLD: Ouais, mais alors, OK , c'est secure, mais alors bonjour l'expérience utilisateur ! Personne va vouloir l'utiliser notre app à ce compte là
+
+ https://twitter.com/michaelneale/status/568279010968383488
+
+1. App requires 2FA login.
+2. get phone from pants
+3. Distracted by 100s of notifications on it
+4. Back to computer. Repeat.
+
+
+
+RPE: Oui, en fait, mais dis francois toi comme moi on utilises 2FA sur nos comptes twitter, google et facebook, n'est ce pas? 
+c'est pas si douloureux, 
+
+FLD: qui ici a activé https et 2fa sur google, facebook, twitter et les autres ?
+
+
+mais crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
+
+FLD: Oui, c'est une bonne idée
+
+RPE: Comme quoi, c'est malin de bosser Dev + Sécu ;) - vas y montre moi comment tu fais avec ton app:
+
+et la je peux montrer encore du code modifié de jhispter ou l'authentication est deporté sur un idp saml et ensuite seuleuemtn un oauth token (et un refresh token) est echangé avec le front-end javascript
+
+resultat tu te tappes le 2fa une fois et ensuite a moins de quitter l'app pendant plus de 30 jours tu le referas pas.
+
+on peux montrer les echanges avec des jolies sequence diagram
+on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
+j'ai du code jhipster et une interface pour ca
+
+
+RPE: Ok, je pense que là t'es bon pour au moins déployé en interne.
+
+FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien, on veut ouvrir le service à l'extérieur.
+
+RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
+
+
+### OAuth secrets 
+
 
 segregate your secrets from your source code
 search in github.com for password, secret, key
@@ -217,49 +384,8 @@ rotate account information
 
 @FLD, ok, là je pense qu'il faut qu'on passe à la partie Cloud....
 
-### secret management
-
-https://twitter.com/jtimberman/status/568124542553423872
-Managing secrets: still the hardest problem in operations.
-
-jce chef recipe
-chef-vault
 
 
-RPE: Bon, après ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
-
-FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
-
-### 2 FA and UX
-
-RPE: vas-y qu'est ce que t'attends, put 2fa in place
-FLD: Ouais, mais alors, OK , c'est secure, mais alors bonjour l'expérience utilisateur ! Personne va vouloir l'utiliser notre app à ce compte là
-* a1: bad ux though, https://twitter.com/michaelneale/status/568279010968383488
-
-1. App requires 2FA login.
-2. get phone from pants
-3. Distracted by 100s of notifications on it
-4. Back to computer. Repeat.
-
-RPE: Oui, en fait, mais crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
-
-FLD: Oui, c'est une bonne idée
-
-RPE: Comme quoi, c'est malin de bosser Dev + Sécu ;) - vas y montre moi comment tu fais avec ton app:
-
-et la je peux montrer encore du code modifié de jhispter ou l'authentication est deporté sur un idp saml et ensuite seuleuemtn un oauth token (et un refresh token) est echangé avec le front-end javascript
-
-resultat tu te tappes le 2fa une fois et ensuite a moins de quitter l'app pendant plus de 30 jours tu le referas pas.
-
-on peux montrer les echanges avec des jolies sequence diagram
-on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
-j'ai du code jhipster et une interface pour ca
-
-RPE: Ok, je pense que là t'es bon pour au moins déployé en interne.
-
-FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien, on veut ouvrir le service à l'extérieur.
-
-RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
 
 ### avoid Brute force attack
 
@@ -380,9 +506,20 @@ ops is about
 * knowledge
 * freedom
 
+
 it will fail, stability is a myth
 * firemen train for fire
 * fireman is not afraid of fire
+
+https://www.techn0polis.net/wp-content/uploads/2015/01/security.png
+
+a ce propos
+
+dans jhipster tu as une page d'audit de secu.
+
+nous en plus, on a prévu le coup si un des nos utilisateurs perd son laptop, on reset son token
+
+
 
 => excellent !
 
@@ -469,7 +606,10 @@ faiblesses de sécurité sont aujourd'hui dans les apps plus que l'infrastructur
 système, les deux profils doivent s'assurer coté à coté et (par exemple) rédiger ensemble les
 polices de sécurité du SecurityManager et les règles de filtrages applicatives.
 
+
 ### misc / unused
+
+
 
 rate limiting => @FLD, tu pensais à quoi là ? Tu as un truc jhipster sur ce point ?.
 
@@ -490,4 +630,7 @@ The best reaction to "this is confusing, where are the docs" is to rewrite the f
 
 * a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
 * a2 : exploits is not such a big deal anymore
+
+
+
 
