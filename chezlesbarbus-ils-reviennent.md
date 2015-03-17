@@ -86,11 +86,11 @@ plan
 
 
 ma petite web app intranet
-==========
+==========================
 
 
 avant propos
------
+------------
 
 FLD: Romain, on n'a une petit appli interne, qu'on va mettre en prod, et on m'a dit de faire un audit de sécurité.
 
@@ -142,7 +142,7 @@ jhipster te donne quelque choix, voici les miens:
 web app
 -------
 
-RPE: donc c'est une web app
+RPE: donc c'est une web app...
 FLD: OUi je sais ce que tu vas me dire:
 
 http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
@@ -157,20 +157,19 @@ https://twitter.com/Developpez/status/560389865003425792
 http://bit.ly/1zaB89X
 
 
-
 Intranet
 -----
 
 * FLD: Ce qui est cool c'est que l'appli est déployé en interne, au sein de notre intranet
-* RPE : just a look 
+* RPE : just a look
 * FLD: je sais ce que tu vas me dire
 * RPE: laisse moi d'abord te poser une question, tes ulisateurs se connecte depuis une variéte de laptop et desktop et se connectet depuis leur machine égagelemt sur internet ?
 * FLD oui
 * RPE: tes utilisateurs sont-ils root sur leur machine ? tes utilisateurs ont-ils des machine managées ?
-* FLD: oui, et tu vas me demander si mes utilisateurs sont usr linux  RHEL 
+* FLD: oui, et tu vas me demander si mes utilisateurs sont usr linux  RHEL
 * RPE: tu l'as compris, intranet ou internet, c'est le même combat.
 
-* FLD: "The only secure computer is one with no power, locked in a room, with no user." Any other system can be compromised. 
+* FLD: "The only secure computer is one with no power, locked in a room, with no user." Any other system can be compromised.
 
 TODO: trouver une anecdote qui montre - que je raconterais en mode "vieux grumpy" qui montre que le réseau interne n'est pas secure.
 
@@ -182,25 +181,24 @@ http://www.arnoldit.com/articles/10intranetSecAug2002.htm
 Thread Model
 --------
 
-FLD: ce qui compte c'est du comprendre les menaces qui pèsent sur notre système. 
+FLD: ce qui compte c'est du comprendre les menaces qui pèsent sur notre système.
 
-Microsoft 
+Microsoft
 https://www.owasp.org/index.php/Threat_Risk_Modeling
 
 
 FLD: pas le temps ici pour faire un cours sur les concepts de STRIDE et DREAD, voici juste un slide
 
+STRIDE is a classification scheme for characterizing known threats according to the kinds of exploit that are used (or motivation of the attacker).
 
-STRIDE is a classification scheme for characterizing known threats according to the kinds of exploit that are used (or motivation of the attacker). 
-
-* Spoofing Identity : ensure a single execution context at the application and database level. 
+* Spoofing Identity : ensure a single execution context at the application and database level.
 * Tampering with Data : data validation
 * Repudiation: audit trails at each tier
 * Information Disclosure: persist/cache as little info as possible
 * Denial of Service, do not allow anonymous, or do as little as possible for anonymous
 * Elevation of Privilege : proper ACL in place
 
-DREAD is a classification scheme for quantifying, comparing and prioritizing the amount of risk presented by each evaluated threat. 
+DREAD is a classification scheme for quantifying, comparing and prioritizing the amount of risk presented by each evaluated threat.
 
 * Damage Potential
 * Reproducibility
@@ -208,16 +206,14 @@ DREAD is a classification scheme for quantifying, comparing and prioritizing the
 * Affected Users
 * Discoverability
 
-
 RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles. Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches combien de stocks
 
-FLD: oui on a beau mashup de données, c'est un "employee productivity tool", on prévois de manipuler des données de type 
+FLD: oui on a beau mashup de données, c'est un "employee productivity tool", on prévois de manipuler des données de type
 * PII http://en.wikipedia.org/wiki/Personally_identifiable_information
-* RH : l'org chart, , les manager pourront également consulter et approuver des demandes de congés et des modifications de salaire 
-* finance : nos utlisateurs pourront consulter et approuver les achats commes les ventes  
+* RH : l'org chart, , les manager pourront également consulter et approuver des demandes de congés et des modifications de salaire
+* finance : nos utlisateurs pourront consulter et approuver les achats commes les ventes
 
-RPE: ok donc, on a plutot intérêt à faire du bon boulot
-
+RPE: ok donc, on a plutot intérêt à faire du bon boulot. Note que les "barbus" ou les techos en général trouvent ce genre de classification / méthodologie souvent un peu "bullshit", ça fait juste des jolies tableaux ou rapports pour le management mais "ça ne me sert à rien". En fait, ça permet surtout de faire comprendre au management qu'il y a un problème, dans un format qu'ils peuvent comprendre et réutiliser. En outre, si vous êtes coté management et que vous soupçonnez que vos devs ont été un peu trop "libérale" avec la sécu, faire ce genre d'inventaire est aussi un bon moyen de leur faire réaliser le problème. Bref, comme tout méthodo ou approche formelle, c'est certainement pas une solution miracle, mais plutôt à outil à utiliser à bonne escient.
 
 Https
 -----
@@ -229,10 +225,13 @@ But if you use SSL at least all your data transmitted is encrypted (except the t
 
 SSL is secure, but remember that any encryption can be broken if given enough time and resources.
 
+Et, surtout, ça ne sert à rien de mettre du HTTPS, partout, juste parce que c'est "secure". C'est le meilleur moyen de détruire les performances de l'application.
+
+Et évidemment, le problème pénible du chiffrement, c'est la gestion des clés et des secrets. Je t'avoue que juste est tellement casse pieds, que ça décourage souvent de le faire.
+
 ### secret management
 
-FLD: pour gèrer mes secrets et mes clefs , j'utilise chef-vault
-
+FLD: Ouais, mais tu vois, c'est là qu'on est malin, car pour gérer nos secrets, on utilise chef-vault
 
 https://twitter.com/jtimberman/status/568124542553423872
 Managing secrets: still the hardest problem in operations.
@@ -242,8 +241,6 @@ chef-vault and citadelle
 
 jce chef recipe
 chef-vault
-
-
 
 Mongo SSL authentication
 ----
@@ -266,33 +263,28 @@ RPE: Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc
 http://www.slideshare.net/mongodb/securing-mongo-db-mongodc-2014-nosig
 http://www.allanbank.com/blog/security/tls/x.509/2014/10/13/tls-x509-and-mongodb/
 
-
-
 ### Password
 
 RPE: Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
-FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré que tout les mots de passe seraient "strong" (à dév)
-pour èviter ca http://www.ayblog.com/wp-content/uploads/2013/10/Nice-Change-of-Password-to-Incorrect.jpg
+FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré que tout les mots de passe seraient "strong" (à dév) pour éviter ca http://www.ayblog.com/wp-content/uploads/2013/10/Nice-Change-of-Password-to-Incorrect.jpg
 
 RPE: mouais, tu veux implementer ca : http://www.medsyn.fr/perso/g.perrin/joomla/images/stories/food/Blog/mot-passe2.jpg
 ou ca https://theeditorsjournal.files.wordpress.com/2014/09/creating-a-password.jpg?w=1240&h=1248
 
 FLD: c'est vrai, que ces strong passwords sont just difficile a retenir mais pas à craquer : http://xkcd.com/936/
 
+RPE: Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
-RPE: Sans compter, qu'il faudra créer un mot de passe pour ton app, en plus du reste. C'est naze, ça va faire chier tout le monde, qui va coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA, et qu'ils ne vont jamais changé par eux même. 
+RPE: Mais même si le mot de passe est "strong," l'utilisateur va devoir le créer, et comme on a plein de mot de passe à gérer, fort à parier, qu'il va reprendre le même que "ailleurs", ce qu'on appelle du "common logging". Et ce mot de passe, est probablement déjà craqué par tout le monde - à commencer par les mecs de la NSA.
 
 FLD: Ouais, c'est vrai qu'il suffit de se rappeler de Sonny...
 we have so may passwords to deal with, we reused them
 sony password reused at yahoo: http://www.troyhunt.com/2012/07/what-do-sony-and-yahoo-have-in-common.html
 
+RPE: Ensuite, avec l'approche db users de JHipster, tu retrouves aussi à gérer le cycle de vie du mot de passe. Il faudra créer un mot de passe pour ton app, en plus du reste, et l'app devra permettre à l'utilisateur de le mettre à jour, mais aussi à l'administrateur de gérer ces derniers. Bref, ça va très rapidement faire chier tout le monde, et les utilisateurs vont sans doute faire du "common logging" et coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA. Et fort à parier que peu, voire aucun, utilisateurs ne le changera par lui même - donc à ton appli de l'exiger - et là encore, des codes à ajouter.
 
-
-
-RPE: Du coup, ton app doit gérer le cycle de vies, envoyés des mails (donc pouvoir envoyer des mails) pour notifier les utilisateurs etc... Bref, la merde.
-
-FLD: je crois qu'en effet Jhipster a toute une tringlerie, avec une page register et de l'envoi de mail avec un password reset link...  moij'avais pensé à faire une page de "password recovery" à base ce question secrète 
+FLD: je crois qu'en effet Jhipster a toute une tringlerie, avec une page register et de l'envoi de mail avec un password reset link...  moij'avais pensé à faire une page de "password recovery" à base ce question secrète
 
 You can name her whatever you like but be sure it’s something you can remember. You’ll be using it as a security question answer for the rest of your life
 
@@ -304,23 +296,21 @@ Paris Hilton pet name security hack
 http://www.macdevcenter.com/pub/a/mac/2005/01/01/paris.html
 http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-prince-hilton-auf-dem-arm.jpg
 
+RPE: Oui mais la question, c'est est ce que les Ops de ta boite vont apprécier la feature ou geuler parce qu'ils ont déjà mis en place leur solution et qu'il apprécierait que tu l'uitlises ?
 
-RPE: on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? En gros, 100% des attaques en 2014 implique des mots de dérobé. Si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, en ai pas !
+FLD: on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? ;) D'ailleurs, 100% des attaques en 2014 implique des mots de dérobé.
+
 http://idtheftcenter.org/
 
+RPE: Bref, comme je le dis souvent, si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, t'as qu'à pas en avoir !
 
-FLD: on souffre tous, on doit tous gerer à notre echelle une ribambelle de mot de passe, moi j'utilise splashid pour stocker et generer mes mots de passe, aucune synchro sur le cloud, juste une synchro entre device
+FLD: on souffre tous, on doit tous gerer à notre echelle une ribambelle de mot de passe, moi j'utilise splashid pour stocker et generer mes mots de passe, aucune synchro sur le cloud, juste une synchro entre device. J'ai actuellement 159 mots de passe dans cette base, je ne voudrais pas en créer un autre...
 
-j'ai actuellement 159 mots de passe dans cette base, je ne voudrais pas en créer un autre...
+### t'as pas un IDP dans ton intranet
 
+RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
 
-### t'as pas un IDP dans ton intranet 
-
-RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ). 
-
-
-
-RPE: Bon, après ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
+RPE: Bref, après toutes ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
 
 FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
 
@@ -339,8 +329,8 @@ FLD: Ouais, mais alors, OK , c'est secure, mais alors bonjour l'expérience util
 
 
 
-RPE: Oui, en fait, mais dis francois toi comme moi on utilises 2FA sur nos comptes twitter, google et facebook, n'est ce pas? 
-c'est pas si douloureux, 
+RPE: Oui, en fait, mais dis francois toi comme moi on utilises 2FA sur nos comptes twitter, google et facebook, n'est ce pas?
+c'est pas si douloureux,
 
 FLD: qui ici a activé https et 2fa sur google, facebook, twitter et les autres ?
 
@@ -367,7 +357,7 @@ FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien,
 RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
 
 
-### OAuth secrets 
+### OAuth secrets
 
 
 segregate your secrets from your source code
@@ -381,11 +371,6 @@ sepration of duties
 rotate account information
 
 +1 slide sur ça
-
-@FLD, ok, là je pense qu'il faut qu'on passe à la partie Cloud....
-
-
-
 
 ### avoid Brute force attack
 
@@ -405,9 +390,9 @@ RPE: Donc avec un RP en place, pour ton problème de mot de passe, tu peux déj�
 
 ### API en ligne
 
-FLD: Au fait, Romain, on n'en a pas parlé, mais mon appli a un service en ligne - un service ReST, 
+FLD: Au fait, Romain, on n'en a pas parlé, mais mon appli a un service en ligne - un service ReST,
 
-RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD ;) ? Mais plus sérieusement, ça crée d'autres problèmes...
+RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD et le "savon" (SOAP) ? Mais plus sérieusement, ça crée d'autres problèmes...
 
 * rate limits
 * header validation
@@ -415,7 +400,6 @@ RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD ;) ? Mais plus sérieus
 
 => IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
 nécessaire, me semble être essentiel.
-
 
 ### The shit HAS hit the fan
 
@@ -453,6 +437,7 @@ Perso, j'ai l'habitude de dire qu'on estimer la nullité crasse d'une sécurité
 La vrai sécurité avec les FW, c'est le filtrage applicatif, c'est à dire, non pas bloqué un protocole ou service, mais vérifier que celui-ci a un usage valide. Fais tu STMP si tu veux, mais sur ce port, je veux que du STMP, pas autre chose. Fais du ssh autant que tu veux, mais sur le port 22 et pas à travers HTTPS, et au passage, si tu fais tu ssh, je te loggue (etc...)
 
 ### HSM (@FLD, RPE doit lire car là, il connait pas, peut être parlant et ça fera une séquence où tu me fermes la geule et tu me dis 'hey pas que les barbus qui s'y connaissent ;)")
+
 hsm protect private key, proprio non ?
 certificate segregated by group
 hsm will make offline attacks impossible
@@ -506,6 +491,7 @@ ops is about
 * knowledge
 * freedom
 
+=> consent, safety, freedom, sounds like a trailer for 50 Shades of Grey :p
 
 it will fail, stability is a myth
 * firemen train for fire
@@ -518,8 +504,6 @@ a ce propos
 dans jhipster tu as une page d'audit de secu.
 
 nous en plus, on a prévu le coup si un des nos utilisateurs perd son laptop, on reset son token
-
-
 
 => excellent !
 
@@ -566,7 +550,7 @@ vlan segregation
 make swing peeps harders:  disable ping sweeps on a network, administrators can block ICMP ECHO requests from outside sources.
 
 @FLD: bof, moi je suis contre les stratégie consiste à fermer/bloquer les trucs. Je préfère surveiller
-que le traffique est sain et correspond aux attentes. Je pense qu'on peut avoir un micro débat sur ce sujet, c'est intéressant. Et genre, tu pourrais conclure "ben dans tout les cas, moi je le fais co ça, si ce n'est que pour te faire chier !" :) 
+que le traffique est sain et correspond aux attentes. Je pense qu'on peut avoir un micro débat sur ce sujet, c'est intéressant. Et genre, tu pourrais conclure "ben dans tout les cas, moi je le fais co ça, si ce n'est que pour te faire chier !" :)
 
 git and jenkins , chef, vagrant exploits
 https://twitter.com/morlhon/status/554899543150850048
@@ -609,12 +593,7 @@ polices de sécurité du SecurityManager et les règles de filtrages applicative
 
 ### misc / unused
 
-
-
-rate limiting => @FLD, tu pensais à quoi là ? Tu as un truc jhipster sur ce point ?.
-
 update your linux (ghost) we you have docker ! fun !
-
 http://googlecloudplatform.blogspot.fr/2015/02/using-google-cloud-platform-for.html
 
 gemalto hacked : https://firstlook.org/theintercept/2015/02/19/great-sim-heist
@@ -622,15 +601,8 @@ gemalto hacked : https://firstlook.org/theintercept/2015/02/19/great-sim-heist
 vous avez été espionné?
 http://www.numerama.com/magazine/32243-avez-vous-ete-espionne-par-la-nsa-voici-une-chance-de-le-savoir.html
 
-siemens stuxnet credentials in the source code
-http://en.wikipedia.org/wiki/Stuxnet
-
 https://twitter.com/codinghorror/status/567434195987738624
 The best reaction to "this is confusing, where are the docs" is to rewrite the feature to make it less confusing, not write more docs.
 
 * a1 : I hide headers info to avoid easy exploit : Wappalyzer screenshot
 * a2 : exploits is not such a big deal anymore
-
-
-
-
