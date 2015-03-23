@@ -43,4 +43,12 @@
  
 [`Talklet 7` Combattre le feu](talklet.7.firemen.md) 
 
+`TODO` transition à faire...
 
+
+[`Talklet 8` Conclusion](talklet.8.conclusion.md) 
+
+
+===
+
+[`Unused`](unused.md)
