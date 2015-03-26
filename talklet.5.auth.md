@@ -115,3 +115,34 @@ FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien,
 
 RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
 
+
+### avoid Brute force attack
+
+FLD: Attend, on y a pensé, et on a mis des contraintes sur les password pour qu'il soit difficile à craquer
+
+(@FLD, là si tu as , on montre du code jhipster)
+
+RPE: Ouais, c'est bien, mais ça n'empêche pas un attaquant d'essayer quand même et, soit d'éventuellement réussir, ou juste rendre ton service inaccessible (par effet de bord). C'est pourr ça que moi j'aime bien avoir un reverse proxy en place en frontal de tout appli.
+
+@FLD, la je ferais une petit explication du concept sur 1,2 slides
+
+RPE: Donc avec un RP en place, pour ton problème de mot de passe, tu peux déjà controllé qu'un utilisateur ou une IP essaye pas "en boucle" de se logguer, sans encombrer le code ou la logique de ton app. Tu peux aussi nettoyer les paramètres transmis ou simplement dropper des requêtes invalides. Quand on sait que, en fin de compte, le gros des exploits se font en abusant des paramètres - comme le classique "; drop database", c'est une bonne protection de s'assurer qu'on  ne recevra que des requêtes dotés de paramètres valides.
+
+(là tu peux rebondir avec les CAPCHAs que tu as mis en place sur ton app jhipster
+
+@FLD, peut être que tu as du code JHipster qui fait pareil, et là on peut faire un micro débat sur ce point entre "a1, je veux le faire dans mon app" et "a2, mais non, laisse l'infra faire...",
+
+### API en ligne
+
+FLD: Au fait, Romain, on n'en a pas parlé, mais mon appli a un service en ligne - un service ReST,
+
+RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD et le "savon" (SOAP) ? Mais plus sérieusement, ça crée d'autres problèmes...
+
+* rate limits
+* header validation
+* conditional requests
+
+=> IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
+nécessaire, me semble être essentiel.
+
+
