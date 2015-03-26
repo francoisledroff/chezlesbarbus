@@ -1,12 +1,15 @@
-Rappel:
--------
+on a donc a faire en priorité:
+l'intro et la conclu
 
-- CfP Devox France, deadline 17.01 (http://cfp.devoxx.fr/)
-- CfP Mix-it, deadline 8 Mars (http://www.mix-it.fr/article/63/fin-du-call-for-paper)
++ pour moi:
+data & ssl
+threat model
+auth
 
-TODO:
-proposer chacun un "tool in action"  ?
 
++ pour toi :
+intranet
+CI et cloud
+fireman
 
-Plan:
-J'ai oublié tout ce qu'on s'est dit au téléphone :(
+Brainbreaks
