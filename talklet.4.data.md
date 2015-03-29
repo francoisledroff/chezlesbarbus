@@ -10,7 +10,7 @@
 mais tes données c'est quoi
 --------
 
-RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles. 
+RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles.
 
 
 discussions sur les données
@@ -19,7 +19,7 @@ discussions sur les données
 * source code
 
 
-Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches combien de stocks
+Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches la quantité de viaga que lui prescrit son médecin.
 
 FLD: oui on a beau mashup de données, c'est un "employee productivity tool", on prévois de manipuler des données de type
 * PII http://en.wikipedia.org/wiki/Personally_identifiable_information
