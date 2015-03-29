@@ -110,3 +110,4 @@ CCL:
 
 `FLD` Ben, la peur c'est le coté obscur non ?
 
+@FLD, je pense que la notion de "peur" est un bon moyen d'embrayer sur la partie "fireman", si on change le brain break, il faudra penser à garder la peur dans le nouveau motif
