@@ -1,25 +1,17 @@
 `Talklet 8` Conclusion
 ==========
 
-`FLD` bon, au final, quand on penses à tout ce qu'on a raconté, ça semble presque mission impossible de sécuriser un système, non ?
 
-`RPE` ben, comme disait l'autre, le seul système vraiment "secure", c'est le système éteint et enfermé à clé. En fait, la vrai question, n'est pas vraiment de savoir si un système est sécurisé, il ne l'est jamais. 
 
-`FLD` Mais alors, à quoi sert tout ce qu'on met en place ?
 
-`RPE` (référence au slide) ben le truc c'est plutôt de te laisser une chance de survivre à l'attaque. Pour prendre l'exemple des pompiers, si ton immeuble, il a des portes coupes feux, des détecteurs de fumées, des extincteurs à chaque étage, il a beaucoup plus de chance de survivre - et même de se tirer indemne, d'un incendie. 
 
-Slide:
+`RPE` Bon, du coup, là tout le monde à soif et après, c'est la bière, donc, si on essayé un peu de résumé tout ça.
 
-it will fail, stability is a myth
-* firemen train for fire
-* fireman is not afraid of fire
+`FLD` Yes, mais on a quand même un paquet de chose. Enfin, voilà une liste, pour faire l'inventaire. 
 
-https://www.techn0polis.net/wp-content/uploads/2015/01/security.png
+`RPE` C'est ton coté Mésopotamien.
 
-`FLD` Ouais, c'est d'autant plus vrai que aujourd'hui, faire un "exploit" n'est plus quelque chose de réserver à une élite de hackers. Avec les sites recensant les exploits, comme du temps des "script kiddies", n'importe qui peut tenter une attaque sur un système. 
-
-### exploit ? not that big of a deal nowadays
+`FLD` Exactement. Bref:
 
 * sandboxing reduces vulnerabilities
 * better application server
@@ -29,20 +21,35 @@ https://www.techn0polis.net/wp-content/uploads/2015/01/security.png
 * you leave an audit trail
 * avoiding downtime when password/key change
 
+`RPE`
+
 * exploit don't last long - so the plan is to "hold" (availability, ensure your systems can "last long enough" during an attack)
 
-
+`FLD`
 
 **The three goals of security are confidentiality, integrity and availability**. Intranet security must deliver integrity and availability. Intranets exist to make information available to colleagues. Nevertheless, confidentiality is an issue. Each job function and person holding that job is given a level of access appropriate to his or her role. Intranets are often less secure than information technology professionals and managers realize
 
-
-
 http://www.arnoldit.com/articles/10intranetSecAug2002.htm
 
+@FLD, j'ai laissé, mais honnetement, j'aime pas trop tout le début ci dessus, je sauterais bien directement à ci dessous:
 
-On pourrait finir en disant qu'après DevOps, il faudrait un DevSec - utilisant le même approche,
-impliquant les gens de la sécurité et les dévs. Ne plus laisser les dévs ignorer la sécurité, mais
-ne plus laisser les experts sécu considéré les apps comme des "boites noires". Le gros des
-faiblesses de sécurité sont aujourd'hui dans les apps plus que l'infrastructure, pour sécuriser un
-système, les deux profils doivent s'assurer coté à coté et (par exemple) rédiger ensemble les
-polices de sécurité du SecurityManager et les règles de filtrages applicatives.
+`FLD` En fait, au bout du compte, on vient de voir que la sécurité, c'est pas un truc adhoc, isolé, que tu peux implémenter à la fin, après un audit, mais plutôt un "combat de tout les instants".
+
+`RPE` Yes, exactement. La sécurité c'est comme les bogues ou les fonctionnalités, il faut y travailler en harmonie avec le développement de l'applicatif, au fil de l'eau. En fait, on pourrait résumer ce qu'on vient de dire par un truc comme "DevSec". De la même manière, qu'avec Puppet...
+
+`FLD` ou Chef !
+
+`RPE` Oui ! Ou Chef ! Bref, de la même manière qu'avec DevOps, on n'a rapprocher l'infrastructure du développement, la sécurité s'est aussi rapprocher du dev. Le temps où les dévs pouvaient dire "la sécurité, je m'en fous, c'est le truc du barbu au fond du couloir", tout aussi révolu que celle où les dits "barbus" pouvaient limiter leur travail à la mise en place de FW, en se moquant (et se lavant mêmes les mains) des applis Java déployé sur leur système.
+
+`FLD` Oauis, clairement, le gros des faiblesses de sécurité sont aujourd'hui dans les apps plus que l'infrastructure, pour sécuriser un
+système, les deux profils doivent s'assurer coté à coté et (par exemple) rédiger ensemble les polices de sécurité du SecurityManager et les règles de filtrages applicatives.
+
+`RPE`Exactement.
+
+`FLD` Et déployer tout ça avec Chef.
+
+`RPE` Ou Puppet.
+
+`FLD` Ou Puppet.
+
+
