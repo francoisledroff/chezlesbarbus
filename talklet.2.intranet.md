@@ -16,7 +16,7 @@ Intranet
 
 `FLD` oui
 
-`RPE`, donc il est aussi possible, malgré les mises à jours régulières des postes "managés", d'avoir des systèmes sur le réseau, compromis. Enfin, assumant que les postes "managés" soient toujours plus "sécurisé" que les postes externe, ce qui peut se discuter (spécialement entre un Windows gangrené de Security Pack, face à une laptop sous une distro linux à jour). 
+`RPE`, donc il est aussi possible, malgré les mises à jours régulières des postes "managés", d'avoir des systèmes sur le réseau, compromis. Enfin, assumant que les postes "managés" soient toujours plus "sécurisé" que les postes externe, ce qui peut se discuter (spécialement entre un Windows gangrené de Security Pack, face à une laptop sous une distro linux à jour).
 
 `FLD` Ok, et du coup, et tu vas me demander si mes utilisateurs sont usr linux  RHEL
 
@@ -24,7 +24,7 @@ Intranet
 
 `FLD` Au final, ce que tu me dis c'est que: "The only secure computer is one with no power, locked in a room, with no user. Any other system can be compromised."
 
-`RPE` Ouais. Et encore, uniquement si tu as déconnecté le disque dur de la carte mère. Le reste c'est de la paté pour Prism ;) 
+`RPE` Ouais. Et encore, uniquement si tu as déconnecté le disque dur de la carte mère. Le reste c'est de la paté pour Prism ;)
 
 Firewall
 ---------
@@ -42,7 +42,7 @@ En fait, le vrai truc utile avec les FW, c'est le filtrage applicatif, c'est à 
 C'est pour ça, j'ai l'habitude de dire qu'on estimer la nullité crasse d'une sécurité par le nombre de port bloqué:
 - je peux pas relever mes mails en POP, c'est bien naze
 - mon accès VPN est bloqué, encore plus naze
-- SSH sortant est bloqué, stupide, un coup de tunnel SSH over HTTPS - avec un peu de "forage" de proxy si besoin est, et je sors de toute manière. 
+- SSH sortant est bloqué, stupide, un coup de tunnel SSH over HTTPS - avec un peu de "forage" de proxy si besoin est, et je sors de toute manière.
 
 Avec tous ça, on n'a certainement pas arrêté les hackers qui sont tout autant libre de faire cross-scripting et d'autres hack à base de pur HTTP, mais on a bien emmerder le reste de la boite.
 
@@ -76,6 +76,6 @@ Reverse Proxy
 
 idée de brain break, tu conclus :
 
-`FLD` "c'est aussi efficace, en terme de contraception, que le retrait".
+`FLD` "c'est aussi efficace que demain des conseils à Romain en veille technologique..."
 
-`RPE` Au fait, comment vas ton gamin ? :) 
+`RPE` Sachant que j'ai choisie Google Buzz à la place de Twitter, Mercurial à la place de Git, et que j'ai jamais utilisé Google Wave mais toujours pensé que ça erait un carton.
