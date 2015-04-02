@@ -16,7 +16,7 @@ Intranet
 
 `FLD` oui
 
-`RPE`, donc il est aussi possible, malgré les mises à jours régulières des postes "managés", d'avoir des systèmes sur le réseau, compromis. Enfin, assumant que les postes "managés" soient toujours plus "sécurisé" que les postes externe, ce qui peut se discuter (spécialement entre un Windows gangrené de Security Pack, face à une laptop sous une distro linux à jour).
+`RPE`, donc il est aussi possible, malgré les mises à jours régulières des postes "managés", d'avoir des systèmes sur le réseau, compromis. Enfin, assumant que les postes "managés" soient toujours plus "sécurisé" que les postes externes, ce qui peut se discuter (spécialement entre un Windows gangrené de Security Pack, face à une laptop sous une distro linux à jour).
 
 `FLD` Ok, et du coup, et tu vas me demander si mes utilisateurs sont usr linux  RHEL
 
@@ -31,20 +31,27 @@ Firewall
 
 `FLD`: mais attends quand meme t'exagères, on peut pas sauter de machine à machine comme ça, on a des firewalls en place !
 
-`RPE`: Et alors ? Quel rapport ? Les FW ça ne sert pas à sécuriser des applis... Non, sérieusement, le truc du FW, c'est juste de faire de la qualité réseau et d'épargner, le CPU. En gros, si un système reçoit un paquet pour un port "non utilisé", il le "drop" en kernal space, plutôt que de le faire remonter pour rien jusqu'au couche applicative. Le paquet est "oublié" à vitesse grand V, et le système se concentre sur autre chose. Bref, ça fait de la qualité réseau, ça réduit le traffique "inutile"
+`RPE`: Et alors ? Quel rapport ? Les FW ça ne sert pas à sécuriser des applis... 
+
+`FLD`: (expression de surprise)
+
+`RPE`: Non, sérieusement, le truc du FW, c'est juste de faire de la qualité réseau et d'épargner, le CPU. En gros, si un système reçoit un paquet pour un port "non utilisé", il le "drop" en kernal space, plutôt que de le faire remonter pour rien jusqu'au couche applicative. Le paquet est "oublié" à vitesse grand V, et le système se concentre sur autre chose. Ca permet aussi de limiter ainsi les attaques de types "déni de service". Bref, ça fait de la qualité réseau en réduissant le traffique "inutile"...
 
 `FLD`: Mais attends ça bloque des ports, donc ça empêche des attaques, non ?
 
-`RPE`: Ouais, sauf que généralement quand tu as truc qui tourne sur un port, c'est que tu en as besoin, donc du coup, le port est ouvert. Si tu es assez con pour laisser tourner un service dont tu as pas besoin, effectivement, ton FW te "sécuriser", mais à mon avis tu auras d'autres problèmes de sécurité. En gros, un FW c'est comme la ligne Maginot, qui, contrairement à ce qu'on pense, a super bien fonctionner - la preuve, Hitler en avait tellement peur, qu'il a décidé de passer à coté. Mais du coup, toute l'inrastructure de combat qu'elle contenait, a servi à rien. Un FW c'est à peu prêt aussi inutile.
+`RPE`: Ouais, sauf que généralement quand tu as truc qui tourne sur un port, c'est que tu en as besoin, donc du coup, le port est ouvert. Si tu es assez con pour laisser tourner un service dont tu n'as PAS besoin, ben effectivement, ton FW te "sécuriser". Mais à mon avis tu auras d'autres problèmes de sécurité dans ta boite. 
 
-En fait, le vrai truc utile avec les FW, c'est le filtrage applicatif, c'est à dire, non pas bloqué un protocole ou service, mais vérifier que celui-ci a un usage valide. Fais tu STMP si tu veux, mais sur ce port, je veux que du STMP, pas autre chose. Fais du SSH autant que tu veux, mais sur le port 22 et pas à travers HTTPS, et au passage, si tu fais tu ssh, je te loggue (etc...) - c'est d'ailleurs 1000 fois plus malin de faire de l'auditer et de la supervision proactive sur les flux SSHs (pour justement détecté un usage illicite) que tout bloqué et rendre infernal la vie de tout le monde dans l'entreprise.
+`RPE`: Bref, en gros, un FW c'est comme la ligne Maginot, qui, contrairement à ce qu'on pense, a super bien fonctionner - la preuve, Hitler en avait tellement peur, qu'il a décidé de passer à coté. Mais du coup, toute l'inrastructure de combat qu'elle contenait, a servi à rien. Un FW c'est à peu prêt aussi inutile. Enfin, dans la manière dont la plupart des gens s'en servent, c'est à dire, pour fermer des ports comme tu le dis.
 
-C'est pour ça, j'ai l'habitude de dire qu'on estimer la nullité crasse d'une sécurité par le nombre de port bloqué:
-- je peux pas relever mes mails en POP, c'est bien naze
+`RPE`: En fait, le vrai truc utile avec les FW, c'est le filtrage applicatif, c'est à dire, non pas bloqué un protocole ou service, mais vérifier que celui-ci a un usage valide. Fais tu STMP si tu veux, mais sur ce port, je veux que du STMP, pas autre chose. Fais du SSH autant que tu veux, mais sur le port 22 et pas à travers HTTPS, et au passage, si tu fais tu ssh, j'enregistre ton activité, et je fais un "audit trail". - c'est d'ailleurs 1000 fois plus malin de faire de l'audit et de la supervision proactive sur les flux SSHs (pour justement détecté un usage illicite) que tout bloqué et rendre infernal la vie de tout le monde dans l'entreprise.
+
+`RPE`: C'est pour ça, j'ai l'habitude de dire qu'on estimer la nullité crasse d'une sécurité par le nombre de port bloqué:
+- je peux pas relever mes mails en POP, c'est naze
 - mon accès VPN est bloqué, encore plus naze
 - SSH sortant est bloqué, stupide, un coup de tunnel SSH over HTTPS - avec un peu de "forage" de proxy si besoin est, et je sors de toute manière.
+- encore un ou deux ports "bloqué" et génèralement je recommande aux clients de virer leur RSSI.
 
-Avec tous ça, on n'a certainement pas arrêté les hackers qui sont tout autant libre de faire cross-scripting et d'autres hack à base de pur HTTP, mais on a bien emmerder le reste de la boite.
+Mais, le pire, c'est avec tout ça, on n'a pas quand même pas résolu les attaques de types cross -scripting que j'évoqué plus haut. Même avec un FW en béton, qui filtre le flux HTTP, il est encore possible de déployer un JS malicieux sur un navigateur s'exécutant dans l'intranet ! Par contre, si on a bloqué plein de ports, on est sûr d'avoir donné une illusion de sécurité et cassé les pieds à tout le monde dans la société...
 
 Reverse Proxy
 ---
@@ -55,7 +62,7 @@ Reverse Proxy
 
 `FLD` ou Chef ! (gros sourire)
 
-`RPE` (regard grumpy) oui, ou chef (@assistance: "pour ceux qui étaient pas là l'année dernière"). Bref, avec cette approche et ces outils, les équipes projets ont de plus en plus la main des composants d'infrastructure comme, par exemple, un serveur web en frontal. Genre, un nginx ou un apache qu'on place devant leur serveur d'app.
+`RPE` (regard grumpy) oui, ou chef (@assistance: "enfin, pour ceux qui étaient pas là l'année dernière"). Bref, avec cette approche et ces outils, les équipes projets ont de plus en plus la main des composants d'infrastructure comme, par exemple, un serveur web en frontal. Genre, un nginx ou un apache qu'on place devant leur serveur d'app.
 
 `FLD` Ben justement, j'en voyais pas l'intérêt, et ça me demande de la conf en plus, donc j'en ai pas mis.
 
@@ -64,7 +71,7 @@ Reverse Proxy
 * dropper aussi les paramètres contenant des morceaux de requêtes SQL ou simplement une taile ou contenu non conforme aux attentes.
 * etc...
 
-`FLD` TODO peut être un petit commentaire ou une "blague" ici
+`FLD` TODO fais peut être un petit commentaire ou une "blague" ici
 
 `RPE` Y'a plein de trucs que je trouve super avec les RPs. En premier lieux, ça décharge l'application d'un lourd travail de nettoyage / protection qui consomme du CPU "applicatif", alors que généralement ton serveur web en frontal, il est, soyons honnête, payé à rien foutre. Si vous me croyez pas, faites un top sur un serveur dédié à de telles instances, vous verrez vite de quoi je parle.
 
