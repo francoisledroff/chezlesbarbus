@@ -22,8 +22,9 @@
 
 [`Talklet 4` Données et Encryption](talklet.4.data.md)
 
+`RPE` Bon on vient de parler l'authentication et l'authorisation de ton serveur app dans Mongo, mais quand est-il de tes utlisateurs sur ton front ?
 
-`RPE` ok on maintenant un plan our sécuriser/encrypter  ces données en transfert, mais comment tu geres l'auth
+`FLD` ca c'est un gros morceau de notre conf en effet.
 
 
 [`Talklet 5` Auth](talklet.5.auth.md)
