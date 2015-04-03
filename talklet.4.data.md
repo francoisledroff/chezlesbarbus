@@ -1,7 +1,9 @@
 `Talket 4` Data and Encryption
 =======
 
+`slide 
 
+RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles.
 
 
 `Talket 4` Draft
@@ -10,7 +12,7 @@
 mais tes données c'est quoi
 --------
 
-RPE: commencons par évaluer les risques, classifions tes données. Tes données peuvent être confidentielles.
+
 
 
 discussions sur les données
