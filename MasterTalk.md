@@ -12,7 +12,7 @@
 
 [`Talklet 2` Intranet, FW et RP](talklet.2.intranet.md) 
 
-`RPE` Mais avant d'aller plus loin, essayons d'analyser de modéliser les menaces qui pèsent sur ton système
+`RPE`  essayons alors d'analyser de modéliser les menaces qui pèsent sur ton système
 
 
 [`Talklet 3` Threat Model](talklet.3.threat.model.md)
