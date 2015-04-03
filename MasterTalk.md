@@ -17,7 +17,6 @@
 
 [`Talklet 3` Threat Model](talklet.3.threat.model.md)
 
-`FLD` cette analyse qui à première vue me paraitre très "barbante" est un exercice très intéressant 
 
 `RPE` il nous faudra beaucoup plus de temps en effet pour creuser l'ensemble des concepts introduits ici, ce qui me parait primordial c'est de comprendre la gravité de voir tes données fuiter. Quelles sont ces données ? Sont elles classifiées ? confidentielles ?
 

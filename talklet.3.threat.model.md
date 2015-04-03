@@ -1,15 +1,40 @@
 `Talklet 3` Threat Model
 --------
 
-`FLD` ce qui compte c'est du comprendre les menaces qui pèsent sur notre système.
+`slide-20` Thread Modeling STRIDE
+-------
 
-Microsoft
-https://www.owasp.org/index.php/Threat_Risk_Modeling
+`FLD` Une méthode intéressant poussée par Microsoft et OWASP est appelée le "Threat Modeling"
+
+Elle permet de mieux identifier les menaces ainsi que les vulnérabilités de votre système
+
+Avec l'acronyme STRIDE Elle propose une categories des attaques possibles selon les types d'exploitation qui leur sont associés , 
+
+Nous n'avons pas le temps de tout couvrir aujourd'hui mais je vous invite à une lecture sur wikipedia ou sur le site OWASP.
+
+A chaque categorie corresponde des mesures à mettre en place
+
+prenons le R de repudiation par example, pour éviter que vos utilisateurs contestent les transactions faites avec leur login et depuis leur machines, mettez en place un "audit trail" sur chacun de vos tiers applicatifs.
 
 
-`FLD` pas le temps ici pour faire un cours sur les concepts de STRIDE et DREAD, voici juste un slide
+`slide-21` Threat Modeling DREAD
+-------
+Avec l'acronyme DREAD cette methode propose également un système de classification pour comparer, qualifier et prioritiser les risques associés à chaque menaces.
 
-STRIDE is a classification scheme for characterizing known threats according to the kinds of exploit that are used (or motivation of the attacker).
+
+Ce methode vous aidera à founir à vos équipes de sécu, d'ops et de dev une modélisation les interactions entre les différents composants de l'application, les flux de données, les séparations de privilèges entre composants et les éléments de stockage, il devrait vous donner une vue d'ensemble de l'exposition de l'application, de ses défenses.
+
+Il vous aidera à la décision des actions à prendre en vue de sécuriser l'application.
+
+`FLD` cette analyse qui à première vue me paraitre très "barbante" s'avère être un exercice très intéressant.
+
+`slide-22` Nos données.
+-------
+
+`RPE` il nous faudra beaucoup plus de temps en effet pour creuser l'ensemble des concepts introduits ici, ce qui me parait primordial c'est de comprendre la gravité de voir tes données fuiter. Quelles sont ces données ? Sont elles classifiées ? confidentielles ?
+
+====
+===== 
 
 * Spoofing Identity : ensure a single execution context at the application and database level.
 * Tampering with Data : data validation
@@ -18,10 +43,13 @@ STRIDE is a classification scheme for characterizing known threats according to 
 * Denial of Service, do not allow anonymous, or do as little as possible for anonymous
 * Elevation of Privilege : proper ACL in place
 
-DREAD is a classification scheme for quantifying, comparing and prioritizing the amount of risk presented by each evaluated threat.
 
-* Damage Potential
-* Reproducibility
-* Exploitability
-* Affected Users
-* Discoverability
+
+
+Microsoft
+https://www.owasp.org/index.php/Threat_Risk_Modeling
+
+
+http://linuxfr.org/news/threat-modeling-savez-vous-quelles-sont-les-menaces-qui-guette
+
+https://www.owasp.org/index.php/Threat_Risk_Modeling

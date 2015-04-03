@@ -92,6 +92,9 @@ Mais, le pire, c'est avec tout ça, on n'a pas quand même pas résolu les attaq
 `FLD` c'est aussi efficace et utile que le plan vigipirate devant les grilles des écoles, 
 ou que la loi Hadopi contre le téléchargement.
 
+`slide-19` Les Menaces
+---------
+
 `FLD` et j'ai beau être en Intranet, il faut que j'évalue les menaces et les risques 
 
 
