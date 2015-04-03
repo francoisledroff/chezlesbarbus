@@ -1,50 +1,88 @@
 `Talklet 1` Intro
 ====
 
+`slide-1` 
+------
+
 fond d'ecran si wifi - ou avoir un "film" du site de 10" si Wifi pourri
 http://map.ipviking.com/
 
-Bonjour
+J'ai une video de 5mn avec Adobe Captivate
+
+
+`slide-2` Bonjour
 -------
 
-`FLD` Bonjour à tous, nous sommes ravis d'être avec vous aujourd'hui....
+`FLD` Bonjour à tous, nous sommes ravis d'être avec vous aujourd'hui. 
 
-Présentations
+`slide-3` Présentations Romain
 ------
 
 `RPE` je m'appelle Romain...
 
+`slide-4` Présentations Francois
+------
 
-`FLD` je m'apelle Francois...
+`FLD` je m'apelle Francois, je suis développeur, chez Adobe IT, je monte des backend en Java, je fais un peu d'ops avec Chef et un peu de front en html javascript et css ...
 
 
 Ce ne sera pas un audit
 ----
 
+#### `slide-5` audit ?
+
+
 `RPE` on y va Francois ? on a promis un "audit de sécurité" en 45 mn
+
+#### `slide-6` non pas un audit
 
 `FLD` oui... mais non
 
 `RPE` Ah bon ? Bon, ça tombe bien ça me casse les pieds les audit !
 
-`FLD` Mais non, c'est pas ça, c'est juste que mon archi n'est pas sèche et mes dévelopements en sont encore em mode POC et j'ai pas encore staffé toute l'équipe, donc on n'est pas en position de faire un audit.
+`FLD` Je ne crois pas être prêt, non... je me sens pas armé pour un audit de sécurité... On en est encore au stade du POC... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe... donc on n'est pas en position de faire un audit.
 
-`RPE` Peut être, mais c'est certainement le meilleur moment pour s'occuper de sécurité.
+`RPE` J'ai déjà vu des POCs partir en prod... c'est certainement le meilleur moment pour s'occuper de sécurité.
 
-`FLD` ?
+#### `slide-7` xss csrf ?
 
-`RPE` Ben, oui, il vaut mieux s'attaquer maintenant à la sécurité tant qu'on peut changer encore relativement facilement l'application - qu'il s'agisse du code ou de l'archi. En fait, la sécurité, c'est comme tout le reste, ça se fait en continue.
+`FLD` Je pense que la plupart des développeurs connaissent les classiques, je pense qu'on saura se prémunir contre les attaques de type injection, cross site scripting et cross request forgery, et le stack sur lequel on est parti fera le plus gros de ce travail pour nous... 
+
+#### `slide-8` non pas on parle pas de xss csrf 
+
+`RPE` c'est déja ça, on ne parlera donc pas de ça aujourd'hui. 
+
+#### `slide-9` xss Rachida 
 
 
-`FLD` Ouais, mais attend il faut des compétences. l'architecte s'est marié la semaine dernière et a donc a rasé sa barbe, depuis personne dans l'équipe n'est calé en sécurité
+Mais si les attaques XSS ce serait un bon rappel pour les dev qui bossaient pour le site de Rachida Dati
+
+`FLD` et un bon rappel le procureur de Paris
+
+#### `slide-10` Security By Design
+
+`FLD` Oui mes besoins en sécurité vont plus loin ... et l'architecte s'est marié, a donc a rasé sa barbe, a eu des enfants et ne code plus la nuit... personne dans l'équipe n'est un expert en sécurité
 
 
-`RPE` Sachant que j'ai étais souvent architecte dans ma carrière, si un archi s'était calé en sécurité - je le serais ! En fait, on va le voir ensemble, mais la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. C'est plutôt un truc de "awareness" - comme dirait des hippies de San Francisco. Bon, commençons par le début, parles moi un peu de ton appli, c'est du Java j'imagine ou tu as enfin appris un vrai language pour homme ;) ?
+`RPE` Sachant que j'ai étais souvent architecte dans ma carrière, si un archi s'était calé en sécurité - je le serais ! En fait, on va le voir ensemble, mais la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. C'est plutôt un truc de "awareness" - comme dirait des hippies de San Francisco. 
 
- Ma petite appli
- --------
+`FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, mais aussi bien sûr les opérations, mais aussi l'intégration continue et l'expérience utilisateurs. Elle impacte ainsi l'ensemble des acteurs  du projet. C'est pour parler de ça qu'on est venu ici aujourd'hui
 
-`FLD` c'est une appli web intranet, c'est pas une appli pour placer des pubs,  c'est pas big data, pas trop social, pas très hipster, mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+`RPE` La sécurité, c'est comme tout le reste, ça se fait en continue. 
+
+
+`RPE` Bon, commençons par le début, parles moi un peu de ton appli, c'est du Java j'imagine ou tu as enfin appris un vrai language pour homme ;) ?
+
+
+`slide-11` Notre cas d'étude
+---
+
+`FLD` c'est une appli web intranet, c'est pas une appli pour placer des pubs,  c'est pas big data, pas trop social, pas très hipster, 
+
+`slide-12` JHipster
+---
+
+mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
 
 `RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons Groovy, avec une extension en cours de fabrication pour trouver une excuse pour utilser Ceylon ou Closure ?
 
@@ -52,7 +90,11 @@ Ce ne sera pas un audit
 
 `RPE` (vers la salle), si vous vous en rappellez, j'ai une mauvaise nouvelle pour vous : vous êtes vieux.
 
-`FLD` Justement ces jeunes dont tu parles connaissent javascript et yeoman. JHipser est basé sur yeoman. tu commences par ce script:
+`slide-13` Yo JHipster
+---
+
+
+`FLD` Quant aux jeunes et à ceux qui sont su resté jeunes connaissent certainement javascript et yeoman. JHipser est basé sur yeoman. tu commences par ce script:
 
 `FLD` yo jHipster
 
@@ -62,20 +104,23 @@ Ce ne sera pas un audit
 
 `RPE` ok, bon  à part télécharger la terre entière pour foutre je ne sais combien de couche d'abstraction à la Java, je vois surtout t'es parti sur du oauth2 et du mongodb. MongoDB c'est pour faire cool et draguer les filles sur la plage, c'est ça ?
 
-`FLD` : Exactement ! :-) Mais par contre, ce qui me fait peur c'est ce genre de chiffre :
+`FLD` Exactement ! :-) 
 
-http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
+`slide-14` Spring Security
+---
 
-* 99% of web applications have at least 1 vulnerability
-* 82% of web applications have at least 1 High/Critical Vulnerability
-* 90% of hacking incidents are not reported publicly
 
-Sécurité : Java serait le programme le plus exposé aux attaques, suivi par QuickTime, Adobe Reader, VLC et .Net§...
+`FLD` Plus sérieusement, ce qui m'a attiré dans ce stack c'est aussi la tringlerie Spring security qui vient avec.
+Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisation, les roles. Il me fournit une solution contre les attaques de type Cross site scripting forgery à base crsf Token, et me fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
 
-https://twitter.com/Developpez/status/560389865003425792
-http://bit.ly/1zaB89X
+`FLD` ce qui me rassure beaucoup  également c'est que je suis en Intranet
 
-`FLD` ce qui me rassure c'est que je suis en Intranet
+
+
+=======
+========
+
+
 
 
 `Talklet 1` old draft
