@@ -37,11 +37,19 @@ Mais on prévois un beau mashup de données, c'est un "employee productivity too
 
 `RPE` SSL c'est secure, mais faire ça correctement c'est tout un art. 
 
-`FLD` Et ça demande une surveillance et une veille techno constante, même les plus grands doivent gérer des situations de crise, vols de certificats, ou la propagation de certificat qu'ils non pas authorisés mais qui sont trustés par la plupart des navigateurs
+`FLD` Et ça demande une surveillance et une veille techno constante,
+
+
+`FLD` même les plus grands doivent gérer des situations de crise, vols de certificats, ou la propagation de certificat qu'ils non pas authorisés mais qui sont trustés par la plupart des navigateurs
 
 `RPE` et souvenez vous, avec suffisamment de temps et de ressources, n'importe quelle chiffrement peut-etre cassé .
 
-`FLD` dernier conseil avant de passer à la suite, demandez à vos équipes de sécu, de scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances 
+`FLD` dernier conseil avant de passer à la suite, 
+
+
+* faite ce boulot au niveau du reverse proxy (nginx, apache...), automatiser cela avec Chef ou Puppet  
+* vous pouvez le faire aussi au niveau du serveur d'app, sachez Jhipster ne le supporte et tout comme Romain ne le conseille pas, cf l'issue jhipster #678
+* scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances 
 
 `RPE` ok, pour le front, admettons qu'on soit bon, regardons le back.
 
@@ -128,6 +136,18 @@ SSL is secure, but remember that any encryption can be broken if given enough ti
 Et, surtout, ça ne sert à rien de mettre du HTTPS, partout, juste parce que c'est "secure". C'est le meilleur moyen de détruire les performances de l'application.
 
 Et évidemment, le problème pénible du chiffrement, c'est la gestion des clés et des secrets. Je t'avoue que juste est tellement casse pieds, que ça décourage souvent de le faire.
+
+
+SSLv2 SSLv2 is Disabled SSLv2 is weak and should be disabled. More information.
+SSLv3 SSLv3 is Disabled Consider disabling SSLv3 to mitigate the POODLE attack.
+TLSv1 TLSv1 is Enabled  TLSv1 should be enabled.
+
+https://twitter.com/jeremiahg/status/580380300494049280
+http://blog.facilelogin.com/2014/10/poodle-attack-and-disabling-ssl-v3-in_18.html
+
+http://foundeo.com/products/iis-weak-ssl-ciphers/test.cfm?test_domain=foundeo.com
+
+https://access.redhat.com/solutions/1232233
 
 
 Mongo SSL authentication
