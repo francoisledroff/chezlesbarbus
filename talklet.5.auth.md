@@ -6,7 +6,22 @@
 `RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
 
-`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur et la 
+`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur 
+la mauvaise experience utilsateur entraine une reutilisation des mots de passe
+la reutilisation des mots entraine un enorme probleme de secu
+comment tu geres tes mots de passe toi Romain ?
+
+slide sur les pass phrases
+
+`RPE` Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+
+`FLD` FLD dans jhipster 46 characters ca passe mais de justesse... 
+150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
+
+sinon pas de contrainte
+
+
+etc...
 
 
 `Talklet 5` Draft
@@ -24,10 +39,9 @@ ou ca https://theeditorsjournal.files.wordpress.com/2014/09/creating-a-password.
 
 FLD: c'est vrai, que ces strong passwords sont just difficile a retenir mais pas à craquer : http://xkcd.com/936/
 
-RPE: Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
-FLD dans jhipster 46 characters ca passe mais de justesse... 
-c'est trop long https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
+
+
 
 
 RPE: Mais même si le mot de passe est "strong," l'utilisateur va devoir le créer, et comme on a plein de mot de passe à gérer, fort à parier, qu'il va reprendre le même que "ailleurs", ce qu'on appelle du "common logging". Et ce mot de passe, est probablement déjà craqué par tout le monde - à commencer par les mecs de la NSA.
