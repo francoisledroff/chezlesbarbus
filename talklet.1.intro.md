@@ -13,12 +13,12 @@ J'ai une video de 5mn avec Adobe Captivate
 `slide-2` Bonjour
 -------
 
-`FLD` Bonjour à tous, nous sommes ravis d'être avec vous aujourd'hui.
+`FLD` Bonjour à tous, nous sommes ravis d'être avec vous aujourd'hui. On va commencer par se présenter rapidement...
 
 `slide-3` Présentations Romain
 ------
 
-`RPE` je m'appelle Romain, je suis développeur Java chez Red Hat - donc dans la branche JBoss. Je suis tombé dans le "café Open Source" quand j'étais petit, d'ailleurs, avec François, et depuis cette époque chez Atos, c'est l'Open Source, qu'il s'agisse de Linux ou du monde JEE qui a guidé ma carrière, sans surprise, jusqu'à Red Hat (What else ? ). Pendant mes 3 premières années chez Red Hat, j'ai tenu le rôle de consultant, puis d'architecte, et je ne suis passé développeur que depuis peu, donc ne soyez pas surpris si je mentionne des "cas clients" ou des mises en production. Tout ceci étaient mon pain quotidien, il y a encoe quelques moi.
+`RPE` Oui, alors "Salut à tous", je m'appelle Romain, je suis développeur Java chez Red Hat - donc dans la branche JBoss. Je suis tombé dans le "café Open Source" quand j'étais petit, d'ailleurs, avec François, et depuis cette époque chez Atos, c'est l'Open Source, qu'il s'agisse de Linux ou du monde JEE qui a guidé ma carrière, sans surprise, jusqu'à Red Hat (What else ? ). Pendant mes 3 premières années chez Red Hat, j'ai tenu le rôle de consultant, puis d'architecte, et je ne suis passé développeur que depuis peu, donc ne soyez pas surpris si je mentionne des "cas clients" ou des mises en production. Tout ceci étaient mon pain quotidien, il y a encore quelques mois. A toi FLD,
 
 `slide-4` Présentations Francois
 ------
@@ -115,7 +115,7 @@ mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
 `FLD` Plus sérieusement, ce qui m'a attiré dans ce stack c'est aussi la tringlerie Spring security qui vient avec.
 Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisation, les roles. Il me fournit une solution contre les attaques de type Cross site scripting forgery à base crsf Token, et me fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
 
-`FLD` ce qui me rassure beaucoup  également c'est que je suis en Intranet
+`RPE` Ouais, c'est plutôt chouette en effet tout ça.
 
 Annexes
 =====
