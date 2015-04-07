@@ -6,16 +6,13 @@
 `RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
 
-`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur 
-la mauvaise experience utilsateur entraine une reutilisation des mots de passe
-la reutilisation des mots entraine un enorme probleme de secu
-comment tu geres tes mots de passe toi Romain ?
+`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur la mauvaise experience utilsateur entraine une reutilisation des mots de passe la reutilisation des mots entraine un enorme probleme de secu comment tu geres tes mots de passe toi Romain ?
 
 slide sur les pass phrases
 
 `RPE` Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
-`FLD` FLD dans jhipster 46 characters ca passe mais de justesse... 
+`FLD` FLD dans jhipster 46 characters ca passe mais de justesse...
 150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
 
 sinon pas de contrainte
@@ -91,7 +88,7 @@ RPE: Bref, après toutes ces conneries, au final, tu as un IDP dans ton intranet
 
 FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
 
-screencast 
+screencast
 
 2 FA and UX
 ----
