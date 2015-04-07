@@ -1,24 +1,52 @@
 `Talklet 5` Auth
 ==========
 
-`slide-
+`slide-28` JHipster login page
+-----------
 
 `RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
+`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
+En tant qu'utilisateur je trouve difficile à justifier.
 
-`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur 
-la mauvaise experience utilsateur entraine une reutilisation des mots de passe
-la reutilisation des mots entraine un enorme probleme de secu
-comment tu geres tes mots de passe toi Romain ?
+Je ne pense pas être le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
+  
+Pourquoi devrai-je à nouveau créer un nouveau mot de passe ?
+Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, github
+Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
+
+`slide-29` xkcd password complexity
+--------
+
+`FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
+
+Quelles seront les règles spécifiques à ce nouveau mot de passe ?
+Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et  
+chiffres ?
+
+`RPE` Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+
+`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse... 
+La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
+
+
+
+
+`slide-30` incorrect password 
+--------
+
+ `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
+
+`RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
+Qui d'entre vous utilise le même mot de passe 
+la reutilisation des mots entraine un enorme probleme de secu.
+
+
+
 
 slide sur les pass phrases
 
-`RPE` Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
-`FLD` FLD dans jhipster 46 characters ca passe mais de justesse... 
-150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
-
-sinon pas de contrainte
 
 
 etc...
@@ -166,4 +194,6 @@ RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD et le "savon" (SOAP) ? 
 => IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
 nécessaire, me semble être essentiel.
 
+===
 
+150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
