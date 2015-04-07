@@ -38,6 +38,12 @@ Cette methode vous aidera à founir à vos équipes de sécu, d'ops et de dev
 
 Elle vous aidera à la décision, et à prendre en vue de sécuriser l'application.
 
+CCL:
+
+`RPE` Note que les "barbus" ou les techos en général trouvent ce genre de classification / méthodologie souvent un peu "bullshit", ça fait juste des jolies tableaux ou rapports pour le management mais "ça ne me sert à rien".
+
+`FLD` En fait, ça permet surtout de faire comprendre au management qu'il y a un problème, dans un format qu'ils peuvent comprendre et réutiliser. En outre, si vous êtes coté management et que vous soupçonnez que vos devs ont été un peu trop "libérale" avec la sécu, faire ce genre d'inventaire est aussi un bon moyen de leur faire réaliser le problème. Bref, comme tout méthodo ou approche formelle, c'est certainement pas une solution miracle, mais plutôt à outil à utiliser à bonne escient.
+
 `slide-22` Nos données.
 -------
 
