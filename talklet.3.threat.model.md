@@ -25,9 +25,9 @@ A chaque categorie corresponde des mesures à mettre en place
 `slide-21` Threat Modeling DREAD
 -------
 
-`FLD`
-Avec l'acronyme DREAD cette methode propose également un système de classification pour comparer, qualifier et prioritiser les risques associés à chaque menaces.
+@FLD: il faudrait introduire DREAD , comme pour STRIDE, et soulignes ce qui les différencie.
 
+`FLD` Avec l'acronyme DREAD cette methode propose également un système de classification pour comparer, qualifier et prioritiser les risques associés à chaque menaces.
 
 Cette methode vous aidera à founir à vos équipes de sécu, d'ops et de dev
 
