@@ -87,8 +87,7 @@ Mais, le pire, c'est avec tout ça, on n'a pas quand même pas résolu les attaq
 
 `FLD` Pour résumer Romain, on peut dire que des firewalls sans filtrage applicatif, c'est comme une frontière sans douanier.
 
-`FLD` c'est aussi efficace et utile que le plan vigipirate devant les grilles des écoles, 
-ou que la loi Hadopi contre le téléchargement.
+`RPE` Ou plutôt avec des douaniers qui arrêtent que les "honnêtes citoyen", sans jamais voir que les criminels passe à 20m de leur point de contrôle...
 
 `slide-19` Les Menaces
 ---------
