@@ -12,8 +12,11 @@ En tant qu'utilisateur je trouve difficile à justifier.
 Je ne pense pas être le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
   
 Pourquoi devrai-je à nouveau créer un nouveau mot de passe ?
-Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, github
-Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
+Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
+
+`RPE` et la je dis merci ou cfp.devoxx...
+
+`FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
 
 `slide-29` xkcd password complexity
 --------
@@ -38,18 +41,67 @@ La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 
  `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
 
 `RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
-Qui d'entre vous utilise le même mot de passe 
+Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
+
+`FLD` pas moi ;-) Et j'en décompte 156 
+
+`slide-31` moi j'ai 156 
+--------
+
+`FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
+et pour ca forcemment j'ai un outil
+
+
+`slide-32` 1 chien
+------
+
+`RPE` t'as 156 mot de passe, mais a quoi bon ? je connais le nom de ton chien, et celui de Paris Hilton également
+
+`note` on respire, on laisse les gens rigoler
+
+`RPE` ok tout le monde a reconnu Paris Hilton ? elle s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients 
+
+n'avait pas choisie une question bien originale 
+et encore moins de questions dont la réponse ne soit partagé sur le web à travers, blogs, journaux et reseaux sociaux pour la plupart d'entre nous
+
+`FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ? 
+
+`RPE` ou avec facebook, snapchat, tinder, gleeden
+
+`FLD` et il n'y a pas que le reseau sociaux on le fait aussi 
+
+
+
+
+est 
+
+ qu'un réponse à question que ses clients 
+
+`FLD` "What is your favorite pet's name?""
+
+`slide-33` wired
+----
+
+
+
+
+
+`slide-32` murphy ?
+--------
+
+`RPE` et quand ton disque crash ?
+`FLD` si tu as toujours ma tablette ou mon telephone, c'est bon
+je synchronise mes mots de passes sur ma tablette et mon telephone
+`RPE` et si tu les perds
+`FLD` dans mon passeport, j'ai 
+
+photo du telephone cassé et du passeport
+
+
+
+
 la reutilisation des mots entraine un enorme probleme de secu.
 
-
-
-
-slide sur les pass phrases
-
-
-
-
-etc...
 
 
 `Talklet 5` Draft
