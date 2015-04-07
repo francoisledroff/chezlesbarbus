@@ -89,10 +89,11 @@ Mais, le pire, c'est avec tout ça, on n'a pas quand même pas résolu les attaq
 
 `RPE` Ou plutôt avec des douaniers qui arrêtent que les "honnêtes citoyen", sans jamais voir que les criminels passe à 20m de leur point de contrôle...
 
+@FLD: est ce que ce slide avec une phrase est vraiment nécessaire ? Je préfère intégrer cette réflexion, en qql phrase, au début du Talklet d'après.
 `slide-19` Les Menaces
 ---------
 
-`FLD` et j'ai beau être en Intranet, il faut que j'évalue les menaces et les risques 
+`FLD` et j'ai beau être en Intranet, il faut que j'évalue les menaces et les risques
 
 
 =======
