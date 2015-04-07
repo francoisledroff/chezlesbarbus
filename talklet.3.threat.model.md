@@ -1,6 +1,8 @@
 `Talklet 3` Threat Model
 --------
 
+`RPE` Pour revenir à l'angoisse que tu exprimais au début, c'est vrai que quand on commence à réflechir en terme de sécurité, on ne voit soit "rien à faire", soit des trous de sécurité partout, et insurmontable. C'est vrai que c'est un peu difficile, comme ça, de regarder son app, et de faire une sorte de sain inventaire, une analyse de menaces en quelques sortes...
+
 `slide-20` Thread Modeling STRIDE
 -------
 
