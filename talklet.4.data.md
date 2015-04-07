@@ -86,49 +86,19 @@ https://github.com/jhipster/generator-jhipster/issues/733
 -------
 
 
-`RPE` Bon on vient de parler l'authentication et l'authorisation de ton serveur app dans Mongo, mais quand est-il de tes utlisateurs sur ton front ?
+`RPE` Bon on vient de parler l'authentication et l'authorisation de ton serveur app dans Mongo, mais quand est-il de tes utilisateurs sur ton front ?
 
 `FLD` ca c'est un gros morceau de notre conf en effet.
 
 
 
-
-
-
-
-==========
-===========
-
-
 `Talket 4` Draft
 =========
-
-mais tes données c'est quoi
---------
-
-
-
-
-discussions sur les données
-* tax
-* PII serial killer
-* source code
-
-
-Genre, si ton app gère des dossiers médicaux, Emmanuel Bernard (ou autre mec connu de l'assistance) à pas forcément envie que tout le monde saches la quantité de viaga que lui prescrit son médecin.
-
 
 * PII http://en.wikipedia.org/wiki/Personally_identifiable_information
 * RH : l'org chart, , les manager pourront également consulter et approuver des demandes de congés et des modifications de salaire
 * finance : nos utlisateurs pourront consulter et approuver les achats commes les ventes
 
-
-
-Https
------
-
-FLD: Bon je propose que l'on parte de servir l'application sur https uniquement
-RPE:  SSL is good, but it depends on how secure is the private key on the server side, how much bits the key has, the algorithm used, how trustworthy the used certificates are, etc ....
 
 TODO
 * pitfall https
