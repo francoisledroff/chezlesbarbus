@@ -18,12 +18,21 @@ Mais on prévois un beau mashup de données, c'est un "employee productivity too
 * des infos sur les deals en cours
 
 
-`RPE` Bref t'as des données interne, du PII, du confidential et restricted
+`RPE` Bref t'as des données interne, du PII, du confidential et restricted. En fati, c'est intéressant, car, même si les données ne paient pas de mine au premier abord, on s'est vite rendu compte qu'elles étaient en fait confidentiel.
+
+`FLD` Ouais, mais est ce qu'on peut vraiment considérer que le PII est confidentielle ?
+
+`RPE` Ben si un ex jaloux tue son ou sa partenaire, employé de ta boite, parce que Adobe n'a pas respecte la confidentialité de son adresse privée, ça peut se réveler embêtant.
+
+`FLD` Yes, c'est vrai, et en y réflechissant, sans trop succès, on n'a pas trop trouver de cas concrets où les données ne sont pas réellement confidentielles. Dans la pratique, et l'informatique de gestion au moins, c'est très rarement le cas.
+
+`RPE` En fait, on est même arrivé à la conclusion, que au final, dans une app, les données les moins confidentielles, c'est peut être justement son code source !
+
+`RPE` Bref, le mieux, dans le doute, est probablement de considérer que les données sont confidentielles, sauf preuve explicite du contraire.
 
 `FLD` Yes, on a donc plutot intérêt à faire du bon boulot.
 
-`RPE` La conclusion, va falloir chiffrer la majorité du flux et de la persistence de ces données de bout en bout, qu'est ce que tu as prévu pour ça ?
-
+`RPE` Ce qui veut dire, qu'il va falloir chiffrer la majorité du flux et de la persistence de ces données de bout en bout, car pour assurer la conidentialité, y'a peu que ça. qu'est ce que tu as prévu pour mettre ça en place ?
 
 
 `slide-24` Chiffrer le front
@@ -69,7 +78,7 @@ https://github.com/jhipster/generator-jhipster/issues/733
 * Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
 
 
-`RPE` Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent à la configuration de FW...
+`RPE` Tu vois, là typiquement, tu as du le coder dans l'appli, ce n'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent, de nos jours, à la configuration de FW...
 
 `FLD` oui je compte fournir ce code à la communauté soit par un pull request sur le project JHIpster ou sur le project spring-data
 
