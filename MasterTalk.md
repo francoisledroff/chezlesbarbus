@@ -2,7 +2,7 @@
 ====
 
 
-[`Talklet 1` Intro](talklet.1.intro.md) 
+[`Talklet 1` Intro](talklet.1.intro.md)
 
 
 `FLD` Ce qui me fait peur c'est ce genre de chiffre :
@@ -10,7 +10,7 @@
 `FLD` ce qui me rassure c'est que je suis en Intranet
 
 
-[`Talklet 2` Intranet, FW et RP](talklet.2.intranet.md) 
+[`Talklet 2` Intranet, FW et RP](talklet.2.intranet.md)
 
 `RPE`  essayons alors d'analyser de modéliser les menaces qui pèsent sur ton système
 
@@ -36,17 +36,9 @@
 
 [`Talklet 6` CI and Secret](talklet.6.ci.md)
 
-`FLD` on est bon là, on peut dormir tranquille
+[`Talklet 7` Combattre le feu](talklet.7.firemen.md)
 
-`RPE` ce n'est qu'une question de temps, on va se faire hacké
-
- 
-[`Talklet 7` Combattre le feu](talklet.7.firemen.md) 
-
-`TODO` transition à faire...
-
-
-[`Talklet 8` Conclusion](talklet.8.conclusion.md) 
+[`Talklet 8` Conclusion](talklet.8.conclusion.md)
 
 
 ===

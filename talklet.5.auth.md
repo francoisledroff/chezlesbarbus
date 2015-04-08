@@ -10,42 +10,45 @@
 En tant qu'utilisateur je trouve difficile à justifier.
 
 Je ne pense pas être le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
-  
+
 Pourquoi devrai-je à nouveau créer un nouveau mot de passe ?
 Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
 
 `RPE` et la je dis merci ou cfp.devoxx...
 
-`FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
+`FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ?
 
+`FLD` FLD dans jhipster 46 characters ca passe mais de justesse...
+150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
+=======
 `slide-29` xkcd password complexity
 --------
 
 `FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
 
 Quelles seront les règles spécifiques à ce nouveau mot de passe ?
-Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et  
+Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et
 chiffres ?
 
 `RPE` Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
-`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse... 
+`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse...
 La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
 
 
 
 
-`slide-30` incorrect password 
+`slide-30` incorrect password
 --------
 
- `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
+ `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect"
 
 `RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
 Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
 
-`FLD` pas moi ;-) Et j'en décompte 156 
+`FLD` pas moi ;-) Et j'en décompte 156
 
-`slide-31` moi j'ai 156 
+`slide-31` moi j'ai 156
 --------
 
 `FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
@@ -59,23 +62,24 @@ et pour ca forcemment j'ai un outil
 
 `note` on respire, on laisse les gens rigoler
 
-`RPE` ok tout le monde a reconnu Paris Hilton ? elle s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients 
+`RPE` ok tout le monde a reconnu Paris Hilton ? elle s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients
 
-n'avait pas choisie une question bien originale 
+n'avait pas choisie une question bien originale
 et encore moins de questions dont la réponse ne soit partagé sur le web à travers, blogs, journaux et reseaux sociaux pour la plupart d'entre nous
+>>>>>>> 439c49a1e0110b43373d8779c92897414b441551
 
-`FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ? 
+`FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ?
 
 `RPE` ou avec facebook, snapchat, tinder, gleeden
 
-`FLD` et il n'y a pas que le reseau sociaux on le fait aussi 
+`FLD` et il n'y a pas que le reseau sociaux on le fait aussi
 
 
 
 
-est 
+est
 
- qu'un réponse à question que ses clients 
+ qu'un réponse à question que ses clients
 
 `FLD` "What is your favorite pet's name?""
 
@@ -93,7 +97,7 @@ est
 `FLD` si tu as toujours ma tablette ou mon telephone, c'est bon
 je synchronise mes mots de passes sur ma tablette et mon telephone
 `RPE` et si tu les perds
-`FLD` dans mon passeport, j'ai 
+`FLD` dans mon passeport, j'ai
 
 photo du telephone cassé et du passeport
 
@@ -171,7 +175,7 @@ RPE: Bref, après toutes ces conneries, au final, tu as un IDP dans ton intranet
 
 FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
 
-screencast 
+screencast
 
 2 FA and UX
 ----
