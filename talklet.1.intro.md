@@ -18,12 +18,20 @@ J'ai une video de 5mn avec Adobe Captivate
 `slide-3` Présentations Romain
 ------
 
-`RPE` Oui, alors "Salut à tous", je m'appelle Romain, je suis développeur Java chez Red Hat - donc dans la branche JBoss. Je suis tombé dans le "café Open Source" quand j'étais petit, d'ailleurs, avec François, et depuis cette époque chez Atos, c'est l'Open Source, qu'il s'agisse de Linux ou du monde JEE qui a guidé ma carrière, sans surprise, jusqu'à Red Hat (What else ? ). Pendant mes 3 premières années chez Red Hat, j'ai tenu le rôle de consultant, puis d'architecte, et je ne suis passé développeur que depuis peu, donc ne soyez pas surpris si je mentionne des "cas clients" ou des mises en production. Tout ceci étaient mon pain quotidien, il y a encore quelques mois. A toi FLD,
+`RPE` Oui, alors "Salut à tous", je m'appelle Romain, je suis développeur Java chez Red Hat - donc dans la branche JBoss. 
+
+Je suis tombé dans le "café Open Source" quand j'étais petit, d'ailleurs, avec François, et depuis cette époque chez Atos, c'est l'Open Source, qu'il s'agisse de Linux ou du monde JEE qui a guidé ma carrière, sans surprise, jusqu'à Red Hat (What else ? ). 
+
+Pendant mes 3 premières années chez Red Hat, j'ai tenu le rôle de consultant, puis d'architecte, et je ne suis passé développeur que depuis peu, donc ne soyez pas surpris si je mentionne des "cas clients" ou des mises en production. Tout ceci étaient mon pain quotidien, il y a encore quelques mois. A toi FLD,
 
 `slide-4` Présentations Francois
 ------
 
-`FLD` je m'apelle Francois, je suis développeur, chez Adobe IT, je monte des backend en Java, je fais un peu d'ops avec Chef et un peu de front en html javascript et css ...
+`FLD` je m'apelle Francois, je suis développeur, chez Adobe IT, je monte des backend en Java, et un peu de front en html javascript et css, et je fais un peu d'ops avec Chef 
+
+et moi avec Puppet !
+
+ ...
 
 
 Ce ne sera pas un audit
@@ -32,7 +40,7 @@ Ce ne sera pas un audit
 #### `slide-5` audit ?
 
 
-`RPE` on y va Francois ? Tu l'air vendu un "audit de sécurité" en 45 mn, non, c'est ça ?
+`RPE` on y va Francois ? On leur a vendu un "audit de sécurité" en 45 mn, non, c'est ça ?
 
 #### `slide-6` non pas un audit
 
@@ -42,56 +50,33 @@ Ce ne sera pas un audit
 
 `FLD` ... je me sens pas armé pour un audit de sécurité... On en est encore au stade du POC... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe...  on n'est pas en position de faire un audit.
 
-`RPE` Tu réalises que la différence entre un Poc et une appli en prod, c'est juste que personne n'a encore mis le PoC en prod ? ;) Bref, si tu as réellement inquiet pour la sécurité, il vaut mieux commencer dès maintenant, car il n'y aura pas de "miracle" d'ici la production. J'ai vu des systèmes avoir comme mot de passe "password", avec un joli document indiquant, en rouge,  "à changer avant la mise en prod", et ... devine le mot de passe en production trois mois plus tard ?
+`RPE` Tu réalises que la différence entre un Poc et une appli en prod, c'est juste que personne n'a encore mis le PoC en prod ? ;) 
 
-(@Public: "Riez pas, c'est vrai, et si ça se trouve, c'était vous sur le projet !")
+Bref, si tu as réellement inquiet pour la sécurité, il vaut mieux commencer dès maintenant, car il n'y aura pas de "miracle" d'ici la production. 
 
-`RPE` Bref, à quoi tu as pensé déjà ? Qu'as tu regardé ?
+J'ai vu des systèmes avoir comme mot de passe root "password", avec un joli document indiquant, en rouge,  "à changer avant la mise en prod", 
 
-#### `slide-7` xss csrf ?
+`FLD` et ...  le mot de passe en production trois mois plus tard ?
 
-`FLD` Je pense que la plupart des développeurs connaissent les classiques, je pense qu'on saura se prémunir contre les attaques de type injection, cross site scripting et cross request forgery, et le stack sur lequel on est parti fera le plus gros de ce travail pour nous...
+`RPE` devine
 
-#### `slide-8` non pas on parle pas de xss csrf
-
-`RPE` Très, bien, bon débarassas, parlons d'autees choses alors !
-
-#### `slide-9` xss Rachida
-
-`RPE` ... même si les attaques XSS ce serait un bon rappel pour les dev qui bossaient pour le site de Rachida Dati
-
-`FLD` et un bon rappel le procureur de Paris.
-
-`RPE` Je crois que là, pour le moment, il doit probablement essayer de relire la page wikipedia sur le sujet. Qu'il doit trouvé confus et incompréhensible. Un juriste qui trouve un texte, confus, si c'est pas de l'ironie ça...
 
 #### `slide-10` Security By Design
 
-`FLD` je pense pourtant que mes besoins en sécurité sont importants et determinant pour la reussite du projet et pour la perennité de mon SI... mais voila......  l'architecte s'est marié, a rasé sa barbe, a eu des enfants ... ne code plus la nuit... et aucun programmeur de l'équipe n'est un expert en sécurité
+`FLD` OK mais voila......  l'architecte s'est marié, a rasé sa barbe, a eu des enfants ... ne code plus la nuit...
 
-`RPE` j'ai souvent été  architecte dans ma carrière, si un archi s'était calé en sécurité - je le serais ! En fait, on va le voir ensemble, mais la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. C'est plutôt un truc de "awareness" - comme dirait des hippies de San Francisco.
+`RPE` et tu lui parles encore ?
 
-`FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, les opérations, mais aussi l'intégration continue et l'expérience utilisateurs. Elle impacte  l'ensemble des acteurs  du projet. C'est pour parler de ça qu'on est venu ici aujourd'hui
+`FLD` et aucun programmeur de l'équipe n'est un expert en sécurité
 
-`RPE`:  En outre, je vois mal comment des experts externes pourront mieux sécuriser ton appli que tes devs et toi. Eventuellement, ton infra se sécu. Mais à la base, pour hacker une appli, il faut la détourner de son fonctionnement "normal". Et, à ton avis, de tes fameux experts en sécurité et ton équipe de dév qui connait mieux le fonctionnement normal de l'appli ? Et donc se prémunir contre son détournement ?
+`RPE` pas de souci... on va le voir ensemble,  la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. 
 
-`RPE` La sécurité, c'est comme tout le reste, ça se fait en continue.  Bon, allez, commençons par le début, parles moi un peu de ton appli, c'est du Java j'imagine ou tu as enfin appris un vrai language pour homme ;) ?
-
-
-Annexes
-=====
-
-### Objectifs
-
- "audit" on a ce mot dans notre abstract, mais en fait on veut pas vraiment faire un audit une fois tout developpé, on veut changer l'etat d'esprit du dev et de lops pour les sensbiliser à la sécu, on veut montrer plutot comme l'archi, la qa, le dev, l'ops sont partie prenante de la secu et comment la secu se fait "by design" tout au long du projet... en gros le concept d'audit de secu est naze...
+`FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, les opérations, mais aussi l'intégration continue et l'expérience utilisateurs.
 
 
-### TODO
--------
+`RPE` Et c'est notre message aujourd'hui
 
-@FLD, je crois ces statistiques ont disparu du talk, peut être les remettre à la fin de l'into.
+`FLD` ok, par ou on commence ?
 
-http://www.ivizsecurity.com/blog/penetration-testing/web-application-vulnerability-statistics-of-2012/
 
-* 99% of web applications have at least 1 vulnerability
-* 82% of web applications have at least 1 High/Critical Vulnerability
-* 90% of hacking incidents are not reported publicly
+

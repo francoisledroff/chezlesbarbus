@@ -4,7 +4,7 @@
 `slide-23` Classification
 ---
 
-`RPE` commencons par évaluer les risques, classifions tes données. Tes données peuvent-elles être considérés comme confidentielles ?
+`RPE` Et dis Tes données peuvent-elles être considérés comme confidentielles ?
 
 `FLD` contrairement à un app store, un site d'ecommerce ou un backend uber, je ne stocke aucun moyen de paiement, je ne risque donc pas les voir fuiter vers le dark web.
 
@@ -105,56 +105,3 @@ https://github.com/jhipster/generator-jhipster/issues/733
 
 
 
-`Talket 4` Draft
-=========
-
-* PII http://en.wikipedia.org/wiki/Personally_identifiable_information
-* RH : l'org chart, , les manager pourront également consulter et approuver des demandes de congés et des modifications de salaire
-* finance : nos utlisateurs pourront consulter et approuver les achats commes les ventes
-
-
-TODO
-* pitfall https
-* https://twitter.com/NorseCorp/status/577895899705270272
-
-But if you use SSL at least all your data transmitted is encrypted (except the target IP because it is used to route your package).
-
-SSL is secure, but remember that any encryption can be broken if given enough time and resources.
-
-Et, surtout, ça ne sert à rien de mettre du HTTPS, partout, juste parce que c'est "secure". C'est le meilleur moyen de détruire les performances de l'application.
-
-Et évidemment, le problème pénible du chiffrement, c'est la gestion des clés et des secrets. Je t'avoue que juste est tellement casse pieds, que ça décourage souvent de le faire.
-
-
-SSLv2 SSLv2 is Disabled SSLv2 is weak and should be disabled. More information.
-SSLv3 SSLv3 is Disabled Consider disabling SSLv3 to mitigate the POODLE attack.
-TLSv1 TLSv1 is Enabled  TLSv1 should be enabled.
-
-https://twitter.com/jeremiahg/status/580380300494049280
-http://blog.facilelogin.com/2014/10/poodle-attack-and-disabling-ssl-v3-in_18.html
-
-http://foundeo.com/products/iis-weak-ssl-ciphers/test.cfm?test_domain=foundeo.com
-
-https://access.redhat.com/solutions/1232233
-
-
-Mongo SSL authentication
-----
-
-RPE:  regardons aussi les flux entre ton app et le reste du réseau. Déjà, rassures moi, la communication entre MongoDB et ton app, rassumes moi c'est pas en clair quand même ? Parce que c'est le fonctionnement par défaut, je te signal
-
-
-### mongo leak
-
-https://twitter.com/unix_root/status/565906945488748544
-40,000 unprotected MongoDB databases, 8 million telecommunication customer records exposed http://thehackernews.com/2015/02/mongodb-database-hacking.html
-
-FLD: Ok, tu m'as convaincu, j'arrête de faire mon bisounours, on va sécuriser la conf mongo. Surtout qu'en fait, c'est pas si simple ...
-
-la je peux faire un slide et fournir un peu de code
-car en fait la x509 authentication n'est pas fourni par defaut dans spring data mongo, j'ai du la coder dans mon appli
-
-RPE: Tu vois, là typiquement, tu as du le coder dans l'appli, c'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent à la configuration de FW...
-
-http://www.slideshare.net/mongodb/securing-mongo-db-mongodc-2014-nosig
-http://www.allanbank.com/blog/security/tls/x.509/2014/10/13/tls-x509-and-mongodb/

@@ -27,7 +27,9 @@ Quelles seront les règles spécifiques à ce nouveau mot de passe ?
 Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et  
 chiffres ?
 
-`RPE` Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+`respiration`
+
+`RPE` depuis que j'ai vu ce xkcd Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
 `FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse... 
 La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
@@ -247,6 +249,8 @@ http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent
 `RPE` pareil pour la plupart des micro paiement
 
 
+=======
+========
 
 
 

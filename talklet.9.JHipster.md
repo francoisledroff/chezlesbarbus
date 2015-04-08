@@ -1,41 +1,63 @@
 `slide-11` Notre cas d'étude
 ---
 
-`FLD` c'est pas une appli pour placer des pubs, ni pour spéculer sur les marchés financier, ce n'est donc ni big data, ni social, ni très hipster... c'est juste une appli web de gestion
+`RPE` maintenant qu'on sait par ou commencer, regardons ton appli
+
+`FLD` c'est pas une appli pour placer des pubs, ni pour spéculer sur les marchés financier, ce n'est donc 
+ni big data, 
+ni du hadoop, 
+ni du machine learning, 
+ni social, 
+ni du docker,
+
+bref pas  très hipster... 
+
+c'est juste une bonne vieille appli web de gestion
+
+`RPE` mais comment tu vas draguer sur la plage ou te la peter sur  twitter ?
 
 `slide-12` JHipster
 ---
 
-`FLD` mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+`FLD` du coup je suis parti sur une stack jhipster
 
 `RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons Groovy, avec une extension en cours de fabrication pour trouver une excuse pour utiliser Ceylon ou Closure ?
 
-`FLD` Ouais, exactement ! :) Non, c'est un generateur d'appli web à la appfuse - pour ceux qui s'en rappelle
+`FLD` Presque :) C'est un generateur d'appli web à la appfuse - pour ceux qui s'en rappelle
 
-`RPE` (vers la salle), si vous vous en rappellez, j'ai une mauvaise nouvelle pour vous : vous êtes vieux.
+`RPE` (vers la salle), si vous vous en rappellez, vou faites du Java depuis trop longtemps.
 
 `slide-13` Yo JHipster
 ---
 
-`FLD` Quant aux jeunes et à ceux qui sont su resté jeunes, eux connaissent certainement javascript et yeoman. JHipser est basé sur yeoman. tu commences par ce script:
+`FLD` Quant aux autres et à ceux qui sont su resté jeunes, eux connaissent certainement javascript et yeoman. JHipster est basé sur yeoman. tu commences par ce script:
 
-`FLD` yo jHipster
+`FLD` yo jHipster et tu choisis ....
 
-`FLD` Tu fais quelques choix ? East Coast ou West Coast ?
+`FLD` et la du choisis Dr Dree, Eminem, East cost? West Cost ?
+ 
 
 `slide-14` JHipster homepage
 ---
 
-`FLD` le résultat est une stack assez lean, plutot récent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
+`FLD` bon en gros je finis une stack assez simple et au gout du jour avec du springboot pour la partie serveur et du angularjs pour le partie cliente
 
-`RPE` ok, bon  à part télécharger la terre entière pour foutre je ne sais combien de couche d'abstraction à la mode Java, je vois surtout t'es parti sur du oauth2 et du mongodb. MongoDB c'est pour faire cool et draguer les filles sur la plage, c'est ça ?
+`RPE` ok mais niveau sécu, t'as quoi ?
 
-`FLD` Exactement ! :-)
 
 `slide-15` Spring Security
 ---
 
-`FLD` Plus sérieusement, ce qui m'a attiré dans ce stack c'est aussi la tringlerie Spring security qui vient avec.
-Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisation, les roles. Il me fournit une solution contre les attaques de type Cross site scripting forgery à base crsf Token, et me fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
+`FLD` Justement, ce qui m'a attiré dans ce stack c'est aussi la tringlerie Spring security qui vient avec.
 
-`RPE` Ouais, c'est plutôt chouette en effet tout ça.
+Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisation, les roles. 
+
+`RPE` et les attaques XSS ?
+
+`FLD` ca gère toout comme  les attaques de type Cross site scripting forgery, il me fournit une solution  à base crsf Token, 
+
+`RPE` et plein d'acronyme anglais pour te la peter, et sinon niveau audit ?
+
+`FLD` aussi... il fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
+
+

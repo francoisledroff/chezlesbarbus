@@ -34,12 +34,6 @@ https://github.com/search?p=3&q=extension%3Aphp+mysql_query+%24_GET&ref=searchre
 
 `RPE` Oui, exactement. Tu dois pouvoir déterminer qui a crée une PR, qui l'a accepté, etc... mais pas seulement. Par exemple, il faut aussi avoir un process pour nettoyé après le départ d'un employé de l'organisation. Effacer leurs repos, mais aussi, pourquoi pas, auditer leur répos publiques (même si ça pose des questions en terme de respect de la vie privée).
 
-`FLD` Oui, mais tout ça n'a de sens que si l'authentification est "forte", genre 2 factor auth.
-
-`RPE` Oui, car si n'importe qui peut hacké le compte de l'employé que tu as "super audité et controllé", c'est bien inutile...
-
-source: http://fr.slideshare.net/chrisgates/lascon-2014-devooops
-
 2) Jenkins
 
 `FLD` Bon, et Jenkins alors ? Lui aussi j'imagine qu'il faut un peu le surveiller.
