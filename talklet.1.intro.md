@@ -40,7 +40,7 @@ Ce ne sera pas un audit
 
 `RPE` Ah bon ? Bon, ça tombe bien ça me casse les pieds les audit !
 
-`FLD` Je ne crois pas être prêt, non... je me sens pas armé pour un audit de sécurité... On en est encore au stade du POC... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe... donc on n'est pas en position de faire un audit.
+`FLD` ... je me sens pas armé pour un audit de sécurité... On en est encore au stade du POC... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe...  on n'est pas en position de faire un audit.
 
 `RPE` Tu réalises que la différence entre un Poc et une appli en prod, c'est juste que personne n'a encore mis le PoC en prod ? ;) Bref, si tu as réellement inquiet pour la sécurité, il vaut mieux commencer dès maintenant, car il n'y aura pas de "miracle" d'ici la production. J'ai vu des systèmes avoir comme mot de passe "password", avec un joli document indiquant, en rouge,  "à changer avant la mise en prod", et ... devine le mot de passe en production trois mois plus tard ?
 
@@ -66,11 +66,11 @@ Ce ne sera pas un audit
 
 #### `slide-10` Security By Design
 
-`FLD` Oui mes besoins en sécurité vont plus loin ... et puis l'architecte du projet s'est marié, a donc a rasé sa barbe, a eu des enfants et ne code plus la nuit... personne dans l'équipe n'est un expert en sécurité
+`FLD` je pense pourtant que mes besoins en sécurité sont importants et determinant pour la reussite du projet et pour la perennité de mon SI... mais voila......  l'architecte s'est marié, a rasé sa barbe, a eu des enfants ... ne code plus la nuit... et aucun programmeur de l'équipe n'est un expert en sécurité
 
-`RPE` Sachant que j'ai étais souvent architecte dans ma carrière, si un archi s'était calé en sécurité - ça se saurait et je le serais !!! En fait, on va le voir ensemble, mais la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. C'est plutôt un truc de "awareness" - comme dirait des hippies de San Francisco.
+`RPE` j'ai souvent été  architecte dans ma carrière, si un archi s'était calé en sécurité - je le serais ! En fait, on va le voir ensemble, mais la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. C'est plutôt un truc de "awareness" - comme dirait des hippies de San Francisco.
 
-`FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, mais aussi bien sûr les opérations, mais aussi l'intégration continue et l'expérience utilisateurs. Elle impacte ainsi l'ensemble des acteurs  du projet. C'est pour parler de ça qu'on est venu ici aujourd'hui
+`FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, les opérations, mais aussi l'intégration continue et l'expérience utilisateurs. Elle impacte  l'ensemble des acteurs  du projet. C'est pour parler de ça qu'on est venu ici aujourd'hui
 
 `RPE`:  En outre, je vois mal comment des experts externes pourront mieux sécuriser ton appli que tes devs et toi. Eventuellement, ton infra se sécu. Mais à la base, pour hacker une appli, il faut la détourner de son fonctionnement "normal". Et, à ton avis, de tes fameux experts en sécurité et ton équipe de dév qui connait mieux le fonctionnement normal de l'appli ? Et donc se prémunir contre son détournement ?
 
@@ -79,16 +79,14 @@ Ce ne sera pas un audit
 `slide-11` Notre cas d'étude
 ---
 
-`FLD` c'est une appli web intranet, c'est pas une appli pour placer des pubs,  c'est pas big data, pas trop social, pas très hipster,
+`FLD` c'est pas une appli pour placer des pubs, ni pour spéculer sur les marchés financier, ce n'est donc ni big data, ni social, ni très hipster... c'est juste une appli web de gestion
 
 `slide-12` JHipster
 ---
 
-mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
+`FLD` mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
 
-`RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot ton app pour lancer un container Scala, lui-même écrit en JRuby, qui exécute des greffons Groovy, avec une extension en cours de fabrication pour trouver une excuse pour utilser Ceylon ou Closure ?
-
-(@Public, riez pas, et si l'un de vous pense que c'est une bonne idée, je le descend).
+`RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons Groovy, avec une extension en cours de fabrication pour trouver une excuse pour utiliser Ceylon ou Closure ?
 
 `FLD` Ouais, exactement ! :) Non, c'est un generateur d'appli web à la appfuse - pour ceux qui s'en rappelle
 
@@ -97,19 +95,22 @@ mais comme je voulais me faire plaisir je suis parti sur un stack jhipster
 `slide-13` Yo JHipster
 ---
 
-`FLD` Quant aux jeunes et à ceux qui sont su resté jeunes connaissent certainement javascript et yeoman. JHipser est basé sur yeoman. tu commences par ce script:
+`FLD` Quant aux jeunes et à ceux qui sont su resté jeunes, eux connaissent certainement javascript et yeoman. JHipser est basé sur yeoman. tu commences par ce script:
 
 `FLD` yo jHipster
 
 `FLD` Tu fais quelques choix ? East Coast ou West Coast ?
 
-`FLD` le résultat est une stack assez lean, plutot récente avec du springboot pour la partie serveur et du angularjs pour le partie cliente
+`slide-14` JHipster homepage
+---
+
+`FLD` le résultat est une stack assez lean, plutot récent avec du springboot pour la partie serveur et du angularjs pour le partie cliente
 
 `RPE` ok, bon  à part télécharger la terre entière pour foutre je ne sais combien de couche d'abstraction à la mode Java, je vois surtout t'es parti sur du oauth2 et du mongodb. MongoDB c'est pour faire cool et draguer les filles sur la plage, c'est ça ?
 
 `FLD` Exactement ! :-)
 
-`slide-14` Spring Security
+`slide-15` Spring Security
 ---
 
 `FLD` Plus sérieusement, ce qui m'a attiré dans ce stack c'est aussi la tringlerie Spring security qui vient avec.

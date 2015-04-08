@@ -1,24 +1,111 @@
 `Talklet 5` Auth
 ==========
 
-`slide-
+`slide-28` JHipster login page
+-----------
 
 `RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
+`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
+En tant qu'utilisateur je trouve difficile à justifier.
 
-`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur la mauvaise experience utilsateur entraine une reutilisation des mots de passe la reutilisation des mots entraine un enorme probleme de secu comment tu geres tes mots de passe toi Romain ?
+Je ne pense pas être le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
 
-slide sur les pass phrases
+Pourquoi devrai-je à nouveau créer un nouveau mot de passe ?
+Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
 
-`RPE` Oui, d'ailleurs toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+`RPE` et la je dis merci ou cfp.devoxx...
+
+`FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ?
 
 `FLD` FLD dans jhipster 46 characters ca passe mais de justesse...
 150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
+=======
+`slide-29` xkcd password complexity
+--------
 
-sinon pas de contrainte
+`FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
+
+Quelles seront les règles spécifiques à ce nouveau mot de passe ?
+Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et
+chiffres ?
+
+`RPE` Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+
+`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse...
+La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
 
 
-etc...
+
+
+`slide-30` incorrect password
+--------
+
+ `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect"
+
+`RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
+Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
+
+`FLD` pas moi ;-) Et j'en décompte 156
+
+`slide-31` moi j'ai 156
+--------
+
+`FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
+et pour ca forcemment j'ai un outil
+
+
+`slide-32` 1 chien
+------
+
+`RPE` t'as 156 mot de passe, mais a quoi bon ? je connais le nom de ton chien, et celui de Paris Hilton également
+
+`note` on respire, on laisse les gens rigoler
+
+`RPE` ok tout le monde a reconnu Paris Hilton ? elle s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients
+
+n'avait pas choisie une question bien originale
+et encore moins de questions dont la réponse ne soit partagé sur le web à travers, blogs, journaux et reseaux sociaux pour la plupart d'entre nous
+>>>>>>> 439c49a1e0110b43373d8779c92897414b441551
+
+`FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ?
+
+`RPE` ou avec facebook, snapchat, tinder, gleeden
+
+`FLD` et il n'y a pas que le reseau sociaux on le fait aussi
+
+
+
+
+est
+
+ qu'un réponse à question que ses clients
+
+`FLD` "What is your favorite pet's name?""
+
+`slide-33` wired
+----
+
+
+
+
+
+`slide-32` murphy ?
+--------
+
+`RPE` et quand ton disque crash ?
+`FLD` si tu as toujours ma tablette ou mon telephone, c'est bon
+je synchronise mes mots de passes sur ma tablette et mon telephone
+`RPE` et si tu les perds
+`FLD` dans mon passeport, j'ai
+
+photo du telephone cassé et du passeport
+
+
+
+
+la reutilisation des mots entraine un enorme probleme de secu.
+
 
 
 `Talklet 5` Draft
@@ -163,4 +250,6 @@ RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD et le "savon" (SOAP) ? 
 => IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
 nécessaire, me semble être essentiel.
 
+===
 
+150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200
