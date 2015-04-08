@@ -5,9 +5,9 @@
 
 
 
-`RPE` Bon, du coup, là tout le monde à soif et après, c'est la bière, donc, si on essayé un peu de résumé tout ça.
+`RPE` Bon, du coup, là tout le monde à soif et après, c'est la bière, donc, si on essayai un peu de résumé tout ça.
 
-`FLD` Yes, mais on a quand même un paquet de chose. Enfin, voilà une liste, pour faire l'inventaire. 
+`FLD` Yes, mais on a quand même un paquet de chose. Enfin, voilà une liste, pour faire l'inventaire.
 
 `RPE` C'est ton coté Mésopotamien.
 
@@ -48,8 +48,6 @@ système, les deux profils doivent s'assurer coté à coté et (par exemple) ré
 
 `FLD` Et déployer tout ça avec Chef.
 
-`RPE` Ou Puppet.
+`RPE` Ou Puppet...
 
 `FLD` Ou Puppet.
-
-

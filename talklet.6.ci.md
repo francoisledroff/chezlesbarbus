@@ -20,11 +20,11 @@ https://github.com/search?p=3&q=extension%3Aphp+mysql_query+%24_GET&ref=searchre
 
 `FLD` Ouais, mais c'est grave ça ?
 
-`RPE` Ben déjà, ça fout en l'air d'audit trail. Tu recherches qui a injecté un code malicieux et ça ne te pointe pas sur la bonne personne, mais surtout ça ouvre la porte à des exploits "social". On a tous dans nos boites des "diva" dont personne ne va remettre le code en question parce que c'est "untel" qui l'a écrit. D'ailleurs, c'est exactement comment ça que Tordvals fait avec le kernel. Il ne pull que depuis des repos de gens qu'il connait et respecte. (@assistance, je vous rassure, les mecs comme ça y'en que 7. Je ne suis pas sûr que Tordvlad accepterait une PR de sa femme...)
+`RPE` Ben déjà, ça fout en l'air d'audit trail. Tu recherches qui a injecté un code malicieux et ça ne te pointe pas sur la bonne personne, mais surtout ça ouvre la porte à des exploits "social". On a tous dans nos boites des "diva" dont personne ne va remettre le code en question parce que c'est "untel" qui l'a écrit. D'ailleurs, c'est exactement comment ça que Tordvals fait avec le kernel. Il ne pull que depuis des repos de gens qu'il connait et respecte. (@assistance, je vous rassure, les mecs comme ça y'en que 7. Je ne suis pas sûr que Tordvlad accepterait une PR de sa propre femme...)
 
 `FLD` Ouais, Ok, donc tu fais une PR avec des commits venant d'un tel gus, et le code est accepté sans être revu...
 
-`RPE` Laissans rentrer, par exemple, un code malicieux...
+`RPE` Laissant rentrer, par exemple, un code malicieux...
 
 `FLD` OK, mais qu'est ce qu'on peut faire concrètement ?
 
@@ -90,7 +90,7 @@ Safer in the Clouds ?
 
 FLD: Ok, tout ça a plutôt marcher, mais maintenant, on va se débarrasser notre infra à nous, et migrer notre app, sur le Cloud. Vu qu'elle est déjà "secure", je dois revoir ma copie tu crois ?
 
-RPE: Ben oauis, et plutôt deux fois qu'une ! Parce que maintenant, si tu applis par en sucette, ton provider Web, va littéralement tu le faire payer.
+RPE: Ben oauis, et plutôt deux fois qu'une ! Parce que maintenant, si ton appli par en sucette, ton fournisseur de "cloud" (comme Amazon), va littéralement tu le faire payer.
 
 a $2.375 amazon mistake
 http://www.devfactor.net/2014/12/30/2375-amazon-mistake/
@@ -101,7 +101,7 @@ http://www.devfactor.net/2014/12/30/2375-amazon-mistake/
 
 `FLD`: Ah oauis, ça fait mal tout ça, surtout qu'on pensait s'intégrer avec S3. Du coup, on va peut être aller voir ailleurs.
 
-`RPE`: Oui, mais ça change rien, dès l'instant où tu t'intègres avec un système externe, il faut grosso modo partir du principe qu'il est pas 'secure' et te protéger de lui. 
+`RPE`: Oui, mais ça change rien, dès l'instant où tu t'intègres avec un système externe, il faut grosso modo partir du principe qu'il est pas 'secure' et te protéger de lui.
 
 `FLD`: En fait, il faut se dire "never assume it's safe".
 
@@ -115,7 +115,7 @@ http://www.devfactor.net/2014/12/30/2375-amazon-mistake/
 
 `FLD`: (gros sourire) ben aucun bien sûr ;) !
 
-Slide: 
+Slide:
 a 10 years old server in your data center is much more vulnerable than a fresh server in the cloud
 
 a 10 years old server, imagine
@@ -124,7 +124,7 @@ a 10 years old server, imagine
 * quaterly security review ? this clash with continous delivery
 a typical aws server last a few days
 
-`RPE`: Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix. Il sont très connu par avoir une service irréprochable qui repose sur la solution de Cloud d'Amazon. Si vous avez bossé sur Amazon, vous savez que bien d'excellente qualité, le service n'est pas à 100% fiable. Une VM peut subitement "disparaitre", le réseau peut devenir temporairement inaccessible, et leur SLA prévoit même qu'une zone entière (par exemple l'Irlande) peut tomber pendant plusieurs minutes ! 
+`RPE`: Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix. Il sont très connu par avoir une service irréprochable qui repose sur la solution de Cloud d'Amazon. Si vous avez bossé sur Amazon, vous savez que bien d'excellente qualité, le service n'est pas à 100% fiable. Une VM peut subitement "disparaitre", le réseau peut devenir temporairement inaccessible, et leur SLA prévoit même qu'une zone entière (par exemple l'Irlande) peut tomber pendant plusieurs minutes !
 Bref, dans ces conditions, pour fournir un super service comme Netflix, il faut que les applications soient très robuste ! Et là, ils ont été géniaux, c'est qu'ils ont forcé leur developeur à se préparer aux pannes et mettant en place un programme simulant ces pannes - le fameux Chaos Monkey. Et le plus incroyable, c'est qu'ils sont tellement sûr de la résilience de leur applications qu'ils laissent Choas Monkey s'exécuter sur leur plateforme de production !!!
 http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
 
@@ -132,7 +132,7 @@ http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
 
 CCL du talklet
 
-`RPE`: Voilà, on a fait un tour rapide, mais comme on peut le voir, l'extension du périmètre de lutte de la sécurité est réelle, et offre un monde de nouveau exploit et de failles à exploiter. Il est évident que, pour le moment, on dispose encore peu d'informations et de recul, et que les approches, dans le domaine de la sécurité, consiste essentiellement à appliquer les "vieilles" recettes. Néanmoins, il ne faut pas avoir peur et retomber un travers inutile et nuisibile de rejet de ces nouvelles infrastructures. 
+`RPE`: Voilà, on a fait un tour rapide, mais comme on peut le voir, l'extension du périmètre de lutte de la sécurité est réelle, et offre un monde de nouveau exploit et de failles à exploiter. Il est évident que, pour le moment, on dispose encore peu d'informations et de recul, et que les approches, dans le domaine de la sécurité, consiste essentiellement à appliquer les "vieilles" recettes. Néanmoins, il ne faut pas avoir peur et retomber un travers inutile et nuisibile de rejet de ces nouvelles infrastructures.
 
 (brain breaks - probablement à améliorer)
 `FLD` Ouais, de toute façon, il faut jamais avoir peur.
