@@ -77,12 +77,25 @@ https://github.com/jhipster/generator-jhipster/issues/733
 * il a donc fallu builder mongo depuis les sources.
 * Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
 
-
-`RPE` Tu vois, là typiquement, tu as du le coder dans l'appli, ce n'est pas un truc qu'un consultant externe aurait pu faire. La sécurité c'est autant le taff du dév que du soi disant "expert sécurité", dont les compétences se limitent trop souvent, de nos jours, à la configuration de FW...
+`RPE` et t'as fait un PR ?
 
 `FLD` oui je compte fournir ce code à la communauté soit par un pull request sur le project JHIpster ou sur le project spring-data
 
-`slide-25` Chiffrer le back
+`slide-25` Chiffrage au repos ?
+-------
+
+`RPE` une fois dans la base comment tu les protège ?
+
+`FLD` j'hesite
+
+`RPE` je te conseille le chiffrage applicatif
+
+
+
+
+
+
+`slide-25` transition vers Auth
 -------
 
 
