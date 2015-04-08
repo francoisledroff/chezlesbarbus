@@ -249,6 +249,38 @@ http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent
 `RPE` pareil pour la plupart des micro paiement
 
 
+slide saml c'est pas suffisant
+-----
+
+OAuth2 Key Features
+
+IETF standard
+Extremely simple for clients (and developers)
+Access tokens carry information (beyond identity)
+Clear separation between users and machines
+Strong emphasis on not collecting user credentials in client app
+Machines act on their own or on behalf of users
+Resources are free to interpret token content
+
+So what's wrong with that?
+
+Nothing, but...
+No standard (yet) for request signing
+
+
+Other Options
+
+OAuth 1.0
+SAML assertions
+Physical network security IP tables etc.
+Kerberos
+Combinations of the above (including OAuth 2.0)
+
+
+http://presos.dsyer.com/decks/microservice-security.html#slide12
+http://presos.dsyer.com/decks/microservice-security.html#slide27
+
+
 =======
 ========
 
