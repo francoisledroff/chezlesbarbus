@@ -18,7 +18,7 @@ Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid
 
 `FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
 
-`slide-29` xkcd password complexity
+`slide-29` Votre mot de passe (xkcd)
 --------
 
 `FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
@@ -35,7 +35,7 @@ La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 
 
 
 
-`slide-30` incorrect password 
+`slide-30` 1 mot de passe (incorrect)
 --------
 
  `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
@@ -45,43 +45,212 @@ Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
 
 `FLD` pas moi ;-) Et j'en décompte 156 
 
-`slide-31` moi j'ai 156 
+`slide-31`  156 mots de passe ?
 --------
 
 `FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
 et pour ca forcemment j'ai un outil
 
 
-`slide-32` 1 chien
+`slide-32` 1 chien ?
 ------
 
 `RPE` t'as 156 mot de passe, mais a quoi bon ? je connais le nom de ton chien, et celui de Paris Hilton également
 
 `note` on respire, on laisse les gens rigoler
 
-`RPE` ok tout le monde a reconnu Paris Hilton ? elle s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients 
+`RPE` ok tout le monde a reconnu Paris Hilton ? 
 
-n'avait pas choisie une question bien originale 
-et encore moins de questions dont la réponse ne soit partagé sur le web à travers, blogs, journaux et reseaux sociaux pour la plupart d'entre nous
+Paris s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients 
+
+T-Mobile n'avait pas choisie une question bien originale... 
+Mais est-il si facile de trouver des questions dont les réponses ne soit déjà partagés sur le web à travers reseaux sociaux, blogs, tabloids, et journaux 
 
 `FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ? 
 
-`RPE` ou avec facebook, snapchat, tinder, gleeden
+`slide-33` des Secrets ? (tweets)
+------
 
-`FLD` et il n'y a pas que le reseau sociaux on le fait aussi 
+`RPE` qui voudrait partager ses secrets avec avec facebook, snapchat, meetic, tinder, gleeden ?
+
+`FLD` Mais qui ne partage quelques secrets avec son banquier ?
+
+`RPE` Et qui n'utilise pas de carte à puces, des cartes SIM ?
+
+`FLD` Dans la vraie vie, un secret c'est quelque chose que vous ne partagez qu'avec une seule personne à la fois.
+
+`RPE` et dans le vraie vie comme sur le web tout des oreilles trainent
+
+`slide-34` 100%
+------
+
+`FLD` on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal".
+
+`note` pause respiration, on laisse lire le public
+
+`RPE`  Bref, comme je le dis souvent, si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, t'as qu'à pas en avoir !
+
+`FLD` Notre but :
+N’être qu’un fournisseur de service
+Identifier un fournissseur d’identité de confiance
+S’y interfacer
+
+`RPE` A qui peut-on faire confiance ?
+
+`FLD` c'est toute la difficulté
+
+
+`slide-35` 1 IDP ?
+-------
+
+`RPE` : Adobe, comme nous Red Hat, vous avez forcemment fait un choix, vous avez une solution de gestion d'identité ? 
+
+Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
+
+
+`FLD`  Oui bien sûr, j'ai donc modifié mon appli généré, 
+
+ 
+`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé par ton fournisseur d'idendité
+
+
+`slide-36` SAML ?
+-------
+
+`FLD` Oui mon IDP comme la plupart des solutions supporte le standard SAML
+
+c'est un standard qui permet de faire du SSO sur le browser.
+si vous voulez débutez et tester votre solution, jetez un coup d'oeil à www.ssocircle.com 
+
+
+`slide-37` SAML & JHipster ?
+-------
+`RPE` Mais dis, JHipster ne supporte pas saml
+
+`FLD` non, 
+mais Spring Security le fait. 
+
+j'ai viré la gestion de mot de passe, j'ai viré pas mal de code, j'en ai rajouté un peu, j'ai pas mal trébuché, fini avec peu de code et beaucoup d'annotations
+
+`FLD` a choisir je préfère tout de même l'annotation hell au xml hell....
+Et Spring Security s'y prête plutot bien.
+
+`RPE` a Quand ton pull request ?
+oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
+
+
+`slide-38` SAML Sequence Diagram
+-------
+
+`RPE` Alors Saml ? comment ça marche ?
+
+`FLD` Le plus compliqué finalement, c'est la config.
+
+* il faut recuperer le meta données de l'idp et fournir a ton moteur client saml
+elle contienne un certificat et des url à associer à la redirection en vue d'un login ou tout au moins d'une verification  d'identité
+* et toi tu fournis à l'idp, quelques metadonnées comme
+  *  certificats et url associer à la redirection en vue d'un login et logout.
+  
+`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé 
+
+`FLD` mon fournisseur de service dit 
+
+* "Not authorized", je te connais pas, je te donne pas le service, je te donne pas la resource, 
+* va prouver ton identité au pres du fournisseur d'identité, 
+* il reviendra vers moi, 
+* si son retour est valide, je te donnerai accès à ma resource 
+* tout du moins si les infos d'idendité extraite dans l'enveloppe saml me permette de te donner le role necessaire pour etre autorise à acceder a ce service ou cette resource.
 
 
 
+`slide-39` login link
+-------
 
-est 
+`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé 
 
- qu'un réponse à question que ses clients 
+`FLD` oui la resource demandé demande un role user, role uniquement attribué si mon IDP valide l'identité de mon
+utilisateur. 
+ 
 
-`FLD` "What is your favorite pet's name?""
+`slide-39` okta 1 factor
+-------
+
+`RPE` ok donc tu es redirigé ici sur ton idp, tu rentres un mot de passe
+`FLD` oui ici mon mot de passe ldap sur adobeNet
+
+
+`slide-37` okta 2nd factor
+-------
+
+`RPE` et t'as demandé a ton IDP d'appliquer un second facteur.
+
+`FLD` Oui le user doit me prouver, me donner
+ 
+ * ce qu'il sait : son password
+ * ce qu'il a : un telephone ou autre generateur de token
+ 
+ 
+`slide-38` logged-in
+-------
+ 
+ `RPE` c'est pas relou ca pour les utilsateurs ?
+ 
+ `FLD` si, mais c'est indispensable vu le niveau de confidentialité de leurs données.
+ 
+
 
 `slide-33` wired
 ----
 
+`RPE`
+
+vous connaissize Paris Hilton ?
+vous connaissez ce gars ?
+vous devriez !
+
+pas le temps de raconter son histoire, ou alors on le laisse pour le q&A
+
+`FLD`
+mais quand vous aurez lu son histoire, cet article sur wired.
+Tou comme moi vous allez activer le 2fa chez tous les fournisseurs de vos identitiés digitales
+
+je l'ai active sur mon compte twitter, facebook, google, 
+
+paypal, github
+
+
+
+`slide-34` 2FA
+----
+
+`RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
+
+`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ? et dont le portefeuille de produits dérivés em 2013 s’élevait à 48 000 milliards d’euros, soit 24 fois le PIB de la France
+
+http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent-leur-niveau-d-avant-crise_4335868_3234.html
+
+`RPE` 1ms pur 100 millions, 1 sec 100
+
+
+`RPE` en tant que dev ou ops vous êtes une cible .
+
+`FLD` allez faire un tour sur twofactors.org, voyez ou vous pouvez activer le 2FA, et faites vos choix en fonction
+
+`RPE` laissez tomber docker
+
+`FLD` preferez github a bitbucket
+
+`RPE` on remarquera qu'elle est bien secure la finance en ligne
+
+`FLD` que l'internet of things et les applis santé font globalement fi de la securité
+
+`RPE` pareil pour la plupart des micro paiement
+
+
+
+
+
+ les developpeurs
 
 
 
@@ -148,18 +317,6 @@ http://www.macdevcenter.com/pub/a/mac/2005/01/01/paris.html
 http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-prince-hilton-auf-dem-arm.jpg
 
 
-FLD: on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal". Tu sais, comme croiser les effluves ? ;) D'ailleurs, 100% des attaques en 2014 implique des mots de dérobé.
-
-http://idtheftcenter.org/
-
-RPE: Bref, comme je le dis souvent, si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, t'as qu'à pas en avoir !
-
-FLD: on souffre tous, on doit tous gerer à notre echelle une ribambelle de mot de passe, moi j'utilise splashid pour stocker et generer mes mots de passe, aucune synchro sur le cloud, juste une synchro entre device. J'ai actuellement 159 mots de passe dans cette base, je ne voudrais pas en créer un autre...
-
-et vous ? carnet ? lastpass ? one password ?
-
-
-RPE: TODO prob dew revocation
 
 
 t'as pas un IDP dans ton intranet
