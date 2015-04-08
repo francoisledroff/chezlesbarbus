@@ -41,6 +41,7 @@ La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 
  `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
 
 `RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
+
 Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
 
 `FLD` pas moi ;-) Et j'en décompte 156 
@@ -172,14 +173,14 @@ elle contienne un certificat et des url à associer à la redirection en vue d'u
 utilisateur. 
  
 
-`slide-39` okta 1 factor
+`slide-40` okta 1 factor
 -------
 
 `RPE` ok donc tu es redirigé ici sur ton idp, tu rentres un mot de passe
 `FLD` oui ici mon mot de passe ldap sur adobeNet
 
 
-`slide-37` okta 2nd factor
+`slide-41` okta 2nd factor
 -------
 
 `RPE` et t'as demandé a ton IDP d'appliquer un second facteur.
@@ -190,7 +191,7 @@ utilisateur.
  * ce qu'il a : un telephone ou autre generateur de token
  
  
-`slide-38` logged-in
+`slide-42` logged-in
 -------
  
  `RPE` c'est pas relou ca pour les utilsateurs ?
@@ -199,7 +200,7 @@ utilisateur.
  
 
 
-`slide-33` wired
+`slide-43` wired
 ----
 
 `RPE`
@@ -229,8 +230,7 @@ paypal, github
 
 http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent-leur-niveau-d-avant-crise_4335868_3234.html
 
-`RPE` 1ms pur 100 millions, 1 sec 100
-
+`RPE` 1ms pur 100 millions, 1 sec 100 milliards, un hack de 8 minutes seconde suffirait-il pour jouer 24 fois le PIB de la France sur les marchés ?
 
 `RPE` en tant que dev ou ops vous êtes une cible .
 
@@ -247,10 +247,6 @@ http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent
 `RPE` pareil pour la plupart des micro paiement
 
 
-
-
-
- les developpeurs
 
 
 
