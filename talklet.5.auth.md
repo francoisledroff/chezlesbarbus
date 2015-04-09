@@ -9,9 +9,9 @@
 `FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
 En tant qu'utilisateur je trouve difficile à justifier.
 
-Je ne pense pas être le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
+`RPE` t'es pas le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
   
-Pourquoi devrai-je à nouveau créer un nouveau mot de passe ?
+`FLD`
 Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
 
 `RPE` et la je dis merci ou cfp.devoxx...
@@ -40,11 +40,11 @@ La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 
 `slide-30` 1 mot de passe (incorrect)
 --------
 
- `FLD` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
+ `RPE` rien ne m'empêche non plus de choisir un mot de passe "incorrect" 
 
-`RPE` Cette  mauvaise experience utilsateur entraine une reutilisation des mots de passe.
+`FLD` et j'imagine que tu reutilise le meme mot de passe partout ?
 
-Qui d'entre vous utilise le même mot de passe sur plus d'un site ?
+`RPE` pas toi ?
 
 `FLD` pas moi ;-) Et j'en décompte 156 
 
@@ -58,31 +58,38 @@ et pour ca forcemment j'ai un outil
 `slide-32` 1 chien ?
 ------
 
-`RPE` t'as 156 mot de passe, mais a quoi bon ? je connais le nom de ton chien, et celui de Paris Hilton également
+`RPE` t'as 156 mot de passe, mais a quoi bon ? je connais le nom de ton chien
 
 `note` on respire, on laisse les gens rigoler
 
-`RPE` ok tout le monde a reconnu Paris Hilton ? 
+`FLD` ok tout le monde a reconnu Paris Hilton ? 
 
-Paris s'est fait hacke sous compte telephone chez T-Mobile qui pour protéger le mot de passe de ses clients 
+`RPE` moi j;ai reconnu le chien
+
+`FLD`
+
+Paris s'est fait hacke sous compte  chez T-Mobile qui pour protéger le mot de passe de ses clients 
 
 T-Mobile n'avait pas choisie une question bien originale... 
+
 Mais est-il si facile de trouver des questions dont les réponses ne soit déjà partagés sur le web à travers reseaux sociaux, blogs, tabloids, et journaux 
 
-`FLD` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ? 
+`RPE` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ? 
 
 `slide-33` des Secrets ? (tweets)
 ------
 
-`RPE` qui voudrait partager ses secrets avec avec facebook, snapchat, meetic, tinder, gleeden ?
+`FLD` qui voudrait partager ses secrets avec avec facebook, snapchat, meetic, tinder, gleeden ?
 
-`FLD` Mais qui ne partage quelques secrets avec son banquier ?
+`RPE` Mais qui ne partage quelques secrets avec son banquier ?
 
-`RPE` Et qui n'utilise pas de carte à puces, des cartes SIM ?
+`FLD` Et qui n'utilise pas de carte à puces, des cartes SIM ?
 
-`FLD` Dans la vraie vie, un secret c'est quelque chose que vous ne partagez qu'avec une seule personne à la fois.
+`RPE` Dans la vraie vie, un secret c'est quelque chose que vous ne partagez qu'avec une seule personne à la fois.
 
-`RPE` et dans le vraie vie comme sur le web tout des oreilles trainent
+`FLD` et dans le vraie vie comme sur le web tout des oreilles trainent
+
+`RPE` Partout
 
 `slide-34` 100%
 ------
@@ -102,13 +109,15 @@ S’y interfacer
 
 `FLD` c'est toute la difficulté
 
+`RPE` : Adobe, comme nous Red Hat, vous avez forcemment fait un choix, vous avez une solution de gestion d'identité ? 
+
+Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
+
+
 
 `slide-35` 1 IDP ?
 -------
 
-`RPE` : Adobe, comme nous Red Hat, vous avez forcemment fait un choix, vous avez une solution de gestion d'identité ? 
-
-Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
 
 
 `FLD`  Oui bien sûr, j'ai donc modifié mon appli généré, 
@@ -116,11 +125,13 @@ Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (S
  
 `RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé par ton fournisseur d'idendité
 
+`FLD` Oui mon IDP comme la plupart des solutions supporte le standard SAML
+
 
 `slide-36` SAML ?
 -------
 
-`FLD` Oui mon IDP comme la plupart des solutions supporte le standard SAML
+
 
 c'est un standard qui permet de faire du SSO sur le browser.
 si vous voulez débutez et tester votre solution, jetez un coup d'oeil à www.ssocircle.com 
@@ -151,10 +162,12 @@ oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
 
 * il faut recuperer le meta données de l'idp et fournir a ton moteur client saml
 elle contienne un certificat et des url à associer à la redirection en vue d'un login ou tout au moins d'une verification  d'identité
+
+`RPE`
 * et toi tu fournis à l'idp, quelques metadonnées comme
   *  certificats et url associer à la redirection en vue d'un login et logout.
   
-`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé 
+`FLD` ok donc tu ceux acceder a ma une resource protégé 
 
 `FLD` mon fournisseur de service dit 
 
@@ -169,10 +182,7 @@ elle contienne un certificat et des url à associer à la redirection en vue d'u
 `slide-39` login link
 -------
 
-`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé 
-
-`FLD` oui la resource demandé demande un role user, role uniquement attribué si mon IDP valide l'identité de mon
-utilisateur. 
+`RPE` alors voyons je click! 
  
 
 `slide-40` okta 1 factor
@@ -198,33 +208,26 @@ utilisateur.
  
  `RPE` c'est pas relou ca pour les utilsateurs ?
  
- `FLD` si, mais c'est indispensable vu le niveau de confidentialité de leurs données.
+ `FLD` c'est vrai que l'equilibre entre expereience tuisateur. confort et securite n'est  pas evident a trouver.
  
-
 
 `slide-43` wired
 ----
 
+`FLD`
+
+tu connaissez le chien de  Paris Hilton ?
+mais tu connaissez ce gars ?
+
 `RPE`
-
-vous connaissize Paris Hilton ?
-vous connaissez ce gars ?
-vous devriez !
-
-pas le temps de raconter son histoire, ou alors on le laisse pour le q&A
+pas avant que tu m'en parles, mais pares avoir lu cet article 
+je comprends que tu veuilles passer en 2 FA
 
 `FLD`
-mais quand vous aurez lu son histoire, cet article sur wired.
-Tou comme moi vous allez activer le 2fa chez tous les fournisseurs de vos identitiés digitales
-
-je l'ai active sur mon compte twitter, facebook, google, 
+Oui je l'ai active sur mon compte twitter, facebook, google, yahoo 
 
 paypal, github
 
-
-
-`slide-34` 2FA
-----
 
 `RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
 
@@ -232,9 +235,16 @@ paypal, github
 
 http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent-leur-niveau-d-avant-crise_4335868_3234.html
 
-`RPE` 1ms pur 100 millions, 1 sec 100 milliards, un hack de 8 minutes seconde suffirait-il pour jouer 24 fois le PIB de la France sur les marchés ?
+`RPE` Quoi ?
 
-`RPE` en tant que dev ou ops vous êtes une cible .
+`FLD` 1ms pur 100 millions, 1 sec 100 milliards, je me demandais juste un hack de 8 minutes seconde suffirait-il pour jouer 24 fois le PIB de la France sur les marchés ?
+
+`RPE` Bret.. en tant que dev ou ops vous êtes une cible .
+
+
+`slide-34` 2FA
+----
+
 
 `FLD` allez faire un tour sur twofactors.org, voyez ou vous pouvez activer le 2FA, et faites vos choix en fonction
 
@@ -242,199 +252,61 @@ http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent
 
 `FLD` preferez github a bitbucket
 
-`RPE` on remarquera qu'elle est bien secure la finance en ligne
+`RPE` si vous navez peur de rien, utiliser ces services de finance en ligne
 
-`FLD` que l'internet of things et les applis santé font globalement fi de la securité
-
-`RPE` pareil pour la plupart des micro paiement
+`FLD` que l'internet of things et les applis santé font globalement fi de la securité,  pareil pour la plupart des micro paiement, 
 
 
-slide saml c'est pas suffisant
+`RPE`en fait le plus secure, etonnamment les reseaux sociaux...
+
+`FLD` et le sreseaux sociaux en UX il sy'connaissent, ils ont trouver un equilibre interesant mais en mettant en place le 2FA
+mais en vous permettant egalement de definir vos telephone et vos  navigateurs de confiances sur lesquels votre session sera maintenue.
+
+
+`RPE` et j'imagine que tu le fais ? ?
+
+
+
+
+slide saml + oauth
 -----
 
-OAuth2 Key Features
+`FLD`
+rappelle moi romain on a saml
+une fois authentifié je vais
+* provisionner un client oauth rien que pour toi (avec ton client idet secret )
+* et t'inviter a faire a la dance oauth
 
-IETF standard
-Extremely simple for clients (and developers)
-Access tokens carry information (beyond identity)
-Clear separation between users and machines
-Strong emphasis on not collecting user credentials in client app
-Machines act on their own or on behalf of users
-Resources are free to interpret token content
+`RPE` ok donc une fois logué, et apres quelques redirect je receiupre un token...
+mais bon il perime le token non ?
 
-So what's wrong with that?
+`FLD` oui mais refresh tokem
 
-Nothing, but...
-No standard (yet) for request signing
+`RPE` ah mais ca pue 
 
+`FLD` oui mais c'est revocable
 
-Other Options
-
-OAuth 1.0
-SAML assertions
-Physical network security IP tables etc.
-Kerberos
-Combinations of the above (including OAuth 2.0)
-
-
-http://presos.dsyer.com/decks/microservice-security.html#slide12
-http://presos.dsyer.com/decks/microservice-security.html#slide27
-
-
-=======
-========
-
-
-
-
-`slide-32` murphy ?
---------
-
-`RPE` et quand ton disque crash ?
-`FLD` si tu as toujours ma tablette ou mon telephone, c'est bon
-je synchronise mes mots de passes sur ma tablette et mon telephone
-`RPE` et si tu les perds
-`FLD` dans mon passeport, j'ai 
-
-photo du telephone cassé et du passeport
-
-
-
-
-la reutilisation des mots entraine un enorme probleme de secu.
-
-
-
-`Talklet 5` Draft
-==========
-
-
-Password regles et limites
+slide revoke
 ------
 
+`RPE` tu peux aller plus loin
 
-FLD: Ouais, mais attend, c'est pas si naze, puis, par défaut, on s'est assuré que tout les mots de passe seraient "strong" (à dév) pour éviter ca http://www.ayblog.com/wp-content/uploads/2013/10/Nice-Change-of-Password-to-Incorrect.jpg
+`FLD` oui email...
 
-RPE: mouais, tu veux implementer ca : http://www.medsyn.fr/perso/g.perrin/joomla/images/stories/food/Blog/mot-passe2.jpg
-ou ca https://theeditorsjournal.files.wordpress.com/2014/09/creating-a-password.jpg?w=1240&h=1248
-
-FLD: c'est vrai, que ces strong passwords sont just difficile a retenir mais pas à craquer : http://xkcd.com/936/
-
-
-
-
-
-
-RPE: Mais même si le mot de passe est "strong," l'utilisateur va devoir le créer, et comme on a plein de mot de passe à gérer, fort à parier, qu'il va reprendre le même que "ailleurs", ce qu'on appelle du "common logging". Et ce mot de passe, est probablement déjà craqué par tout le monde - à commencer par les mecs de la NSA.
-
-FLD: Ouais, c'est vrai qu'il suffit de se rappeler de Sonny...
-we have so may passwords to deal with, we reused them
-sony password reused at yahoo: http://www.troyhunt.com/2012/07/what-do-sony-and-yahoo-have-in-common.html
-
-Password cycle de vie
-------
-
-RPE: Ensuite, avec l'approche db users de JHipster, tu retrouves aussi à gérer le cycle de vie du mot de passe. Il faudra créer un mot de passe pour ton app, en plus du reste, et l'app devra permettre à l'utilisateur de le mettre à jour, mais aussi à l'administrateur de gérer ces derniers. Bref, ça va très rapidement faire chier tout le monde, et les utilisateurs vont sans doute faire du "common logging" et coller son mot de passe "habituel", déjà craqué par tout le monde - à commencer par les mecs de la NSA. Et fort à parier que peu, voire aucun, utilisateurs ne le changera par lui même - donc à ton appli de l'exiger - et là encore, des codes à ajouter.
-
-FLD: je crois qu'en effet Jhipster a toute une tringlerie, avec une page register et de l'envoi de mail avec un password reset link...  moi j'avais pensé à faire une page de "password recovery" à base ce question secrète
-
-You can name her whatever you like but be sure it’s something you can remember. You’ll be using it as a security question answer for the rest of your life
-
-http://positivedoggie.com/you-can-name-her-whatever-you-like-but/
-
-RPE: ca me rappelle le hack de Paris Hilton :
-
-Paris Hilton pet name security hack
-http://www.macdevcenter.com/pub/a/mac/2005/01/01/paris.html
-http://content5.promiflash.de/article-images/w500/paris-hilton-haelt-zwergspitz-prince-hilton-auf-dem-arm.jpg
-
-
-
-
-t'as pas un IDP dans ton intranet
+slide option
 ----
 
-RPE: Puis, bon, Adobe, comme nous Red Hat, on est des boites sérieuses, vous avez bien une solution de gestion d'identité ? Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
+`FLD`
+et sinon on avait d'autre option
 
-RPE: Bref, après toutes ces conneries, au final, tu as un IDP dans ton intranet super-secure ?
+`RPE`
+oui parce que oauth2 ,  No standard (yet) for request signing
 
-FLD: Ouais, d'ailleurs c'est la classe, c'est basé du SAML avec du 2FA !
+`FLD` en fait avec le JWT token et spring security tu peux le faire...
 
-screencast 
+`RPE` mais oui mais pourquoi pas oauth1 ?
 
-2 FA and UX
-----
-
-RPE: vas-y qu'est ce que t'attends, put 2fa in place
-
-FLD: Ouais, mais alors, OK , c'est secure, mais alors bonjour l'expérience utilisateur ! Personne va vouloir l'utiliser notre app à ce compte là
-
- https://twitter.com/michaelneale/status/568279010968383488
-
-1. App requires 2FA login.
-2. get phone from pants
-3. Distracted by 100s of notifications on it
-4. Back to computer. Repeat.
+oauth1 ping pong
 
 
 
-RPE: Oui, en fait, mais dis francois toi comme moi on utilises 2FA sur nos comptes twitter, google et facebook, n'est ce pas?
-c'est pas si douloureux,
-
-FLD: qui ici a activé https et 2fa sur google, facebook, twitter et les autres ?
-
-
-mais crois qu'ici tu pourrais utiliser oauth2, une fois l'utilisatuer authentifié
-
-FLD: Oui, c'est une bonne idée
-
-RPE: Comme quoi, c'est malin de bosser Dev + Sécu ;) - vas y montre moi comment tu fais avec ton app:
-
-et la je peux montrer encore du code modifié de jhispter ou l'authentication est deporté sur un idp saml et ensuite seuleuemtn un oauth token (et un refresh token) est echangé avec le front-end javascript
-
-resultat tu te tappes le 2fa une fois et ensuite a moins de quitter l'app pendant plus de 30 jours tu le referas pas.
-
-on peux montrer les echanges avec des jolies sequence diagram
-on peux aussi montrer que l'on peut revoker les tokens pour les stolen device/laptop/desktop
-j'ai du code jhipster et une interface pour ca
-
-
-RPE: Ok, je pense que là t'es bon pour au moins déployé en interne.
-
-FLD: Ben, c'est ce qu'on a fait après ça, mais maintenant que ça marche bien, on veut ouvrir le service à l'extérieur.
-
-RPE: Ah ouais, mais alors du coup, on n'a pas fini, il reste des trucs à voir. A commencer, par les attaques de types "brute forces" tes mots de passes.
-
-
-### avoid Brute force attack
-
-FLD: Attend, on y a pensé, et on a mis des contraintes sur les password pour qu'il soit difficile à craquer
-
-(@FLD, là si tu as , on montre du code jhipster)
-
-RPE: Ouais, c'est bien, mais ça n'empêche pas un attaquant d'essayer quand même et, soit d'éventuellement réussir, ou juste rendre ton service inaccessible (par effet de bord). C'est pourr ça que moi j'aime bien avoir un reverse proxy en place en frontal de tout appli.
-
-@FLD, la je ferais une petit explication du concept sur 1,2 slides
-
-RPE: Donc avec un RP en place, pour ton problème de mot de passe, tu peux déjà controllé qu'un utilisateur ou une IP essaye pas "en boucle" de se logguer, sans encombrer le code ou la logique de ton app. Tu peux aussi nettoyer les paramètres transmis ou simplement dropper des requêtes invalides. Quand on sait que, en fin de compte, le gros des exploits se font en abusant des paramètres - comme le classique "; drop database", c'est une bonne protection de s'assurer qu'on  ne recevra que des requêtes dotés de paramètres valides.
-
-(là tu peux rebondir avec les CAPCHAs que tu as mis en place sur ton app jhipster
-
-@FLD, peut être que tu as du code JHipster qui fait pareil, et là on peut faire un micro débat sur ce point entre "a1, je veux le faire dans mon app" et "a2, mais non, laisse l'infra faire...",
-
-### API en ligne
-
-FLD: Au fait, Romain, on n'en a pas parlé, mais mon appli a un service en ligne - un service ReST,
-
-RPE: ReST ? Vraiment ? Tu aimes plus te palucher des XSD et le "savon" (SOAP) ? Mais plus sérieusement, ça crée d'autres problèmes...
-
-* rate limits
-* header validation
-* conditional requests
-
-=> IMHO, Un RP en frontal, faisant du nettoyage de requêtes + mise en place de bannissement si
-nécessaire, me semble être essentiel.
-
-===
-
-150 max: https://github.com/jhipster/generator-jhipster/blob/master/app/templates/src/main/java/package/web/rest/_AccountResource.java#L200

@@ -52,6 +52,16 @@ c'est juste une bonne vieille appli web de gestion
 
 Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisation, les roles. 
 
+et me donne un grand choix d'authorisation et authenticatio
+
+`RPE` man in the middle attack
+
+`FLD` Spring Secu supporte HSTS qui indique au client que seul https sera utilisé.
+
+`RPE` clickjacking ?
+
+`FLD` frameOptions().sameOrigin()
+
 `RPE` et les attaques XSS ?
 
 `FLD` ca gère toout comme  les attaques de type Cross site scripting forgery, il me fournit une solution  à base crsf Token, 
@@ -59,5 +69,6 @@ Il m'offre une bonne base de travail pour gérer l'authentication, l'authorisati
 `RPE` et plein d'acronyme anglais pour te la peter, et sinon niveau audit ?
 
 `FLD` aussi... il fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
+n
 
 

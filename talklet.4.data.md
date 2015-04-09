@@ -11,24 +11,17 @@
 Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
 
 * l'adresse, le numero telephone des employés
-* l'ensemble de l'arbre organisationel RH
 * les salaires
-* les congés
-* les notes de frais
 * des infos sur les deals en cours
 
+ping pong
 
-`RPE` Bref t'as des données interne, du PII, du confidential et restricted. En fati, c'est intéressant, car, même si les données ne paient pas de mine au premier abord, on s'est vite rendu compte qu'elles étaient en fait confidentiel.
+* PII
+* super sensible confidentiel
+* deals internal mais restriced
 
-`FLD` Ouais, mais est ce qu'on peut vraiment considérer que le PII est confidentielle ?
 
-`RPE` Ben si un ex jaloux tue son ou sa partenaire, employé de ta boite, parce que Adobe n'a pas respecte la confidentialité de son adresse privée, ça peut se réveler embêtant.
 
-`FLD` Yes, c'est vrai, et en y réflechissant, sans trop succès, on n'a pas trop trouver de cas concrets où les données ne sont pas réellement confidentielles. Dans la pratique, et l'informatique de gestion au moins, c'est très rarement le cas.
-
-`RPE` En fait, on est même arrivé à la conclusion, que au final, dans une app, les données les moins confidentielles, c'est peut être justement son code source !
-
-`RPE` Bref, le mieux, dans le doute, est probablement de considérer que les données sont confidentielles, sauf preuve explicite du contraire.
 
 `FLD` Yes, on a donc plutot intérêt à faire du bon boulot.
 
@@ -61,11 +54,11 @@ Mais on prévois un beau mashup de données, c'est un "employee productivity too
 `slide-24` Chiffrer le back
 -------
 
-`RPE` Dis, avant mmême de parler chiffrement, Contrairement à ces 40 000 db mongo en prod sur le web et non protégées, j'imagine que tu as mis en place un minimum de sécu ?
+`RPE`  Contrairement à ces 40 000 db mongo en prod sur le web , t'as pas apris la confg par défaut ?
 
 `FLD` Oui on a même du diverger du code généré par Jhipster pour assurer le niveau de sécu requise,
 
-En effet JHipster utilise un outil open source appelé mongeez qui  permet de gérer les modifications de vos documents mongo et propager ces changements en synchronisation avec votre code change lors des déploiements.
+En effet JHipster utilise un outil open source appelé mongeez qui  permet de gérer les modifications de vos documents mongo et propager ces changements lors des déploiements.
 
 Cet outil a besoin des droits d'admin sur la base, c'est impossible à utiliser en prod pour nous,
 https://github.com/jhipster/generator-jhipster/issues/733
@@ -88,9 +81,11 @@ https://github.com/jhipster/generator-jhipster/issues/733
 
 `FLD` j'hesite
 
-`RPE` je te conseille le chiffrage applicatif
+`RPE` ecoute on pas le trop le temps mais je te conseille le chiffrage applicatif
 
+`FLD` l'admin du mongo sera plus facile
 
+`RPE` meilleure granularité et   données isolées.
 
 
 
@@ -99,9 +94,11 @@ https://github.com/jhipster/generator-jhipster/issues/733
 -------
 
 
-`RPE` Bon on vient de parler l'authentication et l'authorisation de ton serveur app dans Mongo, mais quand est-il de tes utilisateurs sur ton front ?
+`FLD` Bon on vient de parler l'authentication et l'authorisation de ton serveur app dans Mongo, mais parlons de l'auth tes utilisateurs sur ton front ?
 
-`FLD` ca c'est un gros morceau de notre conf en effet.
+
+
+
 
 
 

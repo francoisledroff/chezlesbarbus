@@ -132,7 +132,9 @@ comme par exemple l'ajout paramètres ou un contenu incohérent
 
 `FLD` ou encore de la validation de header http, l'ajout de token csrf, du throttling ou du rate limiting
 
-`RPE` Tes aimes bien les mots anglais non ? En plus, généralement ton serveur web en frontal, il est, soyons honnête, payé à rien foutre. 
+`RPE` Tes aimes bien les mots anglais non ? 
+
+En plus, généralement ton serveur web en frontal, il est, soyons honnête, payé à rien foutre. 
 
 
 
@@ -148,5 +150,5 @@ comme par exemple l'ajout paramètres ou un contenu incohérent
 
 `RPE` Ou plutôt avec des douaniers qui arrêtent que les "honnêtes citoyen", sans jamais voir que les criminels passe à 20m de leur point de contrôle...
 
-
+`FLD` ok donc on filtre, on nettoie mais on veut aussi recevoir et envoyer des données sur ce fameux reseau non ?
 
