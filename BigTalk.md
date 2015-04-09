@@ -44,21 +44,13 @@ Ce ne sera pas un audit
 
 #### `slide-6` non pas un audit
 
-`FLD` oui... mais non
+`FLD` mmmmmmmrf
 
-`RPE` Ah bon ? Bon, ça tombe bien ça me casse les pieds les audit !
+`RPE` Ah bon cool , ça me casse les pieds les audit ! c'est un truc de consultant en cravate
 
-`FLD` ... je me sens pas armé pour un audit de sécurité... On en est encore au stade du POC... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe...  on n'est pas en position de faire un audit.
+`FLD` non non mais c'est pas ca ... je me sens pas armé pour un audit de sécurité... On en est encore au stade du Proto... mon archi n'est pas sèche et mes dévelopements en sont encore en cours... j'ai pas encore staffé toute l'équipe...  on n'est pas en position de faire un audit.
 
-`RPE` Tu réalises que la différence entre un Poc et une appli en prod, c'est juste que personne n'a encore mis le PoC en prod ? ;) 
-
-Bref, si tu as réellement inquiet pour la sécurité, il vaut mieux commencer dès maintenant, car il n'y aura pas de "miracle" d'ici la production. 
-
-J'ai vu des systèmes avoir comme mot de passe root "password", avec un joli document indiquant, en rouge,  "à changer avant la mise en prod", 
-
-`FLD` et ...  le mot de passe en production trois mois plus tard ?
-
-`RPE` devine
+`RPE` Tu réalises que la différence entre un Proto et une appli en prod, c'est juste que personne n'a encore mis le proto en prod ? ;) 
 
 
 #### `slide-10` Security By Design
@@ -67,9 +59,9 @@ J'ai vu des systèmes avoir comme mot de passe root "password", avec un joli doc
 
 `RPE` et tu lui parles encore ?
 
-`FLD` et aucun programmeur de l'équipe n'est un expert en sécurité
+`FLD` oui c'est moi... mais tu sais  aucun programmeur de l'équipe n'est un cardo en sécurité
 
-`RPE` pas de souci... on va le voir ensemble,  la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. 
+`RPE` pas de souci... on va le voir ensemble,  la sécu touche plein de truc, donc on peut pas vraiment avoir un expert ou un spécialiste. c'est un boulot d'equipe
 
 `FLD` Tu as raison, la sécurité impacte, l'ensemble du projet, nous seuleument les développeurs, les opérations, mais aussi l'intégration continue et l'expérience utilisateurs.
 
@@ -91,7 +83,10 @@ C'est vrai que c'est un peu difficile, comme ça, de regarder son app, et de fai
 
 `FLD` Ben justement, y'a une méthode intéressant poussée par Microsoft et OWASP est appelée le "Threat Modeling"
 
-Elle permet de mieux identifier les menaces ainsi que les vulnérabilités de votre système
+`RPE` y avait pas une conf sur le sujet a devoxx
+on en parle quand meme ?
+
+`FLD` alons-y rapidement, cette methodo permet de mieux identifier les menaces ainsi que les vulnérabilités de votre système
 
 `rpe` ccm ?
 
@@ -103,13 +98,13 @@ Elle permet de mieux identifier les menaces ainsi que les vulnérabilités de vo
 
 Nous n'avons pas le temps de tout couvrir aujourd'hui mais je vous invite à une lecture sur wikipedia ou sur le site OWASP.
 
-A chaque categorie corresponde des mesures à mettre en place
+A chaque categorie correspond des mesures à mettre en place
 
 `RPE` Ok, alors soyons didactique, et prenons un exemple concret. Par exemple, là, ce R de repudiation. Qu'est ce que ça veut dire ?
 
 `FLD` Ben c'est pour éviter que vos utilisateurs contestent les transactions faites avec leur login et depuis leur machines, mettez en place un "audit trail" sur chacun de vos tiers applicatifs.
 
-`RPE` En effet, si on doit inputer à quelqu'un une manipulation malhonnête sur une transaction, c'est probablement de pouvoir le prouvé sans l'ombre d'un doute.
+`RPE` En effet, si on doit inputer à quelqu'un une manipulation malhonnête sur une transaction, c'est bien de pouvoir le prouvé sans l'ombre d'un doute.
 
 `slide-21` priority  
 -------
@@ -153,7 +148,8 @@ c'est juste une bonne vieille appli web de gestion
 
 `FLD` du coup je suis parti sur une stack jhipster
 
-`RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons Groovy, avec une extension en cours de fabrication pour trouver une excuse pour utiliser Ceylon ou Closure ?
+`RPE` c'est quoi jhipster ? Encore un framework MVC ? Un truc qui springboot pour lancer un container scala écrit en JRuby qui exécute des greffons Groovy ?
+
 
 `FLD` Presque :) C'est un generateur d'appli web à la appfuse - pour ceux qui s'en rappelle
 
@@ -203,6 +199,7 @@ et me donne un grand choix d'authorisation et authenticatio
 `FLD` aussi... il fournit une bonne trame pour l'audit et logs relatifs à la sécurité.
 n
 
+pause 
 
 `Talklet 2` Intranet, FW & RP
 ====
@@ -229,16 +226,16 @@ Laisse moi te poser une question, tes utilisateurs se connectent depuis une vari
 
 sachent que certains sont même "root" et que tous n'ont pas des postes "managés" ?
 
+`RPE` l'intranet n'est qu'a un saut de puce de 'l'internet
 
-`RPE`, donc  malgré les mises à jours régulières des postes "managés", d'avoir des systèmes compromis. 
-
-{Enfin, assumant que les postes "managés" soient toujours plus "sécurisé" que les postes externes, ce qui peut se discuter (spécialement entre un Windows gangrené de Security Pack, face à une laptop sous une distro linux à jour).}
 
 ### `slide-17` computer locked in a room
 
-`FLD` Au final, ce que tu me dis, des que c'est en reseau, c'est foutu
+`FLD` Au final, tu me tiens le meme discours que tous ces barbus, des que je suis connecté, je peux me faire hacké...
 
-mais je suis sauvé j'ai des FW
+`RPE` exactement
+
+`FLD` mais je suis sauvé  j'ai des FW
 
 
 `slide-18` Firewall
@@ -282,15 +279,15 @@ FLD sourire. respiration
 
 `RPE`: En ccl, moi, j'ai l'habitude de dire qu'on estimer la nullité crasse d'un IT par le nombre de port bloqué:
 
-`FLD` je peux pas relever mes mails en POP, 
+`FLD` un IT ou on peux pas relever ses mails en POP, 
 
 `RPE` c'est naze
 
-`FLD` mon accès VPN est bloqué, 
+`FLD` un IT ou l'accès VPN est bloqué, 
 
 `RPE` encore plus naze
 
-`FLD` SSH sortant est bloqué
+`FLD` ou le SSH sortant est bloqué
 
 `RPE` toujours naze et stupide. Un coup de tunnel SSH over HTTPS, et tu sors.
 
@@ -323,7 +320,7 @@ FLD sourire. respiration
 
  par exemple, un serveur web en frontal. Genre, un nginx ou un apache qu'on place devant leur serveur d'app.
 
-`FLD` Ben justement, sur ma petite appli intranet, puisqu'on était en mode POC, on a pas eu le temps..
+`FLD` Ben justement, sur ma petite appli intranet, puisqu'on était en mode Proto, on a pas eu le temps..
 
 `RPE` C'est con ça,  Car en fait, quand tu un serveur web en frontal, tu peux t'en servir comme un reverse-proxy (RP). 
 
@@ -339,10 +336,6 @@ comme par exemple l'ajout paramètres ou un contenu incohérent
 `FLD` ou encore de la validation de header http, l'ajout de token csrf, du throttling ou du rate limiting
 
 `RPE` Tes aimes bien les mots anglais non ? 
-
-En plus, généralement ton serveur web en frontal, il est, soyons honnête, payé à rien foutre. 
-
-
 
 `FLD` mais on peux pas me le hacker aussi vite et bien le RP ?
 
@@ -367,6 +360,10 @@ En plus, généralement ton serveur web en frontal, il est, soyons honnête, pay
 `RPE` Et dis Tes données peuvent-elles être considérés comme confidentielles ?
 
 `FLD` contrairement à un app store, un site d'ecommerce ou un backend uber, je ne stocke aucun moyen de paiement, je ne risque donc pas les voir fuiter vers le dark web.
+
+`rpe` ok cool
+
+`FLD`
 
 Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
 
@@ -402,12 +399,7 @@ ping pong
 
 `RPE` et souvenez vous, avec suffisamment de temps et de ressources, n'importe quelle chiffrement peut-etre cassé .
 
-`FLD` dernier conseil avant de passer à la suite,
-
-
-* faite ce boulot au niveau du reverse proxy (nginx, apache...), automatiser cela avec Chef ou Puppet
-* vous pouvez le faire aussi au niveau du serveur d'app, sachez Jhipster ne le supporte et tout comme Romain ne le conseille pas, cf l'issue jhipster #678
-* scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances
+`FLD` scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances
 
 `RPE` ok, pour le front, admettons qu'on soit bon, regardons le back.
 
@@ -416,21 +408,21 @@ ping pong
 
 `RPE`  Contrairement à ces 40 000 db mongo en prod sur le web , t'as pas apris la confg par défaut ?
 
-`FLD` Oui on a même du diverger du code généré par Jhipster pour assurer le niveau de sécu requise,
-
-En effet JHipster utilise un outil open source appelé mongeez qui  permet de gérer les modifications de vos documents mongo et propager ces changements lors des déploiements.
+`FLD` Oui l'a fait, Mais il faut savoir que JHipster utilise un outil tier open source appelé mongeez 
 
 Cet outil a besoin des droits d'admin sur la base, c'est impossible à utiliser en prod pour nous,
-https://github.com/jhipster/generator-jhipster/issues/733
 
-`RPE` ok donc t'as mis en place une authentication et un ACL bien. Mais t'as chiffrer les données qui passe sur le cable entre ton serveur d'app et Mongo ? ou elle passe en clair ?
+`RPE` logique donc t'as mis en place une authentication et un ACL bien. Mais t'as chiffrer les données qui passe sur le cable entre ton serveur d'app et Mongo ? ou elle passe en clair ?
 
 `FLD` on l'a fait oui, mais ce fut épique, par défaut le support n'est pas fourni dans les distro Mongo, il est disponible dans le code open source,
 
 * il a donc fallu builder mongo depuis les sources.
-* Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
 
-`RPE` et t'as fait un PR ?
+`RPE` mais c'est vraiment pourri de devoir debuilder mongo...
+
+`FLD` Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
+
+et t'as fait un pull request ?
 
 `FLD` oui je compte fournir ce code à la communauté soit par un pull request sur le project JHIpster ou sur le project spring-data
 
@@ -526,9 +518,7 @@ et pour ca forcemment j'ai un outil
 
 `note` on respire, on laisse les gens rigoler
 
-`FLD` ok tout le monde a reconnu Paris Hilton ? 
-
-`RPE` moi j;ai reconnu le chien
+`FLD` et celui de Paris Hilton ? 
 
 `FLD`
 
@@ -595,10 +585,34 @@ Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (S
 `slide-36` SAML ?
 -------
 
-
-
 c'est un standard qui permet de faire du SSO sur le browser.
 si vous voulez débutez et tester votre solution, jetez un coup d'oeil à www.ssocircle.com 
+
+`slide-38` SAML Sequence Diagram
+-------
+
+`RPE` Alors Saml ? comment ça marche ?
+
+`FLD` Le plus compliqué finalement, c'est la config.
+
+* il faut recuperer le meta données de l'idp et fournir a ton moteur client saml
+elle contienne un certificat et des url à associer à la redirection en vue d'un login ou tout au moins d'une verification  d'identité
+
+`RPE`
+* et toi tu fournis à l'idp, quelques metadonnées comme
+  *  certificats et url associer à la redirection en vue d'un login et logout.
+  
+`FLD` exactement, regardons le flow
+
+ tu ceux acceder a ma une resource protégé 
+mon fournisseur de service dit 
+
+* "Not authorized", je te connais pas, je te donne pas le service, je te donne pas la resource, 
+* va prouver ton identité au pres du fournisseur d'identité, 
+* il reviendra vers moi, 
+* si son retour est valide, je te donnerai accès à ma resource 
+* tout du moins si les infos d'idendité extraite dans l'enveloppe saml me permette de te donner le role necessaire pour etre autorise à acceder a ce service ou cette resource.
+
 
 
 `slide-37` SAML & JHipster ?
@@ -617,29 +631,6 @@ Et Spring Security s'y prête plutot bien.
 oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
 
 
-`slide-38` SAML Sequence Diagram
--------
-
-`RPE` Alors Saml ? comment ça marche ?
-
-`FLD` Le plus compliqué finalement, c'est la config.
-
-* il faut recuperer le meta données de l'idp et fournir a ton moteur client saml
-elle contienne un certificat et des url à associer à la redirection en vue d'un login ou tout au moins d'une verification  d'identité
-
-`RPE`
-* et toi tu fournis à l'idp, quelques metadonnées comme
-  *  certificats et url associer à la redirection en vue d'un login et logout.
-  
-`FLD` ok donc tu ceux acceder a ma une resource protégé 
-
-`FLD` mon fournisseur de service dit 
-
-* "Not authorized", je te connais pas, je te donne pas le service, je te donne pas la resource, 
-* va prouver ton identité au pres du fournisseur d'identité, 
-* il reviendra vers moi, 
-* si son retour est valide, je te donnerai accès à ma resource 
-* tout du moins si les infos d'idendité extraite dans l'enveloppe saml me permette de te donner le role necessaire pour etre autorise à acceder a ce service ou cette resource.
 
 
 
@@ -688,22 +679,14 @@ pas avant que tu m'en parles, mais pares avoir lu cet article
 je comprends que tu veuilles passer en 2 FA
 
 `FLD`
-Oui je l'ai active sur mon compte twitter, facebook, google, yahoo 
+Oui je l'ai active sur mon compte twitter, facebook, google, yahoo , github, paypal,
 
-paypal, github
 
 
 `RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
 
-`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ? et dont le portefeuille de produits dérivés em 2013 s’élevait à 48 000 milliards d’euros, soit 24 fois le PIB de la France
+`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ? 
 
-http://www.lemonde.fr/economie/article/2013/12/17/les-produits-derives-depassent-leur-niveau-d-avant-crise_4335868_3234.html
-
-`RPE` Quoi ?
-
-`FLD` 1ms pur 100 millions, 1 sec 100 milliards, je me demandais juste un hack de 8 minutes seconde suffirait-il pour jouer 24 fois le PIB de la France sur les marchés ?
-
-`RPE` Bret.. en tant que dev ou ops vous êtes une cible .
 
 
 `slide-34` 2FA
@@ -894,8 +877,6 @@ combattre le feu
 `RPE` Ben sinon, si un mec à trouver un exploit sur ton app, il peut accéder à ses données, mais aussi éventuellement, modifier son comportement. 
 
 meca qui bloque
-
-Par exemple, lui faire envoyer des mails ("Merci à l'infrastructure Adobe d'avoir participé "pro bono" à la diffusion de mes spams !), effacer des fichiers ou récupérer des données d'une autre app colocalisé avec l'appli.
 
 co un RP !
 
