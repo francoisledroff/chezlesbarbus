@@ -88,32 +88,3 @@ http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
 de choas monkey a hacky monckey
 
 
-
-annexe
------
-
-1) Github
-
-`RPE` Bon, of course, l'ami Github est le premier auquel on pense. Suffit de voir combien de résultat retourne une requête sur 'mysql_query' dans la code base, pour voir qu'on a déjà un bon point de départ.
-
-https://github.com/search?p=3&q=extension%3Aphp+mysql_query+%24_GET&ref=searchresults&type=Code  (faire une photo)
-
-`RPE` Bon, au final, c'est évident, et je pense que la plupart d'entre vous sont (ou plutôt pensent être) protégé, parce que "aucune personne dans la compagnie ne va jamais commité un mot de passe". Ouais, bon, allez, assumons que c'est vrai. De toute manière, y'a beaucoup plus retour à faire. Comme par exemple commité sous un autre nom - en effet, c'est la grosse faiblesse des DVCS par rapport à SVN/CVS, plus de centralisation. N'importe qui peut fusionner une PR venant de quelqu'un autre contenant des commits avec "d'autres auteurs".
-
-`FLD` Ouais, mais c'est grave ça ?
-
-`RPE` Ben déjà, ça fout en l'air d'audit trail. Tu recherches qui a injecté un code malicieux et ça ne te pointe pas sur la bonne personne, mais surtout ça ouvre la porte à des exploits "social". On a tous dans nos boites des "diva" dont personne ne va remettre le code en question parce que c'est "untel" qui l'a écrit. D'ailleurs, c'est exactement comment ça que Tordvals fait avec le kernel. Il ne pull que depuis des repos de gens qu'il connait et respecte. (@assistance, je vous rassure, les mecs comme ça y'en que 7. Je ne suis pas sûr que Tordvlad accepterait une PR de sa propre femme...)
-
-`FLD` Ouais, Ok, donc tu fais une PR avec des commits venant d'un tel gus, et le code est accepté sans être revu...
-
-`RPE` Laissant rentrer, par exemple, un code malicieux...
-
-`FLD` OK, mais qu'est ce qu'on peut faire concrètement ?
-
-`RPE` Ben des trucs simple, comme 1) se méfier des PR même venant d'auteur de confiance, si elles changent beaucoup de code. En fait, une PR (à mon sens), c'est comme une méthode Java ou un commit, ça doit pas être trop long. La même manière par exemple que je n'écris pas une méthode Java qui dépasse 5,6 lignes, et que je ne fais pas un commit avec 143 changements, je pense qu'une PR devrait contenir un petit ensemble de commit (ou un seul, même si perso, je trouve ça dommage).
-
-`FLD` OK, mais sinon. Quoi d'autre ? Avoir une forme de tracabilité pour l'audit j'imagine ...
-
-`RPE` Oui, exactement. Tu dois pouvoir déterminer qui a crée une PR, qui l'a accepté, etc... mais pas seulement. Par exemple, il faut aussi avoir un process pour nettoyé après le départ d'un employé de l'organisation. Effacer leurs repos, mais aussi, pourquoi pas, auditer leur répos publiques (même si ça pose des questions en terme de respect de la vie privée).
-
-
