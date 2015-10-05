@@ -463,16 +463,8 @@ et t'as fait un pull request ?
 `RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
 `FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
-En tant qu'utilisateur je trouve difficile à justifier.
 
 `RPE` t'es pas le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
-  
-`FLD`
-Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
-
-`RPE` et la je dis merci ou cfp.devoxx...
-
-`FLD` Si votre site est pro, vous avez surement un ldap ou mieux un identity provider ? 
 
 `slide-29` Votre mot de passe (xkcd)
 --------
@@ -569,9 +561,9 @@ Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (S
 
 
 
+
 `slide-35` 1 IDP ?
 -------
-
 
 
 `FLD`  Oui bien sûr, j'ai donc modifié mon appli généré, 
@@ -754,6 +746,17 @@ oui parce que oauth2 ,  No standard (yet) for request signing
 `RPE` mais oui mais pourquoi pas oauth1 ?
 
 oauth1 ping pong
+
+
+slide public idp option
+----
+
+
+`FLD`
+Et Si votre site est publique, pourquoi ne pas me proposer de me logger avec openid, facebook, google, twitter et surtout github si votre public est un public developpeurs.
+
+
+`RPE` et la je dis merci ou cfp.devoxx...
 
 
 
