@@ -290,32 +290,30 @@ do so.
 Reverse Proxy
 ---------
 
-`RPE` You use reverse proxy for this. Nowdays, project often have the control on the proxy
+`RPE` You use reverse proxy for this. Nowdays, project often have the control on the HTTP load
+balancer in front of their app...
 
-`FLD` Ben justement, sur ma petite appli intranet, puisqu'on était en mode Proto, on a pas eu le temps..
+`FLD` Well, sadly because we are still prototyping, we had no time to set up a load balancer in
+front
 
-`RPE` C'est con ça,  Car en fait, quand tu un serveur web en frontal, tu peux t'en servir comme un reverse-proxy (RP).
+`RPE` It's a shame, because you also have a reverse proxy, and use it to ensure your webapp is not being
+attack using malicious content. Indeed, the reverse proxy can analyze any incoming requests...
 
-pour faire simple, que, avant de retourner une requête vers ton serveur d'app, le RP va analyser son contenu
+`FLD` and so what ?
 
-`FLD` et alors ?
+`RPE` well if the request does not match what the app expectation, it will just drop it. Let's take
+a simple example. If you have a form with date field and are getting a 300 hundreds characters, it
+is both invalid and most likely an attack...
 
-`RPE`  si elle n'est pas conforme aux attentes de l'application il la dropped
+`FLD` yes, you can also do header validation, add CSRF token,  throttling or even rate limiting
 
-comme par exemple l'ajout paramètres ou un contenu incohérent
-(exemple date sur 200 carateres)
+`RPE` And a shitload of very cryptic technical terms. You might get some girls out of that.
 
-`FLD` ou encore de la validation de header http, l'ajout de token csrf, du throttling ou du rate limiting
+`FLD` Right, but can't my RP get hacked too ?
 
-`RPE` Tes aimes bien les mots anglais non ?
+`RPE` In theory yes, but it's more difficult (explains hacks and then how RP are therefore "immune" to it)
 
-`FLD` mais on peux pas me le hacker aussi vite et bien le RP ?
-
-`RPE` Plus difficilement, parce que la plupart des hacks se basent sur le fait de manipuler la réaction du serveur distant en abusant des requêtes qu'il accepte. Or le RP ne repond pas a ses reaquetes
-
-`FLD` oui il se contente de les analyser et nettoyer.
-
-`RPE` ce qui laisse donc très, très peu de marge à un attaquant pour le contourner.
+`FLD` Yes, it just analyze and clean, does not replies nor interract with the attacker.
 
 `FLD` ok so filter content, clean but also need to returns data
 
