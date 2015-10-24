@@ -323,28 +323,26 @@ is both invalid and most likely an attack...
 `slide-23` Classification
 ---
 
-`RPE` Et dis Tes données peuvent-elles être considérés comme confidentielles ?
+`FLD` Well, let's talk about data. Here, no business, no backend uber, no wire transfer - basically
+no fund to get hacked to the dark web
 
-`FLD` contrairement à un app store, un site d'ecommerce ou un backend uber, je ne stocke aucun moyen de paiement, je ne risque donc pas les voir fuiter vers le dark web.
+`RPE` Always nice to have
 
-`RPE` ok cool
+`FLD` But a nice data mash up, typical "employee productivity tool", such as
 
-`FLD` Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
-
-* l'adresse, le numero telephone des employés
-* les salaires
-* des infos sur les deals en cours
+* employee address, phonee number
+* salaries, financial package
+* current deals and opportunities
 
 ping pong
 
-* PII
-* super sensible confidentiel
-* deals internal mais restriced
+* PII - bound by law to keep private - especially here in Germany
+* super sensible - on top of being confidential of course
+* internal and restriced
 
-`FLD` Yes, on a donc plutot intérêt à faire du bon boulot.
+`FLD` OK, so we need to keep this secure
 
-`RPE` Ce qui veut dire, qu'il va falloir chiffrer la majorité du flux et de la persistence de ces données de bout en bout, car pour assurer la conidentialité, y'a peu que ça. qu'est ce que tu as prévu pour mettre ça en place ?
-
+`RPE` Which means encrypting all data that go through the system, from one end to an other.
 
 `slide-24` Chiffrer le front
 -------
