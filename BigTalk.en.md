@@ -53,24 +53,24 @@ late for the audit ?
 `FLD` Talking about the architect - not a security guru : he got maried, shaved his bears, got kids,
 he's not coding at night anymore
 
-Are we you still on speaking terms after that ???
+`RPE` Are we you still on speaking terms after that ???
 
-Can't do otherwise, i'm the architect
+`FLD` Can't do otherwise, i'm the architect
 
-Though break
+`RPE` Though break
 
 That being said, I'm no expert in security and I have no expert in the team
 
-RPE No issue, team work
+`RPE` No issue, as we'll see, security is about team work...
 
 #### Continuous Security
 
-RPE and it's basically our message of today (if you are manager, it means you can already
+`RPE` ... and this is s basically our message of today (so if you are manager, it means you can already
 leave the room or fall asleep)
 
-and if you are security guru do the same.
+`FLD` and if you are security guru do the same !
 
-That being said, where do we start ? Because security is a rather broad topic to say the least
+`RPE` That being said, where do we start ? Because security is a rather broad topic to say the least
 
 `Talklet 3` Threat Model
 --------
@@ -110,38 +110,38 @@ screwed :)
 
 `FLD` key aspect => assess the risk business wise. thus DREAD providing a classification scheme
 
-RPE Damage meaning how bad would an attack be?
+`RPE` Damage meaning how bad would an attack be?
 
-FLD Reproducibility - how easy is it to reproduce the attack?
+`FLD` Reproducibility - how easy is it to reproduce the attack?
 
-RPE Exploitability - how much work is it to launch the attack?
+`RPE` Exploitability - how much work is it to launch the attack?
 
-FLD Affected users - how many people will be impacted?
+`FLD` Affected users - how many people will be impacted?
 
-RPE Discoverability - how easy is it to discover the threat?
+`RPE` Discoverability - how easy is it to discover the threat?
 
-FLD Id treats + risks behind helps to do ...
+`FLD` Id treats + risks behind helps to do ...
 
-RPE Or not.
+`RPE` Or not.
 
-FLD @first relunctant, proposed by some security expert, but I found it very useful
+`FLD` @first relunctant, proposed by some security expert, but I found it very useful
 
-RPE communication tool between top management and low level expert - making each other language
+`RPE` communication tool between top management and low level expert - making each other language
 understandeable by the other one
 
 `slide-11` Notre cas d'étude
 ---
 
-RPE Brilliant, we know where to start. let's take a look at your app, now.
+`RPE` Brilliant, we know where to start. let's take a look at your app, now.
 
-FLD not a app for ads, neither deal with high velocity threads, so it's not
+`FLD` not a app for ads, neither deal with high velocity threads, so it's not
 big data, hadoop, machine learning, social,...
 
-RPE at least you put some Docker in any, to be trendy ?
+`RPE` at least you put some Docker in any, to be trendy ?
 
-FLD not even that. Just a good, old fashion enterprise app
+`FLD` not even that. Just a good, old fashion enterprise app
 
-RPE Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local
+`RPE` Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local
 hackerspace. (don't laugh I've a girlfiends like that)
 
 Exactly.
@@ -149,32 +149,32 @@ Exactly.
 `slide-12` JHipster
 ---
 
-FLD Yep, that's why to save this sinking ship I use jHipster ?
+`FLD` Yep, that's why to save this sinking ship I use jHipster ?
 
-RPE JHipster ??? WTF is this ? yet an other meta framework to Springboot a Scala container written in
+`RPE` JHipster ??? WTF is this ? yet an other meta framework to Springboot a Scala container written in
 JRUby (which in turn runs Groovy plugins ?)
 
-FLD Almost :) - it's app generator - like jboss forge or appfuse
+`FLD` Almost :) - it's app generator - like jboss forge or appfuse
 
-RPE ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
+`RPE` ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
 
 `slide-13` Yo JHipster
 ---
-on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
+`FLD` on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
 yo jhiptser + choose
 
 `slide-14` JHipster homepage
 ---
 
-end up with sleak stack, both lean and up to date, using springboot on the server side + angular on
+`FLD` end up with sleak stack, both lean and up to date, using springboot on the server side + angular on
 client
 
-RPE Cool, with that, you might get some girls, but about security features ?
+`RPE` Cool, with that, you might get some girls, but about security features ?
 
 `slide-15` Spring Security
 ---
 
-actually, what was appealing to me was the spring sec plumbering coming with it.
+`FLD` actually, what was appealing to me was the spring sec plumbering coming with it.
 It brings solid foundation for ACL
 
 `RPE` man in the middle attack
@@ -212,85 +212,85 @@ within the confine of a compartimented VLAN, behind a bunch of firewalls.
 connectiong to your app from their laptop?
 
 
-FLD Yep, and also mobile+tablets
+`FLD` Yep, and also mobile+tablets
 
-RPE of course they are... And from those, I'm guessing they also to the internet
+`RPE` of course they are... And from those, I'm guessing they also to the internet
 
 I know where ur getting at - and to make it worse, some has even root privliges, plus not managed
 
-RPE Arg, ur killing me ! My Red Hat heart is bleeding ! Bottom line is, internet is just a short
+`RPE` Arg, ur killing me ! My Red Hat heart is bleeding ! Bottom line is, internet is just a short
 hop away...
 
 ### computer locked in a room
 
-FLD computer room
+`FLD` computer room
 
-RPE Exactly
+`RPE` Exactly
 
-FLD But I don't have to worry - I got firewalls !!!!
+`FLD` But I don't have to worry - I got firewalls !!!!
 
 Firewall
 ---------
 
-And so ? What's your point here ?
+`RPE` And so ? What's your point here ?
 
 Well, fw are securing stuff, aren't they ?
 
-No, they are not. FW blocks access to unused ports - but your app needs to be accessed, therefore
+`RPE` No, they are not. FW blocks access to unused ports - but your app needs to be accessed, therefore
 the port to it needs to be open, isn't it ?
 
-Yes
+`FLD` Yes
 
-FW mostly aims are helping networking traffic, reducing unneeded load on the system. Its usual usage
+`RPE` FW mostly aims are helping networking traffic, reducing unneeded load on the system. Its usual usage
 does not provide security to *your* app. It reduces DoS attacks, but does not protect apps itself.
 
-OK, but it does blocks some ports ?
+`FLD` OK, but it does blocks some ports ?
 
-Yep, but if you ur running service that you don't need to access, you have other issues you need to
+`RPE` Yep, but if you ur running service that you don't need to access, you have other issues you need to
 take care of...
 
-Ok, but what about open ports ? We can't close them so what do we do ?
+`FLD` Ok, but what about open ports ? We can't close them so what do we do ?
 
-You look at how they are used. If you open a port send mails, it should only have SMTP, for
+`RPE` You look at how they are used. If you open a port send mails, it should only have SMTP, for
 instance. Sidenote about this, I generally grade how ineffective a security is by the number of port
 being uselessly closed.
 
-So if you can't get email using POP
+`FLD` So if you can't get email using POP
 
-Bad
+`RPE` Bad
 
-IT blocks VPN
+`FLD` IT blocks VPN
 
-Even more.
+`RPE` Even more.
 
-No SSH inbound ?
+`FLD` No SSH inbound ?
 
-Worse and pointless, with a SSH outbound, you can connect to a remote server, and then piggy back
+`RPE` Worse and pointless, with a SSH outbound, you can connect to a remote server, and then piggy back
 your way inside the IT. However, with all those ports being closed or blocked, you did provide a
 very strong complete illusion of security
 
-While making everyday tasks in the company, a living hell. (in the sake of security => bad
+`FLD` While making everyday tasks in the company, a living hell. (in the sake of security => bad
 usability).
 
-OK, so bottom line is the key to securing app is protocol and content filtering,
+`RPE` OK, so bottom line is the key to securing app is protocol and content filtering,
 
-Right, but can FW do that ?
+`FLD` Right, but can FW do that ?
 
-Yes, generally in some limited fashion, but the issue is that you rarely have the control
+`RPE` Yes, generally in some limited fashion, but the issue is that you rarely have the control
 over'em,...
 
-Right, @Adobe, we don't have control over the FW, infra deals with that
+`FLD` Right, @Adobe, we don't have control over the FW, infra deals with that
 
-RPE Yes, and even if they would like to do it right, they lack the in depth knowledge of your app to
+`RPE` Yes, and even if they would like to do it right, they lack the in depth knowledge of your app to
 do so.
 
-OK, so how do we do here ?
+`FLD` OK, so how do we do here ?
 
 
 Reverse Proxy
 ---------
 
-RPE You use reverse proxy for this. Nowdays, project often have the control on the proxy
+`RPE` You use reverse proxy for this. Nowdays, project often have the control on the proxy
 
 `FLD` Ben justement, sur ma petite appli intranet, puisqu'on était en mode Proto, on a pas eu le temps..
 
@@ -329,11 +329,9 @@ comme par exemple l'ajout paramètres ou un contenu incohérent
 
 `FLD` contrairement à un app store, un site d'ecommerce ou un backend uber, je ne stocke aucun moyen de paiement, je ne risque donc pas les voir fuiter vers le dark web.
 
-`rpe` ok cool
+`RPE` ok cool
 
-`FLD`
-
-Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
+`FLD` Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
 
 * l'adresse, le numero telephone des employés
 * les salaires
@@ -344,9 +342,6 @@ ping pong
 * PII
 * super sensible confidentiel
 * deals internal mais restriced
-
-
-
 
 `FLD` Yes, on a donc plutot intérêt à faire du bon boulot.
 
@@ -427,7 +422,7 @@ Quelles seront les règles spécifiques à ce nouveau mot de passe ?
 Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et
 chiffres ?
 
-`respiration`
+respiration
 
 `RPE` depuis que j'ai vu ce xkcd Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
 
@@ -459,11 +454,12 @@ et pour ca forcemment j'ai un outil
 
 `RPE` you have 156 password but what the point ? I know one thing about you - your dog name !
 
-`note` on respire, on laisse les gens rigoler
+(note: on respire, on laisse les gens rigoleur)
 
 `FLD` et celui de Paris Hilton ?
 
 `FLD` story
+
 `RPE` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ?
 
 `slide-33` des Secrets ? (tweets)
@@ -602,8 +598,6 @@ je comprends que tu veuilles passer en 2 FA
 `FLD`
 Oui je l'ai active sur mon compte twitter, facebook, google, yahoo , github, paypal,
 
-
-
 `RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
 
 `FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ?
@@ -731,17 +725,17 @@ cloud
 ----
 `RPE` Bon j'imagine que apres tu va mettre ton app sur le cloud ?
 
-`FLD`: Ah non g peur la
+`FLD` Ah non g peur la
 
-`RPE`: Non, au contraire ! Le cloud te force à faire plus gaffe à ta sécurité, pour toutes les raisons qu'on vient d'évoquer, mais t'apportes bcp en termes de sécurité.
+`RPE` Non, au contraire ! Le cloud te force à faire plus gaffe à ta sécurité, pour toutes les raisons qu'on vient d'évoquer, mais t'apportes bcp en termes de sécurité.
 
 Y'a qu'on bien de système non maintenu, qui tourne depuis 10 ans, sans le moindre de security patch appliqué dans ton infra ? Voir sans admin !
 
-`FLD`: (gros sourire) ben aucun bien sûr ;) !
+`FLD` (gros sourire) ben aucun bien sûr ;) !
 
 `FLD` Cattle vs Pet,
 
-`RPE`: Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix.
+`RPE` Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix.
 
 Ils sont très connu par avoir une service irréprochable qui repose sur la solution de Cloud d'Amazon.
 
@@ -766,15 +760,15 @@ de choas monkey a hacky monckey
 slide devops -> devsec
 ----
 
-FLD en fait fo etre pret a etre hacke
+`FLD` en fait fo etre pret a etre hacke
 
-RPE exactement ! Regarde github
+`RPE` exactement ! Regarde github
 
-FLD tell the story
+`FLD` tell the story
 
-RPE => pret a endurer une attaque
+`RPE` => pret a endurer une attaque
 
-FLD pompier metaphore
+`FLD` pompier metaphore
 
 combattre le feu
 ----
@@ -797,15 +791,15 @@ co un RP !
 slide devsec devops
 ----
 
-`FLD`: Ouais, mais dis moi, avec ça en place, ça évite que ton application crée des fichiers, ou exécute des programmes, mais si l'exploit se base sur une "activité" normale. Par exemple modifie le contenu d'un fichier de données légitime de l'application - tu peux gérer ça avec ton SM ou SE Linux ?
+`FLD` Ouais, mais dis moi, avec ça en place, ça évite que ton application crée des fichiers, ou exécute des programmes, mais si l'exploit se base sur une "activité" normale. Par exemple modifie le contenu d'un fichier de données légitime de l'application - tu peux gérer ça avec ton SM ou SE Linux ?
 
-`RPE`: Non, j'en doute, et de toute manière, ça ne serait pas vraiment une bonne pratique, de mettre ce genre de contrôle en place là dedans.
+`RPE` Non, j'en doute, et de toute manière, ça ne serait pas vraiment une bonne pratique, de mettre ce genre de contrôle en place là dedans.
 
-`FLD`: Ben moi, j'ai une bonne technique pour ça, super simple pas comme "ta super science".
+`FLD` Ben moi, j'ai une bonne technique pour ça, super simple pas comme "ta super science".
 
 TODO: simple checksum on sensitive directory only
 
-`RPE`: Ah ouais, c'est pas mal en effet !  DevSec
+`RPE` Ah ouais, c'est pas mal en effet !  DevSec
 
 CCL
 ----
