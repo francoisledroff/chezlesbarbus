@@ -1,0 +1,856 @@
+`Talklet 1` Intro
+====
+
+`slide-1`
+------
+
+http://map.ipviking.com/
+
+`slide-2` Bonjour
+-------
+
+`FLD` Hi everybody ! Welcome to our talk, here, at Code Motion Berlin. We are delighted to have
+you with us today. Let's first start by introducing ourself...
+
+`slide-3` Présentations Romain
+------
+
+`RPE` Yep, I'll be first. So my name is Romain Pelisse, I'm a sustain developer on JBoss EAP at Red Hat -
+sustain developer is a fancy title, but I do is mostly simply fixing bugs in our Java code. If I'm a Java developer, I also
+have a strong experience with RHEL (Red Hat Linux) and the infrastructure universe.
+
+And you ?
+
+`slide-4` Présentations Francois
+------
+
+`FLD` I am Francois, I'm a developer at Adobe IT. I build Java Backend, with a zest of HTML/JS &
+CSS. I also do a bit of Ops, mainly with Chef.
+
+Ce ne sera pas un audit
+----
+
+#### `slide-5` audit ?
+
+`RPE` Let's go François ? We did sell'em something about "security audit", didn't we ?
+
+#### non pas un audit
+
+`FLD` yeah, but the more I think about it, the less I'm convinced this make sense.
+
+`RPE` Ok cool don't want to do it either, sounds like the job of some bullshiters wearing suit
+
+`FLD` my app is just a prototype, it's not fit yet for an audit
+
+granted, but you do realize that the only thing separating a prototype for being production ready,
+is that nobody has yet put the prototype in production... yet.
+
+`FLD` Indeed. Also don't you think that waiting for the app to be finished, means it's too
+late for the audit ?
+
+`RPE` at the end, you won't be able to fix a *broken architecture*, 2 days before prod...
+
+`FLD` Talking about the architect - not a security guru : he got maried, shaved his bears, got kids,
+he's not coding at night anymore
+
+Are we you still on speaking terms after that ???
+
+Can't do otherwise, i'm the architect
+
+Though break
+
+That being said, I'm no expert in security and I have no expert in the team
+
+RPE No issue, team work
+
+#### Continuous Security
+
+RPE and it's basically our message of today (if you are manager, it means you can already
+leave the room or fall asleep)
+
+and if you are security guru do the same.
+
+That being said, where do we start ? Because security is a rather broad topic to say the least
+
+`Talklet 3` Threat Model
+--------
+
+`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global
+vision - but how to cope with a large scope ? And that's why, i've looked into an interesting
+methodology from M$ and OWASP and called "Threat Modeling". it's really helpful.
+
+`RPE` Ok, nice on a resume, cool to brag during interview people or chat over a beer, but
+what does it actually do ?
+
+`FLD` Well, it's a vast topic, so the first you need to break your systems into
+small enoug subsystems so that you can treat model'em. For each you identify the weakness &
+threats
+
+`slide-20` Identifier les menaces
+-------
+
+`FLD` first step is id treats and this model provides a mnemonic acronym to list the
+diffents
+
+`RPE` Ok, so we have not time to cover that - it would complete separate talk. Let's be practical,
+look at one them. For instance, what R stands for ?
+
+`FLD` the threat behind that is user denial (example)
+
+`RPE` How to fix or mitigate the impact as they say ?
+
+`FLD` Audit trails prooving without doubt cred used
+
+`RPE` ... and that is something you can NOT fix when the app is ready. It's already too late. You're
+screwed :)
+
+
+`slide-21` priority
+-------
+
+`FLD` key aspect => assess the risk business wise. thus DREAD providing a classification scheme
+
+RPE Damage meaning how bad would an attack be?
+
+FLD Reproducibility - how easy is it to reproduce the attack?
+
+RPE Exploitability - how much work is it to launch the attack?
+
+FLD Affected users - how many people will be impacted?
+
+RPE Discoverability - how easy is it to discover the threat?
+
+FLD Id treats + risks behind helps to do ...
+
+RPE Or not.
+
+FLD @first relunctant, proposed by some security expert, but I found it very useful
+
+RPE communication tool between top management and low level expert - making each other language
+understandeable by the other one
+
+`slide-11` Notre cas d'étude
+---
+
+RPE Brilliant, we know where to start. let's take a look at your app, now.
+
+FLD not a app for ads, neither deal with high velocity threads, so it's not
+big data, hadoop, machine learning, social,...
+
+RPE at least you put some Docker in any, to be trendy ?
+
+FLD not even that. Just a good, old fashion enterprise app
+
+RPE Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local
+hackerspace. (don't laugh I've a girlfiends like that)
+
+Exactly.
+
+`slide-12` JHipster
+---
+
+FLD Yep, that's why to save this sinking ship I use jHipster ?
+
+RPE JHipster ??? WTF is this ? yet an other meta framework to Springboot a Scala container written in
+JRUby (which in turn runs Groovy plugins ?)
+
+FLD Almost :) - it's app generator - like jboss forge or appfuse
+
+RPE ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
+
+`slide-13` Yo JHipster
+---
+on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
+yo jhiptser + choose
+
+`slide-14` JHipster homepage
+---
+
+end up with sleak stack, both lean and up to date, using springboot on the server side + angular on
+client
+
+RPE Cool, with that, you might get some girls, but about security features ?
+
+`slide-15` Spring Security
+---
+
+actually, what was appealing to me was the spring sec plumbering coming with it.
+It brings solid foundation for ACL
+
+`RPE` man in the middle attack
+
+`FLD` Spring Secu supports HSTS - qui indique au client que seul https sera utilisé.
+
+`RPE` and what clickjacking ?
+
+`FLD` frameOptions().sameOrigin()
+
+`RPE` and the infamous XSS attacks ?
+
+`FLD` that too - along Cross site scripting forgery, il me fournit une solution  à base crsf Token,
+
+`RPE` in short - a shit load of fancy acronyms to brag at parties
+
+`FLD` yep, and let's not forget a skeleton for audit trails and security logging
+
+`RPE` like the one you need to address the previously mentione R of STRIDE - repudiation threat.
+
+pause
+
+
+`Talklet 2` Intranet, FW & RP
+====
+
+
+`slide-16` Intranet
+----
+
+`FLD` That being said, I'm not that worried in the end, because my app is only internal, well hidden
+within the confine of a compartimented VLAN, behind a bunch of firewalls.
+
+`RPE` Yeeaaahhh, about that. Don't you think it's a bit naive of you ? I mean you do have user
+connectiong to your app from their laptop?
+
+
+FLD Yep, and also mobile+tablets
+
+RPE of course they are... And from those, I'm guessing they also to the internet
+
+I know where ur getting at - and to make it worse, some has even root privliges, plus not managed
+
+RPE Arg, ur killing me ! My Red Hat heart is bleeding ! Bottom line is, internet is just a short
+hop away...
+
+### computer locked in a room
+
+FLD computer room
+
+RPE Exactly
+
+FLD But I don't have to worry - I got firewalls !!!!
+
+Firewall
+---------
+
+And so ? What's your point here ?
+
+Well, fw are securing stuff, aren't they ?
+
+No, they are not. FW blocks access to unused ports - but your app needs to be accessed, therefore
+the port to it needs to be open, isn't it ?
+
+Yes
+
+FW mostly aims are helping networking traffic, reducing unneeded load on the system. Its usual usage
+does not provide security to *your* app. It reduces DoS attacks, but does not protect apps itself.
+
+OK, but it does blocks some ports ?
+
+Yep, but if you ur running service that you don't need to access, you have other issues you need to
+take care of...
+
+Ok, but what about open ports ? We can't close them so what do we do ?
+
+You look at how they are used. If you open a port send mails, it should only have SMTP, for
+instance. Sidenote about this, I generally grade how ineffective a security is by the number of port
+being uselessly closed.
+
+So if you can't get email using POP
+
+Bad
+
+IT blocks VPN
+
+Even more.
+
+No SSH inbound ?
+
+Worse and pointless, with a SSH outbound, you can connect to a remote server, and then piggy back
+your way inside the IT. However, with all those ports being closed or blocked, you did provide a
+very strong complete illusion of security
+
+While making everyday tasks in the company, a living hell. (in the sake of security => bad
+usability).
+
+OK, so bottom line is the key to securing app is protocol and content filtering,
+
+Right, but can FW do that ?
+
+Yes, generally in some limited fashion, but the issue is that you rarely have the control
+over'em,...
+
+Right, @Adobe, we don't have control over the FW, infra deals with that
+
+RPE Yes, and even if they would like to do it right, they lack the in depth knowledge of your app to
+do so.
+
+OK, so how do we do here ?
+
+
+Reverse Proxy
+---------
+
+RPE You use reverse proxy for this. Nowdays, project often have the control on the proxy
+
+`FLD` Ben justement, sur ma petite appli intranet, puisqu'on était en mode Proto, on a pas eu le temps..
+
+`RPE` C'est con ça,  Car en fait, quand tu un serveur web en frontal, tu peux t'en servir comme un reverse-proxy (RP).
+
+pour faire simple, que, avant de retourner une requête vers ton serveur d'app, le RP va analyser son contenu
+
+`FLD` et alors ?
+
+`RPE`  si elle n'est pas conforme aux attentes de l'application il la dropped
+
+comme par exemple l'ajout paramètres ou un contenu incohérent
+(exemple date sur 200 carateres)
+
+`FLD` ou encore de la validation de header http, l'ajout de token csrf, du throttling ou du rate limiting
+
+`RPE` Tes aimes bien les mots anglais non ?
+
+`FLD` mais on peux pas me le hacker aussi vite et bien le RP ?
+
+`RPE` Plus difficilement, parce que la plupart des hacks se basent sur le fait de manipuler la réaction du serveur distant en abusant des requêtes qu'il accepte. Or le RP ne repond pas a ses reaquetes
+
+`FLD` oui il se contente de les analyser et nettoyer.
+
+`RPE` ce qui laisse donc très, très peu de marge à un attaquant pour le contourner.
+
+`FLD` ok so filter content, clean but also need to returns data
+
+`Talket 4` Data and Encryption
+=======
+
+`slide-23` Classification
+---
+
+`RPE` Et dis Tes données peuvent-elles être considérés comme confidentielles ?
+
+`FLD` contrairement à un app store, un site d'ecommerce ou un backend uber, je ne stocke aucun moyen de paiement, je ne risque donc pas les voir fuiter vers le dark web.
+
+`rpe` ok cool
+
+`FLD`
+
+Mais on prévois un beau mashup de données, c'est un "employee productivity tool", à travers mon app vont transiter des données que je ne voudrait pas voir fuiter, comme
+
+* l'adresse, le numero telephone des employés
+* les salaires
+* des infos sur les deals en cours
+
+ping pong
+
+* PII
+* super sensible confidentiel
+* deals internal mais restriced
+
+
+
+
+`FLD` Yes, on a donc plutot intérêt à faire du bon boulot.
+
+`RPE` Ce qui veut dire, qu'il va falloir chiffrer la majorité du flux et de la persistence de ces données de bout en bout, car pour assurer la conidentialité, y'a peu que ça. qu'est ce que tu as prévu pour mettre ça en place ?
+
+
+`slide-24` Chiffrer le front
+-------
+
+`FLD` de bout en bout, commencons alors par le front, on prévoit évidemment de tout servir en https
+
+`RPE` SSL c'est secure, mais faire ça correctement c'est tout un art.
+
+`FLD` Et ça demande une surveillance et une veille techno constante,
+
+`FLD` même les plus grands doivent gérer des situations de crise, vols de certificats, ou la propagation de certificat qu'ils non pas authorisés mais qui sont trustés par la plupart des navigateurs
+
+`RPE` et souvenez vous, avec suffisamment de temps et de ressources, n'importe quelle chiffrement peut-etre cassé .
+
+`FLD` scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances
+
+`RPE` ok, pour le front, admettons qu'on soit bon, regardons le back.
+
+`slide-24` Chiffrer le back
+-------
+
+`RPE`  Contrairement à ces 40 000 db mongo en prod sur le web , t'as pas apris la confg par défaut ?
+
+`FLD` Oui l'a fait, Mais il faut savoir que JHipster utilise un outil tier open source appelé mongeez
+
+Cet outil a besoin des droits d'admin sur la base, c'est impossible à utiliser en prod pour nous,
+
+`RPE` logique donc t'as mis en place une authentication et un ACL bien. Mais t'as chiffrer les données qui passe sur le cable entre ton serveur d'app et Mongo ? ou elle passe en clair ?
+
+`FLD` on l'a fait oui, mais ce fut épique, par défaut le support n'est pas fourni dans les distro Mongo, il est disponible dans le code open source,
+
+* il a donc fallu builder mongo depuis les sources.
+
+`RPE` mais c'est vraiment pourri de devoir debuilder mongo...
+
+`FLD` Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
+
+et t'as fait un pull request ?
+
+`FLD` oui je compte fournir ce code à la communauté soit par un pull request sur le project JHIpster ou sur le project spring-data
+
+`slide-25` Chiffrage au repos ?
+-------
+
+`RPE` une fois dans la base comment tu les protège ?
+
+`FLD` j'hesite
+
+`RPE` ecoute on pas le trop le temps mais je te conseille le chiffrage applicatif
+
+`FLD` l'admin du mongo sera plus facile
+
+`RPE` meilleure granularité et données isolées => which could have been helpful to Ashley Madison
+
+`Talklet 5` Auth
+==========
+
+`slide-28` JHipster login page
+-----------
+
+`RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
+
+`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
+
+`RPE` t'es pas le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
+
+`slide-29` Votre mot de passe (xkcd)
+--------
+
+`FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
+
+Quelles seront les règles spécifiques à ce nouveau mot de passe ?
+Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et
+chiffres ?
+
+`respiration`
+
+`RPE` depuis que j'ai vu ce xkcd Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+
+`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse...
+La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
+
+extended dictionnary also used => known words
+
+`slide-30` 1 mot de passe (incorrect)
+--------
+
+`RPE` rien ne m'empêche non plus de choisir un mot de passe "incorrect"
+
+`FLD` et j'imagine que tu reutilise le meme mot de passe partout ?
+
+`RPE` pas toi ?
+
+`FLD` pas moi ;-) Et j'en décompte 156
+
+`slide-31`  156 mots de passe ?
+--------
+
+`FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
+et pour ca forcemment j'ai un outil
+
+
+`slide-32` 1 chien ?
+------
+
+`RPE` you have 156 password but what the point ? I know one thing about you - your dog name !
+
+`note` on respire, on laisse les gens rigoler
+
+`FLD` et celui de Paris Hilton ?
+
+`FLD` story
+`RPE` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ?
+
+`slide-33` des Secrets ? (tweets)
+------
+
+`FLD` qui voudrait partager ses secrets avec avec facebook, snapchat, meetic, tinder, gleeden ?
+
+`RPE` Mais qui ne partage quelques secrets avec son banquier ?
+
+`FLD` Et qui n'utilise pas de carte à puces, des cartes SIM ?
+
+`RPE` Dans la vraie vie, un secret c'est quelque chose que vous ne partagez qu'avec une seule personne à la fois.
+
+`FLD` et dans le vraie vie comme sur le web tout des oreilles trainent
+
+`RPE` Partout
+
+`slide-34` 100%
+------
+
+`FLD` on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal".
+
+`note` pause respiration, on laisse lire le public
+
+`RPE`  Bref, comme je le dis souvent, si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, t'as qu'à pas en avoir !
+
+`FLD` Notre but :
+N’être qu’un fournisseur de service
+Identifier un fournissseur d’identité de confiance
+S’y interfacer
+
+`RPE` A qui peut-on faire confiance ?
+
+`FLD` c'est toute la difficulté
+
+`RPE` : Adobe, comme nous Red Hat, vous avez forcemment fait un choix, vous avez une solution de gestion d'identité ?
+
+Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
+
+`slide-35` 1 IDP ?
+-------
+
+`FLD`  Oui bien sûr, j'ai donc modifié mon appli généré,
+
+`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé par ton fournisseur d'idendité
+
+`FLD` Oui mon IDP comme la plupart des solutions supporte le standard SAML
+
+
+`slide-36` SAML ?
+-------
+
+c'est un standard qui permet de faire du SSO sur le browser.
+si vous voulez débutez et tester votre solution, jetez un coup d'oeil à www.ssocircle.com
+
+`slide-38` SAML Sequence Diagram
+-------
+
+`RPE` So SAML ? How does it work ?
+
+`FLD` Le plus compliqué finalement, c'est la config.
+
+* il faut recuperer le meta données de l'idp et fournir a ton moteur client saml
+elle contienne un certificat et des url à associer à la redirection en vue d'un login ou tout au moins d'une verification  d'identité
+
+`RPE`
+* et toi tu fournis à l'idp, quelques metadonnées comme
+  *  certificats et url associer à la redirection en vue d'un login et logout.
+
+`FLD` exactement, regardons le flow
+
+ tu ceux acceder a ma une resource protégé
+mon fournisseur de service dit
+
+* "Not authorized", je te connais pas, je te donne pas le service, je te donne pas la resource,
+* va prouver ton identité au pres du fournisseur d'identité,
+* il reviendra vers moi,
+* si son retour est valide, je te donnerai accès à ma resource
+* tout du moins si les infos d'idendité extraite dans l'enveloppe saml me permette de te donner le role necessaire pour etre autorise à acceder a ce service ou cette resource.
+
+`slide-37` SAML & JHipster ?
+-------
+`RPE` But ur  JHipster thingy supports SAML ?
+
+`FLD` no but Spring Security does
+
+`FLD` a choisir je préfère tout de même l'annotation hell au xml hell....
+Et Spring Security s'y prête plutot bien.
+
+`RPE` a Quand ton pull request ?
+oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
+
+`slide-39` login link
+-------
+
+`RPE` alors voyons je click!
+
+
+`slide-40` okta 1 factor
+-------
+
+`RPE` ok donc tu es redirigé ici sur ton idp, tu rentres un mot de passe
+`FLD` oui ici mon mot de passe ldap sur adobeNet
+
+
+`slide-41` okta 2nd factor
+-------
+
+`RPE` et t'as demandé a ton IDP d'appliquer un second facteur.
+
+`FLD` Oui le user doit me prouver, me donner
+
+ * ce qu'il sait : son password
+ * ce qu'il a : un telephone ou autre generateur de token
+
+
+`slide-42` logged-in
+-------
+
+ `RPE` c'est pas relou ca pour les utilsateurs ?
+
+ `FLD` c'est vrai que l'equilibre entre expereience tuisateur. confort et securite n'est  pas evident a trouver.
+
+`slide-43` wired
+----
+
+`FLD`
+
+tu connaissez le chien de  Paris Hilton ?
+mais tu connaissez ce gars ?
+
+`RPE`
+pas avant que tu m'en parles, mais pares avoir lu cet article
+je comprends que tu veuilles passer en 2 FA
+
+`FLD`
+Oui je l'ai active sur mon compte twitter, facebook, google, yahoo , github, paypal,
+
+
+
+`RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
+
+`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ?
+
+`slide-34` 2FA
+----
+
+`FLD` allez faire un tour sur twofactors.org, voyez ou vous pouvez activer le 2FA, et faites vos choix en fonction
+
+`RPE` laissez tomber docker
+
+`FLD` preferez github a bitbucket
+
+`RPE` si vous navez peur de rien, utiliser ces services de finance en ligne
+
+`FLD` que l'internet of things et les applis santé font globalement fi de la securité,  pareil pour la plupart des micro paiement,
+
+
+`RPE`en fait le plus secure, etonnamment les reseaux sociaux...
+
+`FLD` et le sreseaux sociaux en UX il sy'connaissent, ils ont trouver un equilibre interesant mais en mettant en place le 2FA
+
+mais en vous permettant egalement de definir vos telephone et vos  navigateurs de confiances sur lesquels votre session sera maintenue.
+
+`RPE` et j'imagine que tu le fais ? ?
+
+slide saml + oauth
+-----
+
+`FLD`
+rappelle moi romain on a saml
+une fois authentifié je vais
+* provisionner un client oauth rien que pour toi (avec ton client idet secret )
+* et t'inviter a faire a la dance oauth
+
+`RPE` ok donc une fois logué, et apres quelques redirect je receiupre un token...
+mais bon il perime le token non ?
+
+`FLD` oui mais refresh token - can it be hacked ?
+
+`RPE` ah mais ca pue
+
+`FLD` oui mais c'est revocable
+
+slide revoke
+------
+
+`RPE` tu peux aller plus loin
+
+`FLD` oui email...
+
+slide option
+----
+
+`FLD`
+et sinon on avait d'autre option
+
+`RPE`
+oui parce que oauth2 ,  No standard (yet) for request signing
+
+`FLD` en fait avec le JWT token et spring security tu peux le faire...
+
+`RPE` mais oui mais pourquoi pas oauth1 ?
+
+oauth1 ping pong
+
+`Talket 6` Extension du périmètre de la lutte - CI & Cloud
+=========
+
+`RPE` Jusqu'à maintenant, quand on pense sécurité des applicatis, on a naturellement tendance à penser au plateforme de production. Et donc, de délaisser, voir d'être laxasiste avec les environements de dev et les plateforme d'intégration continue. Je ne vais pas vous surprendre en disant que c'est certainement une très mauvaise idée. Surtout qu'avec l'arrivée du Cloud, dont la flexibilité repose massivement sur une chaine de déploiement continue irréprochable, tout un univers de faille et d'exploit nouveau s'ouvre aux attaquants, dans un domaine, où les experts de la sécurité sont très loin d'avoir évangélisé et diffusé les bonnes pratiques associées.
+
+
+slide github secret
+--------
+
+`FLD` Commencons par regarder notre code, contient-il des secrets ?
+
+slide rail tweet
+-----
+
+`RPE`
+
+slide secret management is not easy
+----
+
+`FLD`
+
+slide chef-vault intro
+----
+`FLD`
+
+
+`RPE` mais bon faut securiser les servers
+
+slide chef vault problem
+---
+
+`FLD`
+
+`RPE` white list ? scale up ?
+
+`FLD` chef server à securiser mais c'est pas le seul dans notre usine logicielle et note build pipeline
+
+
+slide jenkins
+---
+
+`RPE` Ah oui à fond, surtout que je connais beaucoup de gens qui non seulement n'impose pas d'authentification sur Jenkins - donc n'importe qui peut créer des jobs, mais le bouzin étant assez extensible, on peut même lui injecte des extensions via la "script console". Mais en fait, même si tu fermes ça, n'importe qui, qui peut crée un job, peut faire exécuter du code au serveur, donc...
+
+`FLD` ... donc il est crucial de bien pouvoir tracer qui, depuis où, à créer ou lancer un job.
+
+`RPE` Exactement.
+
+slide nexus
+----
+
+`FLD` presentation des trucs qu'on chope
+
+`RPE` faut faire un proxy et faire des checksums
+satelite
+
+`FLD` nexus aussi
+
+cloud
+----
+`RPE` Bon j'imagine que apres tu va mettre ton app sur le cloud ?
+
+`FLD`: Ah non g peur la
+
+`RPE`: Non, au contraire ! Le cloud te force à faire plus gaffe à ta sécurité, pour toutes les raisons qu'on vient d'évoquer, mais t'apportes bcp en termes de sécurité.
+
+Y'a qu'on bien de système non maintenu, qui tourne depuis 10 ans, sans le moindre de security patch appliqué dans ton infra ? Voir sans admin !
+
+`FLD`: (gros sourire) ben aucun bien sûr ;) !
+
+`FLD` Cattle vs Pet,
+
+`RPE`: Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix.
+
+Ils sont très connu par avoir une service irréprochable qui repose sur la solution de Cloud d'Amazon.
+
+Si vous avez bossé sur Amazon, vous savez que bien d'excellente qualité, le service n'est pas à 100% fiable.
+
+Une VM peut subitement "disparaitre", le réseau peut devenir temporairement inaccessible, et leur SLA prévoit même qu'une zone entière (par exemple l'Irlande) peut tomber pendant plusieurs minutes !
+
+Bref, dans ces conditions, pour fournir un super service comme Netflix, il faut que les applications soient très robuste !
+
+Et là, Netflix a été génial, ils ont forcé leur developeur à se préparer aux pannes et mettant en place un programme simulant ces pannes - le fameux Chaos Monkey.
+
+Et le plus incroyable, c'est qu'ils sont tellement sûr de la résilience de leur applications qu'ils laissent Choas Monkey s'exécuter sur leur plateforme de production !!!
+
+http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
+
+de choas monkey a hacky monckey
+
+
+`Talklet 7` Firemen
+===========
+
+slide devops -> devsec
+----
+
+FLD en fait fo etre pret a etre hacke
+
+RPE exactement ! Regarde github
+
+FLD tell the story
+
+RPE => pret a endurer une attaque
+
+FLD pompier metaphore
+
+combattre le feu
+----
+
+`RPE` the goal is to give the system a fighting chance
+        => firedoor / smoke detector
+
+`FLD` ccm
+
+`RPE` IDS pour reperer des intrusions
+
+`FLD` HSM ben d'attaque offline
+
+`RPE` Ben sinon, si un mec à trouver un exploit sur ton app, il peut accéder à ses données, mais aussi éventuellement, modifier son comportement.
+
+meca qui bloque
+
+co un RP !
+
+slide devsec devops
+----
+
+`FLD`: Ouais, mais dis moi, avec ça en place, ça évite que ton application crée des fichiers, ou exécute des programmes, mais si l'exploit se base sur une "activité" normale. Par exemple modifie le contenu d'un fichier de données légitime de l'application - tu peux gérer ça avec ton SM ou SE Linux ?
+
+`RPE`: Non, j'en doute, et de toute manière, ça ne serait pas vraiment une bonne pratique, de mettre ce genre de contrôle en place là dedans.
+
+`FLD`: Ben moi, j'ai une bonne technique pour ça, super simple pas comme "ta super science".
+
+TODO: simple checksum on sensitive directory only
+
+`RPE`: Ah ouais, c'est pas mal en effet !  DevSec
+
+CCL
+----
+
+`FLD` In short, what to remember is
+* firemen train for fire
+* fireman is not afraid of fire
+
+https://www.techn0polis.net/wp-content/uploads/2015/01/security.png
+
+`Talklet 8` Conclusion
+==========
+
+`RPE` OK, so time to wrap up - what did we talk about during all this time:
+
+`FLD` security, it's you
+
+`RPE` no ! it's you
+
+`FLD` see the big picture, analyse risks, use threat modelling to see clearly where u stand
+
+`RPE` don't ever think you are actually safe
+
+`FLD` not even behind a compartiment VLAN, and a truckload of FW
+
+`RPE` your data is not safe either
+
+`FLD` so encrypt
+
+`RPE` which means management secrets
+
+`FLD` even at home (private sphere)
+
+`RPE` used 2FA and kill your dog - boom Struppi !
+
+`FLD` UX is not excuse for lack of security - and security is not an excuse for a bad UX
+
+`RPE` Also don't forget that the battefield has extended to new territories
+
+`FLD` such as continuous integration, delivery and cloud
+
+`RPE` treat your servers like a cattle, not like a pet
+
+`FLD` (Anyway the dog is already dead)
+
+`RPE` finally, be *ready* to fight fire - because if you are successful
+
+`FLD` ... you'll be hacked !
