@@ -383,15 +383,13 @@ data going across the wire from your app to the DB ?
 `slide-25` Chiffrage au repos ?
 -------
 
-`RPE` une fois dans la base comment tu les protège ?
+`RPE` OK, so now we have secure the communication between ur app and the users, and between the app
+and the db. But how do we store then there ?
 
-`FLD` j'hesite
+`FLD` not sure what to do (explain options) => encrypt on db
 
-`RPE` ecoute on pas le trop le temps mais je te conseille le chiffrage applicatif
-
-`FLD` l'admin du mongo sera plus facile
-
-`RPE` meilleure granularité et données isolées => which could have been helpful to Ashley Madison
+`RPE` make admin life easier, but also strong impact on performance - encryption on app level
+provided better granularity (ex: Ashley Madison)
 
 `Talklet 5` Auth
 ==========
@@ -399,11 +397,9 @@ data going across the wire from your app to the DB ?
 `slide-28` JHipster login page
 -----------
 
-`RPE` Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
+`RPE` jhipster default, local db, bullshit for prod Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
-`FLD` une véritable plaie, non seuleument pour la sécurité mais également pour l'expérience utilisateur.
-
-`RPE` t'es pas le seul, le simple fait de devoir creer et gerer un n-ieme mot de passe peut dramatiquement reduire la retention d'utilisateurs.
+`FLD` prod, but also UX, yet an other password to ask for users
 
 `slide-29` Votre mot de passe (xkcd)
 --------
