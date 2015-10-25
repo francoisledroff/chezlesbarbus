@@ -347,42 +347,38 @@ ping pong
 `slide-24` Chiffrer le front
 -------
 
-`FLD` de bout en bout, commencons alors par le front, on prévoit évidemment de tout servir en https
+`FLD` ok, so first let's start by the front - no other way around it, I need to encrypt everything
+and use SSLde bout en bout, commencons alors par le front, on prévoit évidemment de tout servir en https
 
-`RPE` SSL c'est secure, mais faire ça correctement c'est tout un art.
+`RPE` Right, SSL is secure , but doing it correctly requires a lot of work - it's an art in itself.
+SSL c'est secure, mais faire ça correctement c'est tout un art.
 
-`FLD` Et ça demande une surveillance et une veille techno constante,
+`FLD` And requires constant monitoring and following updates thoroughly
 
-`FLD` même les plus grands doivent gérer des situations de crise, vols de certificats, ou la propagation de certificat qu'ils non pas authorisés mais qui sont trustés par la plupart des navigateurs
+`FLD`even the biggest companines must deals with crisis, certificates being compromised or
+propagtation of unauthorized certificates (but still trusted by most browser)
 
-`RPE` et souvenez vous, avec suffisamment de temps et de ressources, n'importe quelle chiffrement peut-etre cassé .
+`RPE` and don't forget that, with enough time and resources, any encryption can be broken.
 
-`FLD` scannez vous serveur https pour détecter les éventuelles vulnérabilités et obsolesances
+`FLD` scan your https server to detect new weakness and obsolete packages
 
-`RPE` ok, pour le front, admettons qu'on soit bon, regardons le back.
+`RPE` ok, on the front, we're set and good. Let's look at the backend.
 
 `slide-24` Chiffrer le back
 -------
 
-`RPE`  Contrairement à ces 40 000 db mongo en prod sur le web , t'as pas apris la confg par défaut ?
+`RPE` First of all, don't tell me your MongoDB is like those 40 000 instances over the web that are
+running with default configuration ?
 
-`FLD` Oui l'a fait, Mais il faut savoir que JHipster utilise un outil tier open source appelé mongeez
+`FLD` Yes, we have fixed that +  mongeez required admin on db, not an option
 
-Cet outil a besoin des droits d'admin sur la base, c'est impossible à utiliser en prod pour nous,
+`RPE` Ok, right so now you have a proper authorization scheme on your instance. But, what about your
+data going across the wire from your app to the DB ?
 
-`RPE` logique donc t'as mis en place une authentication et un ACL bien. Mais t'as chiffrer les données qui passe sur le cable entre ton serveur d'app et Mongo ? ou elle passe en clair ?
+`FLD` encrypt (explain)
 
-`FLD` on l'a fait oui, mais ce fut épique, par défaut le support n'est pas fourni dans les distro Mongo, il est disponible dans le code open source,
+`RPE` PR ? It's been six month !!!
 
-* il a donc fallu builder mongo depuis les sources.
-
-`RPE` mais c'est vraiment pourri de devoir debuilder mongo...
-
-`FLD` Il a fallu aussi coder l'authentication par certificat dans le stack spring-data, il n'y etait pas.
-
-et t'as fait un pull request ?
-
-`FLD` oui je compte fournir ce code à la communauté soit par un pull request sur le project JHIpster ou sur le project spring-data
 
 `slide-25` Chiffrage au repos ?
 -------
