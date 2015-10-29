@@ -1,18 +1,16 @@
 `Talklet 1` Intro
 ====
 
-`slide-1`
-------
 
-http://map.ipviking.com/
-
-`slide-2` Bonjour
+Hello
 -------
 
 `FLD` Hi everybody ! Welcome to our talk, here, at Code Motion Berlin. We are delighted to have
-you with us today. Let's first start by introducing ourself...
+you with us today. 
+But... anyway... we have a lot to cover, let's get started ! Romain, what don't you start by introducing yourself ?
 
-`slide-3` Présentations Romain
+
+Romain
 ------
 
 `RPE` Yep, I'll be first. So my name is Romain Pelisse, I'm a sustain developer on JBoss EAP at Red Hat -
@@ -21,37 +19,34 @@ have a strong experience with RHEL (Red Hat Linux) and the infrastructure univer
 
 And you ?
 
-`slide-4` Présentations Francois
+Francois
 ------
 
-`FLD` I am Francois, I'm a developer at Adobe IT. I build Java Backend, with a zest of HTML/JS &
-CSS. I also do a bit of Ops, mainly with Chef.
+`FLD` I am Francois, I'm super happy to be in Berlin today, it's been 20 years, since I last came here. I'm a developer at Adobe. I mainly do plumbing....
+I implement distributed systems on top of Java, on top of infrastructure I implement using Chef. And I'm lucky to be surrended by a great team, among them hispters, hipsters who imlement great web and desktop UI using vintage languages such as js, css and html.
 
-Ce ne sera pas un audit
+
+Security Audit
 ----
-
-#### `slide-5` audit ?
 
 `RPE` Let's go François ? We did sell'em something about "security audit", didn't we ?
 
-#### non pas un audit
-
-`FLD` yeah, but the more I think about it, the less I'm convinced this make sense.
+`FLD` yeah, but the more I think about it, the less I'm convinced a vintage security audit would make sense these days...
 
 `RPE` Ok cool don't want to do it either, sounds like the job of some bullshiters wearing suit
 
-`FLD` my app is just a prototype, it's not fit yet for an audit
+`FLD` And remember, our killer app, the one we wanted to release for code motion Berlin, is still a prototype.
 
-granted, but you do realize that the only thing separating a prototype for being production ready,
+`RPE` granted, but you do realize that the only thing separating a prototype for being production ready,
 is that nobody has yet put the prototype in production... yet.
 
-`FLD` Indeed. Also don't you think that waiting for the app to be finished, means it's too
+`FLD` Indeed.  should beAnd if Also don't you think that waiting for the app to be finished, means it's too
 late for the audit ?
 
 `RPE` at the end, you won't be able to fix a *broken architecture*, 2 days before prod...
 
-`FLD` Talking about the architect - not a security guru : he got maried, shaved his bears, got kids,
-he's not coding at night anymore
+`FLD` Agreed . I would rather spend on continuous security and and security training for all.  Talking about training, the architect is defintely not a security guru, plus, he got maried, shaved his bears, stopped coding at night... he got a kid.
+
 
 `RPE` Are we you still on speaking terms after that ???
 
@@ -59,38 +54,46 @@ he's not coding at night anymore
 
 `RPE` Though break
 
-That being said, I'm no expert in security and I have no expert in the team
-
 `RPE` No issue, as we'll see, security is about team work...
 
-#### Continuous Security
+Continuous Security
+----
 
-`RPE` ... and this is s basically our message of today (so if you are manager, it means you can already
-leave the room or fall asleep)
+`RPE` ... and this is s basically our message of today 
 
-`FLD` and if you are security guru do the same !
+`FLD` so if you are manager, Remember "security is continuous or it's not, It's everybody responsability, including yours, provide security training for all"
 
-`RPE` That being said, where do we start ? Because security is a rather broad topic to say the least
+`RPE` so if you are manager, now it means you can already leave the room or fall asleep.
 
-`Talklet 3` Threat Model
+`pause`
+
+`RPE` That being said, where do we start? Because security is a rather broad topic to say the least
+
+Threat Modeling
 --------
 
-`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global
-vision - but how to cope with a large scope ? And that's why, i've looked into an interesting
-methodology from M$ and OWASP and called "Threat Modeling". it's really helpful.
+`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global vision 
+but I wondered should we deal with such a large scope ? 
+I seeked for help.
+I've been told to look into an interesting.
+methodology pushed from M$ and OWASP.
+
+It's called "Threat Modeling". 
+
+it's supposed to be really helpful.
 
 `RPE` Ok, nice on a resume, cool to brag during interview people or chat over a beer, but
 what does it actually do ?
 
-`FLD` Well, it's a vast topic, so the first you need to break your systems into
-small enoug subsystems so that you can treat model'em. For each you identify the weakness &
-threats
+`FLD` Well, you need to isolate, pick a small a small enoug sub-systems, within your overall solution. For the threat model to remain manageable, that is feasible within a projcet iteration sprint, and to be readable, understood by all.  
 
-`slide-20` Identifier les menaces
+
+Identify the threats: STRIDE
 -------
 
-`FLD` first step is id treats and this model provides a mnemonic acronym to list the
-diffents
+`FLD` first step : identifying the threats 
+and this model provides a mnemonic acronym to list the
+diffents categories of threats.
 
 `RPE` Ok, so we have not time to cover that - it would complete separate talk. Let's be practical,
 look at one them. For instance, what R stands for ?
@@ -105,7 +108,7 @@ look at one them. For instance, what R stands for ?
 screwed :)
 
 
-`slide-21` priority
+Assess the risks: DREAD
 -------
 
 `FLD` key aspect => assess the risk business wise. thus DREAD providing a classification scheme
@@ -129,27 +132,30 @@ screwed :)
 `RPE` communication tool between top management and low level expert - making each other language
 understandeable by the other one
 
-`slide-11` Notre cas d'étude
+Our App
 ---
 
-`RPE` Brilliant, we know where to start. let's take a look at your app, now.
+`RPE` Brilliant, we know where to start. let's take a look at our app, now.
+Let me guess, it does look fancy, is that a desktop app for creatives ?
 
-`FLD` not a app for ads, neither deal with high velocity threads, so it's not
-big data, hadoop, machine learning, social,...
+`FLD`, nop, It's a add placement, it's not marketing, high frequency trading
 
-`RPE` at least you put some Docker in any, to be trendy ?
+ it's not big data, hadoop, machine learning, not even social,...
+ 
+`RPE` Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local hackerspace. (don't laugh I've a girlfiends like that)
 
-`FLD` not even that. Just a good, old fashion enterprise app
+`FLD` True, it's a good old fashion enterprise app. Quite boring to chat about over a beer.
 
-`RPE` Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local
-hackerspace. (don't laugh I've a girlfiends like that)
+`RPE` unless we throw some docker in 
 
-Exactly.
+`FLD` we could, but I have better and trendier , heard about :
 
-`slide-12` JHipster
+
+
+JHipster
 ---
 
-`FLD` Yep, that's why to save this sinking ship I use jHipster ?
+`FLD` jHipster ?
 
 `RPE` JHipster ??? WTF is this ? yet an other meta framework to Springboot a Scala container written in
 JRUby (which in turn runs Groovy plugins ?)
@@ -158,20 +164,20 @@ JRUby (which in turn runs Groovy plugins ?)
 
 `RPE` ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
 
-`slide-13` Yo JHipster
+Yo 
 ---
 `FLD` on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
 yo jhiptser + choose
 
-`slide-14` JHipster homepage
----
 
 `FLD` end up with sleak stack, both lean and up to date, using springboot on the server side + angular on
 client
 
-`RPE` Cool, with that, you might get some girls, but about security features ?
+`RPE` Cool, with that, we might get lucky.
 
-`slide-15` Spring Security
+But you told them we were Java guys, right, tell me abuut the security features built on top of Java in there  ?
+
+Spring Security
 ---
 
 `FLD` actually, what was appealing to me was the spring sec plumbering coming with it.
@@ -202,7 +208,7 @@ pause
 ====
 
 
-`slide-16` Intranet
+Intranet
 ----
 
 `FLD` That being said, I'm not that worried in the end, because my app is only internal, well hidden
@@ -220,12 +226,6 @@ I know where ur getting at - and to make it worse, some has even root privliges,
 
 `RPE` Arg, ur killing me ! My Red Hat heart is bleeding ! Bottom line is, internet is just a short
 hop away...
-
-### computer locked in a room
-
-`FLD` computer room
-
-`RPE` Exactly
 
 `FLD` But I don't have to worry - I got firewalls !!!!
 
