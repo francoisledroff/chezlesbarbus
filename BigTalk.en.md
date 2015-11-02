@@ -6,7 +6,7 @@ Hello
 -------
 
 `FLD` Hi everybody ! Welcome to our talk, here, at Code Motion Berlin. We are delighted to have
-you with us today. 
+you with us today.
 But... anyway... we have a lot to cover, let's get started ! Romain, what don't you start by introducing yourself ?
 
 
@@ -59,7 +59,7 @@ late for the audit ?
 Continuous Security
 ----
 
-`RPE` ... and this is s basically our message of today 
+`RPE` ... and this is s basically our message of today
 
 `FLD` so if you are manager, Remember "security is continuous or it's not, It's everybody responsability, including yours, provide security training for all"
 
@@ -72,26 +72,26 @@ Continuous Security
 Threat Modeling
 --------
 
-`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global vision 
-but I wondered should we deal with such a large scope ? 
+`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global vision
+but I wondered should we deal with such a large scope ?
 I seeked for help.
 I've been told to look into an interesting.
 methodology pushed from M$ and OWASP.
 
-It's called "Threat Modeling". 
+It's called "Threat Modeling".
 
 it's supposed to be really helpful.
 
 `RPE` Ok, nice on a resume, cool to brag during interview people or chat over a beer, but
 what does it actually do ?
 
-`FLD` Well, you need to isolate, pick a small a small enoug sub-systems, within your overall solution. For the threat model to remain manageable, that is feasible within a projcet iteration sprint, and to be readable, understood by all.  
+`FLD` Well, you need to isolate, pick a small a small enoug sub-systems, within your overall solution. For the threat model to remain manageable, that is feasible within a projcet iteration sprint, and to be readable, understood by all.
 
 
 Identify the threats: STRIDE
 -------
 
-`FLD` first step : identifying the threats 
+`FLD` first step : identifying the threats
 and this model provides a mnemonic acronym to list the
 diffents categories of threats.
 
@@ -141,12 +141,12 @@ Let me guess, it does look fancy, is that a desktop app for creatives ?
 `FLD`, nop, It's a add placement, it's not marketing, high frequency trading
 
  it's not big data, hadoop, machine learning, not even social,...
- 
+
 `RPE` Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local hackerspace. (don't laugh I've a girlfiends like that)
 
 `FLD` True, it's a good old fashion enterprise app. Quite boring to chat about over a beer.
 
-`RPE` unless we throw some docker in 
+`RPE` unless we throw some docker in
 
 `FLD` we could, but I have better and trendier , heard about :
 
@@ -164,7 +164,7 @@ JRUby (which in turn runs Groovy plugins ?)
 
 `RPE` ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
 
-Yo 
+Yo
 ---
 `FLD` on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
 yo jhiptser + choose
@@ -404,20 +404,17 @@ provided better granularity (ex: Ashley Madison)
 `slide-29` Votre mot de passe (xkcd)
 --------
 
-`FLD` Autres questions qui me viennent à l'esprit devant ce genre d'ecran :
-
-Quelles seront les règles spécifiques à ce nouveau mot de passe ?
-Va-t-il encore m'imposer des contraintes inèptes relatives à l'ulisation des caractères speciaux et
-chiffres ?
+`FLD` what comes to mind with this kind of screen (password constraint)
 
 respiration
 
-`RPE` depuis que j'ai vu ce xkcd Je suis assez fan de ces pass phrase mais toute ma famille se plaint que le mot de passe du wifi à la campagne est trop long ! Pourtant "Romain a des plus jolie cheveux que ses soeurs", c'est pas compliqué à retenir, non ? :)
+`RPE` since I saw this XKCD, I've become a big fan of those sort of password. That being said, my familly has strangely been relunctant about it
 
-`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse...
-La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
+`FLD` Why so ?
 
-extended dictionnary also used => known words
+`RPE` Apparently my sisters have issue with the passphrase I used: "Roman has the best hair of the familly"... Not too complicated to remember however...
+
+`FLD` and fits in jhipster constraint + extended dictionnary also used => known words
 
 `slide-30` 1 mot de passe (incorrect)
 --------
