@@ -1,12 +1,11 @@
-`Talklet 1` Intro
-====
+
 
 
 Hello
 -------
 
 `FLD` Hi everybody ! Welcome to our talk, here, at Code Motion Berlin. We are delighted to have
-you with us today.
+you with us today. 
 But... anyway... we have a lot to cover, let's get started ! Romain, what don't you start by introducing yourself ?
 
 
@@ -59,7 +58,7 @@ late for the audit ?
 Continuous Security
 ----
 
-`RPE` ... and this is s basically our message of today
+`RPE` ... and this is s basically our message of today 
 
 `FLD` so if you are manager, Remember "security is continuous or it's not, It's everybody responsability, including yours, provide security training for all"
 
@@ -72,26 +71,26 @@ Continuous Security
 Threat Modeling
 --------
 
-`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global vision
-but I wondered should we deal with such a large scope ?
+`FLD` Indeed. Security is continuous process, touch any and all level, needs to have a global vision 
+but I wondered should we deal with such a large scope ? 
 I seeked for help.
 I've been told to look into an interesting.
 methodology pushed from M$ and OWASP.
 
-It's called "Threat Modeling".
+It's called "Threat Modeling". 
 
 it's supposed to be really helpful.
 
 `RPE` Ok, nice on a resume, cool to brag during interview people or chat over a beer, but
 what does it actually do ?
 
-`FLD` Well, you need to isolate, pick a small a small enoug sub-systems, within your overall solution. For the threat model to remain manageable, that is feasible within a projcet iteration sprint, and to be readable, understood by all.
+`FLD` Well, you need to isolate, pick a small a small enoug sub-systems, within your overall solution. For the threat model to remain manageable, that is feasible within a projcet iteration sprint, and to be readable, understood by all.  
 
 
 Identify the threats: STRIDE
 -------
 
-`FLD` first step : identifying the threats
+`FLD` first step : identifying the threats 
 and this model provides a mnemonic acronym to list the
 diffents categories of threats.
 
@@ -132,21 +131,28 @@ Assess the risks: DREAD
 `RPE` communication tool between top management and low level expert - making each other language
 understandeable by the other one
 
-Our App
+DeepDive
 ---
 
 `RPE` Brilliant, we know where to start. let's take a look at our app, now.
 Let me guess, it does look fancy, is that a desktop app for creatives ?
 
+
+`FLD` let's Deep dive
+
 `FLD`, nop, It's a add placement, it's not marketing, high frequency trading
 
  it's not big data, hadoop, machine learning, not even social,...
-
+ 
 `RPE` Not going to help win followers on Twitter, or pick up girls at a local geeky bar or the local hackerspace. (don't laugh I've a girlfiends like that)
+
+
+Our Use Case
+---
 
 `FLD` True, it's a good old fashion enterprise app. Quite boring to chat about over a beer.
 
-`RPE` unless we throw some docker in
+`RPE` unless we throw some docker in 
 
 `FLD` we could, but I have better and trendier , heard about :
 
@@ -164,7 +170,7 @@ JRUby (which in turn runs Groovy plugins ?)
 
 `RPE` ok, if you recall AppFuse you've been doing this/java for too long - time to change job or even retire.
 
-Yo
+Yo 
 ---
 `FLD` on the contrary, if you re one of the cool kids, you surely know js + yeoman, based on it, fire with
 yo jhiptser + choose
@@ -203,9 +209,6 @@ It brings solid foundation for ACL
 
 pause
 
-
-`Talklet 2` Intranet, FW & RP
-====
 
 
 Intranet
@@ -315,12 +318,13 @@ is both invalid and most likely an attack...
 
 `FLD` Yes, it just analyze and clean, does not replies nor interract with the attacker.
 
+
+Our Data
+=====
+
 `FLD` ok so filter content, clean but also need to returns data
 
-`Talket 4` Data and Encryption
-=======
-
-`slide-23` Classification
+Our Data Let's encrypt
 ---
 
 `FLD` Well, let's talk about data. Here, no business, no backend uber, no wire transfer - basically
@@ -344,7 +348,7 @@ ping pong
 
 `RPE` Which means encrypting all data that go through the system, from one end to an other.
 
-`slide-24` Chiffrer le front
+Encrypt the front-end
 -------
 
 `FLD` ok, so first let's start by the front - no other way around it, I need to encrypt everything
@@ -364,7 +368,7 @@ propagtation of unauthorized certificates (but still trusted by most browser)
 
 `RPE` ok, on the front, we're set and good. Let's look at the backend.
 
-`slide-24` Chiffrer le back
+Encryp the backend
 -------
 
 `RPE` First of all, don't tell me your MongoDB is like those 40 000 instances over the web that are
@@ -380,7 +384,7 @@ data going across the wire from your app to the DB ?
 `RPE` PR ? It's been six month !!!
 
 
-`slide-25` Chiffrage au repos ?
+Encrypt at rest
 -------
 
 `RPE` OK, so now we have secure the communication between ur app and the users, and between the app
@@ -391,32 +395,45 @@ and the db. But how do we store then there ?
 `RPE` make admin life easier, but also strong impact on performance - encryption on app level
 provided better granularity (ex: Ashley Madison)
 
-`Talklet 5` Auth
+ashley madison
+-------
+
+`FLD` for password, hash use bcrypt, but remember sometimes it's not only the password you need to protect. it's your user identity
+
+Auth
 ==========
 
-`slide-28` JHipster login page
+JHipster login page
 -----------
 
 `RPE` jhipster default, local db, bullshit for prod Ah je vois que par défaut, jhipster a sa propre base de donnees d'utilisateur, pas mal pour le dev, mais une cata pour la prod !
 
 `FLD` prod, but also UX, yet an other password to ask for users
 
-`slide-29` Votre mot de passe (xkcd)
+Good Password (xkcd)
 --------
+
 
 `FLD` what comes to mind with this kind of screen (password constraint)
 
 respiration
 
-`RPE` since I saw this XKCD, I've become a big fan of those sort of password. That being said, my familly has strangely been relunctant about it
+ `RPE` since I saw this XKCD, I've become a big fan of those sort of password. That being said, my familly has strangely been relunctant about it
 
-`FLD` Why so ?
+`FLD` why so ?
 
 `RPE` Apparently my sisters have issue with the passphrase I used: "Roman has the best hair of the familly"... Not too complicated to remember however...
 
-`FLD` and fits in jhipster constraint + extended dictionnary also used => known words
+chtulu
+--------
 
-`slide-30` 1 mot de passe (incorrect)
+
+`FLD` "Romain a des plus jolie cheveux que ses soeurs" 46 caractères dans jhipster 46 characters ca passe mais de justesse...
+La seule contrainte imposée sur ce mot de passe c'est qu'il doit faire entre 6 et 50 caractères.
+
+extended dictionnary also used => known words
+
+One (incorrect) password
 --------
 
 `RPE` rien ne m'empêche non plus de choisir un mot de passe "incorrect"
@@ -427,14 +444,14 @@ respiration
 
 `FLD` pas moi ;-) Et j'en décompte 156
 
-`slide-31`  156 mots de passe ?
+156 passwords
 --------
 
 `FLD` je les génère,  les renouvelle, les chiffres, les stock sur mon disque
 et pour ca forcemment j'ai un outil
 
 
-`slide-32` 1 chien ?
+One dog
 ------
 
 `RPE` you have 156 password but what the point ? I know one thing about you - your dog name !
@@ -447,7 +464,7 @@ et pour ca forcemment j'ai un outil
 
 `RPE` en meme temps qui voudrait vraiment partager un vrai secret avec son operateur telephonique ?
 
-`slide-33` des Secrets ? (tweets)
+Secrets (tweets)
 ------
 
 `FLD` qui voudrait partager ses secrets avec avec facebook, snapchat, meetic, tinder, gleeden ?
@@ -462,7 +479,7 @@ et pour ca forcemment j'ai un outil
 
 `RPE` Partout
 
-`slide-34` 100%
+2FA 100%
 ------
 
 `FLD` on est donc d'accord : pour faire court, les mots de passe, c'est juste "mal".
@@ -470,6 +487,56 @@ et pour ca forcemment j'ai un outil
 `note` pause respiration, on laisse lire le public
 
 `RPE`  Bref, comme je le dis souvent, si tu veux pas de divorce, te marie pas, ben pareil, si tu veux pas qu'on te vole to password, t'as qu'à pas en avoir !
+
+`FLD` use 2FA where password is not enough, it is just one step
+
+
+
+wired
+----
+
+`FLD`
+
+tu connaissez le chien de  Paris Hilton ?
+mais tu connaissez ce gars ?
+
+`RPE`
+pas avant que tu m'en parles, mais pares avoir lu cet article
+je comprends que tu veuilles passer en 2 FA
+
+`FLD`
+Oui je l'ai active sur mon compte twitter, facebook, google, yahoo , github, paypal,
+
+`RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
+
+`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ?
+
+2FA
+----
+
+`FLD` allez faire un tour sur twofactors.org, voyez ou vous pouvez activer le 2FA, et faites vos choix en fonction
+
+`RPE` laissez tomber docker
+
+`FLD` preferez github a bitbucket
+
+`RPE` si vous navez peur de rien, utiliser ces services de finance en ligne
+
+`FLD` que l'internet of things et les applis santé font globalement fi de la securité,  pareil pour la plupart des micro paiement,
+
+
+`RPE`en fait le plus secure, etonnamment les reseaux sociaux...
+
+`FLD` et le sreseaux sociaux en UX il sy'connaissent, ils ont trouver un equilibre interesant mais en mettant en place le 2FA
+
+mais en vous permettant egalement de definir vos telephone et vos  navigateurs de confiances sur lesquels votre session sera maintenue.
+
+`RPE` et j'imagine que tu le fais ? ?
+
+`FLD` c'est ce que nos utilisateurex exigeant voulaient qu'on fasse
+
+Our Solution
+----
 
 `FLD` Notre but :
 N’être qu’un fournisseur de service
@@ -484,23 +551,17 @@ S’y interfacer
 
 Si vous n'avez pas, je crois qu'on en vends 4 différents au dernier compte ! (Si vous prenez une paire de QUeue JMS, en plus, on fait un prix ;) ).
 
-`slide-35` 1 IDP ?
--------
-
-`FLD`  Oui bien sûr, j'ai donc modifié mon appli généré,
-
-`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé par ton fournisseur d'idendité
 
 `FLD` Oui mon IDP comme la plupart des solutions supporte le standard SAML
 
 
-`slide-36` SAML ?
+SAML
 -------
 
 c'est un standard qui permet de faire du SSO sur le browser.
 si vous voulez débutez et tester votre solution, jetez un coup d'oeil à www.ssocircle.com
 
-`slide-38` SAML Sequence Diagram
+SAML Sequence Diagram
 -------
 
 `RPE` So SAML ? How does it work ?
@@ -525,7 +586,7 @@ mon fournisseur de service dit
 * si son retour est valide, je te donnerai accès à ma resource
 * tout du moins si les infos d'idendité extraite dans l'enveloppe saml me permette de te donner le role necessaire pour etre autorise à acceder a ce service ou cette resource.
 
-`slide-37` SAML & JHipster ?
+SAML & JHipster ?
 -------
 `RPE` But ur  JHipster thingy supports SAML ?
 
@@ -537,20 +598,21 @@ Et Spring Security s'y prête plutot bien.
 `RPE` a Quand ton pull request ?
 oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
 
-`slide-39` login link
+Click
 -------
+
+`RPE` ok donc tu présentes donc cette page a mister anonymous, et tu lui propose un lien vers une resource protégé par ton fournisseur d'idendité
 
 `RPE` alors voyons je click!
 
-
-`slide-40` okta 1 factor
+before the click: the network login 
 -------
 
-`RPE` ok donc tu es redirigé ici sur ton idp, tu rentres un mot de passe
-`FLD` oui ici mon mot de passe ldap sur adobeNet
+Click
+-------
 
 
-`slide-41` okta 2nd factor
+okta 2nd factor
 -------
 
 `RPE` et t'as demandé a ton IDP d'appliquer un second facteur.
@@ -559,57 +621,26 @@ oui c'est en projet, il y a deja un ticket le 695 qui lui associé.
 
  * ce qu'il sait : son password
  * ce qu'il a : un telephone ou autre generateur de token
-
-
-`slide-42` logged-in
+ 
+ 
+okta verify
 -------
 
+logged-in
+------
+
+
  `RPE` c'est pas relou ca pour les utilsateurs ?
+ 
+UX 2 fa tweets 
+------
+
+
 
  `FLD` c'est vrai que l'equilibre entre expereience tuisateur. confort et securite n'est  pas evident a trouver.
 
-`slide-43` wired
-----
 
-`FLD`
-
-tu connaissez le chien de  Paris Hilton ?
-mais tu connaissez ce gars ?
-
-`RPE`
-pas avant que tu m'en parles, mais pares avoir lu cet article
-je comprends que tu veuilles passer en 2 FA
-
-`FLD`
-Oui je l'ai active sur mon compte twitter, facebook, google, yahoo , github, paypal,
-
-`RPE` en tant que developpeurs il est de votre responsabilité de protéger vos secrets, vous êtes la cible des hackers
-
-`FLD` vous avez votre profil sur linked-in, et vous êtes devops ou security specialist chez BNP ou 1 ms valent 100 millions d'euros ?
-
-`slide-34` 2FA
-----
-
-`FLD` allez faire un tour sur twofactors.org, voyez ou vous pouvez activer le 2FA, et faites vos choix en fonction
-
-`RPE` laissez tomber docker
-
-`FLD` preferez github a bitbucket
-
-`RPE` si vous navez peur de rien, utiliser ces services de finance en ligne
-
-`FLD` que l'internet of things et les applis santé font globalement fi de la securité,  pareil pour la plupart des micro paiement,
-
-
-`RPE`en fait le plus secure, etonnamment les reseaux sociaux...
-
-`FLD` et le sreseaux sociaux en UX il sy'connaissent, ils ont trouver un equilibre interesant mais en mettant en place le 2FA
-
-mais en vous permettant egalement de definir vos telephone et vos  navigateurs de confiances sur lesquels votre session sera maintenue.
-
-`RPE` et j'imagine que tu le fais ? ?
-
-slide saml + oauth
++ oauth2
 -----
 
 `FLD`
@@ -627,7 +658,7 @@ mais bon il perime le token non ?
 
 `FLD` oui mais c'est revocable
 
-slide revoke
+oauth2 revoke
 ------
 
 `RPE` tu peux aller plus loin
@@ -649,7 +680,7 @@ oui parce que oauth2 ,  No standard (yet) for request signing
 
 oauth1 ping pong
 
-`Talket 6` Extension du périmètre de la lutte - CI & Cloud
+CI & Cloud
 =========
 
 `RPE` Jusqu'à maintenant, quand on pense sécurité des applicatis, on a naturellement tendance à penser au plateforme de production. Et donc, de délaisser, voir d'être laxasiste avec les environements de dev et les plateforme d'intégration continue. Je ne vais pas vous surprendre en disant que c'est certainement une très mauvaise idée. Surtout qu'avec l'arrivée du Cloud, dont la flexibilité repose massivement sur une chaine de déploiement continue irréprochable, tout un univers de faille et d'exploit nouveau s'ouvre aux attaquants, dans un domaine, où les experts de la sécurité sont très loin d'avoir évangélisé et diffusé les bonnes pratiques associées.
@@ -710,6 +741,9 @@ cloud
 ----
 `RPE` Bon j'imagine que apres tu va mettre ton app sur le cloud ?
 
+cloud is someone else computer
+----
+
 `FLD` Ah non g peur la
 
 `RPE` Non, au contraire ! Le cloud te force à faire plus gaffe à ta sécurité, pour toutes les raisons qu'on vient d'évoquer, mais t'apportes bcp en termes de sécurité.
@@ -718,7 +752,16 @@ Y'a qu'on bien de système non maintenu, qui tourne depuis 10 ans, sans le moind
 
 `FLD` (gros sourire) ben aucun bien sûr ;) !
 
+Cattle vs pet
+------
+
 `FLD` Cattle vs Pet,
+
+Crazy number
+----
+
+NetFlix
+-----
 
 `RPE` Exactement ;) - dans le cloud tes machines sont constament reconstruit "fraîche" et patché. Un super exemple est Neflix.
 
@@ -739,7 +782,7 @@ http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
 de choas monkey a hacky monckey
 
 
-`Talklet 7` Firemen
+ready to be hacked?
 ===========
 
 
@@ -793,7 +836,7 @@ TODO: simple checksum on sensitive directory only
 
 https://www.techn0polis.net/wp-content/uploads/2015/01/security.png
 
-`Talklet 8` Conclusion
+Conclusion
 ==========
 
 `RPE` OK, so time to wrap up - what did we talk about during all this time:
