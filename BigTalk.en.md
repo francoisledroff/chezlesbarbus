@@ -175,12 +175,12 @@ client
 
 `RPE` Cool, with that, we might get lucky.
 
-But you told them we were Java guys, right, tell me abuut the security features built on top of Java in there  ?
+`FLD or RPE ?` But you told them we were Java guys, right, let me tell you about the security features built on top of Java in there  ?
 
 Spring Security
 ---
 
-`FLD` actually, what was appealing to me was the spring sec plumbering coming with it.
+`FLD` what was appealing to me in this stack was the spring sec plumbering coming with it.
 It brings solid foundation for ACL
 
 `RPE` man in the middle attack
@@ -279,7 +279,7 @@ usability).
 `RPE` Yes, generally in some limited fashion, but the issue is that you rarely have the control
 over'em,...
 
-`FLD` Right, @Adobe, we don't have control over the FW, infra deals with that
+`FLD` Right, @Adobe, we don't have control over the FW, a dedicated team deals with that
 
 `RPE` Yes, and even if they would like to do it right, they lack the in depth knowledge of your app to
 do so.
@@ -745,20 +745,9 @@ de choas monkey a hacky monckey
 `Talklet 7` Firemen
 ===========
 
-slide devops -> devsec
-----
 
-`FLD` en fait fo etre pret a etre hacke
 
-`RPE` exactement ! Regarde github
-
-`FLD` tell the story
-
-`RPE` => pret a endurer une attaque
-
-`FLD` pompier metaphore
-
-combattre le feu
+The House is on fire
 ----
 
 `RPE` the goal is to give the system a fighting chance
@@ -776,8 +765,19 @@ meca qui bloque
 
 co un RP !
 
-slide devsec devops
+Firefigthers
 ----
+
+
+`FLD` en fait fo etre pret a etre hacke
+
+`RPE` exactement ! Regarde github
+
+`FLD` tell the story
+
+`RPE` => pret a endurer une attaque
+
+`FLD` pompier metaphore
 
 `FLD` Ouais, mais dis moi, avec ça en place, ça évite que ton application crée des fichiers, ou exécute des programmes, mais si l'exploit se base sur une "activité" normale. Par exemple modifie le contenu d'un fichier de données légitime de l'application - tu peux gérer ça avec ton SM ou SE Linux ?
 
@@ -789,8 +789,6 @@ TODO: simple checksum on sensitive directory only
 
 `RPE` Ah ouais, c'est pas mal en effet !  DevSec
 
-CCL
-----
 
 `FLD` In short, what to remember is
 * firemen train for fire
