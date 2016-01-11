@@ -1,23 +1,36 @@
-Hairy Security: your new business partner (or crasher!)
+Hairy Security: a gamble you can't afford...
 
 So you had this great idea for an app, even built a proof of concept around it
 and, of course, baked it on top of JBoss and RHEL – what else ?  Time is
 flying and everyone wants it to go live asap. But did you give a thought to
-the
-reat business enabler that is Security ?
+that great business enabler, Security ?
 
 In this session we’ll debate, have fun, state the obvious and debunk a few
-security myths
-* No, there is no such thing as one good password
-* Yes, you do need an Identity provider,
-** we’ll have a look at JBoss Keycloak for that
-* Yes, strong security can also lead to fantastic user experience
-* No, silver bullet, be pragmatic, mix various standards and frameworks
-** here we’ll introduce SAML and OAuth2
-* Yes, Security needs to be baked in all your automation and continuous
-integration
-* Secret Management is key , we’ll have a quick look at ansible vault for this
-* It’s not a question of 'if' but 'when' you’ll be hacked
-** here SELinux and the Java SecurityManager will be your best friends
+security myths by reviewing a typical enterprise web app use case. 
+
+No, there is no such thing as a good password; keep yourself away from the password business, use an Identity provider (we’ll have a look at JBoss Keycloak for that).
+
+Yes, strong security can also lead to fantastic user experience. No, there is no silver bullet, be pragmatic, mix various standards and frameworks (we’ll introduce SAML and OAuth2). 
+
+Yes, Security needs to be baked into all your automation and continuous
+integration. Secret Management is key (we’ll have a quick look at ansible vault for this).
+
+It’s not a question of 'if' but 'when' you’ll be hacked (SELinux and the Java SecurityManager will be your best friends).
 
 Then, you’ll decide for yourself if it's really time for you app to go live !
+
+
+====
+
+Madeleine sur le titre:
+
+ I love the title "Hairy Security" but it gets a bit ambiguous when
+your meaning is actually that correcting Hairy Security will become a new business 
+partner and that right now Hairy Security is a great danger.   Hairy Security :  recipe for
+disaster...  Hairy Security :  a gamble you can't afford...  Hairy Security :  dumb !
+Hairy Security :   scary predictions you shouldn't ignore ...  Hairy Security :  riding for
+a fall...  Hairy Security : are you at risk ?   Etc.
+
+
+Hairy Security :  a business killer...
+Hairy Security :  dancing with danger...
