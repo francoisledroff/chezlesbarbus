@@ -1,14 +1,15 @@
 Titre: 125
 ----
 
-Université DevOps par des Barbus / à la bonne franquette
-Université DevOps pour Barbus Sérieux et Pressé
+au choix:
 
-Apprennez rapidement à mettre en place votre infrastructure DevOps, l'aide de Ansible ou Chef !
+* Micro services cherchent barbus polyglotes
+* Micro service, maxi devops
+* Micro service, avoir des tripes
+* Apprennez rapidement à mettre en place votre infrastructure DevOps, l'aide de Ansible ou Chef !
+* Université DevOps par des Barbus / à la bonne franquette
+* Université DevOps pour Barbus Sérieux et Pressé
 
-Micro services cherchent barbus polyglotes
-Micro service, maxi devops
-Micro service, avoir des tripes
 
 
 Résumé: 600
