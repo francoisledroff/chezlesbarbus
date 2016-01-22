@@ -6,16 +6,23 @@ Université DevOps pour Barbus Sérieux et Pressé
 
 Apprennez rapidement à mettre en place votre infrastructure DevOps, l'aide de Ansible ou Chef !
 
+Micro services cherchent barbus polyglotes
+Micro service, maxi devops
+Micro service, avoir des tripes
+
 
 Résumé: 600
 ----
 
-A l'aide d'un cas pratique, le déploiement d'un micro service Java, que vous réaliserez pendant la
-session, vous découvrirez les fondements, et les difficultés, liées à la mise en place d'une
-infrastructure DevOps, incluant sa sécurité, - avec l'assistance de François et Romain. Et en plus,
-vous aurez le choix de votre implémenation, en optant soit pour utiliser Chef, sous la bienvaillante
-direction de François, ou Ansible avec l'aide de Romain. Libéré des guerres de chappelles, ils exposeront
-leur approche résolument pragmatique...
+Victimes de la mode, Francois et Romain ont développé une solution sur une architecture micro-services. 
+
+Venez mettre en place le déploiement continu et sécurisé de leur solution.
+
+Vous aurez le choix des armes (Chef ou Ansible, VM ou Docker) pour les aider à réaliser les conséquences que leurs actes.
+
+Nous verront ainsi que les micro-services tendent à déplacer la complexité vers les opérations en faisant des "services avec les tripes à l'extérieur".
+
+Libérés des guerres de chappelles, ensemble nous débaterons des concepts, des points communs et des différences, des avantages et des inconvénients des différentes stratégies de déploiement que vous aurez mis en place lors de ce lab. 
 
 Message pour le comité: 3500, obligatoire
 ----
