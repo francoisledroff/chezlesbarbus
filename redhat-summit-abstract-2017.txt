@@ -1,0 +1,31 @@
+* Title:
+
+* Abstract: 2500c
+
+With the increasing numbers of DoS attacks and password stole, security is simply no longer something one can ignore. But how to approach such a broad and difficult topic ? Especially from the point of view of a JEE application ? How can both JBoss EAP and its security feature (Keycloak) protect your application ?
+
+In this session we’ll debate, but also have fun, state the obvious and debunk a few security myths:
+
+No, there is no such thing as a good password; keep yourself away from the password business, use an Identity provider (we’ll have a look at JBoss Keycloak for that).
+
+Yes, strong security can also lead to fantastic user experience. No, there is no silver bullet, be pragmatic, mix various standards and frameworks (we’ll introduce SAML and OAuth2).
+
+Yes, Security needs to be baked into all your automation and continuous integration. Secret Management is key (we’ll have a quick look at ansible vault for this).
+
+It’s not a question of 'if' but 'when' you’ll be hacked (SELinux and the Java SecurityManager will be your best friends).
+
+Then, you’ll decide for yourself if it's really time for you app to go live !
+
+* One-Sentence Abstract (for mobile): Hairy Security
+
+* Primary Theme: Security
+* Supporting Themes: Application Platforms, Application Dev, DevOps, Integration, Mobile
+* Primary Solution: Middleware
+
+* Product(s):
+** Red Hat JBoss Core Services Collection
+** Red Hat JBoss Enterprise Application Platform
+
+
+** Primary Audience: Developer ? Architect ? One only !
+** Level: Working knowledge required (based on this http://redhat.slides.com/events/2017-red-hat-summit-submission-guide#/13)
