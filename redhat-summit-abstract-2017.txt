@@ -1,24 +1,21 @@
 * Title:
 
-* Abstract: 2500c
+* Abstract: Hairy Security: the many threats to one simple REST API
 
 It's getting dangerous out there, it's all over the news, IT security is simply no longer something one can ignore. 
 
-In this session we'll model all the threats to a ... very simple REST API; a simple REST API powered by JBoss EAP leveraging KeyCloak Identity and Access Management
+In this session we'll model all the threats to a very simple REST API; a simple REST API powered by JBoss EAP leveraging KeyCloak Identity and Access Management. We’ll debate, but also have fun, state the obvious and debunk a few security myths:
 
-In this session we’ll debate, but also have fun, state the obvious and debunk a few security myths:
+* Yes, strong security come at price, it requires a brain,
+* No, strong security does not mean crappy user experience,
+* No, there is no silver bullet, be pragmatic, 
+* Yes, they are many standards and frameworks (saml, oauth, jwt, 2-way-ssl ...) we'll showcase a few and debate when to choose what
+* Yes, SELinux and the Java SecurityManager can be your friends
+* Yes, Security needs to be baked into all your automation and continuous integration. Secret Management is key 
 
-Yes, strong security come at price, it requires a brain,
-No, strong security does not mean crappy user experience,
-No, there is no silver bullet, be pragmatic, 
-Yes, they are many standards and frameworks: saml, oauth, jwt, 2-way-ssl
-we'll showcase them and debate when to choose what
-Yes, SELinux and the Java SecurityManager can be your friends
-Yes, Security needs to be baked into all your automation and continuous integration. Secret Management is key (we’ll have a quick look at ansible vault for this).
+Remember, It’s not a question of 'if' but 'when' you’ll be hacked, at the send of this session, you’ll decide for yourself if it's really time for this simple REST API to go live !
 
-Remember, It’s not a question of 'if' but 'when' you’ll be hacked, at the send of this session, you’ll decide for yourself if it's really time for your REST API to go live !
-
-* One-Sentence Abstract: Hairy Security
+* One-Sentence Abstract:  Hairy Security: the many threats to one simple REST API.
 
 * Primary Theme: Security
 * Supporting Themes: Application Platforms, Application Dev, DevOps, Integration, Mobile
