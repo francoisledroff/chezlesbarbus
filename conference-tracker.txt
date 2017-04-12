@@ -1,0 +1,39 @@
+Conference we want to submit to
+=====
+
+2017
+
+Devox BE
+----
+*  https://cfp.devoxx.be/
+* When ? Nov 2017
+* CFP opens in May 2017
+
+JAX London
+----
+* https://jaxlondon.com/call-for-papers/
+* When ? 9-12/10 2017
+* CFP finished on 18/04/2017
+
+
+2018
+
+
+JBCNConf
+----
+* Where ? Barcelona
+* When ? 19-21 June
+* http://www.jbcnconf.com/2017/
+
+JonTheBeach
+----
+* when: May
+* where: Malaga, Spain
+* CfP starts:
+
+JavaZone
+----
+* Where ? Oslo
+* When ?
+* https://2017.javazone.no/
+* CfP opens
