@@ -1,0 +1,15 @@
+For years Java developers work on one operating system, often Windows, and deployed on an other, most of the time a linux. While the later comes with gazillion of infrastructure tools that the developer couldn't use with their Java software. However, with the rise of the DevOps movement, along with the use of lightweight container, such as Docker, those tools are now available, even in the development environment. So let's see, through this presentation, how can Java developer simplify greatly the implementation of their microservice, by delegating work to many Linux software, thus focusing on their business logic. Let's see how you can have the "best of both world".
+
+This presentation, to remains fun but also concrete, will uses a case study, detailing the conception and setup of a Java microservice on a Linux system.
+
+Tags / Keyword: Java, Microservice, Wildfly Swarm, Linux/RHEL, DevOps
+
+JAX Track:
+
+Microservices  *
+Frameworks, Tools, Technologies
+Architecture
+Experiences & Patterns
+Organizational Transformation
+
+
