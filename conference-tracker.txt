@@ -2,28 +2,43 @@ Conference we want to submit to
 =====
 
 2017
+====
 
 Devox BE
 ----
 *  https://cfp.devoxx.be/
 * When ? Nov 2017
 * CFP opens in May 2017
+* Status: *DRAFT, TO REVIEW AND SUBMIT*
 
 JAX London
 ----
 * https://jaxlondon.com/call-for-papers/
 * When ? 9-12/10 2017
 * CFP finished on 18/04/2017
+* Status: SUBMITTED
 
+Code Motion Berlin
+----
+* CFP: http://speaker.codemotionworld.com/c4p.php?c=gestione_call4paper
+* When ? 12th & 13th October @Kulturbraurei
+* CFP finishes on 15/06/2017
+* Status: SUBMITTED
 
 2018
-
+====
 
 JBCNConf
 ----
 * Where ? Barcelona
 * When ? 19-21 June
 * http://www.jbcnconf.com/2017/
+
+BreizCamp
+----
+* après devox france
+
+* devoxx france ?
 
 JonTheBeach
 ----
