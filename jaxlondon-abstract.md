@@ -31,4 +31,4 @@ It's a fun, pragmatic, very instructive talk we've been doing in the past (well 
 
 * Primary Theme: Security around web apps, and http API powered by Java
 * Supporting Themes: it could fit other tracks as well like 'Devops`, up to you guys !
-* 
+

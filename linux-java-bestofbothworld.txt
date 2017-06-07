@@ -15,3 +15,6 @@ Experiences & Patterns
 Organizational Transformation
 
 
+This talk will be fun while instructive.
+It could be also belong to the Devops track
+
