@@ -1,6 +1,6 @@
 Java & Linux the "best of both worlds"
 
-For years Java developers have been working on one operating system (Windows and OS-X), and deployed on an other, most of the time a Linux. The later came with gazillion of infrastructure tools the Java developer could not use and/or just ignored, that was until now. Indeed with the rise of the DevOps movement, along with the use of lightweight container, such as Docker, those tools are now available and developer friendly. This presentation will show case how Java developers can greatly simplify the implementation of their microservice, by delegating work to Linux-based softwares, while powering their business logic with Java. We'll see how we can have the "best of both worlds".
+For years Java developers have been working on one operating system (Windows and OS-X), and deploying on another, most of the time a Linux. The later came with gazillion of infrastructure tools the Java developer could not use and/or just ignored, that was until now. Indeed with the rise of the DevOps movement, along with the use of lightweight container, such as Docker, those tools are now available and developer friendly. This presentation will show case how Java developers can greatly simplify the implementation of their microservice, by delegating work to Linux-based softwares, while powering their business logic with Java. We'll see how we can have the "best of both worlds".
 
 This presentation, to remains fun but also concrete, will uses a case study, detailing the conception and setup of a Java microservice on a Linux system.
 
