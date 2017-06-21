@@ -9,7 +9,7 @@ Devox BE
 *  https://cfp.devoxx.be/
 * When ? Nov 2017
 * CFP opens in May 2017
-* Status: *DRAFT, TO REVIEW AND SUBMIT*
+* Status: SUBMITTED
 
 JAX London
 ----
