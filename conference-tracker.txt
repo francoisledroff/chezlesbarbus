@@ -7,9 +7,9 @@ Conference we want to submit to
 Devox BE
 ----
 *  https://cfp.devoxx.be/
-* When ? Nov 2017
+* When 6th to 10th Nov 2017
 * CFP opens in May 2017
-* Status: SUBMITTED
+* Status: REJECTED
 
 JAX London
 ----
@@ -27,6 +27,13 @@ Code Motion Berlin
 
 2018
 ====
+
+Javaland
+----
+* Where: Köln
+* CfP closes on 10/08/2017
+* Status: TODO
+* Note: sans toi, mais je le met ici pour moi :)
 
 JBCNConf
 ----
@@ -52,3 +59,4 @@ JavaZone
 * When ?
 * https://2017.javazone.no/
 * CfP opens
+
